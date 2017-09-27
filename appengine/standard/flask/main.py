@@ -40,15 +40,15 @@ def acadia():
   return render_template('parks/acadia.html')
 
 @app.route('/states/california.html')
-def yellowstone():
+def california():
   return render_template('states/california.html')
 
 @app.route('/states/maine.html')
-def yellowstone():
+def maine():
   return render_template('states/maine.html')
 
 @app.route('/states/wyoming.html')
-def yellowstone():
+def wyoming():
   return render_template('states/wyoming.html')
 
 @app.route('/campgrounds/2357')

@@ -32,11 +32,11 @@ def yellowstone():
   return render_template('parks/yellowstone.html')
 
 @app.route('/parks/yosemite.html')
-def yellowstone():
+def yosemite():
   return render_template('parks/yosemite.html')
 
 @app.route('/parks/acadia.html')
-def yellowstone():
+def acadia():
   return render_template('parks/acadia.html')
 
 @app.route('/states/california.html')

@@ -59,11 +59,11 @@ def campgrounds():
 def campground1():
   return render_template('campgrounds/campground.html', name='Mammoth Campground', park='Yellowstone National Park', state='Wyoming', description="Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.", sites='85')
 
-@app.route('/campgrounds/2372')
+@app.route('/campgrounds/100')
 def campground2():
-  return render_template('campgrounds/campground.html', name='Madison Campground', park='Yellowstone National Park', state='Wyoming', description="One of our most popular campgrounds due to its central location and long season, Madison sits about 14 miles east from the town of West Yellowstone and 16 miles north of Old Faithful. Nearby, the Gibbon and Firehole rivers join to form the Madison, all of which are considered world-class fly fishing destinations. In spring and early summer, nearby meadows teem with wildflowers and grazing bison. In September and early October, you can often hear the bugling of bull elk.", sites='278')
+  return render_template('campgrounds/campground.html', name='Seawall Campground', park='Acadia National Park', state='Maine', description="Seawall Campground is located on Mount Desert Island, 4 miles south of Southwest Harbor on ME 102A. It is open from late May through September. Reservations are recommended. There are walk-in and drive-up tent sites, as well as RV sites (without hookups).", sites='275')
 
 
-@app.route('/campgrounds/2374')
+@app.route('/campgrounds/4508')
 def campground3():
-  return render_template('campgrounds/campground.html', name='Fishing Bridge RV Park', park='Yellowstone National Park', state='Wyoming', description="Fishing Bridge RV Park is located near the Yellowstone River where it exits Yellowstone Lake on its way north toward the Grand Canyon of the Yellowstone. This is the only campground in Yellowstone to offer water, sewer, and electrical hookups for RVs. Because grizzly bears frequent the area, no tents or tent campers are allowed. Campfires are prohibited in the Fishing Bridge RV Park, including the use of portable fire pits.", sites='340')
+  return render_template('campgrounds/campground.html', name='Upper Pines', park='Yosemite National Park', state='California', description="Upper Pines Campground is in Yosemite Valley (4,000 ft / 1200m).", sites='235')

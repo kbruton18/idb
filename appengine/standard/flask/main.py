@@ -51,6 +51,10 @@ def maine():
 def wyoming():
   return render_template('states/wyoming.html')
 
+@app.route('/campgrounds.html')
+def campgrounds():
+  return render_template('campgrounds/campground_landing.html')
+
 @app.route('/campgrounds/2357')
 def campground1():
   return render_template('campgrounds/campground.html', name='Mammoth Campground', park='Yellowstone National Park', state='Wyoming', description="Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.", sites='85')

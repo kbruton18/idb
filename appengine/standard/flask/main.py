@@ -27,6 +27,14 @@ def placesofinterest():
 def placestostay():
   return render_template('placestostay.html')
 
-@app.route('/countries/china.html')
-def china():
-  return render_template('countries/china.html')
+@app.route('/parks/yellowstone.html')
+def yellowstone():
+  return render_template('parks/yellowstone.html')
+
+@app.route('/parks/yosemite.html')
+def yellowstone():
+  return render_template('parks/yosemite.html')
+
+@app.route('/parks/acadia.html')
+def yellowstone():
+  return render_template('parks/acadia.html')

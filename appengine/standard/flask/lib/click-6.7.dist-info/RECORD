@@ -24,6 +24,7 @@ click-6.7.dist-info/top_level.txt,sha256=J1ZQogalYS4pphY_lPECoNMfw0HzTSrZglC4Yfw
 click-6.7.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
 click/exceptions.pyc,,
 click/_unicodefun.pyc,,
+click/_termui_impl.pyc,,
 click/_compat.pyc,,
 click/_textwrap.pyc,,
 click/_winconsole.pyc,,
@@ -37,5 +38,4 @@ click/termui.pyc,,
 click/core.pyc,,
 click/formatting.pyc,,
 click/__init__.pyc,,
-click/_termui_impl.pyc,,
 click/globals.pyc,,

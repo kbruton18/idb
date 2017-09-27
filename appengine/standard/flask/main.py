@@ -23,9 +23,9 @@ def cities():
 def placesofinterest():
   return render_template('placesofinterest.html')
   
-@app.route('/placestostay.html')
-def placestostay():
-  return render_template('placestostay.html')
+@app.route('/states.html')
+def states():
+  return render_template('states.html')
 
 @app.route('/parks/yellowstone.html')
 def yellowstone():
@@ -38,3 +38,15 @@ def yellowstone():
 @app.route('/parks/acadia.html')
 def yellowstone():
   return render_template('parks/acadia.html')
+
+@app.route('/states/california.html')
+def yellowstone():
+  return render_template('states/california.html')
+
+@app.route('/states/maine.html')
+def yellowstone():
+  return render_template('states/maine.html')
+
+@app.route('/states/wyoming.html')
+def yellowstone():
+  return render_template('states/wyoming.html')

@@ -26,15 +26,3 @@ def placesofinterest():
 @app.route('/states.html')
 def states():
   return render_template('states.html')
-
-@app.route('/states/california.html')
-def yellowstone():
-  return render_template('states/california.html')
-
-@app.route('/states/maine.html')
-def yellowstone():
-  return render_template('states/maine.html')
-
-@app.route('/states/wyoming.html')
-def yellowstone():
-  return render_template('states/wyoming.html')

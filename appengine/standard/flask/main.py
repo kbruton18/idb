@@ -57,13 +57,13 @@ def campgrounds():
 
 @app.route('/campgrounds/2357')
 def campground1():
-  return render_template('campgrounds/campground.html', name='Mammoth Campground', park='Yellowstone National Park', state='Wyoming', description="Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.", sites='85')
+  return render_template('campgrounds/campground.html', name='Mammoth Campground', park='Yellowstone National Park', state='Wyoming', description="Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.", sites='85', parkUrl='yellowstone.html')
 
 @app.route('/campgrounds/100')
 def campground2():
-  return render_template('campgrounds/campground.html', name='Seawall Campground', park='Acadia National Park', state='Maine', description="Seawall Campground is located on Mount Desert Island, 4 miles south of Southwest Harbor on ME 102A. It is open from late May through September. Reservations are recommended. There are walk-in and drive-up tent sites, as well as RV sites (without hookups).", sites='275')
+  return render_template('campgrounds/campground.html', name='Seawall Campground', park='Acadia National Park', state='Maine', description="Seawall Campground is located on Mount Desert Island, 4 miles south of Southwest Harbor on ME 102A. It is open from late May through September. Reservations are recommended. There are walk-in and drive-up tent sites, as well as RV sites (without hookups).", sites='275', parkUrl='acadia.html')
 
 
 @app.route('/campgrounds/4508')
 def campground3():
-  return render_template('campgrounds/campground.html', name='Upper Pines', park='Yosemite National Park', state='California', description="Upper Pines Campground is in Yosemite Valley (4,000 ft / 1200m).", sites='235')
+  return render_template('campgrounds/campground.html', name='Upper Pines', park='Yosemite National Park', state='California', description="Upper Pines Campground is in Yosemite Valley (4,000 ft / 1200m).", sites='235', parkUrl='yosemite.html')

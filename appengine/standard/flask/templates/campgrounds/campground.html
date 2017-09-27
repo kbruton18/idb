@@ -87,7 +87,7 @@
           <div class='col-md-8'>
             <p style="font-size:100%">
               <b>Park:</b>
-              {{ park }}
+              <a href="/parks/{{ parkUrl }}">{{ park }}</a>
             </p>
          </div>
         </div>
@@ -96,7 +96,7 @@
           <div class="col-md-8">
             <p style="font-size:100%">
               <b>States:</b>
-              <a href="/states/{{ state }}">{{ state }}</a>
+              <a href="/states/{{ state.lower() }}.html">{{ state }}</a>
             </p>
           </div>
         </div>

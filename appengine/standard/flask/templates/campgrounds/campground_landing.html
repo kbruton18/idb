@@ -36,7 +36,7 @@
         <hr class="divider">
         <div class="row">
 
-        {% block card %}
+        {% if true %}
           {% set campId = "2357" %}
           {% set photoUrl = "https://www.nps.gov/common/uploads/structured_data/3C84C3C0-1DD8-B71B-0BFF90B64283C3D8.jpg" %}
           {% set groundName = "Mammoth Campground" %}
@@ -45,7 +45,7 @@
           {% set siteNumber = "85" %}
           {% set directionsUrl = "" %}
           {% include 'campgrounds/campground_card.html' %}
-        {% endblock %}
+        {% endif %}
 
           <!-- <div class="col-md-4 mb-4 mb-md-0">
             <div class="card h-100">
@@ -67,7 +67,18 @@
             </div>
           </div>
 
-          <div class="col-md-4 mb-4 mb-md-0">
+          {% if true %}
+            {% set campId = "4508" %}
+            {% set photoUrl = "https://www.nps.gov/common/uploads/structured_data/3C7B45AE-1DD8-B71B-0B7EE131C7DFC2F5.jpg" %}
+            {% set groundName = "Upper Pines" %}
+            {% set parkName = "Yosemite National Park" %}
+            {% set state = "California" %}
+            {% set siteNumber = "235" %}
+            {% set directionsUrl = "http://www.nps.gov/acad/planyourvisit/camping.htm" %}
+            {% include 'campgrounds/campground_card.html' %}
+          {% endif %}
+
+          <!-- <div class="col-md-4 mb-4 mb-md-0">
             <div class="card h-100">
               <a href="/campgrounds/4508"><img class="card-img-top" src="https://www.nps.gov/common/uploads/structured_data/3C7B45AE-1DD8-B71B-0B7EE131C7DFC2F5.jpg" alt=""></a>
               <div class="card-body text-center">
@@ -75,7 +86,7 @@
                 </h4>
               </div>
             </div>
-          </div>
+          </div> -->
 
           </div>
         </div>

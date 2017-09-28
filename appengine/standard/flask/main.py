@@ -24,15 +24,15 @@ def states():
   return render_template('states.html')
 
 @app.route('/visitorcenters/sieurdemonts.html')
-def yellowstone():
+def acadia_visitor_center():
   return render_template('visitorcenters/sieurdemonts.html')
 
 @app.route('/visitorcenters/yellowstonevisitorcenter.html')
-def yosemite():
+def yellowstone_visitor_center():
   return render_template('visitorcenters/yellowstonevisitorcenter.html')
 
 @app.route('/visitorcenters/yosemitevisitorcenter.html')
-def acadia():
+def yosemite_visitor_center():
   return render_template('visitorcenters/yosemitevisitorcenter.html')
 
 @app.route('/parks/yellowstone.html')

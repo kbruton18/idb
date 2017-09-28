@@ -1,0 +1,22 @@
+<div class="col-md-4 mb-4 mb-md-0">
+  <div class="card h-100">
+    <a href="/campgrounds/{{ campId }}"><img class="card-img-top" src="{{ photoUrl }}" alt=""></a>
+    <div class="card-body text-center">
+      <h4 class="card-title m-0">{{ groundName }}<br/>
+        <small class="text-muted">{{ parkName }}</small>
+      </h4>
+      <p style="font-size:100%">
+        <b>States:</b>
+        <a href="/states/{{ state.lower() }}.html">{{ state }}</a>
+      </p>
+      <p style="font-size:100%">
+        <b>Number of Sites:</b>
+        {{ siteNumber }}
+      </p>
+      <p style="font-size:100%">
+        <b>Directions:</b>
+        {{ directionsUrl }}
+      </p>
+    </div>
+  </div>
+</div>

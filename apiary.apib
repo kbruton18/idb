@@ -3,78 +3,140 @@ HOST: http://polls.apiblueprint.org/
 
 # kbruton18
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+SWEet Travels is an API that allows clients to query information from the SWEet Travels website.
 
-## Questions Collection [/questions]
+## Visitor Centers Collection [/visitor_centers]
+### List Visitor Centers [GET]
 
-### List All Questions [GET]
+List all visitor centers contained in SWEet Travels.
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "num": "2",
+                "visitor_centers": [
                     {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
+                        "name": "Yosemite Valley Visitor Center",
+                        "state": "CA",
+                        "national_park": "Yosemite",
+                        "description": "Year-round facility offering Yosemite maps and brochures, nature exhibits, a theater and a bookstore.",
+                        "hours": "9AM-5PM",
+                        "address": "9035 Village Dr, Yosemite Valley, CA 95389",
+                        "phone number": "(209) 372-0200",
+                        "latitude":37.748518,
+                        "longitude": -119.587258,
+                        "directions_info": "From San Francisco, take I-580 east to I-205 east to Highway 120 east (Manteca) or Highway 140 east (Merced) into Yosemite National Park.",
+                        "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
+                        "website": "https://www.nps.gov/yose/planyourvisit/yv.htm",
+                    },
+                    {
+                        "name": "West Thumb Information Station",
+                        "state": "WY",
+                        "national_park": "Yellowstone",
+                        "description": "Offers information about the adjacent geyser basin on the shore of Yellowstone Lake",
+                        "hours": "9AM-5PM",
+                        "address": "Grand Loop Rd, Yellowstone National Park, WY 82190",
+                        "phone number": "(307) 344-2876",
+                        "latitude": 44.415785,
+                        "longitude": -110.573375,
+                        "directions_info": "A few miles north of Grant Village on the western shore of Yellowstone Lake, West Thumb can be accessed from three different directions. Please find more information on our park roads page @ http://www.nps.gov/yell/planyourvisit/parkroads.htm.",
+                        "directions_url": "https://www.nps.gov/yell/planyourvisit/maps.htm",
+                        "website": "https://www.nps.gov/yell/planyourvisit/yv.htm",
+                    },
                 ]
             }
         ]
 
-### Create a New Question [POST]
+### Get a Visitor Center [GET]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Get an individual visitor center.
 
-+ Request (application/json)
++ Response 200 (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
+        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                "name": "Yosemite Valley Visitor Center",
+                "state": "CA",
+                "national_park": "Yosemite",
+                "description": "Year-round facility offering Yosemite maps and brochures, nature exhibits, a theater and a bookstore.",
+                "hours": "9AM-5PM",
+                "address": "9035 Village Dr, Yosemite Valley, CA 95389",
+                "phone number": "(209) 372-0200",
+                "latitude":37.748518,
+                "longitude": -119.587258,
+                "directions_info": "From San Francisco, take I-580 east to I-205 east to Highway 120 east (Manteca) or Highway 140 east (Merced) into Yosemite National Park.",
+                "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
+                "website": "https://www.nps.gov/yose/planyourvisit/yv.htm",
+            }
+        ]
+
+
+## State Collection [/states]
+
+### List States [GET]
+
+List all state objects contained in SWEet Travels.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "num": 2,
+                "states": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
+                        "name": "California",
+                        "abbreviations": "CA, Calif., Cal.",
+                        "nicknames": "The Golden State",
+                        "timezone": "Pacific (UTC -8/-7)",
+                        "governor": "Jerry Brown (D)",
+                        "capital": "Sacramento",
+                        "largest_city": "Los Angeles",
+                        "total_population": 39250017,
+                        "total_area": 163696,
+                        "median_income": 63636,
+                        "national_parks": "Yosemite",
+                        "campgrounds": "Upper Pines",
+                        "website": "http://www.ca.gov",
                     }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
+                        "name": "Maine",
+                        "abbreviations": "ME, Me.",
+                        "nicknames": "The Pine Tree State, Vacationland",
+                        "timezone": "Eastern (UTC −5/−4)",
+                        "governor": "Paul LePage (R)",
+                        "capital": "Augusta",
+                        "largest_city": "Portland",
+                        "total_population": 1331479,
+                        "total_area": 35385,
+                        "median_income": 50756,
+                        "national_parks": "Acadia",
+                        "campgrounds": "Seawall Campground",
+                        "website": "http://www.maine.gov/",
+                    }, 
                 ]
             }
+        ]
+
+### Get a State [GET]
+
+Get an individual state.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "California",
+                "abbreviations": "CA, Calif., Cal.",
+                "nicknames": "The Golden State",
+                "timezone": "Pacific (UTC -8/-7)",
+                "governor": "Jerry Brown (D)",
+                "capital": "Sacramento",
+                "largest_city": "Los Angeles",
+                "total_population": 39250017,
+                "total_area": 163696,
+                "median_income": 63636,
+                "national_parks": "Yosemite",
+                "campgrounds": "Upper Pines",
+                "website": "http://www.ca.gov",
+            }
+        ]

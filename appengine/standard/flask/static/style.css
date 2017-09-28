@@ -3,8 +3,7 @@
 }
 
 .imageCrop {
-  width: 750px;
-  height: 450px;
+  height: calc(60% * width);
   overflow: hidden;
 }
 

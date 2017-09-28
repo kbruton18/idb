@@ -35,7 +35,17 @@
         <h2 class="text-center text-lg text-uppercase my-0">Campgrounds</h2>
         <hr class="divider">
         <div class="row">
-          <div class="col-md-4 mb-4 mb-md-0">
+
+        {% block card %}
+          {% set groundName = "Mammoth Campground" %}
+          {% set parkName = "Yellowstone National Park" %}
+          {% set state = "Wyoming" %}
+          {% set siteNumber = "85" %}
+          {% set directionsUrl = "" %}
+          {% include 'campground_card.html' %}
+        {% endblock %}
+
+          <!-- <div class="col-md-4 mb-4 mb-md-0">
             <div class="card h-100">
               <a href="/campgrounds/2357"><img class="card-img-top" src="https://www.nps.gov/common/uploads/structured_data/3C84C3C0-1DD8-B71B-0BFF90B64283C3D8.jpg" alt=""></a>
               <div class="card-body text-center">
@@ -43,7 +53,7 @@
                 </h4>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="col-md-4 mb-4 mb-md-0">
             <div class="card h-100">

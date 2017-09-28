@@ -64,3 +64,13 @@ hr.divider {
 .map-container iframe.clicked {
   pointer-events: auto;
 }
+
+.imageCrop {
+  width: 750px;
+  height: 450px;
+  overflow: hidden;
+}
+
+.imageCrop img {
+  width: 100%;
+}

@@ -15,10 +15,6 @@ def about():
 def parks():
   return render_template('parks.html')
 
-@app.route('/cities.html')
-def cities():
-  return render_template('cities.html')
-
 @app.route('/visitorcenters.html')
 def visitorcenters():
   return render_template('visitorcenters.html')
@@ -26,6 +22,18 @@ def visitorcenters():
 @app.route('/states.html')
 def states():
   return render_template('states.html')
+
+@app.route('/visitorcenters/sieurdemonts.html')
+def yellowstone():
+  return render_template('visitorcenters/sieurdemonts.html')
+
+@app.route('/visitorcenters/yellowstonevisitorcenter.html')
+def yosemite():
+  return render_template('visitorcenters/yellowstonevisitorcenter.html')
+
+@app.route('/visitorcenters/yosemitevisitorcenter.html')
+def acadia():
+  return render_template('visitorcenters/yosemitevisitorcenter.html')
 
 @app.route('/parks/yellowstone.html')
 def yellowstone():

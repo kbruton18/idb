@@ -43,29 +43,19 @@
           {% set parkName = "Yellowstone National Park" %}
           {% set state = "Wyoming" %}
           {% set siteNumber = "85" %}
+          {% set directionsUrl = "https://www.nps.gov/yell/planyourvisit/directions.htm" %}
+          {% include 'campgrounds/campground_card.html' %}
+        {% endif %}
+        {% if true %}
+          {% set campId = "100" %}
+          {% set photoUrl = "https://www.nps.gov/common/uploads/structured_data/3C7D51BA-1DD8-B71B-0B6B502BB63607A5.jpg" %}
+          {% set groundName = "Seawall Campground" %}
+          {% set parkName = "Acadia National Park" %}
+          {% set state = "Maine" %}
+          {% set siteNumber = "275" %}
           {% set directionsUrl = "" %}
           {% include 'campgrounds/campground_card.html' %}
         {% endif %}
-
-          <!-- <div class="col-md-4 mb-4 mb-md-0">
-            <div class="card h-100">
-              <a href="/campgrounds/2357"><img class="card-img-top" src="https://www.nps.gov/common/uploads/structured_data/3C84C3C0-1DD8-B71B-0BFF90B64283C3D8.jpg" alt=""></a>
-              <div class="card-body text-center">
-                <h4 class="card-title m-0">Mammoth Campground<br />
-                </h4>
-              </div>
-            </div>
-          </div> -->
-
-          <div class="col-md-4 mb-4 mb-md-0">
-            <div class="card h-100">
-              <a href="/campgrounds/100"><img class="card-img-top" src="https://www.nps.gov/common/uploads/structured_data/3C7D51BA-1DD8-B71B-0B6B502BB63607A5.jpg" alt=""></a>
-              <div class="card-body text-center">
-                <h4 class="card-title m-0">Seawall Campground<br />
-                </h4>
-              </div>
-            </div>
-          </div>
 
           {% if true %}
             {% set campId = "4508" %}
@@ -77,16 +67,6 @@
             {% set directionsUrl = "http://www.nps.gov/acad/planyourvisit/camping.htm" %}
             {% include 'campgrounds/campground_card.html' %}
           {% endif %}
-
-          <!-- <div class="col-md-4 mb-4 mb-md-0">
-            <div class="card h-100">
-              <a href="/campgrounds/4508"><img class="card-img-top" src="https://www.nps.gov/common/uploads/structured_data/3C7B45AE-1DD8-B71B-0B7EE131C7DFC2F5.jpg" alt=""></a>
-              <div class="card-body text-center">
-                <h4 class="card-title m-0">Upper Pines<br />
-                </h4>
-              </div>
-            </div>
-          </div> -->
 
           </div>
         </div>

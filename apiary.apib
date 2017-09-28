@@ -1,9 +1,74 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://www.swetravels.me
 
 # kbruton18
 
 SWEet Travels is an API that allows clients to query information from the SWEet Travels website.
+
+## Parks Collection [/parks]
+### List Visitor Centers [GET]
+
+List all national parks contained in SWEet Travels.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "num": "2",
+                "visitor_centers": [
+                    {
+                        "name": "Yosemite",
+                        "states": "CA",
+                        "description": "Not just a great valley, but a shrine to human foresight, the strength of granite, the power of glaciers, the persistence of life, and the tranquility of the High Sierra.First protected in 1864, Yosemite National Park is best known for its waterfalls, but within its nearly 1,200 square miles, you can find deep valleys, grand meadows, ancient giant sequoias, a vast wilderness area, and much more.",
+                        "weather_info": "Yosemite National Park covers nearly 1,200 square miles (3,100 square km) in the Sierra Nevada, with elevations ranging from about 2,000 feet (600 m) to 13,000 ft (4,000 m). Yosemite receives 95% of its precipitation between October and May (and over 75% between November and March). Most of Yosemite is blanketed in snow from about November through May. (Yosemite Valley can be rainy or snowy in any given winter storm.)",
+                        "campgrounds": "Upper Pines",
+                        "visitor_centers": "Yosemite Valley Visitor Center",
+                        "park_code": "yose",
+                        "designation": "National Park",
+                        "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
+                        "url": "https://www.nps.gov/yose/planyourvisit/yv.htm",
+                    },
+                    {
+                        "name": "Yellowstone",
+                        "state": "ID, MT, WY",
+                        "description": "Visit Yellowstone and experience the world's first national park. Marvel at a volcano’s hidden power rising up in colorful hot springs, mudpots, and geysers. Explore mountains, forests, and lakes to watch wildlife and witness the drama of the natural world unfold. Discover the history that led to the conservation of our national treasures “for the benefit and enjoyment of the people.",
+                        "weather_info": "Yellowstone's weather can vary quite a bit, even in a single day. In the summer, daytime highs can exceed 70F (25C), only to drop 20 or more degrees when a thunderstorm rolls through. It can snow during any month of the year, and winter lows frequently drop below zero, especially at night. Bring a range of clothing options, including a warm jacket and rain gear, even in the summer.",
+                        "campgrounds": "Mammoth Campground",
+                        "visitor_centers": "West Thumb Information Station",
+                        "park_code": "yell",
+                        "designation": "National Park",
+                        "directions_url": "https://www.nps.gov/yell/planyourvisit/maps.htm",
+                        "url": "https://www.nps.gov/yell/planyourvisit/yv.htm",
+                    },
+                ]
+            }
+        ]
+
+### Get a National Park [GET]
+
+Get an individual national park.
+
++ Parameters
+    + name - A string variable used to find a specific park
+    
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Yosemite",
+                "states": "CA",
+                "description": "Not just a great valley, but a shrine to human foresight, the strength of granite, the power of glaciers, the persistence of life, and the tranquility of the High Sierra.First protected in 1864, Yosemite National Park is best known for its waterfalls, but within its nearly 1,200 square miles, you can find deep valleys, grand meadows, ancient giant sequoias, a vast wilderness area, and much more.",
+                "weather_info": "Yosemite National Park covers nearly 1,200 square miles (3,100 square km) in the Sierra Nevada, with elevations ranging from about 2,000 feet (600 m) to 13,000 ft (4,000 m). Yosemite receives 95% of its precipitation between October and May (and over 75% between November and March). Most of Yosemite is blanketed in snow from about November through May. (Yosemite Valley can be rainy or snowy in any given winter storm.)",
+                "campgrounds": "Upper Pines",
+                "visitor_centers": "Yosemite Valley Visitor Center",
+                "park_code": "yose",
+                "designation": "National Park",
+                "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
+                "url": "https://www.nps.gov/yose/planyourvisit/yv.htm",
+            }
+        ]
+
+
 
 ## Visitor Centers Collection [/visitor_centers]
 ### List Visitor Centers [GET]
@@ -51,6 +116,10 @@ List all visitor centers contained in SWEet Travels.
 ### Get a Visitor Center [GET]
 
 Get an individual visitor center.
+
+
++ Parameters
+    + name - A string variable used to find a specific visitor center
 
 + Response 200 (application/json)
 
@@ -121,6 +190,9 @@ List all state objects contained in SWEet Travels.
 
 Get an individual state.
 
++ Parameters
+    + name - A string variable used to find a specific state
+
 + Response 200 (application/json)
 
         [
@@ -138,5 +210,59 @@ Get an individual state.
                 "national_parks": "Yosemite",
                 "campgrounds": "Upper Pines",
                 "website": "http://www.ca.gov",
+            }
+        ]
+        
+## Campground Collection [/campground]
+
+### List Campgrounds [GET]
+
+List all campground objects contained in SWEet Travels.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "num": 2,
+                "states": [
+                    {
+                        "name":"Mammoth Campground",
+                        "state":"WY",
+                        "desc":"Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.",
+                        "parkName":"Yellowstone National Park",
+                        "numberOfCampSites":"85",
+                        "directionsUrl":"https://www.nps.gov/yell/planyourvisit/directions.htm",
+                        "reservationsUrl":"n/a"
+                    }, {
+                        "name":"Seawall Campground",
+                        "state":"ME",
+                        "desc":"Seawall Campground is located on Mount Desert Island, 4 miles south of Southwest Harbor on ME 102A. It is open from late May through September. Reservations are recommended. There are walk-in and drive-up tent sites, as well as RV sites (without hookups).",
+                        "parkName":"Acadia National Park",
+                        "numberOfCampSites":"275",
+                        "directionsUrl":"https://www.nps.gov/acad/planyourvisit/directions.htm",
+                        "reservationsUrl":"n/a"
+                    }, 
+                ]
+            }
+        ]
+
+### Get a Campground [GET]
+
+Get an individual campground.
+
++ Parameters
+    + name - A string variable used to find a specific campground
+
++ Response 200 (application/json)
+
+        [        
+            {  
+                "name":"Mammoth Campground",
+                "state":"Wyoming",
+                "desc":" Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.",
+                "parkName":"Yellowstone National Park",
+                "numberOfCampSites":"85",
+                "directionsUrl":"https://www.nps.gov/yell/planyourvisit/directions.htm",
+                "reservationsUrl":"n/a"
             }
         ]

@@ -70,7 +70,7 @@
             </p>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class='col-md-2'> </div>
           <div class='col-md-8'>
             <p style="font-size:100%">
@@ -78,7 +78,18 @@
               {{ sites }}
             </p>
          </div>
-        </div>
+        </div> -->
+        {% for key, value in attr.iteritems() %}
+          <div class='col-md-2'>
+
+          </div>
+          <div class='col-md-8'>
+            <p style="font-size:100%">
+              <b>{{ key|e }}:</b>
+              {{ value|e }}
+            </p>
+          </div>
+        {% endfor %}
 
       </div>
 

@@ -10,6 +10,23 @@
 
   <title>Yosemite - SWEet Travels</title>
 
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+
   <!-- Bootstrap core CSS -->
   <link href="../../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -154,6 +171,9 @@
         </p>
       </div>
     </div>
+    <center>
+    <a class="twitter-timeline" href="https://twitter.com/YosemiteNPS?ref_src=twsrc%5Etfw" data-height="450" data-width="550">Tweets by YosemiteNPS</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </center>
 
   </div>
 

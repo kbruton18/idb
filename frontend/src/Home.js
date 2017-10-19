@@ -7,6 +7,7 @@ import {
 } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
 import Nav from './Nav.js';
+import Title from './Title.js';
 
 const yosemite = require('./img/yosemite.jpg');
 const grandcanyon = require('./img/grandcanyon.jpg');
@@ -33,15 +34,6 @@ const items = [
     altText: 'Great Smoky Mountains'
   }
 ]
-
-function Title(props) {
-  return (
-    <div>
-      <div class="tagline-upper text-center text-heading text-shadow text-white mt-5 d-none d-lg-block">SWEet Travels</div>
-      <div class="tagline-lower text-center text-expanded text-shadow text-uppercase text-white mb-5 d-none d-lg-block">CS 373 Fall 2017 | Group 16</div>
-    </div>
-  );
-}
 
 function Message(props) {
   return (
@@ -86,7 +78,7 @@ function Intro(props) {
   )
 }
 
-function Home(props) {
+export default function Home(props) {
   return (
     <div>
       <Title />
@@ -96,5 +88,3 @@ function Home(props) {
     </div>
   )
 }
-
-export {Home};

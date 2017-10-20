@@ -10,8 +10,7 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardFooter,
-  CardDeck
+  CardFooter
 } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
 import Nav from './Nav.js';

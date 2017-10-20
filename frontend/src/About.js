@@ -17,6 +17,10 @@ import Nav from './Nav.js';
 import Title from './Title.js';
 
 const derekImg = require('./img/about/derek.jpg');
+const katherineImg = require('./img/about/katherine.jpg');
+const linhImg = require('./img/about/linh.jpg');
+const rachelImg = require('./img/about/rachel.jpg');
+const ryanImg = require('./img/about/ryan.jpeg');
 
 function AboutSite(props) {
   return (
@@ -53,11 +57,11 @@ function AboutTeamMember(props) {
 
 class AboutTeam extends Component {
   render() {
-    const derek = {"name": "Derek Chang", "title": "Front-End Engineer", "text": "Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on the 'Parks' model and had a great time learning Flask.", "commits": 15, "issues": 8, "test": 0, imageSrc: derekImg, imageCaption: "Derek"};
-    const katherine = {"name": "Katherine Bruton", "title": "Back-End Engineer", "text": "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", "commits": 30, "issues": 8, "test": 0};
-    const linh = {"name": "Linh Nguyen", "title": "Front-End Engineer", "text": "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I've worked on the States pages.", "commits": 25, "issues": 5, "test": 0};
-    const rachel = {"name": "Rachel Oei", "title": "Back-End Engineer", "text": "I am a senior computer science major from Miami, Florida. I worked on the Home and About pages for this project and got to learn about Google Cloud Platform, Flask, and Bootstrap.", "commits": 19, "issues": 13, "test": 0};
-    const ryan = {"name": "Ryan Le", "title": "Front-End Engineer", "text": "Hi! I'm a fourth year disaster human studying Computer Science at The University of Texas at Austin. So far, I've mostly worked on the Campgrounds page and had a lovely time learning about Google Cloud Platform and Flask.", "commits": 60, "issues": 7, "test": 0};
+    const derek = {"name": "Derek Chang", "title": "Front-End Engineer", "text": "Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on the 'Parks' model and had a great time learning Flask.", "commits": 15, "issues": 8, "tests": 0, imageSrc: derekImg, imageCaption: "Derek"};
+    const katherine = {"name": "Katherine Bruton", "title": "Back-End Engineer", "text": "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", "commits": 30, "issues": 8, "tests": 0, imageSrc: katherineImg, imageCaption: "Katherine"};
+    const linh = {"name": "Linh Nguyen", "title": "Front-End Engineer", "text": "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I've worked on the States pages.", "commits": 25, "issues": 5, "tests": 0, "imageSrc": linhImg, imageCaption: "Linh"};
+    const rachel = {"name": "Rachel Oei", "title": "Back-End Engineer", "text": "I am a senior computer science major from Miami, Florida. I worked on the Home and About pages for this project and got to learn about Google Cloud Platform, Flask, and Bootstrap.", "commits": 19, "issues": 13, "tests": 0, "imageSrc": rachelImg, "imageCaption": "Rachel"};
+    const ryan = {"name": "Ryan Le", "title": "Front-End Engineer", "text": "Hi! I'm a fourth year disaster human studying Computer Science at The University of Texas at Austin. So far, I've mostly worked on the Campgrounds page and had a lovely time learning about Google Cloud Platform and Flask.", "commits": 60, "issues": 7, "tests": 0, "imageSrc": ryanImg, "imageCaption": "Ryan"};
     return (
       <Container className="bg-faded p-4 my-4">
         <hr className="divider"/>
@@ -68,6 +72,18 @@ class AboutTeam extends Component {
         <Row>
           <Col>
             <AboutTeamMember member={derek}/>
+          </Col>
+          <Col>
+            <AboutTeamMember member={katherine}/>
+          </Col>
+          <Col>
+            <AboutTeamMember member={linh}/>
+          </Col>
+          <Col>
+            <AboutTeamMember member={rachel}/>
+          </Col>
+          <Col>
+            <AboutTeamMember member={ryan}/>
           </Col>
         </Row>
       </Container>

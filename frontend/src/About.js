@@ -10,7 +10,8 @@ import {
   CardBody,
   CardTitle,
   CardSubtitle,
-  CardFooter
+  CardFooter,
+  CardDeck
 } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
 import Nav from './Nav.js';
@@ -42,8 +43,9 @@ function AboutTeamMember(props) {
     <Card>
       <CardImg top width="100%" src={props.member.imageSrc} alt={props.member.imageCaption} />
       <CardBody>
-        <CardTitle>{props.member.name}</CardTitle>
-        <CardSubtitle>{props.member.title}</CardSubtitle>
+        <CardTitle className="text-center">{props.member.name}</CardTitle>
+        <CardSubtitle className="text-center text-muted">{props.member.title}</CardSubtitle>
+        <br/>
         <CardText>{props.member.text}</CardText>
       </CardBody>
       <CardFooter className="text-muted">
@@ -70,19 +72,19 @@ class AboutTeam extends Component {
         </h2>
         <hr className="divider"/>
         <Row>
-          <Col>
+          <Col lg="4" md="6" sm="12">
             <AboutTeamMember member={derek}/>
           </Col>
-          <Col>
+          <Col lg="4" md="6" sm="12">
             <AboutTeamMember member={katherine}/>
           </Col>
-          <Col>
+          <Col lg="4" md="6" sm="12">
             <AboutTeamMember member={linh}/>
           </Col>
-          <Col>
+          <Col lg="4" md="6" sm="12">
             <AboutTeamMember member={rachel}/>
           </Col>
-          <Col>
+          <Col lg="4" md="6" sm="12">
             <AboutTeamMember member={ryan}/>
           </Col>
         </Row>

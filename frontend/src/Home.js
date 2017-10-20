@@ -6,8 +6,6 @@ import {
   Col
 } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
-import Nav from './Nav.js';
-import Title from './Title.js';
 
 const yosemite = require('./img/yosemite.jpg');
 const grandcanyon = require('./img/grandcanyon.jpg');
@@ -81,8 +79,6 @@ function Intro(props) {
 export default function Home(props) {
   return (
     <div>
-      <Title />
-      <Nav />
       <Head />
       <Intro />
     </div>

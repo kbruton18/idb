@@ -25,24 +25,24 @@ export default class Nav extends React.Component {
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
               <li class="nav-item active px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="index.html">Home
+                <a class="nav-link text-uppercase text-expanded" href="/">Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="about.html">About</a>
+                <a class="nav-link text-uppercase text-expanded" href="/about">About</a>
               </li>
               <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="parks.html">Parks</a>
+                <a class="nav-link text-uppercase text-expanded" href="/parks">Parks</a>
               </li>
               <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="campgrounds.html">Campgrounds</a>
+                <a class="nav-link text-uppercase text-expanded" href="/campgrounds">Campgrounds</a>
               </li>
               <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="visitorcenters.html">Visitor Centers</a>
+                <a class="nav-link text-uppercase text-expanded" href="/visitorcenters">Visitor Centers</a>
               </li>
               <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="states.html">States</a>
+                <a class="nav-link text-uppercase text-expanded" href="/states">States</a>
               </li>
             </ul>
           </div>

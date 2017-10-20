@@ -13,8 +13,7 @@ import {
   CardFooter
 } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
-import Nav from './Nav.js';
-import Title from './Title.js';
+import CustomCard from './CustomCard.js';
 
 const derekImg = require('./img/about/derek.jpg');
 const katherineImg = require('./img/about/katherine.jpg');
@@ -92,13 +91,44 @@ class AboutTeam extends Component {
   }
 }
 
+function AboutSources(props) {
+  const content = (
+    <Container>
+      <p>Our data came from the <a href="https://www.nps.gov/subjects/digital/nps-data-api.htm">National Park Service API </a>and the <a href="https://developers.google.com/places/">Google Places API</a>. We used Postman to make REST calls to scrape data. Postman is an HTTP client with a GUI that allowed us to make REST calls to the APIs. We can also enter authorization keys and
+      HTTP headers to parameterize queries, and view and take the returned JSON data.</p>
+      <p>We used the <a href="https://github.com/BlackrockDigital/startbootstrap-business-casual">Business Casual </a>template from the <a href="https://startbootstrap.com/template-overviews/business-casual/">Start Bootstrap </a> site as our site template. This template was released under the MIT license.</p>
+    </Container>
+  );
+  return (
+    <CustomCard title="Our" strongTitle="Sources" content={content}/>
+  )
+}
+
+function AboutProcess(props) {
+  const content = (
+    <Container>
+      <p>Our data came from the <a href="https://www.nps.gov/subjects/digital/nps-data-api.htm">National Park Service API </a>and the <a href="https://developers.google.com/places/">Google Places API</a>. For this part of the project, we looked up and entered text manually; we did not scrape any sources. </p>
+      <p>We used a variety of tools for this website, including Google Cloud Platform for hosting, Namecheap for the domain name, Github as a code repository, Trello for issue tracking, Apiary for API design, Postman for REST calls, Plan-It-Poker for     user stories, Slack for communication, and Git for version control.</p>
+      <p>
+        The code repository for this site: <a href="https://github.com/kbruton18/idb">Github</a><br />
+        The issue tracker for this site: <a href="https://trello.com/b/zej73RSH/idb-phase-1">Trello</a><br />
+        The API for this site: <a href="http://docs.kbruton18.apiary.io">Apiary</a><br />
+        The technical report for phase 1 of the project: <a href="https://utexas.box.com/s/hex16czsb3svpacowrlt5ml5n8n6geae">Report</a>
+      </p>
+    </Container>
+  );
+  return (
+    <CustomCard title="Our" strongTitle="Process" content={content}/>
+  )
+}
+
 export default function About(props) {
   return (
     <div>
-      <Title />
-      <Nav />
-      <AboutSite />
-      <AboutTeam />
+      <AboutSite/>
+      <AboutTeam/>
+      <AboutSources/>
+      <AboutProcess/>
     </div>
   );
 }

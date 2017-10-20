@@ -2,6 +2,15 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+env_variables:
+    CLOUDSQL_CONNECTION_NAME: sweet-travels:us-central1:myinstance
+    CLOUDSQL_USER: root
+    CLOUDSQL_PASSWORD: swetravels
+
+libraries:
+- name: MySQLdb
+  version: "latest"
+
 # [START handlers]
 handlers:
 - url: /static

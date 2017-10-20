@@ -6,6 +6,7 @@ import {
 import './App.css';
 import Nav from './Nav.js';
 import Title from './Title.js';
+import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
 
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
           </div>
+          <Footer/>
         </div>
       </Router>
     );

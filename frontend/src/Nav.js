@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
 export default class Nav extends React.Component {
   constructor(props) {
     super(props);
@@ -16,33 +16,31 @@ export default class Nav extends React.Component {
   }
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
-        <div class="container">
-          <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Menu</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg navbar-light bg-faded py-lg-4">
+        <div className="container">
+          <a className="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Menu</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item active px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/">Home
-                  <span class="sr-only">(current)</span>
-                </a>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav mx-auto">
+              <li className="nav-item active px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/">Home</Link>
               </li>
-              <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/about">About</a>
+              <li className="nav-item px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/about">About</Link>
               </li>
-              <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/parks">Parks</a>
+              <li className="nav-item px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/parks">Parks</Link>
               </li>
-              <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/campgrounds">Campgrounds</a>
+              <li className="nav-item px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/campgrounds">Campgrounds</Link>
               </li>
-              <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/visitorcenters">Visitor Centers</a>
+              <li className="nav-item px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/visitorcenters">Visitor Centers</Link>
               </li>
-              <li class="nav-item px-lg-4">
-                <a class="nav-link text-uppercase text-expanded" href="/states">States</a>
+              <li className="nav-item px-lg-4">
+                <Link className="nav-link text-uppercase text-expanded" to="/states">States</Link>
               </li>
             </ul>
           </div>

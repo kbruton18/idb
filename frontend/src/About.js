@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import {
   Container,
   Row,
@@ -12,7 +11,6 @@ import {
   CardSubtitle,
   CardFooter
 } from 'reactstrap';
-import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
 import CustomCard from './CustomCard.js';
 
 const derekImg = require('./img/about/derek.jpg');

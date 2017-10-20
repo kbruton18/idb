@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
-import logo from './logo.svg';
-import { Button } from 'reactstrap';
 import './App.css';
 import Nav from './Nav.js';
 import Title from './Title.js';
@@ -15,16 +12,16 @@ import About from './About.js';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Title/>
-        <Nav/>
-        <Router>
+      <Router>
+        <div className="App">
+          <Title/>
+          <Nav/>
           <div>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }

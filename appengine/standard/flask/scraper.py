@@ -1,7 +1,7 @@
 import urllib2, json
 import os
 
-import MySQLdb, webapp2
+import MySQLdb  
 
 from pprint import pprint
 
@@ -33,7 +33,7 @@ def connect_to_cloudsql():
     #
     else:
         db = MySQLdb.connect(
-            host='127.0.0.1', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD)
+            host='104.198.224.97', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD)
 
     return db
 
@@ -58,7 +58,7 @@ def connect_to_cloudsql():
 
 db = connect_to_cloudsql()
 cursor = db.cursor()
-cursor.execute('SHOW VARIABLES')
+cursor.execute('SHOW DATABASES;')
 
 for r in cursor.fetchall():
     print('{}\n'.format(r))

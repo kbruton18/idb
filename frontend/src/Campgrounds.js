@@ -15,7 +15,7 @@ const ca = require('./img/states/california.jpg');
 
 function CampgroundCard(props) {
   return (
-    <Card body className="text-center">
+    <Card className="text-center">
       <CardImg top width="100%" src={props.img} alt={props.alt} />
       <CardBody>
         <CardTitle>{props.title}</CardTitle>

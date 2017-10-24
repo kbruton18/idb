@@ -14,13 +14,13 @@ const yose = require('./img/visitorcenters/yosemite.png');
 
 function VisitorCenterCard(props) {
   return (
-    <Card body className="text-center">
+    <Card className="text-center">
       <CardImg top width="100%" src={props.img} alt={props.alt} />
       <CardBody>
         <CardTitle>{props.title}</CardTitle>
         <CardText>
           <b>Park: </b><a href={props.parkUrl}>{props.parkName}</a><br />
-          <b>State: </b><a href={props.stateUrl}>{props.stateName}</a>
+          <b>State: </b><a href={props.stateUrl}>{props.stateName}</a><br />
           <b>Address: </b>{props.address}<br />
           <b>Phone Number: </b>{props.phone}<br />
           <b>Operating Hours: </b>{props.hours}

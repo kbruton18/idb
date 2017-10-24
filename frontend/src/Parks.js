@@ -16,19 +16,18 @@ const y = require('./img/parks/yosemite.jpg');
 
 function AboutPark(props) {
   return (
-    <Card>
+    <Card className ="text-center">
       <CardImg top width="100%" src={props.park.imageSrc} alt={props.park.imageCaption} />
       <CardBody>
         <CardTitle className="text-center">{props.park.name}</CardTitle>
-        <CardSubtitle className="text-center text-muted"></CardSubtitle>
-        <CardText> <b>State(s)</b>: {props.park.state}</CardText>
-        <CardText> <b>Park Code</b>: {props.park.code}</CardText>
-        <CardText> <b>Designation</b>: {props.park.desg} </CardText>
-        <CardText> <b>Visitor Center(s)</b>: {props.park.visit} </CardText>
-        <CardText> <b>url</b>: {props.park.url} </CardText>
+        <CardText> 
+        <b>State(s)</b>: {props.park.state} <br/>
+        <b>Park Code</b>: {props.park.code} <br/>
+        <b>Designation</b>: {props.park.desg} <br/>
+        <b>Visitor Center(s)</b>: {props.park.visit} <br/>
+        <b>url</b>: <a href={props.park.url}>{props.park.url}</a> <br/>
+        </CardText>
       </CardBody>
-      <CardFooter className="text-muted">
-      </CardFooter>
     </Card>
   )
 }

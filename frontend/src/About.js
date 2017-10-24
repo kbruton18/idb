@@ -12,6 +12,7 @@ import {
   CardFooter
 } from 'reactstrap';
 import CustomCard from './CustomCard.js';
+import AboutStats from './AboutStats.js';
 
 const derekImg = require('./img/about/derek.jpg');
 const katherineImg = require('./img/about/katherine.jpg');

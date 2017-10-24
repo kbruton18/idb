@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import 'whatwg-fetch';
 
 import {
   Container,
@@ -13,7 +14,7 @@ import {
   CardFooter
 } from 'reactstrap';
 
-export default class AboutStats extends Components {
+export default class AboutStats extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -28,7 +29,7 @@ export default class AboutStats extends Components {
 	componentDidMount() {
 		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=dchang95')
 			.then((response) => { return response.json();
-			}).then((reponseJson) => {
+			}).then((responseJson) => {
 				this.setState({derekc: responseJson});
 			});
 
@@ -58,7 +59,15 @@ export default class AboutStats extends Components {
 	}
 
 	render() {
-		<i>Num. of commits: {this.state.derekc.length}</i><br/>
+		return (
+			<p>
+				<AboutStats derek='{this.state.derekc.length}'/>
+				<AboutStats katherine='{this.state.katherinec.length}'/>
+				<AboutStats linh='{this.state.linhc.length}'/>
+				<AboutStats rachel='{this.state.rachelc.length}'/>
+				<AboutStats ryan='{this.state.ryanc.length}'/>
+			</p>
+		);
 	}
 
 }

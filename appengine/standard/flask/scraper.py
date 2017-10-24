@@ -6,9 +6,9 @@ import MySQLdb, webapp2
 from pprint import pprint
 
 # These environment variables are configured in app.yaml.
-CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
-CLOUDSQL_USER = os.environ.get('CLOUDSQL_USER')
-CLOUDSQL_PASSWORD = os.environ.get('CLOUDSQL_PASSWORD')
+CLOUDSQL_CONNECTION_NAME = "sweet-travels:us-central1:myinstance"
+CLOUDSQL_USER = "root"
+CLOUDSQL_PASSWORD = "swetravels"
 
 
 def connect_to_cloudsql():
@@ -38,10 +38,8 @@ def connect_to_cloudsql():
     return db
 
 
-class MainPage(webapp2.RequestHandler):
-    def get(self):
-        """Simple request handler that shows all of the MySQL variables."""
-        self.response.headers['Content-Type'] = 'text/plain'
+"""Simple request handler that shows all of the MySQL variables."""
+# response.headers['Content-Type'] = 'text/plain'
         
 #        	# parks request
 #		endpoint = "https://developer.nps.gov/api/v1/parks?limit=1000&api_key=api_key_goes_here"
@@ -58,14 +56,12 @@ class MainPage(webapp2.RequestHandler):
 #		for x in data["data"]:
 #		  print (x)
 
-        db = connect_to_cloudsql()
-        cursor = db.cursor()
-        cursor.execute('SHOW VARIABLES')
+db = connect_to_cloudsql()
+cursor = db.cursor()
+cursor.execute('SHOW VARIABLES')
 
-        for r in cursor.fetchall():
-            self.response.write('{}\n'.format(r))
+for r in cursor.fetchall():
+    print('{}\n'.format(r))
 
+print('Finished executing')
 
-app = webapp2.WSGIApplication([
-    ('/', MainPage),
-], debug=True)

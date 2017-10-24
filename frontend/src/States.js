@@ -7,7 +7,7 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
+  CardTitle
 } from 'reactstrap';
 
 const ca = require('./img/states/california.jpg');

@@ -7,8 +7,8 @@ from pprint import pprint
 
 # These environment variables are configured in app.yaml.
 CLOUDSQL_CONNECTION_NAME = "sweet-travels:us-central1:myinstance"
-CLOUDSQL_USER = "root"
-CLOUDSQL_PASSWORD = "swetravels"
+CLOUDSQL_USER = "INSERT_USER_HERE"
+CLOUDSQL_PASSWORD = "INSERT_PASSWORD_HERE"
 
 
 def connect_to_cloudsql():
@@ -33,7 +33,8 @@ def connect_to_cloudsql():
     #
     else:
         db = MySQLdb.connect(
-            host='104.198.224.97', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD)
+            host='INSERT_HOST_HERE', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD, 
+            db="parks", charset="utf8", use_unicode=True)
 
     return db
 

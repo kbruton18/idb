@@ -10,6 +10,7 @@ import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
 import Parks from './Parks.js';
+import States from './States.js';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
             <Route path="/parks" component={Parks}/>
+            <Route path="/states" component={States}/>
           </div>
           <Footer/>
         </div>

@@ -23,7 +23,10 @@ def connect_to_cloudsql():
         db = MySQLdb.connect(
             unix_socket=cloudsql_unix_socket,
             user=CLOUDSQL_USER,
-            passwd=CLOUDSQL_PASSWORD)
+            passwd=CLOUDSQL_PASSWORD,
+            db="parks",
+            charset='utf8',
+            use_unicode=True)
 
     # If the unix socket is unavailable, then try to connect using TCP. This
     # will work if you're running a local MySQL server or using the Cloud SQL
@@ -33,34 +36,42 @@ def connect_to_cloudsql():
     #
     else:
         db = MySQLdb.connect(
-            host='104.198.224.97', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD)
+            host='104.198.224.97', user=CLOUDSQL_USER, passwd=CLOUDSQL_PASSWORD,
+            db="parks", charset="utf8", use_unicode=True)
 
     return db
 
 
 """Simple request handler that shows all of the MySQL variables."""
-# response.headers['Content-Type'] = 'text/plain'
-        
-#           # parks request
-          # endpoint = "https://developer.nps.gov/api/v1/parks?limit=1000&api_key=api_key_goes_here"
-          # req = urllib2.Request(endpoint,headers={})
-          
-          # response = urllib2.urlopen(req)
-          # the_page = response.read()
-          # # response.read() returns bytes, which we need to decode into a string
-          # the_page = the_page.decode("utf-8") 
-          
-          # data = json.loads(the_page)
-          
-          # # this will print out each individual entry in data
-          # for x in data["data"]:
-          #   print (x)
+# parks request
+endpoint = "https://developer.nps.gov/api/v1/parks?limit=1000&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2"
+req = urllib2.Request(endpoint,headers={})
+
+response = urllib2.urlopen(req)
+the_page = response.read()
+# response.read() returns bytes, which we need to decode into a string
+the_page = the_page.decode("utf-8") 
+data = json.loads(the_page)
 
 db = connect_to_cloudsql()
 cursor = db.cursor()
-cursor.execute('SHOW DATABASES;')
+add_park = ("INSERT INTO parks "
+   "(description, designation, directionsInfo, directionsUrl, fullName, latLong, parkCode, url, weatherInfo, states) "
+   "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
-for r in cursor.fetchall():
-    print('{}\n'.format(r))
+for x in data["data"]:
+    data_park = (x["description"],
+    x["designation"], x["directionsInfo"],
+    x["directionsUrl"], x["fullName"],
+    x["latLong"], x["parkCode"],
+    x["url"], x["weatherInfo"], x["states"])
+
+    try: 
+        cursor.execute(add_park, data_park)
+    except: 
+        print (x["fullName"])
+
+db.commit()
 
 print('Finished executing')
+

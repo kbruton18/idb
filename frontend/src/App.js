@@ -12,6 +12,7 @@ import About from './About.js';
 import Parks from './Parks.js';
 import States from './States.js';
 import Campgrounds from './Campgrounds.js';
+import VisitorCenters from './VisitorCenters.js';
 
 class App extends Component {
   render() {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/parks" component={Parks}/>
             <Route path="/states" component={States}/>
             <Route path="/campgrounds" component={Campgrounds}/>
+            <Route path="/visitorcenters" component={VisitorCenters}/>
           </div>
           <Footer/>
         </div>

@@ -9,6 +9,10 @@ import Title from './Title.js';
 import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
+import Parks from './Parks.js';
+import States from './States.js';
+import Campgrounds from './Campgrounds.js';
+import VisitorCenters from './VisitorCenters.js';
 
 class App extends Component {
   render() {
@@ -20,6 +24,10 @@ class App extends Component {
           <div>
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
+            <Route path="/parks" component={Parks}/>
+            <Route path="/states" component={States}/>
+            <Route path="/campgrounds" component={Campgrounds}/>
+            <Route path="/visitorcenters" component={VisitorCenters}/>
           </div>
           <Footer/>
         </div>

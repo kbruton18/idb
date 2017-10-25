@@ -54,6 +54,23 @@ class State(database.Model):
 	url = database.Column(database.Text)
 	ID = database.Column(database.Integer, autoincrement = True)
 
+	def __init__(self, name, abbreviations, nicknames, timeZone, governor,
+		capital, largestCity, totalPopulation, totalArea, medianIncome,
+		nationalParks, campgrounds, url):
+		self.name = name
+		self.abbreviations = abbreviations
+		self.nicknames = nicknames
+		self.timeZone = timeZone
+		self.governor = governor
+		self.capital = capital
+		self.largestCity = largestCity
+		self.totalPopulation = totalPopulation
+		self.totalArea = totalArea
+		self.medianIncome = medianIncome
+		self.nationalParks = nationalParks
+		self.campgrounds = campgrounds
+		self.url = url
+
 	def __repr__(self):
 		return '<State %s>' % self.name
 
@@ -75,6 +92,24 @@ class Campground(database.Model):
 	imageUrl = database.Column(database.Text)
 	ID = database.Column(database.Integer, autoincrement = True)
 
+	def __init__(self, name, parkCode, states, description,
+		regulationsOverview, wheelchairAccess, internetInfo,
+		weatherInfo, regulationsUrl, totalSites, directionsInfo,
+		directionsUrl, imageUrl):
+		self.name = name
+		self.parkCode = parkCode
+		self.states = states
+		self.description = description
+		self.regulationsOverview = regulationsOverview
+		self.wheelchairAccess = wheelchairAccess
+		self.internetInfo = internetInfo
+		self.weatherInfo = weatherInfo
+		self.regulationsUrl = regulationsUrl
+		self.totalSites = totalSites
+		self.directionsInfo = directionsInfo
+		self.directionsUrl = directionsUrl
+		self.imageUrl = imageUrl
+
 	def __repr__(self):
 		return '<Campground %s: parkCode=%s>' % self.name, self.parkCode
 
@@ -91,6 +126,18 @@ class VisitorCenter(database.Model):
 	website = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
 	ID = database.Column(database.Integer, autoincrement = True)
+
+	def __init__(self, name, parkCode, states, description, latLong,
+		directionsUrl, directionsInfo, website, imageUrl):
+		self.name = name
+		self.parkCode = parkCode
+		self.states = states
+		self.description = description
+		self.latLong = latLong
+		self.directionsUrl = directionsUrl
+		self.directionsInfo = directionsInfo
+		self.website = website
+		self.imageUrl = imageUrl
 
 	def __repr__(self):
 		return '<Visitor Center %s: parkCode =%s>' % self.fullName, self.parkCode

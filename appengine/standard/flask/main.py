@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 
-lo = (
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root@/<dbname>?unix_socket=/cloudsql/<projectid>:<instancename>'
+
 
 @app.route('/')
 @app.route('/index.html')

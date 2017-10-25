@@ -20,7 +20,9 @@ const ca = require('./img/states/california.jpg');
 function StateCard(props) {
   return (
     <Card className="text-center">
-      <CardImg top width="100%" src={props.img} alt={props.alt} />
+      <Link to={`/states/${props.title}`}>
+        <CardImg top width="100%" src={props.img} alt={props.alt} />
+      </Link>
       <CardBody>
         <CardTitle>{props.title}</CardTitle>
         <CardText>

@@ -34,9 +34,8 @@ export default class AboutStats extends Component {
 
 	componentDidMount() {
 		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=dchang95')
-			.then((response) => { return response.json();
-			}).then((responseJson) => {
-				console.log("done");
+			.then((response) => response.json())
+			.then((responseJson) => {
 				this.setState({derekc: responseJson});
 			});
 

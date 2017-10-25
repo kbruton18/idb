@@ -10,12 +10,12 @@ import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
 import Parks from './Parks.js';
-import States from './States.js';
 import Campgrounds from './Campgrounds.js';
 import VisitorCenters from './VisitorCenters.js';
+import States from './States.js';
 import ParkDetail from './ParkDetail.js';
-import StateDetail from './StateDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
+import StateDetail from './StateDetail.js';
 
 class App extends Component {
   render() {

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'INSERT_STRING_HERE'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:swetravels@104.198.224.97/swe_travels'
 
 @app.route('/')
 @app.route('/index.html')

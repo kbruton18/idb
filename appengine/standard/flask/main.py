@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 
-lo = (
 app = Flask(__name__)
 
 @app.route('/')

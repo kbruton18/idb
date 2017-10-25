@@ -25,29 +25,42 @@ class ParkCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      states: "",
-      parkCode: "",
-      url: "",
-      desig: ""
+      data: []
     }
   }
 
   componentDidMount() {
-    fetch('https://developer.nps.gov/api/v1/parks?parkCode=acad&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2')
+    fetch('https://developer.nps.gov/api/v1/parks?parkCode=yose&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          name: responseJson['data'][0]['name'],
-          states: responseJson['data'][0]['states'],
-          parkCode: responseJson['data'][0]['parkCode'],
-          url: responseJson['data'][0]['url'],
-          desig: responseJson['data'][0]['designation']
+          data: responseJson['data']
         })
       })
   }
 
   render() {
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    console.log(this.state.data);
+    const test = this.state.data.map((d) => {
+      return (
+        <Card className ="text-center">
+          <Link to={`/parks/${d.name}`}>
+            <CardImg top width="100%" src={y} alt="ok" />
+          </Link>
+          <CardBody>
+            <CardTitle className="text-center">{d.name}</CardTitle>
+            <CardText> 
+            <b>State(s)</b>: {d.states} <br/>
+            <b>Park Code</b>: {d.parkCode} <br/>
+            <b>Designation</b>: {d.designation} <br/>
+            <b>Visitor Center(s)</b>: fdksjf <br/>
+            <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
+            </CardText>
+          </CardBody>
+        </Card>
+        )
+    })
     const yosemite = {"name": this.state.name, "state": this.state.states, "code": this.state.parkCode, "desg": this.state.designation, "visit": "Yosemite Valley Visitor Center", 
     "url": this.state.url, imageSrc: y, imageCaption: "Derek"};
     return (
@@ -59,34 +72,13 @@ class ParkCard extends Component {
       <hr className="divider"/>
       <Row>
         <Col lg="4" md="6" sm="12">
-          <AboutPark park={yosemite}/>
+          {test}
         </Col>
       </Row>
     </Container>
     );
   }
 }
-
-function AboutPark(props) {
-  return (
-    <Card className ="text-center">
-      <Link to={`/parks/${props.park.name}`}>
-        <CardImg top width="100%" src={props.park.imageSrc} alt={props.park.imageCaption} />
-      </Link>
-      <CardBody>
-        <CardTitle className="text-center">{props.park.name}</CardTitle>
-        <CardText> 
-        <b>State(s)</b>: {props.park.state} <br/>
-        <b>Park Code</b>: {props.park.code} <br/>
-        <b>Designation</b>: {props.park.desg} <br/>
-        <b>Visitor Center(s)</b>: {props.park.visit} <br/>
-        <b>url</b>: <a href={props.park.url}>{props.park.url}</a> <br/>
-        </CardText>
-      </CardBody>
-    </Card>
-  )
-}
-
 
 const Parks = (props) => (
     <div> 

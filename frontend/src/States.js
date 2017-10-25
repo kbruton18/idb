@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {
+  Link,
+  Route
+} from 'react-router-dom';
+import {
   Container,
   Row,
   Col,
@@ -9,6 +13,7 @@ import {
   CardBody,
   CardTitle
 } from 'reactstrap';
+import StateDetail from './StateDetail.js';
 
 const ca = require('./img/states/california.jpg');
 
@@ -30,7 +35,7 @@ function StateCard(props) {
   );
 }
 
-export default function States(props) {
+function StateLanding(props) {
   return (
     <div>
       <Container className="bg-faded p-4 my-4">
@@ -48,4 +53,13 @@ export default function States(props) {
       </Container>
     </div>
   );
+}
+
+export default function States(props) {
+  return (
+    <div>
+      <Route exact path="/states" component={StateLanding}/>
+      <Route path="/states/:id" component={StateDetail}/>
+    </div>
+  )
 }

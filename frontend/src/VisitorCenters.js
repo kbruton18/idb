@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {
+  Link,
+  Route
+} from 'react-router-dom';
+import {
   Container,
   Row,
   Col,
@@ -9,6 +13,7 @@ import {
   CardBody,
   CardTitle
 } from 'reactstrap';
+import VisitorCenterDetail from './VisitorCenterDetail.js';
 
 const yose = require('./img/visitorcenters/yosemite.png');
 
@@ -30,7 +35,7 @@ function VisitorCenterCard(props) {
   );
 }
 
-export default function VisitorCenters(props) {
+function VisitorCenterLanding(props) {
   return (
     <div>
       <Container className="bg-faded p-4 my-4">
@@ -49,4 +54,13 @@ export default function VisitorCenters(props) {
       </Container>
     </div>
   );
+}
+
+export default function VisitorCenters(props) {
+  return (
+    <div>
+      <Route exact path="/visitorcenters" component={VisitorCenterLanding}/>
+      <Route path="/visitorcenters/:id" component={VisitorCenterDetail}/>
+    </div>
+  )
 }

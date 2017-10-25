@@ -14,6 +14,8 @@ import States from './States.js';
 import Campgrounds from './Campgrounds.js';
 import VisitorCenters from './VisitorCenters.js';
 import ParkDetail from './ParkDetail.js';
+import StateDetail from './StateDetail.js';
+import VisitorCenterDetail from './VisitorCenterDetail.js';
 
 class App extends Component {
   render() {
@@ -26,10 +28,12 @@ class App extends Component {
             <Route exact path="/" component={Home}/>
             <Route path="/about" component={About}/>
             <Route path="/parks" component={Parks}/>
-            <Route path="/states" component={States}/>
             <Route path="/campgrounds" component={Campgrounds}/>
             <Route path="/visitorcenters" component={VisitorCenters}/>
+            <Route path="/states" component={States}/>
             <Route path="parks/:id" component={ParkDetail}/>
+            <Route path="visitorcenters/:id" component={VisitorCenterDetail}/>
+            <Route path="states/:id" component={StateDetail}/>
           </div>
           <Footer/>
         </div>

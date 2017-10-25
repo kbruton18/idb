@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import CustomCard from './CustomCard.js';
 
 class ParkDetail extends Component {
 
-	constructor(props) {
-		super(props);
+	constructor({match}) {
+		super(match);
 		this.state = {
-			id: props.params.id, 
+			id: match.params.id, 
 			data: []
 		}
 	}
@@ -21,7 +22,12 @@ class ParkDetail extends Component {
 	}
 
 	render() {
-		return (<h1>{this.props.params.id}</h1>);
+		console.log(this.props.params);
+		return (
+		  <div>
+			<CustomCard title={this.state.id}/>
+		  </div>
+		);
 	}
 }
 

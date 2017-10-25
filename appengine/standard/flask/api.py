@@ -92,7 +92,7 @@ def get_campground_attribute(campground_name, attribute_name):
 def get_visitor_centers_dict():
     visitor_centers_list = VisitorCenter.query.all()
     visitor_centers = {}
-    for visitor_center = visitor_centers_list:
+    for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
         visitor_center_dict["name"] = visitor_center.name
         visitor_center_dict["park"] = visitor_center.park

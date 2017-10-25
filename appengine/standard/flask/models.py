@@ -18,7 +18,7 @@ class Park(database.Model):
 	imageUrl = database.Column(database.String)
 
 	def __repr__(self):
-		return '<Park %r>' % self.fullName
+		return '<Park %s>' % self.fullName
 
 
 class State(database.Model):
@@ -37,7 +37,7 @@ class State(database.Model):
 	url = database.Column(database.String)
 
 	def __repr__(self):
-		return '<State %r>' % self.name
+		return '<State %s>' % self.name
 
 
 class Campground(database.Model):
@@ -57,7 +57,7 @@ class Campground(database.Model):
 	imageUrl = database.Column(database.String)
 
 	def __repr__(self):
-		return '<Campground %r>' % self.name
+		return '<Campground %s>' % self.name
 
 
 class VisitorCenter(database.Model):
@@ -74,4 +74,4 @@ class VisitorCenter(database.Model):
 	website = database.Column(database.String)
 
 	def __repr__(self):
-		return '<Visitor Center %r>' % self.fullName
+		return '<Visitor Center %s>' % self.fullName

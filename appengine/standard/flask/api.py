@@ -1,7 +1,7 @@
 from models import Park, State, Campground, VisitorCenter
 
 # Returns a dictionary of park codes mapped to dictionaries.
-# Each park's dictionary maps attribute names to the park's attribute values
+# Each park's dictionary maps attribute park IDs to the park's attribute values
 def get_parks_dict():
     parks_list = Park.query.all()
     parks = {}
@@ -18,15 +18,24 @@ def get_parks_dict():
         park_dict["weatherInfo"] = park.weatherInfo
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
-
-        parks[park.parkCode] = park_dict
+	park_dict["ID"] = park.ID
+        parks[park.ID] = park_dict
     return parks
 
 # Returns a park's attribute, given the park code as a string (e.g. "dena")
 # and the name of the desired attribute (e.g. "imageUrl")
-def get_park_attribute(park_code, attribute_name):
+def get_park_attribute_code(park_code, attribute_name):
     # raises exception if park code does not match exactly one park
     park = Park.query.filter_by(parkCode=park_code).one()
+    if hasattr(Park, attribute_name):
+        return getattr(park, attribute_name)
+    else:
+        raise ValueError("attribute_name not valid")
+
+# Returns a park's attribute, given its ID and the name of the desired attribute
+def get_park_attribute(id, attribute_name):
+    # Raises exception if id does not match exactly one park
+    park = Park.query.filter_by(ID=id).one()
     if hasattr(Park, attribute_name):
         return getattr(park, attribute_name)
     else:
@@ -49,12 +58,12 @@ def get_states_dict():
         state_dict["nationalParks"] = state.nationalParks
         state_dict["campground"] = state.campground
         state_dict["url"] = state.url
-
-        states[state.name] = state_dict
+	state_dict["ID"] = state.ID
+        states[state.ID] = state_dict
     return states
 
-def get_state_attribute(state_name, attribute_name):
-    state = State.query.filter_by(name=state_name).one()
+def get_state_attribute(id, attribute_name):
+    state = State.query.filter_by(ID=id).one()
     if hasattr(State, attribute_name):
         return getattr(state, attribute_name)
     else:
@@ -78,12 +87,12 @@ def get_campgrounds_dict():
         campground_dict["directionsInfo"] = campground.directionsInfo
         campground_dict["directonsUrl"] = campground.directonsUrl
         campground_dict["imageUrl"] = campground.imageUrl
-
-        campgrounds[campground.name] = campground_dict
+	campground_dict["ID"] = campground.ID
+        campgrounds[campground.ID] = campground_dict
     return campgrounds
 
-def get_campground_attribute(campground_name, attribute_name):
-    campground = Campground.query.filter_by(name=campground_name).one()
+def get_campground_attribute(id, attribute_name):
+    campground = Campground.query.filter_by(ID=id).one()
     if hasattr(Campground, attribute_name):
         return getattr(campground, attribute_name)
     else:
@@ -104,12 +113,12 @@ def get_visitor_centers_dict():
         visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
         visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
         visitor_center_dict["website"] = visitor_center.website
-
-        visitor_centers[visitor_center.name] = visitor_center_dict
+	visitor_center_dict["ID"] = visitor_center.ID
+        visitor_centers[visitor_center.ID = visitor_center_dict
     return visitor_centers
 
-def get_visitor_center_attribute(visitor_center_name, attribute_name):
-    visitor_center = VisitorCenter.query.filter_by(name=visitor_center_name).one()
+def get_visitor_center_attribute(id, attribute_name):
+    visitor_center = VisitorCenter.query.filter_by(ID=id).one()
     if hasattr(VisitorCenter, attribute_name):
         return getattr(visitor_center, attribute_name)
     else:

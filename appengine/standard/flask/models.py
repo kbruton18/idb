@@ -18,6 +18,21 @@ class Park(database.Model):
 	imageUrl = database.Column(database.Text)
 	ID = database.Column(database.Integer, autoincrement = True)
 
+	def __init__(self, parkCode, fullName, description, designation,
+		directionsInfo, directionsUrl, latLong, url, weatherInfo,
+		states, imageUrl):
+		self.parkCode = parkCode
+		self.fullName = fullName
+		self.description = description
+		self.designation = designation
+		self.directionsInfo = directionsInfo
+		self.directionsUrl = directionsUrl
+		self.latLong = latLong
+		self.url = url
+		self.weatherInfo = weatherInfo
+		self.states = states
+		self.imageUrl = imageUrl
+
 	def __repr__(self):
 		return '<Park %s: ParkCode=%s>' % self.fullName, self.parkCode
 

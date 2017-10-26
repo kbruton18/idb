@@ -18,6 +18,11 @@
   font-size: large;
 }
 
+.App-imageCrop {
+    height: calc(width * 0.5);
+    overflow: hidden;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

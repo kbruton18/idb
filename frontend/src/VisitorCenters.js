@@ -14,55 +14,72 @@ import {
   CardTitle
 } from 'reactstrap';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
+import CustomCard from './CustomCard.js'
 
-const yose = require('./img/visitorcenters/yosemite.png');
+class VisitorCenters extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      requestFailed: false,
+      vcDetail: [],
+    }
+  };
 
-function VisitorCenterCard(props) {
-  return (
-    <Card className="text-center">
-      <Link to={`/states/${props.title}`}>
-        <CardImg top width="100%" src={props.img} alt={props.alt} />
-      </Link>
-      <CardBody>
-        <CardTitle>{props.title}</CardTitle>
-        <CardText>
-          <b>Park: </b><a href={props.parkUrl}>{props.parkName}</a><br />
-          <b>State: </b><a href={props.stateUrl}>{props.stateName}</a><br />
-          <b>Address: </b>{props.address}<br />
-          <b>Phone Number: </b>{props.phone}<br />
-          <b>Operating Hours: </b>{props.hours}
-        </CardText>
-      </CardBody>
-    </Card>
-  );
-}
+  componentDidMount() {
+    console.log('I was triggered during componentDidMount')
+    //https://developer.nps.gov/api/v1/parks?limit=519&fields=contacts&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2
+    fetch('/api/parks')
+      .then((response) => {
+        return response.json()
+      }).then((responseJson) => {
+        let details = responseJson.map((detail) => {
+          return(
+            <div key={detail.parkCode}>
+            <Col lg="4" md="6" sm="12">
+              
+              <Card top width="100%" className ="text-center">
+                <Link to={`/parks/${detail.parkCode}`}>
+                  <CardImg top width="100%" src={detail.imageUrl} alt="ok" />
+                </Link>
+                <CardBody>
+                  <CardTitle className="text-center">{detail.fullName}</CardTitle>
+                  <CardText> 
+                  <b>State(s)</b>: {detail.states} <br/>
+                  <b>Park Code</b>: {detail.parkCode} <br/>
+                  <b>Designation</b>: {detail.designation} <br/>
+                  <b>Visitor Center(s)</b>: fdksjf <br/>
+                  <b>url</b>: <a href={detail.imageUrl}>{detail.url}</a> <br/>
+                  </CardText>
+                </CardBody>
+              </Card>
+              </Col>
+              </div>
+          )
+        })
+        this.setState({vcDetail: details, requestFailed: true,})
+      })
+      console.log('ended');
+      console.log(this.state);
+  }
 
-function VisitorCenterLanding(props) {
-  return (
-    <div>
+  render() {
+    console.log('I was triggered during render')
+    console.log(this.state.vcDetail)
+    if (!this.state.requestFailed) return <p>Failed request</p>
+    if (!this.state.vcDetail) return <p>Loading</p>
+    return (
+      <div>
       <Container className="bg-faded p-4 my-4">
         <hr className="divider"/>
         <h2 className="text-center text-lg text-uppercase my-0">Visitor Centers</h2>
         <hr className="divider"/>
         <Row>
-          <Col lg="4" md="6" sm="12">
-            <VisitorCenterCard img={yose} alt="Yosemite Valley Visitor Center Image" 
-              title="Yosemite Valley Visitor Center" parkUrl="http://www.swetravels.me/parks/yosemite.html"
-              parkName="Yosemite" stateUrl="http://www.swetravels.me/states/california.html"
-              stateName="CA" address="9035 Village Dr, Yosemite Valley, CA 95389" 
-              phone="(209) 372-0200" hours="9AM-5PM"/>
-          </Col>
+            {this.state.vcDetail}
         </Row>
       </Container>
-    </div>
-  );
+      </div>
+    )
+  }
 }
 
-export default function VisitorCenters(props) {
-  return (
-    <div>
-      <Route exact path="/visitorcenters" component={VisitorCenterLanding}/>
-      <Route path="/visitorcenters/:id" component={VisitorCenterDetail}/>
-    </div>
-  )
-}
+export default VisitorCenters

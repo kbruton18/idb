@@ -51,7 +51,6 @@ def get_states_dict():
         state_dict["totalPopulation"] = state.totalPopulation
         state_dict["medianIncome"] = state.medianIncome
         state_dict["nationalParks"] = state.nationalParks
-        state_dict["campground"] = state.campground
         state_dict["url"] = state.url
 	# state_dict["ID"] = state.ID
         states[state.name] = state_dict
@@ -116,4 +115,3 @@ def get_visitor_center_attribute(visitor_center_name, attribute_name):
         return getattr(visitor_center, attribute_name)
     else:
         raise ValueError("attribute_name not valid")
-

@@ -148,3 +148,4 @@ def get_visitor_centers_list():
 #         return getattr(visitor_center, attribute_name)
 #     else:
 #         raise ValueError("attribute_name not valid")
+

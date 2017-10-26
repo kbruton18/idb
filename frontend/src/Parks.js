@@ -30,27 +30,25 @@ class ParkCard extends Component {
   }
 
   componentDidMount() {
-    fetch('https://developer.nps.gov/api/v1/parks?parkCode=yose&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2')
+    fetch('http://sweet-travels.appspot.com/api/parks')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          data: responseJson['data']
+          data: responseJson
         })
       })
   }
 
   render() {
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    console.log(this.state.data);
     const test = this.state.data.map((d) => {
       return (
         <Card className ="text-center">
-          <Link to={`/parks/${d.name}`}>
-            <CardImg top width="100%" src={y} alt="ok" />
+          <Link to={`/parks/${d.parkCode}`}>
+            <CardImg top width="100%" src={d.imageUrl} alt="ok" />
           </Link>
           <CardBody>
-            <CardTitle className="text-center">{d.name}</CardTitle>
-            <CardText> 
+            <CardTitle className="text-center">{d.fullName}</CardTitle>
+            <CardText>
             <b>State(s)</b>: {d.states} <br/>
             <b>Park Code</b>: {d.parkCode} <br/>
             <b>Designation</b>: {d.designation} <br/>
@@ -61,8 +59,6 @@ class ParkCard extends Component {
         </Card>
         )
     })
-    const yosemite = {"name": this.state.name, "state": this.state.states, "code": this.state.parkCode, "desg": this.state.designation, "visit": "Yosemite Valley Visitor Center", 
-    "url": this.state.url, imageSrc: y, imageCaption: "Derek"};
     return (
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
@@ -81,9 +77,9 @@ class ParkCard extends Component {
 }
 
 const Parks = (props) => (
-    <div> 
-      <Route exact path="/parks" component={ParkCard}/>    
-      <Route path="/parks/:id" component={ParkDetail}/>    
+    <div>
+      <Route exact path="/parks" component={ParkCard}/>
+      <Route path="/parks/:id" component={ParkDetail}/>
     </div>
   )
 

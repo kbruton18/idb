@@ -13,12 +13,13 @@ class Park(database.Model):
 	latLong = database.Column(database.Text)
 	url = database.Column(database.Text)
 	weatherInfo = database.Column(database.Text)
+	campgrounds = database.Column(database.Text)
 	states = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
 
 	def __init__(self, parkCode, fullName, description, designation,
 		directionsInfo, directionsUrl, latLong, url, weatherInfo,
-		states, imageUrl):
+		campgrounds, states, imageUrl):
 		self.parkCode = parkCode
 		self.fullName = fullName
 		self.description = description
@@ -28,6 +29,7 @@ class Park(database.Model):
 		self.latLong = latLong
 		self.url = url
 		self.weatherInfo = weatherInfo
+		self.campgrounds = campgrounds
 		self.states = states
 		self.imageUrl = imageUrl
 

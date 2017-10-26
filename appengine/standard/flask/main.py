@@ -1,14 +1,21 @@
 from flask import Flask, render_template, request, jsonify
+from flask_restplus import Resource, Api
 from api import get_parks_dict
 from models import database
 
 app = Flask(__name__)
+api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:swetravels@104.198.224.97/swe_travels'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 database.init_app(app)
 
+@api.route('/api/parks')
+class HelloWorld(Resource):
+  def get(self):
+    return jsonify(get_parks_dict())
+
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5000)
+  app.run(host="0.0.0.0")
 
 @app.route('/')
 @app.route('/index.html')

@@ -1,18 +1,18 @@
 from flask import Flask, render_template, request, jsonify
-from flask_restplus import Resource, Api
+# from flask_restplus import Resource, Api
 from api import get_parks_dict
 from models import database
 
 app = Flask(__name__)
-api = Api(app)
+# api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:swetravels@104.198.224.97/swe_travels'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 database.init_app(app)
 
-@api.route('/api/parks')
-class HelloWorld(Resource):
-  def get(self):
-    return jsonify(get_parks_dict())
+# @api.route('/api/parks')
+# class HelloWorld(Resource):
+#   def get(self):
+#     return jsonify(get_parks_dict())
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")
@@ -96,9 +96,9 @@ tasks = [
 }]
 
 
-@app.route('/swetravels/api/parks', methods=['GET'])
+@app.route('/api/parks', methods=['GET'])
 def get_parks():
-    return jsonify({'tasks':tasks})
+    return render_template('campgrounds/campground_landing.htmla')
 
 @app.route('/campgrounds/4508')
 def campground3():

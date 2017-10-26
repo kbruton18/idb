@@ -39,8 +39,8 @@ class Park(database.Model):
 
 class State(database.Model):
 	__tablename__ = 'states'
-	name = database.Column(database.String(200), primary_key = True)
-	abbreviations = database.Column(database.Text)
+	name = database.Column(database.String(200))
+	abbreviations = database.Column(database.Text, primary_key = True)
 	nicknames = database.Column(database.Text)
 	timeZone = database.Column(database.Text)
 	governor = database.Column(database.Text)

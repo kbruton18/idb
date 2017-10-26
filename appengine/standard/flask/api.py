@@ -118,6 +118,14 @@ def get_visitor_centers_dict():
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
+def get_visitor_center_list():
+    visit_dict = get_visitor_centers_dict()
+    visit_code = visit_dict.keys()
+    data = []
+    for code in visit_code:
+        data.append(visit_dict[code])
+    return data
+
 def get_visitor_center_attribute(visitor_center_name, attribute_name):
     visitor_center = VisitorCenter.query.filter_by(name=visitor_center_name).one()
     if hasattr(VisitorCenter, attribute_name):

@@ -40,11 +40,6 @@ def get_parks_list():
 #     else:
 #         raise ValueError("attribute_name not valid")
 
-# Returns a park's dictionary, given the park code as a string (e.g. "dena")
-def get_park_dict(park_code):
-  park = Park.query.filter_by(parkCode=park_code).one()
-  return park.__dict__
-
 def get_states_dict():
     states_list = State.query.all()
     states = {}

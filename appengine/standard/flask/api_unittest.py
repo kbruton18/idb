@@ -22,13 +22,21 @@ class APITestMethods(unittest.TestCase):
     parks = api.get_parks_dict()
     denali = parks["dena"]
     self.assertEquals(denali["fullName"], "Denali National Park & Preserve")
+    
+  def testGetParkInfo(self):
+    denali = api.get_park_info("dena")
+    self.assertEquals(denali["fullName"], "Denali National Park & Preserve")
 
   def testGetStatesDict(self):
     states = api.get_states_dict()
     self.assertTrue("CA" in states.keys())
     self.assertFalse("XX" in states.keys())
+    
+  def testGetStateInfo(self):
+    tx = api.get_state_info("TX")
+    self.assertEquals(tx["capital"], "Austin")
 
-  def testStatesNumbers(self):
+  def testStatesLength(self):
     states = api.get_states_dict()
     self.assertEquals(50, len(states.keys()))
 
@@ -37,11 +45,6 @@ class APITestMethods(unittest.TestCase):
     ca = states["CA"]
     self.assertEquals("California", ca["fullName"])
 
-  def testStatesAbbreviations(self):
-    states = api.get_states_dict()
-    ca = states["CA"]
-    self.assertEquals("CA", ca["abbreviations"])
-  
   def testStatesList(self):
     states = api.get_states_list()
     self.assertEquals(len(states), 50)
@@ -49,6 +52,10 @@ class APITestMethods(unittest.TestCase):
   def testCampgroundsDict(self):
     campgrounds = api.get_campgrounds_dict()
     self.assertTrue("Yosemite Creek Campground" in campgrounds.keys())
+    
+  def testGetCampgroundInfo(self):
+    cg = api.get_campground_info("Yosemite Creek Campground")
+    self.assertEquals(cg["parkCode"], "yose")
     
   def testCampgroundsList(self):
     campgrounds = api.get_campgrounds_list()
@@ -61,6 +68,10 @@ class APITestMethods(unittest.TestCase):
   def testVisitorCentersDict(self):
     centers = api.get_visitor_centers_dict()
     self.assertTrue("Denali Visitor Center" in centers.keys())
+    
+  def testGetVisitorCenterInfo(self):
+    vc = api.get_visitor_center_info("Denali Visitor Center")
+    self.assertEquals(vc["parkCode"], "dena")
 
   def testVisitorCentersStates(self):
     centers = api.get_visitor_centers_dict()

@@ -76,7 +76,7 @@ class APITestMethods(unittest.TestCase):
     centers = api.get_visitor_centers_dict()
     hasVC = False
     for dict in campgrounds:
-      if dict["name"] = "Denali Visitor Center":
+      if dict["name"] == "Denali Visitor Center":
         hasVC = True
     self.assertTrue(hasVC)
 

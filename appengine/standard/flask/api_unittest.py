@@ -25,7 +25,7 @@ class APITestMethods(unittest.TestCase):
 
   def testGetStatesDict(self):
     states = api.get_states_dict()
-    self.assertTrue("California" in states.keys())
+    self.assertTrue("CA" in states.keys())
     self.assertFalse("XX" in states.keys())
 
   def testStatesNumbers(self):
@@ -34,17 +34,12 @@ class APITestMethods(unittest.TestCase):
 
   def testStatesNames(self):
     states = api.get_states_dict()
-    ca = states["California"]
+    ca = states["CA"]
     self.assertEquals("California", ca["fullName"])
-  
-  def testStatesCapitals(self):
-    states = api.get_states_dict()
-    ca = states["California"]
-    self.assertEquals("Los Angeles", ca["capital"])
 
   def testStatesAbbreviations(self):
     states = api.get_states_dict()
-    ca = states["California"]
+    ca = states["CA"]
     self.assertEquals("CA", ca["abbreviations"])
   
   def testStatesList(self):
@@ -53,7 +48,7 @@ class APITestMethods(unittest.TestCase):
 
   def testCampgroundsDict(self):
     campgrounds = api.get_campgrounds_dict()
-    self.assertTrue(True)
+    self.assertTrue("Yosemite Creek Campground" in campgrounds.keys())
     
   def testCampgroundsList(self):
     campgrounds = api.get_campgrounds_list()
@@ -75,7 +70,7 @@ class APITestMethods(unittest.TestCase):
   def testVisitorCentersList(self):
     centers = api.get_visitor_centers_dict()
     hasVC = False
-    for dict in campgrounds:
+    for dict in centers:
       if dict["name"] == "Denali Visitor Center":
         hasVC = True
     self.assertTrue(hasVC)

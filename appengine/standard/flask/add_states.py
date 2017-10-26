@@ -115,21 +115,22 @@ for id in pageids:
           print(str(flagurl))
           break
 
-  # assume abbreviations is just the postal code, which it currently is
-  filter_clause = "%" + abbreviations + "%"
-  parks = database.session.query(Park).filter(Park.states.like(filter_clause)).all()
-  nationalParks = ""
-  for p in parks:
-    nationalParks += str(p.parkCode) + ","
-  nationalParks = nationalParks.rstrip(",")
-
-  campgroundModels = database.session.query(Campground).filter(Campground.states.like(filter_clause)).all()
   campgrounds = ""
-  for c in campgroundModels:
-    campgrounds += str(c.name) + ","
-  campgrounds = campgrounds.rstrip(",")
+  nationalParks = ""
+  with database.session.no_autoflush:
+    # assume abbreviations is just the postal code, which it currently is
+    filter_clause = "%" + abbreviations + "%"
+    parks = database.session.query(Park).filter(Park.states.like(filter_clause)).all()
+    for p in parks:
+      nationalParks += str(p.parkCode) + ","
+    nationalParks = nationalParks.rstrip(",")
+
+    campgroundModels = database.session.query(Campground).filter(Campground.states.like(filter_clause)).all()
+    for c in campgroundModels:
+      campgrounds += str(c.name) + ","
+    campgrounds = campgrounds.rstrip(",")
 
   state = State(name, abbreviations, nickname, timeZone, governor, capital, largestCity, totalPopulation, totalArea, medianIncome, nationalParks, campgrounds, url, flagurl)
-  database.session.add(state)
+  database.session.merge(state)
 database.session.commit()
 print('Finished executing\n')

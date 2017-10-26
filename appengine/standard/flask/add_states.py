@@ -24,7 +24,8 @@ create_app().app_context().push()
 # parks request
 start = "https://en.wikipedia.org/w/api.php?action=query&titles="
 # put the states that you want scraped here. Put %20 for spaces and things like New York (state) and Washington (state) need the (state)s after it
-states = "Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New%20Hampshire|New%20Jersey|New%20Mexico|New%20York%20(state)|North%20Carolina|North%20Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode%20Island|South%20Carolina|South%20Dakota|Tennessee|Texas|Utah|Vermont|Virgina|Washington%20(state)|West%20Virginia|Wisconsin|Wyoming"
+#states = "Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New%20Hampshire|New%20Jersey|New%20Mexico|New%20York%20(state)|North%20Carolina|North%20Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode%20Island|South%20Carolina|South%20Dakota|Tennessee|Texas|Utah|Vermont|Virgina|Washington%20(state)|West%20Virginia|Wisconsin|Wyoming"
+states = "Alabama"
 end = "&prop=revisions&rvprop=content&format=json"
 endpoint = ''.join([start, states, end])
 
@@ -56,6 +57,7 @@ for id in pageids:
   campgrounds = ""
   url = ""
   flag = ""
+  flagurl = ""
 
   text = statedata["revisions"][0]["*"][0:10000]
   attributes = text.split('\n')
@@ -92,15 +94,13 @@ for id in pageids:
     if url == "" and attribute.startswith("|Website"):
       index = attribute.find("=")
       url = attribute[index+2:]
-    if flag == ""and attribute.startswith("|Flag"):
+    if flag == "" and attribute.startswith("|Flag"):
       index = attribute.find("=")
       flag = attribute[index+2:]
       flag = flag.replace(" ", "_")
 
-    imageEndpoint = "https://commons.wikimedia.org/w/api.php?action=query&titles=File:" + flag + "&prop=imageinfo&iiprop=url&format=json"
-    imageReq = urllib2.Request(imageEndpoint,headers={"User-Agent": "UT Austin CS 373 Project (http://swetravels.me/)"})
-
-    try: 
+      imageEndpoint = "https://commons.wikimedia.org/w/api.php?action=query&titles=File:" + flag + "&prop=imageinfo&iiprop=url&format=json"
+      imageReq = urllib2.Request(imageEndpoint,headers={"User-Agent": "UT Austin CS 373 Project (http://swetravels.me/)"})
       imageResponse = urllib2.urlopen(imageReq)
       imagePage = imageResponse.read()
       # response.read() returns bytes, which we need to decode into a string
@@ -110,18 +110,11 @@ for id in pageids:
       pageids = imageData["query"]["pages"].keys()
       for image_id in pageids:
         imageData = imageData["query"]["pages"][image_id]
+        if "imageinfo" in imageData.keys():
+          flagurl = imageData["imageinfo"][0]["url"]
+          print(str(flagurl))
+          break
 
-        print(str(imageData["imageInfo"][0]["url"]))
-        # imageText = imageData["revisions"][0]["*"][0:10000]
-        # imgAttributes = imageText.split('\n')
-
-        # for att in imgAttributes: 
-        #   print(str(att))
-
-    except: 
-      continue
-
-      
   state = State(name, abbreviations, nickname, timeZone, governor, capital, largestCity, totalPopulation, totalArea, medianIncome, nationalParks, campgrounds, url)
   pprint(state.__dict__)
 

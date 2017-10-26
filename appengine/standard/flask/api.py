@@ -98,7 +98,7 @@ def get_campgrounds_list():
         return data
 
 def get_campground_info(name):
-    campground_dict = get_campground_dict()
+    campground_dict = get_campgrounds_dict()
     return campground_dict[name]
 
 def get_visitor_centers_dict():

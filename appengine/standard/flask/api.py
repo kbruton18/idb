@@ -32,18 +32,13 @@ def get_parks_list():
 
 # Returns a park's attribute, given the park code as a string (e.g. "dena")
 # and the name of the desired attribute (e.g. "imageUrl")
-def get_park_attribute_code(park_code, attribute_name):
-    # raises exception if park code does not match exactly one park
-    park = Park.query.filter_by(parkCode=park_code).one()
-    if hasattr(Park, attribute_name):
-        return getattr(park, attribute_name)
-    else:
-        raise ValueError("attribute_name not valid")
-
-# Returns a park's dictionary, given the park code as a string (e.g. "dena")
-def get_park_dict(park_code):
-  park = Park.query.filter_by(parkCode=park_code).one()
-  return park.__dict__
+# def get_park_attribute_code(park_code, attribute_name):
+#     # raises exception if park code does not match exactly one park
+#     park = Park.query.filter_by(parkCode=park_code).one()
+#     if hasattr(Park, attribute_name):
+#         return getattr(park, attribute_name)
+#     else:
+#         raise ValueError("attribute_name not valid")
 
 def get_states_dict():
     states_list = State.query.all()
@@ -65,12 +60,20 @@ def get_states_dict():
         states[state.name] = state_dict
     return states
 
-def get_state_attribute(state_name, attribute_name):
-    state = State.query.filter_by(name=state_name).one()
-    if hasattr(State, attribute_name):
-        return getattr(state, attribute_name)
-    else:
-        raise ValueError("attribute_name not valid")
+def get_states_list():
+        states_dict = get_states_dict()
+        states_codes = states_dict.keys()
+        data = []
+        for code in states_codes:
+                data.append(states_dict[code])
+        return data
+
+# def get_state_attribute(state_name, attribute_name):
+#     state = State.query.filter_by(name=state_name).one()
+#     if hasattr(State, attribute_name):
+#         return getattr(state, attribute_name)
+#     else:
+#         raise ValueError("attribute_name not valid")
 
 def get_campgrounds_dict():
     campgrounds_list = Campground.query.all()
@@ -78,8 +81,8 @@ def get_campgrounds_dict():
     for campground in campgrounds_list:
         campground_dict = {}
         campground_dict["name"] = campground.name
-        campground_dict["park"] = campground.park
-        campground_dict["states"] = campground.states
+        # campground_dict["park"] = campground.park
+        # campground_dict["states"] = campground.states
         campground_dict["description"] = campground.description
         campground_dict["regulations"] = campground.regulations
         campground_dict["wheelchairAccess"] = campground.wheelchairAccess
@@ -93,12 +96,20 @@ def get_campgrounds_dict():
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
-def get_campground_attribute(campground_name, attribute_name):
-    campground = Campground.query.filter_by(name=campground_name).one()
-    if hasattr(Campground, attribute_name):
-        return getattr(campground, attribute_name)
-    else:
-        raise ValueError("attribute_name not valid")
+def get_campgrounds_list():
+        campgrounds_dict = get_campgrounds_dict()
+        campgrounds_codes = campgrounds_dict.keys()
+        data = []
+        for code in campgrounds_codes:
+                data.append(campgrounds_dict[code])
+        return data
+
+# def get_campground_attribute(campground_name, attribute_name):
+#     campground = Campground.query.filter_by(name=campground_name).one()
+#     if hasattr(Campground, attribute_name):
+#         return getattr(campground, attribute_name)
+#     else:
+#         raise ValueError("attribute_name not valid")
 
 def get_visitor_centers_dict():
     visitor_centers_list = VisitorCenter.query.all()
@@ -106,8 +117,8 @@ def get_visitor_centers_dict():
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
         visitor_center_dict["name"] = visitor_center.name
-        visitor_center_dict["park"] = visitor_center.park
-        visitor_center_dict["states"] = visitor_center.states
+        # visitor_center_dict["park"] = visitor_center.park
+        # visitor_center_dict["states"] = visitor_center.states
         visitor_center_dict["description"] = visitor_center.description
         visitor_center_dict["address"] = visitor_center.address
         visitor_center_dict["phone_number"] = visitor_center.phone_number
@@ -118,17 +129,18 @@ def get_visitor_centers_dict():
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
-def get_visitor_center_list():
-    visit_dict = get_visitor_centers_dict()
-    visit_code = visit_dict.keys()
-    data = []
-    for code in visit_code:
-        data.append(visit_dict[code])
-    return data
+def get_visitor_centers_list():
+        vc_dict = get_visitor_centers_dict()
+        vc_codes = vc_dict.keys()
+        data = []
+        for code in vc_codes:
+                data.append(vc_dict[code])
+        return data
 
-def get_visitor_center_attribute(visitor_center_name, attribute_name):
-    visitor_center = VisitorCenter.query.filter_by(name=visitor_center_name).one()
-    if hasattr(VisitorCenter, attribute_name):
-        return getattr(visitor_center, attribute_name)
-    else:
-        raise ValueError("attribute_name not valid")
+# def get_visitor_center_attribute(visitor_center_name, attribute_name):
+#     visitor_center = VisitorCenter.query.filter_by(name=visitor_center_name).one()
+#     if hasattr(VisitorCenter, attribute_name):
+#         return getattr(visitor_center, attribute_name)
+#     else:
+#         raise ValueError("attribute_name not valid")
+

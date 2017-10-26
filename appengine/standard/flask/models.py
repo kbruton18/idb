@@ -50,10 +50,11 @@ class State(database.Model):
 	nationalParks = database.Column(database.Text)
 	campgrounds = database.Column(database.Text)
 	url = database.Column(database.Text)
+	imageUrl = database.Column(database.Text)
 
 	def __init__(self, name, abbreviations, nicknames, timeZone, governor,
 		capital, largestCity, totalPopulation, totalArea, medianIncome,
-		nationalParks, campgrounds, url):
+		nationalParks, campgrounds, url, imageUrl):
 		self.name = name
 		self.abbreviations = abbreviations
 		self.nicknames = nicknames
@@ -67,6 +68,7 @@ class State(database.Model):
 		self.nationalParks = nationalParks
 		self.campgrounds = campgrounds
 		self.url = url
+		self.imageUrl = imageUrl
 
 	def __repr__(self):
 		return '<State %s>' % self.name

@@ -78,8 +78,8 @@ def get_campgrounds_dict():
     for campground in campgrounds_list:
         campground_dict = {}
         campground_dict["name"] = campground.name
-        campground_dict["park"] = campground.park
-        campground_dict["states"] = campground.states
+        # campground_dict["park"] = campground.park
+        # campground_dict["states"] = campground.states
         campground_dict["description"] = campground.description
         campground_dict["regulations"] = campground.regulations
         campground_dict["wheelchairAccess"] = campground.wheelchairAccess
@@ -106,8 +106,8 @@ def get_visitor_centers_dict():
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
         visitor_center_dict["name"] = visitor_center.name
-        visitor_center_dict["park"] = visitor_center.park
-        visitor_center_dict["states"] = visitor_center.states
+        # visitor_center_dict["park"] = visitor_center.park
+        # visitor_center_dict["states"] = visitor_center.states
         visitor_center_dict["description"] = visitor_center.description
         visitor_center_dict["address"] = visitor_center.address
         visitor_center_dict["phone_number"] = visitor_center.phone_number

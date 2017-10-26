@@ -116,17 +116,19 @@ def get_visitor_centers_dict():
     visitor_centers = {}
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
-        visitor_center_dict["name"] = visitor_center.name
+        # visitor_center_dict["name"] = visitor_center.name
         # visitor_center_dict["park"] = visitor_center.park
         # visitor_center_dict["states"] = visitor_center.states
-        visitor_center_dict["description"] = visitor_center.description
-        visitor_center_dict["address"] = visitor_center.address
-        visitor_center_dict["phone_number"] = visitor_center.phone_number
-        visitor_center_dict["latLong"] = visitor_center.latLong
-        visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
-        visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
-        visitor_center_dict["website"] = visitor_center.website
-        visitor_centers[visitor_center.name] = visitor_center_dict
+        # visitor_center_dict["description"] = visitor_center.description
+        # visitor_center_dict["address"] = visitor_center.address
+        # visitor_center_dict["phone_number"] = visitor_center.phone_number
+        # visitor_center_dict["latLong"] = visitor_center.latLong
+        # visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
+        # visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
+        # visitor_center_dict["website"] = visitor_center.website
+        visitor_center_dict["name"] = "hello"
+        # visitor_centers[visitor_center.name] = visitor_center_dict
+        visitor_centers["visitor_center.name"] = visitor_center_dict
     return visitor_centers
 
 def get_visitor_centers_list():

@@ -29,7 +29,7 @@ def get_campgrounds():
 
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():
-  return jsonify(get_visitor_center_list())
+  return jsonify(get_visitor_centers_dict())
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

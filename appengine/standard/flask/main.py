@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:swetravels@104.198.224.97/swe_travels'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 database.init_app(app)
+
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=5000)
 
@@ -78,9 +79,19 @@ def campground1():
 def campground2():
   return render_template('campgrounds/campground.html', name='Seawall Campground', park='Acadia National Park', state='Maine', description="Seawall Campground is located on Mount Desert Island, 4 miles south of Southwest Harbor on ME 102A. It is open from late May through September. Reservations are recommended. There are walk-in and drive-up tent sites, as well as RV sites (without hookups).", parkUrl='acadia.html', photoUrl='http://media-cdn.tripadvisor.com/media/photo-s/09/41/ef/e9/seawall-campground.jpg', attr={"Regulations": "http://www.nps.gov/acad/learn/management/lawsandpolicies.htm","Weather Overview": "Summer temperatures range from 45-90F (7-30C). Fall temperatures range from 30-70F (-1-21C). Typically the first is in frost mid-October and first snowfall begins in November and can continue through April with an average accumulation of 73 inches (185 cm). Winter temperatures range from 14-35F (-10 - 2C). A limited number of primitive hike-in sites are available in the winter. Spring temperatures range from 30-70F (-1-21C).", "Total Sites": 275, "Regulations Overview": "Camp only in designated sites. Always leave something on your site to indicate occupancy. This is especially important for truck campers, vans, and RVs.\nCampsites are limited to two tents, six people, and one vehicle.\nAll equipment must be placed on the gravel portion of the site.\nConnecting to any water or electric utility is prohibited.\nPlease contact a ranger about special circumstances or extra parking.\nKeep off vegetated areas.\nDo not feed wildlife.\nDo not gather, pick, or cut wildflowers, plants, trees, rocks, or any other objects.\nDo not wash items at water faucets. All camp waste water must be disposed of in designated drains.\nStore all food and cooking equipment in an enclosed vehicle or hard-sided food locker. Place all garbage in trash containers or in your vehicle. Properly store all items that may attract wildlife.\nDriving nails, spikes, or screws into trees is prohibited.\nDigging trenches is prohibited."})
 
+
+tasks = [ 
+{
+"description": "hey"
+},
+{
+"description": "hi"
+}]
+
+
 @app.route('/swetravels/api/parks', methods=['GET'])
 def get_parks():
-    return jsonify(get_parks_dict())
+    return jsonify({'tasks':tasks})
 
 @app.route('/campgrounds/4508')
 def campground3():

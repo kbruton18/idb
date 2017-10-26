@@ -98,7 +98,7 @@ tasks = [
 
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
-    return render_template('campgrounds/campground_landing.htmla')
+    return render_template('campgrounds/campground_landing.html')
 
 @app.route('/campgrounds/4508')
 def campground3():

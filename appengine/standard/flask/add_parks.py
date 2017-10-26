@@ -1,4 +1,4 @@
-from models import database, Park
+from models import database, Park, Campground
 import urllib2, json
 import requests
 from main import create_app
@@ -59,9 +59,18 @@ for x in data["data"]:
     if "National Park" not in x["fullName"]:
         continue
 
+    campgrounds = ""
+    with database.session.no_autoflush:
+        campgroundModels = database.session.query(Campground).filter(Campground.parkCode==x["parkCode"]).all()
+        for c in campgroundModels:
+            campgrounds += str(c.name) + ", "
+        campgrounds = campgrounds.rstrip(", ")
+
+    print(campgrounds)
     park = Park(x["parkCode"], x["fullName"], x["description"],
         x["designation"], x["directionsInfo"], x["directionsUrl"],
-        x["latLong"], x["url"], x["weatherInfo"], x["states"], photo_endpoint)
+        x["latLong"], x["url"], x["weatherInfo"], campgrounds, x["states"], 
+        photo_endpoint)
     database.session.add(park)
 database.session.commit()
 

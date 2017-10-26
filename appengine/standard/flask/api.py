@@ -4,7 +4,7 @@ from models import Park, State, Campground, VisitorCenter
 # Each park's dictionary maps attribute park IDs to the park's attribute values
 def get_parks_dict():
     parks_list = Park.query.all()
-    parks = []
+    parks = {}
     for park in parks_list:
         park_dict = {}
         park_dict["parkCode"] = park.parkCode

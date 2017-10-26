@@ -1,3 +1,4 @@
 Flask==0.12.2
-MySQLdb==1.2.4
 webapp2==2.3
+Flask-SQLAlchemy
+SQLAlchemy

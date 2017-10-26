@@ -44,32 +44,6 @@ List all national parks contained in SWEet Travels.
             }
         ]
 
-### Get a National Park [GET]
-
-Get an individual national park.
-
-+ Parameters
-    + name - A string variable used to find a specific park
-    
-+ Response 200 (application/json)
-
-        [
-            {
-                "name": "Yosemite",
-                "states": "CA",
-                "description": "Not just a great valley, but a shrine to human foresight, the strength of granite, the power of glaciers, the persistence of life, and the tranquility of the High Sierra.First protected in 1864, Yosemite National Park is best known for its waterfalls, but within its nearly 1,200 square miles, you can find deep valleys, grand meadows, ancient giant sequoias, a vast wilderness area, and much more.",
-                "weather_info": "Yosemite National Park covers nearly 1,200 square miles (3,100 square km) in the Sierra Nevada, with elevations ranging from about 2,000 feet (600 m) to 13,000 ft (4,000 m). Yosemite receives 95% of its precipitation between October and May (and over 75% between November and March). Most of Yosemite is blanketed in snow from about November through May. (Yosemite Valley can be rainy or snowy in any given winter storm.)",
-                "campgrounds": "Upper Pines",
-                "visitor_centers": "Yosemite Valley Visitor Center",
-                "park_code": "yose",
-                "designation": "National Park",
-                "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
-                "url": "https://www.nps.gov/yose/planyourvisit/yv.htm",
-            }
-        ]
-
-
-
 ## Visitor Centers Collection [/visitor_centers]
 ### List Visitor Centers [GET]
 
@@ -113,32 +87,6 @@ List all visitor centers contained in SWEet Travels.
             }
         ]
 
-### Get a Visitor Center [GET]
-
-Get an individual visitor center.
-
-
-+ Parameters
-    + name - A string variable used to find a specific visitor center
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "name": "Yosemite Valley Visitor Center",
-                "state": "CA",
-                "national_park": "Yosemite",
-                "description": "Year-round facility offering Yosemite maps and brochures, nature exhibits, a theater and a bookstore.",
-                "hours": "9AM-5PM",
-                "address": "9035 Village Dr, Yosemite Valley, CA 95389",
-                "phone number": "(209) 372-0200",
-                "latitude":37.748518,
-                "longitude": -119.587258,
-                "directions_info": "From San Francisco, take I-580 east to I-205 east to Highway 120 east (Manteca) or Highway 140 east (Merced) into Yosemite National Park.",
-                "directions_url": "https://www.nps.gov/yose/planyourvisit/maps.htm",
-                "website": "https://www.nps.gov/yose/planyourvisit/yv.htm",
-            }
-        ]
 
 
 ## State Collection [/states]
@@ -186,33 +134,7 @@ List all state objects contained in SWEet Travels.
             }
         ]
 
-### Get a State [GET]
 
-Get an individual state.
-
-+ Parameters
-    + name - A string variable used to find a specific state
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "name": "California",
-                "abbreviations": "CA, Calif., Cal.",
-                "nicknames": "The Golden State",
-                "timezone": "Pacific (UTC -8/-7)",
-                "governor": "Jerry Brown (D)",
-                "capital": "Sacramento",
-                "largest_city": "Los Angeles",
-                "total_population": 39250017,
-                "total_area": 163696,
-                "median_income": 63636,
-                "national_parks": "Yosemite",
-                "campgrounds": "Upper Pines",
-                "website": "http://www.ca.gov",
-            }
-        ]
-        
 ## Campground Collection [/campground]
 
 ### List Campgrounds [GET]
@@ -243,26 +165,5 @@ List all campground objects contained in SWEet Travels.
                         "reservationsUrl":"n/a"
                     }, 
                 ]
-            }
-        ]
-
-### Get a Campground [GET]
-
-Get an individual campground.
-
-+ Parameters
-    + name - A string variable used to find a specific campground
-
-+ Response 200 (application/json)
-
-        [        
-            {  
-                "name":"Mammoth Campground",
-                "state":"Wyoming",
-                "desc":" Our only year-round campground, Mammoth is located five miles south of Gardiner, Montana and the park's North Entrance. Situated in a high sage brush steppe above the Gardner River, scattered juniper and Douglas fir trees provide shade during hot summer months. The campground is close to fishing, hiking, and the famous Mammoth Hot Springs Terraces. Great wildlife viewing opportunities abound with elk and bison occasionally passing through the campground.",
-                "parkName":"Yellowstone National Park",
-                "numberOfCampSites":"85",
-                "directionsUrl":"https://www.nps.gov/yell/planyourvisit/directions.htm",
-                "reservationsUrl":"n/a"
             }
         ]

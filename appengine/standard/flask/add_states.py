@@ -22,7 +22,12 @@ create_app().app_context().push()
 
 """Simple request handler that shows all of the MySQL variables."""
 # parks request
-endpoint = "https://en.wikipedia.org/w/api.php?action=query&titles=Florida&prop=revisions&rvprop=content&format=json"
+start = "https://en.wikipedia.org/w/api.php?action=query&titles="
+# put the states that you want scraped here. Put %20 for spaces and things like New York (state) and Washington (state) need the (state)s after it
+states = "Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|New%20York%20(state)"
+end = "&prop=revisions&rvprop=content&format=json"
+endpoint = ''.join([start, states, end])
+
 req = urllib2.Request(endpoint,headers={"User-Agent": "UT Austin CS 373 Project (http://swetravels.me/)"})
 
 response = urllib2.urlopen(req)

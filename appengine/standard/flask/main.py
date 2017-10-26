@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from api import get_parks_dict
 
 app = Flask(__name__)

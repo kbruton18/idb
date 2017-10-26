@@ -1,4 +1,4 @@
-from models import database, State
+from models import database, State, Park, Campground
 import urllib2, json
 import requests
 from main import create_app
@@ -25,7 +25,7 @@ create_app().app_context().push()
 start = "https://en.wikipedia.org/w/api.php?action=query&titles="
 # put the states that you want scraped here. Put %20 for spaces and things like New York (state) and Washington (state) need the (state)s after it
 #states = "Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New%20Hampshire|New%20Jersey|New%20Mexico|New%20York%20(state)|North%20Carolina|North%20Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode%20Island|South%20Carolina|South%20Dakota|Tennessee|Texas|Utah|Vermont|Virgina|Washington%20(state)|West%20Virginia|Wisconsin|Wyoming"
-states = "Alabama"
+states = "California"
 end = "&prop=revisions&rvprop=content&format=json"
 endpoint = ''.join([start, states, end])
 
@@ -115,7 +115,21 @@ for id in pageids:
           print(str(flagurl))
           break
 
-  state = State(name, abbreviations, nickname, timeZone, governor, capital, largestCity, totalPopulation, totalArea, medianIncome, nationalParks, campgrounds, url)
+  # assume abbreviations is just the postal code, which it currently is
+  filter_clause = "%" + abbreviations + "%"
+  parks = database.session.query(Park).filter(Park.states.like(filter_clause)).all()
+  nationalParks = ""
+  for p in parks:
+    nationalParks += str(p.parkCode) + ","
+  nationalParks = nationalParks.rstrip(",")
+
+  campgroundModels = database.session.query(Campground).filter(Campground.states.like(filter_clause)).all()
+  campgrounds = ""
+  for c in campgroundModels:
+    campgrounds += str(c.name) + ","
+  campgrounds = campgrounds.rstrip(",")
+
+  state = State(name, abbreviations, nickname, timeZone, governor, capital, largestCity, totalPopulation, totalArea, medianIncome, nationalParks, campgrounds, url, flagurl)
   pprint(state.__dict__)
 
 print('Finished executing\n')

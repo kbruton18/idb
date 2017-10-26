@@ -1,4 +1,5 @@
 from models import Park, State, Campground, VisitorCenter
+from flask import Flask
 
 # Returns a dictionary of park codes mapped to dictionaries.
 # Each park's dictionary maps attribute park IDs to the park's attribute values
@@ -18,8 +19,16 @@ def get_parks_dict():
         park_dict["weatherInfo"] = park.weatherInfo
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
-        parks["data"].push(park_dict)
+        parks[park.parkCode] = park_dict
     return parks
+    
+def get_parks_list():
+	parks_dict = get_parks_dict()
+	park_codes = parks_dict.keys()
+	data = []
+	for code in park_codes:
+		data.append(parks_dict[code])
+	return data
 
 # Returns a park's attribute, given the park code as a string (e.g. "dena")
 # and the name of the desired attribute (e.g. "imageUrl")

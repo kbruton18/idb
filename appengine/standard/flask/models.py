@@ -16,7 +16,6 @@ class Park(database.Model):
 	weatherInfo = database.Column(database.Text)
 	states = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
-	ID = database.Column(database.Integer, autoincrement = True)
 
 	def __init__(self, parkCode, fullName, description, designation,
 		directionsInfo, directionsUrl, latLong, url, weatherInfo,
@@ -52,7 +51,6 @@ class State(database.Model):
 	nationalParks = database.Column(database.Text)
 	campgrounds = database.Column(database.Text)
 	url = database.Column(database.Text)
-	ID = database.Column(database.Integer, autoincrement = True)
 
 	def __init__(self, name, abbreviations, nicknames, timeZone, governor,
 		capital, largestCity, totalPopulation, totalArea, medianIncome,
@@ -90,7 +88,6 @@ class Campground(database.Model):
 	directionsInfo = database.Column(database.Text)
 	directionsUrl = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
-	ID = database.Column(database.Integer, autoincrement = True)
 
 	def __init__(self, name, parkCode, states, description,
 		regulationsOverview, wheelchairAccess, internetInfo,
@@ -125,7 +122,6 @@ class VisitorCenter(database.Model):
 	directionsInfo = database.Column(database.Text)
 	website = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
-	ID = database.Column(database.Integer, autoincrement = True)
 
 	def __init__(self, name, parkCode, states, description, latLong,
 		directionsUrl, directionsInfo, website, imageUrl):

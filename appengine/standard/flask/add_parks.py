@@ -66,7 +66,8 @@ for x in data["data"]:
             campgrounds += str(c.name) + ", "
         campgrounds = campgrounds.rstrip(", ")
 
-    print(campgrounds)
+    if campgrounds == "": 
+        campgrounds = "N/A"
     park = Park(x["parkCode"], x["fullName"], x["description"],
         x["designation"], x["directionsInfo"], x["directionsUrl"],
         x["latLong"], x["url"], x["weatherInfo"], campgrounds, x["states"], 

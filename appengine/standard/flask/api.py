@@ -18,8 +18,7 @@ def get_parks_dict():
         park_dict["weatherInfo"] = park.weatherInfo
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
-	park_dict["ID"] = park.ID
-        parks[park.ID] = park_dict
+        parks[park.parkCode] = park_dict
     return parks
 
 # Returns a park's attribute, given the park code as a string (e.g. "dena")

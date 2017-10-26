@@ -1,24 +1,23 @@
-sep=;
-Story Title;Estimate;Vote Started;Voting Duration;Avg Voting Time;Fastest;Slowest;
-As a user, I should be able to see the map of the state on the state detail page so that I can immediately know where it is located from me.;3;18/10/2017 02:39:49;00:00:07;00:00:03;Rachel;Ryan Le;
-As a user, I want to get to related parks from campgrounds;3;18/10/2017 02:39:36;00:00:11;00:00:05;Rachel;Ryan Le;
-As a user, I want to be able to click a specific park and see its lists of associated visitor centers and campgrounds, so that I can plan my visit.;3;18/10/2017 02:39:23;00:00:11;00:00:04;Rachel;Ryan Le;
-As a user, I want to get to related states from a campground;3;18/10/2017 02:39:11;00:00:09;00:00:06;Rachel;Ryan Le;
-As a developer, I want to read a technical report of the website so I can learn how the site was built.;5;18/10/2017 02:39:01;00:00:08;00:00:04;Rachel;Ryan Le;
-As a user, we should be able to see embedded social media feeds.;2;18/10/2017 02:38:53;00:00:06;00:00:03;Rachel;Ryan Le;
-As a user, I want to be able to navigate between visitor centers and their corresponding parks/states, so that I can see which visitor center is associated with which park and states.;3;18/10/2017 02:38:42;00:00:08;00:00:06;Rachel;Ryan Le;
-As a user, I should be able to see all the states when I click on States so that I can quickly see my available options when planning my trip;5;18/10/2017 02:38:32;00:00:08;00:00:04;Rachel;Ryan Le;
-As a user, I want to see pages of campgrounds rather than all of them on one page so that everything doesn't bog down trying to load at once;5;18/10/2017 02:38:21;00:00:08;00:00:06;Rachel;Ryan Le;
-As a user, I want to look at a specific visitor center and see its hours of operation, so that I can plan my visit.;2;18/10/2017 02:38:10;00:00:08;00:00:04;Rachel;Ryan Le;
-As a user, I want to be able to click on About so that I can learn more about the website, how it is used, and get background on the creators of the site.;Â½;18/10/2017 02:37:53;00:00:14;00:00:06;Rachel;Ryan Le;
-As a user, I should be able to see multiple campgrounds when I click on Campgrounds so that I can quickly look through my options.;2;18/10/2017 02:37:34;00:00:17;00:00:10;Rachel;Ryan Le;
-As a user, I want to be able to click a visitor center and see a map of where that visitor center is located, so I can plan navigation.;5;18/10/2017 02:37:18;00:00:13;00:00:08;Rachel;Ryan Le;
-As a user, I want to click on Visitor Centers and see a list of park visitor centers so I can plan out my visit.;2;18/10/2017 02:37:04;00:00:12;00:00:05;Rachel;Ryan Le;
-As a user, I want to be able to click on a specific state from the states list so that I can get to the detail page of the state and get more information on it.;3;18/10/2017 02:36:47;00:00:14;00:00:10;Rachel;Ryan Le;
-As a user of the SWEtravels API, I want to query for campgrounds and get back results;5;18/10/2017 02:36:36;00:00:09;00:00:06;Rachel;Ryan Le;
-As a user, I want to be able to navigate to all the pages from the home page because I do not want to use a broken website.;20;18/10/2017 02:36:23;00:00:10;00:00:05;Rachel;Ryan Le;
-As a user, I want to be able to click on States so that I can view all the list of possible states with parks that I could visit.;2;18/10/2017 02:36:09;00:00:12;00:00:08;Rachel;Ryan Le;
-As a user, I should be able to see an image of the campground.;Â½;18/10/2017 02:35:58;00:00:07;00:00:04;Rachel;Ryan Le;
-As a user, I should be able to click on a specific campground to view more information on that campground;2;18/10/2017 02:35:46;00:00:09;00:00:05;Rachel;Ryan Le;
-As a user, I want to see a carousel on the homepage so I can navigate.;1;18/10/2017 02:35:33;00:00:08;00:00:05;Rachel;Ryan Le;
-As a user, I should be able to click on Campgrounds to view a list of campgrounds;2;18/10/2017 02:34:59;00:00:30;00:00:22;Rachel;Ryan Le;
+Story Title,Estimate,Vote Started,Voting Duration,Avg Voting Time,Fastest,Slowest,Actual Time
+"As a user, I should be able to see the map of the state on the state detail page so that I can immediately know where it is located from me.",3,18/10/2017 02:39:49,0:00:07,0:00:03,Rachel,Ryan Le,4
+"As a user, I want to get to related parks from campgrounds",3,18/10/2017 02:39:36,0:00:11,0:00:05,Rachel,Ryan Le,3
+"As a user, I want to be able to click a specific park and see its lists of associated visitor centers and campgrounds, so that I can plan my visit.",3,18/10/2017 02:39:23,0:00:11,0:00:04,Rachel,Ryan Le,3
+"As a user, I want to get to related states from a campground",3,18/10/2017 02:39:11,0:00:09,0:00:06,Rachel,Ryan Le,3
+"As a developer, I want to read a technical report of the website so I can learn how the site was built.",5,18/10/2017 02:39:01,0:00:08,0:00:04,Rachel,Ryan Le,5
+"As a user, we should be able to see embedded social media feeds.",2,18/10/2017 02:38:53,0:00:06,0:00:03,Rachel,Ryan Le,2
+"As a user, I want to be able to navigate between visitor centers and their corresponding parks/states, so that I can see which visitor center is associated with which park and states.",3,18/10/2017 02:38:42,0:00:08,0:00:06,Rachel,Ryan Le,2
+"As a user, I should be able to see all the states when I click on States so that I can quickly see my available options when planning my trip",5,18/10/2017 02:38:32,0:00:08,0:00:04,Rachel,Ryan Le,3
+"As a user, I want to see pages of campgrounds rather than all of them on one page so that everything doesn't bog down trying to load at once",5,18/10/2017 02:38:21,0:00:08,0:00:06,Rachel,Ryan Le,2
+"As a user, I want to look at a specific visitor center and see relevant content, so that I can plan my visit.",2,18/10/2017 02:38:10,0:00:08,0:00:04,Rachel,Ryan Le,2
+"As a user, I want to be able to click on About so that I can learn more about the website, how it is used, and get background on the creators of the site.",å_,18/10/2017 02:37:53,0:00:14,0:00:06,Rachel,Ryan Le,1
+"As a user, I should be able to see multiple campgrounds when I click on Campgrounds so that I can quickly look through my options.",2,18/10/2017 02:37:34,0:00:17,0:00:10,Rachel,Ryan Le,2
+"As a user, I want to be able to click a visitor center and see a map of where that visitor center is located, so I can plan navigation.",5,18/10/2017 02:37:18,0:00:13,0:00:08,Rachel,Ryan Le,2
+"As a user, I want to click on Visitor Centers and see a list of park visitor centers so I can plan out my visit.",2,18/10/2017 02:37:04,0:00:12,0:00:05,Rachel,Ryan Le,2
+"As a user, I want to be able to click on a specific state from the states list so that I can get to the detail page of the state and get more information on it.",3,18/10/2017 02:36:47,0:00:14,0:00:10,Rachel,Ryan Le,2
+"As a user of the SWEtravels API, I want to query for campgrounds and get back results",5,18/10/2017 02:36:36,0:00:09,0:00:06,Rachel,Ryan Le,5
+"As a user, I want to be able to navigate to all the pages from the home page because I do not want to use a broken website.",20,18/10/2017 02:36:23,0:00:10,0:00:05,Rachel,Ryan Le,3
+"As a user, I want to be able to click on States so that I can view all the list of possible states with parks that I could visit.",2,18/10/2017 02:36:09,0:00:12,0:00:08,Rachel,Ryan Le,2
+"As a user, I should be able to see an image of the campground.",å_,18/10/2017 02:35:58,0:00:07,0:00:04,Rachel,Ryan Le,1
+"As a user, I should be able to click on a specific campground to view more information on that campground",2,18/10/2017 02:35:46,0:00:09,0:00:05,Rachel,Ryan Le,1
+"As a user, I want to see a carousel on the homepage so I can navigate.",1,18/10/2017 02:35:33,0:00:08,0:00:05,Rachel,Ryan Le,2
+"As a user, I should be able to click on Campgrounds to view a list of campgrounds",2,18/10/2017 02:34:59,0:00:30,0:00:22,Rachel,Ryan Le,3

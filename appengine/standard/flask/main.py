@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from api import *
 from models import database
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 def create_app():
     app = Flask(__name__)
@@ -12,6 +13,7 @@ def create_app():
     return app
 
 app = create_app()
+CORS(app)
 
 @app.route('/api/parks', methods=['GET'])
 def get_parks():

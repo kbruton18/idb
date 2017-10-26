@@ -25,11 +25,11 @@ def get_states():
 
 @app.route('/api/campgrounds', methods=['GET'])
 def get_campgrounds():
-  return jsonify(get_campgrounds_dict())
+  return jsonify(get_campgrounds_list())
 
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():
-  return jsonify(get_visitor_centers_dict())
+  return jsonify(get_visitor_centers_list())
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

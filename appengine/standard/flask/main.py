@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from api import get_parks_dict
+from models import database
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:swetravels@104.198.224.97/swe_travels'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+database.init_app(app)
 
 @app.route('/')
 @app.route('/index.html')
@@ -91,7 +94,7 @@ tasks = [
 
 @app.route('/swetravels/api/parks', methods=['GET'])
 def get_parks():
-    return jsonify({'tasks': tasks})
+    return jsonify(get_parks_dict())
 
 @app.route('/campgrounds/4508')
 def campground3():

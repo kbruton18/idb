@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from main import app
 
-database = SQLAlchemy(app)
+database = SQLAlchemy()
 
 class Park(database.Model):
 	__tablename__ = 'parks'

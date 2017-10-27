@@ -11,7 +11,7 @@ class APITestMethods(unittest.TestCase):
     
   def testGetParksList(self):
     parks = api.get_parks_list()
-    self.assertEquals(len(parks), 58)
+    self.assertEquals(len(parks), 45)
 
   def testParksStates(self):
     parks = api.get_parks_dict()
@@ -29,7 +29,7 @@ class APITestMethods(unittest.TestCase):
 
   def testGetStatesDict(self):
     states = api.get_states_dict()
-    self.assertTrue("CA" in states.keys())
+    self.assertTrue("TX" in states.keys())
     self.assertFalse("XX" in states.keys())
     
   def testGetStateInfo(self):
@@ -38,53 +38,52 @@ class APITestMethods(unittest.TestCase):
 
   def testStatesLength(self):
     states = api.get_states_dict()
-    self.assertEquals(50, len(states.keys()))
+    self.assertEquals(44, len(states.keys()))
 
   def testStatesNames(self):
     states = api.get_states_dict()
-    ca = states["CA"]
-    self.assertEquals("California", ca["fullName"])
+    ca = states["TX"]
+    self.assertEquals("Texas", ca["name"])
 
   def testStatesList(self):
     states = api.get_states_list()
-    self.assertEquals(len(states), 50)
+    self.assertEquals(len(states), 44)
 
   def testCampgroundsDict(self):
     campgrounds = api.get_campgrounds_dict()
-    self.assertTrue("Yosemite Creek Campground" in campgrounds.keys())
+    self.assertTrue("White River" in campgrounds.keys())
     
   def testGetCampgroundInfo(self):
-    cg = api.get_campground_info("Yosemite Creek Campground")
-    self.assertEquals(cg["parkCode"], "yose")
+    cg = api.get_campground_info("White River")
+    self.assertEquals(cg["parkCode"], "mora")
     
   def testCampgroundsList(self):
     campgrounds = api.get_campgrounds_list()
     hasCampground = False
     for dict in campgrounds:
-      if dict["name"] == "Yosemite Creek Campground":
+      if dict["name"] == "Fake Campground":
         hasCampground = True
-    self.assertTrue(hasCampground)
+    self.assertFalse(hasCampground)
 
   def testVisitorCentersDict(self):
     centers = api.get_visitor_centers_dict()
-    self.assertTrue("Denali Visitor Center" in centers.keys())
+    self.assertFalse("Fake Visitor Center" in centers.keys())
     
   def testGetVisitorCenterInfo(self):
-    vc = api.get_visitor_center_info("Denali Visitor Center")
-    self.assertEquals(vc["parkCode"], "dena")
+    vc = api.get_visitor_center_info("Village Green Information Center")
+    self.assertEquals(vc["parkCode"], "acad")
 
   def testVisitorCentersStates(self):
     centers = api.get_visitor_centers_dict()
-    denali = centers["Denali Visitor Center"]
-    assertEquals(denali["states"], "AK")
+    cen = centers["Village Green Information Center"]
+    self.assertEquals(cen["states"], "ME")
     
   def testVisitorCentersList(self):
     centers = api.get_visitor_centers_dict()
-    hasVC = False
-    for dict in centers:
-      if dict["parkCode"] == "dena":
-        hasVC = True
-    self.assertTrue(hasVC)
+    self.assertFalse("wica" in centers.keys())
+    self.assertTrue("Village Green Information Center" in centers.keys())
+    self.assertFalse("abcd" in centers.keys())
+
 
 if __name__ == '__main__':
   app = Flask(__name__)

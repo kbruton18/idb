@@ -14,6 +14,7 @@ import {
   CardTitle
 } from 'reactstrap';
 import CustomCard from './CustomCard.js';
+import NotFound from './NotFound.js';
 
 class CampgroundDetail extends Component {
 
@@ -29,13 +30,26 @@ class CampgroundDetail extends Component {
     fetch('http://sweet-travels.appspot.com/api/campgrounds/' + this.state.id)
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({
-          data: responseJson
-        })
+        if (responseJson) {
+          console.log(responseJson);
+          this.setState({
+            data: responseJson
+          })
+        } else {
+          this.setState({nothingFound: true});
+        }
+      })
+      .catch(() => {
+        this.setState({nothingFound: true});
       })
   }
 
   render() {
+    if (this.state.nothingFound) {
+      return (
+        <NotFound/>
+      )
+    }
     return (
       <div>
       <Container className="bg-faded p-4 my-4">

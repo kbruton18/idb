@@ -13,6 +13,7 @@ import {
   CardBody,
   CardTitle
 } from 'reactstrap';
+import NotFound from './NotFound.js';
 
 class StateDetail extends Component {
 
@@ -32,12 +33,20 @@ class StateDetail extends Component {
           data: responseJson
         })
       })
+      .catch(() => {
+        this.setState({nothingFound: true});
+      })
   }
 
   render() {
+    if (this.state.nothingFound) {
+      return (
+        <NotFound/>
+      )
+    }
     return (
       <div>
-      <Container className="bg-faded p-4 my-4">
+        <Container className="bg-faded p-4 my-4">
         <hr className="divider"/>
         <h2 className="text-center text-lg text-uppercase my-0">
            <strong> {this.state.data.name}</strong>

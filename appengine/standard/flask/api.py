@@ -54,6 +54,7 @@ def get_states_dict():
         state_dict["nationalParks"] = state.nationalParks
         state_dict["campgrounds"] = state.campgrounds
         state_dict["url"] = state.url
+        state_dict["imageUrl"] = state.imageUrl
         states[state.abbreviations] = state_dict
     return states
 

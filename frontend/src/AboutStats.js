@@ -24,52 +24,46 @@ export default class AboutStats extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			derekc: [],
-			katherinec: [],
-			linhc: [],
-			rachelc: [],
-			ryanc: []
+			stats: []
 		}
 	}
 
 	componentDidMount() {
-		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=dchang95')
+		fetch('https://api.github.com/repos/kbruton18/idb/stats/contributors')
 			.then((response) => response.json())
 			.then((responseJson) => {
-				this.setState({derekc: responseJson});
-			});
-
-		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=kbruton18') 
-			.then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({katherinec: responseJson});
-			});
-
-		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=linh-nguyen') 
-			.then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({linhc: responseJson});
-			});
-
-		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=racheloei') 
-			.then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({rachelc: responseJson});
-			});
-
-		fetch('https://api.github.com/repos/kbruton18/idb/commits?author=ryanhle') 
-			.then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({ryanc: responseJson});
+				this.setState({stats: responseJson});
 			});
 	}
 
 	render() {
-    const derek = {"name": "Derek Chang", "title": "Front-End Engineer", "text": "Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on the 'Parks' model and had a great time learning Flask.", "commits": this.state.derekc.length, "issues": 8, "tests": 0, imageSrc: derekImg, imageCaption: "Derek"};
-    const katherine = {"name": "Katherine Bruton", "title": "Back-End Engineer", "text": "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", "commits": this.state.katherinec.length, "issues": 8, "tests": 0, imageSrc: katherineImg, imageCaption: "Katherine"};
-    const linh = {"name": "Linh Nguyen", "title": "Front-End Engineer", "text": "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I've worked on the States pages.", "commits": 25, "issues": this.state.linhc.length, "tests": 0, "imageSrc": linhImg, imageCaption: "Linh"};
-    const rachel = {"name": "Rachel Oei", "title": "Back-End Engineer", "text": "I am a senior computer science major from Miami, Florida. I worked on the Home and About pages for this project and got to learn about Google Cloud Platform, Flask, and Bootstrap.", "commits": this.state.rachelc.length, "issues": 13, "tests": 0, "imageSrc": rachelImg, "imageCaption": "Rachel"};
-    const ryan = {"name": "Ryan Le", "title": "Front-End Engineer", "text": "Hi! I'm a fourth year disaster human studying Computer Science at The University of Texas at Austin. So far, I've mostly worked on the Campgrounds page and had a lovely time learning about Google Cloud Platform and Flask.", "commits": this.state.ryanc.length, "issues": 7, "tests": 0, "imageSrc": ryanImg, "imageCaption": "Ryan"};
+    var derekc = 0
+    var linhc = 0
+    var katherinec = 0
+    var rachelc = 0
+    var ryanc = 0
+    for (var i = 0; i < this.state.stats.length; i++) {
+      if (this.state.stats[i]) {
+        var curr = this.state.stats[i]["author"]["login"]
+        var total = this.state.stats[i]["total"]
+        if (curr == "dchang95") {
+          derekc = total
+        } else if (curr == "kbruton18") {
+          katherinec = total
+        } else if (curr == "linh-nguyen") {
+          linhc = total
+        } else if (curr == "ryanhle") {
+          ryanc = total
+        } else if (curr = "racheloei") {
+          rachelc = total
+        }
+      }
+    }
+    const derek = {"name": "Derek Chang", "title": "Front-End Engineer", "text": "Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on the 'Parks' model and had a great time learning Flask.", "commits": derekc, "issues": 14, "tests": 0, imageSrc: derekImg, imageCaption: "Derek"};
+    const katherine = {"name": "Katherine Bruton", "title": "Back-End Engineer", "text": "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", "commits": katherinec, "issues": 16, "tests": 0, imageSrc: katherineImg, imageCaption: "Katherine"};
+    const linh = {"name": "Linh Nguyen", "title": "Front-End Engineer", "text": "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I've worked on the States pages.", "commits": linhc, "issues": 17, "tests": 0, "imageSrc": linhImg, imageCaption: "Linh"};
+    const rachel = {"name": "Rachel Oei", "title": "Back-End Engineer", "text": "I am a senior computer science major from Miami, Florida. I worked on the Home and About pages for this project and got to learn about Google Cloud Platform, Flask, and Bootstrap.", "commits": rachelc, "issues": 18, "tests": 0, "imageSrc": rachelImg, "imageCaption": "Rachel"};
+    const ryan = {"name": "Ryan Le", "title": "Front-End Engineer", "text": "Hi! I'm a fourth year disaster human studying Computer Science at The University of Texas at Austin. So far, I've mostly worked on the Campgrounds page and had a lovely time learning about Google Cloud Platform and Flask.", "commits": ryanc, "issues": 16, "tests": 0, "imageSrc": ryanImg, "imageCaption": "Ryan"};
     return (
       <Container className="bg-faded p-4 my-4">
         <hr className="divider"/>

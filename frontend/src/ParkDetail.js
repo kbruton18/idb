@@ -43,13 +43,17 @@ class ParkDetail extends Component {
 					 <strong> {this.state.data.fullName}</strong>
 				</h2>
 				<hr className="divider"/>
-				<CardImg top width="100%" src={this.state.data.imageUrl} alt="parks image" />
+				<center><img width="50%" src={this.state.data.imageUrl} alt="parks image" /></center>
+				<p><b>Park Code:</b> {this.state.data.parkCode}</p>
 				<p><b>State(s):</b> {this.state.data.states}</p>
 				<p><b>Description:</b> {this.state.data.description}</p>
 				<p><b>Designation:</b> {this.state.data.designation}</p>
+				<p><b>Campgrounds:</b> {this.state.data.campgrounds}</p>
 				<p><b>Lat Long:</b> {this.state.data.latLong}</p>
 				<p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
+				<p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
 				<p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
+				<p><b>Website:</b> <a href={this.state.data.url}>{this.state.data.url}</a></p>
 			</Container>
 		  </div>
 		);

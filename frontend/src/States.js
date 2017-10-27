@@ -36,7 +36,7 @@ class StateCard extends Component {
 
   render() {
     const states = this.state.data.map((d) => {
-      return (
+      return d.nationalParks!="No national park in this state." ? (
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
           <Link to={`/states/${d.abbreviations}`}>
@@ -50,6 +50,26 @@ class StateCard extends Component {
             <b>Timezone: </b>{d.timeZone}<br />
             <b>Capital: </b>{d.capital}<br />
             <b>National Park(s):</b> <Link to={`/parks/${d.nationalParks}`}> {d.nationalParks}</Link>
+            </CardText>
+          </CardBody>
+        </Card>
+        </Col>
+        )
+        :
+        (
+        <Col lg="4" md="6" sm="12">
+        <Card className ="text-center">
+          <Link to={`/states/${d.abbreviations}`}>
+            <CardImg top width="100%" src={d.imageUrl} alt="ok" />
+          </Link>
+          <CardBody>
+            <CardTitle className="text-center">{d.name}</CardTitle>
+            <CardText>
+            <b>Abbreviations: </b>{d.abbreviations}<br />
+            <b>Nickname(s): </b>{d.nicknames}<br />
+            <b>Timezone: </b>{d.timeZone}<br />
+            <b>Capital: </b>{d.capital}<br />
+            <b>National Park(s):</b> {d.nationalParks}
             </CardText>
           </CardBody>
         </Card>

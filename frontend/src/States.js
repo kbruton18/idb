@@ -45,11 +45,11 @@ class StateCard extends Component {
           <CardBody>
             <CardTitle className="text-center">{d.name}</CardTitle>
             <CardText>
-            <b>Abbreviations: </b>{props.abbreviations}<br />
-            <b>Nickname(s): </b>{props.nicknames}<br />
-            <b>Timezone: </b>{props.timeZone}<br />
-            <b>Capital: </b>{props.capital}<br />
-            <b>National Park(s):</b> <Link to='/parks/${props.nationalParks}'>{props.nationalParks}</Link>
+            <b>Abbreviations: </b>{d.abbreviations}<br />
+            <b>Nickname(s): </b>{d.nicknames}<br />
+            <b>Timezone: </b>{d.timeZone}<br />
+            <b>Capital: </b>{d.capital}<br />
+            <b>National Park(s):</b> <Link to='/parks/${props.nationalParks}'>{d.nationalParks}</Link>
             </CardText>
           </CardBody>
         </Card>

@@ -49,10 +49,11 @@ def get_states_dict():
         state_dict["capital"] = state.capital
         state_dict["largestCity"] = state.largestCity
         state_dict["totalPopulation"] = state.totalPopulation
+        state_dict["totalArea"] = state.totalArea
         state_dict["medianIncome"] = state.medianIncome
         state_dict["nationalParks"] = state.nationalParks
+        state_dict["campgrounds"] = state.campgrounds
         state_dict["url"] = state.url
-	# state_dict["ID"] = state.ID
         states[state.abbreviations] = state_dict
     return states
 
@@ -81,7 +82,7 @@ def get_campgrounds_dict():
         campground_dict["wheelchairAccess"] = campground.wheelchairAccess
         campground_dict["internetInfo"] = campground.internetInfo
         campground_dict["weatherInfo"] = campground.weatherInfo
-        # campground_dict["regulationsUrl"] = campground.regulationsUrl
+        campground_dict["regulationsUrl"] = campground.regulationsUrl
         campground_dict["totalSites"] = campground.totalSites
         campground_dict["directionsInfo"] = campground.directionsInfo
 	campground_dict["directionsUrl"] = campground.directionsUrl
@@ -110,12 +111,11 @@ def get_visitor_centers_dict():
         visitor_center_dict["parkCode"] = visitor_center.parkCode
         visitor_center_dict["states"] = visitor_center.states
         visitor_center_dict["description"] = visitor_center.description
-        # visitor_center_dict["address"] = visitor_center.address
-        # visitor_center_dict["phone_number"] = visitor_center.phone_number
         visitor_center_dict["latLong"] = visitor_center.latLong
         visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
         visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
         visitor_center_dict["website"] = visitor_center.website
+        visitor_center_dict["imageUrl"] = visitor_center.imageUrl
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 

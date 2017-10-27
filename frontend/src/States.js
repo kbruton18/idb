@@ -35,7 +35,10 @@ class StateCard extends Component {
   }
 
   render() {
+
     const states = this.state.data.map((d) => {
+      var x = d.nationalParks
+      var y = x.split(',')
       return d.nationalParks!="No national park in this state." ? (
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
@@ -49,7 +52,7 @@ class StateCard extends Component {
             <b>Nickname(s): </b>{d.nicknames}<br />
             <b>Timezone: </b>{d.timeZone}<br />
             <b>Capital: </b>{d.capital}<br />
-            <b>National Park(s):</b> <Link to={`/parks/${d.nationalParks}`}> {d.nationalParks}</Link>
+            <b>National Park(s):</b> <Link to={`/parks/${y[0]}`}> {y[0]}</Link>
             </CardText>
           </CardBody>
         </Card>

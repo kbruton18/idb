@@ -34,7 +34,7 @@ class APITestMethods(unittest.TestCase):
     
   def testGetStateInfo(self):
     tx = api.get_state_info("TX")
-    self.assertEquals(tx["capital"], "Austin")
+    self.assertEquals(tx["capital"], "Austin, Texas")
 
   def testStatesLength(self):
     states = api.get_states_dict()
@@ -82,7 +82,7 @@ class APITestMethods(unittest.TestCase):
     centers = api.get_visitor_centers_dict()
     hasVC = False
     for dict in centers:
-      if dict["name"] == "Denali Visitor Center":
+      if dict["parkCode"] == "dena":
         hasVC = True
     self.assertTrue(hasVC)
 

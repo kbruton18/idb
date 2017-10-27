@@ -36,25 +36,27 @@ class VisitorCenterCard extends Component {
 
   render() {
     const test = this.state.data.map((d) => {
-      return (
-        <Col lg="4" md="6" sm="12">
-          <Card className ="text-center">
-            <Link to={`/parks/${d.name}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="ok" />
-            </Link>
-            <CardBody>
-              <CardTitle className="text-center">{d.fullName}</CardTitle>
-              <CardText>
-              <b>State(s)</b>: {d.states} <br/>
-              <b>Park Code</b>: {d.parkCode} <br/>
-              <b>Designation</b>: {d.designation} <br/>
-              <b>Visitor Center(s)</b>: fdksjf <br/>
-              <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
-              </CardText>
-            </CardBody>
-          </Card>
-        </Col>
-      )
+      if (d.website.length != 0) {
+        return (
+          <Col lg="4" md="6" sm="12">
+            <Card className ="text-center">
+              <Link to={`/parks/${d.name}`}>
+                <CardImg top width="100%" src={d.imageUrl} alt="visitor center image" />
+              </Link>
+              <CardBody>
+                <CardTitle className="text-center">{d.name}</CardTitle>
+                <CardText>
+                <b>Park</b>: {d.parkCode} <br/>
+                <b>State(s)</b>: {d.states} <br/>
+                <b>Lat/Long</b>: {d.latLong} <br/>
+                <b>Directions</b>: {d.directionsUrl} <br/>
+                <b>Website</b>: <a href={d.website}>{d.website}</a>
+                </CardText>
+              </CardBody>
+            </Card>
+          </Col>
+        )
+      }
     })
 
     return (

@@ -40,7 +40,7 @@ class ParkCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/parks/${d.parkCode}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="ok" />
+              <CardImg top width="100%" src={d.imageUrl} alt="parks image" />
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
@@ -48,7 +48,7 @@ class ParkCard extends Component {
               <b>State(s)</b>: {d.states} <br/>
               <b>Park Code</b>: {d.parkCode} <br/>
               <b>Designation</b>: {d.designation} <br/>
-              <b>Visitor Center(s)</b>: fdksjf <br/>
+              <b>Campgrounds(s)</b>: {d.campgrounds} <br/>
               <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
               </CardText>
             </CardBody>

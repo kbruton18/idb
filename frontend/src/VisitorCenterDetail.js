@@ -14,6 +14,7 @@ import {
   CardTitle
 } from 'reactstrap';
 import CustomCard from './CustomCard.js';
+import NotFound from './NotFound.js';
 
 class VisitorCenterDetail extends Component {
 
@@ -33,9 +34,17 @@ class VisitorCenterDetail extends Component {
           data: responseJson
         })
       })
+      .catch(() => {
+        this.setState({nothingFound: true});
+      })
   }
 
   render() {
+    if (this.state.nothingFound) {
+      return (
+        <NotFound/>
+      )
+    }
     return (
       <div>
       <Container className="bg-faded p-4 my-4">

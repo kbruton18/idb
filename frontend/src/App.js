@@ -16,6 +16,7 @@ import States from './States.js';
 import ParkDetail from './ParkDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
 import StateDetail from './StateDetail.js';
+import NotFound from './NotFound.js';
 
 class App extends Component {
   render() {

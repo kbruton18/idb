@@ -13,6 +13,7 @@ import {
   CardBody,
   CardTitle
 } from 'reactstrap';
+import NotFound from './NotFound.js';
 
 class ParkDetail extends Component {
 
@@ -32,16 +33,24 @@ class ParkDetail extends Component {
 					data: responseJson
 				})
 			})
+      .catch(() => {
+        this.setState({nothingFound: true});
+      })
 	}
 
 	render() {
+    if (this.state.nothingFound) {
+      return (
+        <NotFound/>
+      )
+    }
 		var states = this.state.data.states
 		return (
 		  <div>
-			<Container className="bg-faded p-4 my-4">
-				<hr className="divider"/>
-				<h2 className="text-center text-lg text-uppercase my-0">
-					 <strong> {this.state.data.fullName}</strong>
+        <Container className="bg-faded p-4 my-4">
+          <hr className="divider"/>
+          <h2 className="text-center text-lg text-uppercase my-0">
+            <strong> {this.state.data.fullName}</strong>
 				</h2>
 				<hr className="divider"/>
 				<center><img width="50%" src={this.state.data.imageUrl} alt="parks image" /></center>

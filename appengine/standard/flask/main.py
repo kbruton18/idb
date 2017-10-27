@@ -27,13 +27,25 @@ def get_park(park_code):
 def get_states():
   return jsonify(get_states_list())
 
+@app.route('/api/states/<string:abbreviation>', methods=['GET'])
+def get_state(abbreviation):
+  return jsonify(get_state_info(abbreviation))
+
 @app.route('/api/campgrounds', methods=['GET'])
 def get_campgrounds():
   return jsonify(get_campgrounds_list())
 
+@app.route('/api/campgrounds/<string:name>', methods=['GET'])
+def get_campground(name):
+  return jsonify(get_campground_info(name))
+
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():
   return jsonify(get_visitor_centers_list())
+
+@app.route('/api/visitorcenters/<string:name>', methods=['GET'])
+def get_visitor_center(name):
+  return jsonify(get_visitor_center_info(name))
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

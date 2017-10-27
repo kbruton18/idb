@@ -24,7 +24,7 @@ create_app().app_context().push()
 # parks request
 start = "https://en.wikipedia.org/w/api.php?action=query&titles="
 # put the states that you want scraped here. Put %20 for spaces and things like New York (state) and Washington (state) need the (state)s after it
-states = "Alabama|Alaska|Arizona|Arkansas|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New%20Hampshire|New%20Jersey|New%20Mexico|New%20York%20(state)|North%20Carolina|North%20Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode%20Island|South%20Carolina|South%20Dakota|Tennessee|Texas|Utah|Vermont|Virgina|Washington%20(state)|West%20Virginia|Wisconsin|Wyoming"
+states = "Alabama|Alaska|Arizona|Arkansas|Colorado|Connecticut|Delaware|Florida|Georgia_(U.S._state)|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New%20Hampshire|New%20Jersey|New%20Mexico|New%20York%20(state)|North%20Carolina|North%20Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode%20Island|South%20Carolina|South%20Dakota|Tennessee|Texas|Utah|Vermont|Virgina|Washington%20(state)|West%20Virginia|Wisconsin|Wyoming"
 # states = "California"
 end = "&prop=revisions&rvprop=content&format=json"
 endpoint = ''.join([start, states, end])

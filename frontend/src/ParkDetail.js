@@ -35,6 +35,7 @@ class ParkDetail extends Component {
 	}
 
 	render() {
+		var states = this.state.data.states
 		return (
 		  <div>
 			<Container className="bg-faded p-4 my-4">
@@ -45,7 +46,7 @@ class ParkDetail extends Component {
 				<hr className="divider"/>
 				<center><img width="50%" src={this.state.data.imageUrl} alt="parks image" /></center>
 				<p><b>Park Code:</b> {this.state.data.parkCode}</p>
-				<p><b>State(s):</b> {this.state.data.states}</p>
+				<p><b>State(s):</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states} </Link></p>
 				<p><b>Description:</b> {this.state.data.description}</p>
 				<p><b>Designation:</b> {this.state.data.designation}</p>
 				<p><b>Campgrounds:</b> {this.state.data.campgrounds}</p>

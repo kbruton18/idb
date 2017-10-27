@@ -48,7 +48,7 @@ class ParkCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
               <CardText>
-              <b>State(s)</b>: {d.states} <br/>
+              <b>State(s)</b>: <Link to={`/states/${d.states}`}> {d.states} </Link><br/>
               <b>Park Code</b>: {d.parkCode} <br/>
               <b>Designation</b>: {d.designation} <br/>
               <b>Campgrounds(s)</b>: <Link to={`/campgrounds/${listCampgrounds[0]}`}>{listCampgrounds[0]}</Link> <br/>
@@ -68,7 +68,7 @@ class ParkCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
               <CardText>
-              <b>State(s)</b>: {d.states} <br/>
+              <b>State(s)</b>: <Link to={`/states/${d.states}`}> {d.states} </Link> <br/>
               <b>Park Code</b>: {d.parkCode} <br/>
               <b>Designation</b>: {d.designation} <br/>
               <b>Campgrounds(s)</b>: {d.campgrounds} <br/>

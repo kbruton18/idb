@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardFooter
-} from 'reactstrap';
+import { Container } from 'reactstrap';
 import CustomCard from './CustomCard.js';
 import AboutStats from './AboutStats.js';
-
-const derekImg = require('./img/about/derek.jpg');
-const katherineImg = require('./img/about/katherine.jpg');
-const linhImg = require('./img/about/linh.jpg');
-const rachelImg = require('./img/about/rachel.jpg');
-const ryanImg = require('./img/about/ryan.jpeg');
 
 function AboutSite(props) {
   return (

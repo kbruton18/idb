@@ -60,7 +60,7 @@ class StateCard extends Component {
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
       <h2 className="text-center text-lg text-uppercase my-0">
-        parks
+        states
       </h2>
       <hr className="divider"/>
       <Row>

@@ -36,11 +36,11 @@ class VisitorCenterCard extends Component {
 
   render() {
     const test = this.state.data.map((d) => {
-      if (d.website.length != 0) {
+      if (d.website.length !== 0) {
         return (
           <Col lg="4" md="6" sm="12">
             <Card className ="text-center">
-              <Link to={`/parks/${d.name}`}>
+              <Link to={`/visitorcenters/${d.name}`}>
                 <CardImg top width="100%" src={d.imageUrl} alt="visitor center image" />
               </Link>
               <CardBody>

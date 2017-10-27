@@ -14,72 +14,69 @@ import {
   CardTitle
 } from 'reactstrap';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
-import CustomCard from './CustomCard.js'
 
-class VisitorCenters extends Component {
+class VisitorCenterCard extends Component {
+
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      requestFailed: false,
-      vcDetail: [],
+      data: []
     }
-  };
+  }
 
   componentDidMount() {
-    console.log('I was triggered during componentDidMount')
-    //https://developer.nps.gov/api/v1/parks?limit=519&fields=contacts&api_key=ZpESFe8R2hqjdYKmaXyiblZZeaKuYhW1l8q6WmO2
-    fetch('/api/parks')
-      .then((response) => {
-        return response.json()
-      }).then((responseJson) => {
-        let details = responseJson.map((detail) => {
-          return(
-            <div key={detail.parkCode}>
-            <Col lg="4" md="6" sm="12">
-              
-              <Card top width="100%" className ="text-center">
-                <Link to={`/parks/${detail.parkCode}`}>
-                  <CardImg top width="100%" src={detail.imageUrl} alt="ok" />
-                </Link>
-                <CardBody>
-                  <CardTitle className="text-center">{detail.fullName}</CardTitle>
-                  <CardText> 
-                  <b>State(s)</b>: {detail.states} <br/>
-                  <b>Park Code</b>: {detail.parkCode} <br/>
-                  <b>Designation</b>: {detail.designation} <br/>
-                  <b>Visitor Center(s)</b>: fdksjf <br/>
-                  <b>url</b>: <a href={detail.imageUrl}>{detail.url}</a> <br/>
-                  </CardText>
-                </CardBody>
-              </Card>
-              </Col>
-              </div>
-          )
+    fetch('http://sweet-travels.appspot.com/api/visitorcenters')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          data: responseJson
         })
-        this.setState({vcDetail: details, requestFailed: true,})
       })
-      console.log('ended');
-      console.log(this.state);
   }
 
   render() {
-    console.log('I was triggered during render')
-    console.log(this.state.vcDetail)
-    if (!this.state.requestFailed) return <p>Failed request</p>
-    if (!this.state.vcDetail) return <p>Loading</p>
+    const test = this.state.data.map((d) => {
+      return (
+        <Col lg="4" md="6" sm="12">
+          <Card className ="text-center">
+            <Link to={`/parks/${d.name}`}>
+              <CardImg top width="100%" src={d.imageUrl} alt="ok" />
+            </Link>
+            <CardBody>
+              <CardTitle className="text-center">{d.fullName}</CardTitle>
+              <CardText>
+              <b>State(s)</b>: {d.states} <br/>
+              <b>Park Code</b>: {d.parkCode} <br/>
+              <b>Designation</b>: {d.designation} <br/>
+              <b>Visitor Center(s)</b>: fdksjf <br/>
+              <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+      )
+    })
+
     return (
-      <div>
       <Container className="bg-faded p-4 my-4">
-        <hr className="divider"/>
-        <h2 className="text-center text-lg text-uppercase my-0">Visitor Centers</h2>
-        <hr className="divider"/>
-        <Row>
-            {this.state.vcDetail}
-        </Row>
-      </Container>
-      </div>
-    )
+      <hr className="divider"/>
+      <h2 className="text-center text-lg text-uppercase my-0">
+        Visitor Centers
+      </h2>
+      <hr className="divider"/>
+      <Row>
+        {test}
+      </Row>
+    </Container>
+    );
   }
 }
+
+const VisitorCenters = (props) => (
+    <div>
+      <Route exact path="/visitorcenters" component={VisitorCenterCard}/>
+      <Route path="/visitorcenters/:id" component={VisitorCenterDetail}/>
+    </div>
+  )
 
 export default VisitorCenters

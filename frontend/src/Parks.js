@@ -11,14 +11,9 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardFooter
+  CardTitle
 } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
-import CustomCard from './CustomCard.js';
-
-const y = require('./img/parks/yosemite.jpg');
 
 class ParkCard extends Component {
 
@@ -42,23 +37,26 @@ class ParkCard extends Component {
   render() {
     const test = this.state.data.map((d) => {
       return (
-        <Card className ="text-center">
-          <Link to={`/parks/${d.parkCode}`}>
-            <CardImg top width="100%" src={d.imageUrl} alt="ok" />
-          </Link>
-          <CardBody>
-            <CardTitle className="text-center">{d.fullName}</CardTitle>
-            <CardText>
-            <b>State(s)</b>: {d.states} <br/>
-            <b>Park Code</b>: {d.parkCode} <br/>
-            <b>Designation</b>: {d.designation} <br/>
-            <b>Visitor Center(s)</b>: fdksjf <br/>
-            <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
-            </CardText>
-          </CardBody>
-        </Card>
-        )
+        <Col lg="4" md="6" sm="12">
+          <Card className ="text-center">
+            <Link to={`/parks/${d.parkCode}`}>
+              <CardImg top width="100%" src={d.imageUrl} alt="ok" />
+            </Link>
+            <CardBody>
+              <CardTitle className="text-center">{d.fullName}</CardTitle>
+              <CardText>
+              <b>State(s)</b>: {d.states} <br/>
+              <b>Park Code</b>: {d.parkCode} <br/>
+              <b>Designation</b>: {d.designation} <br/>
+              <b>Visitor Center(s)</b>: fdksjf <br/>
+              <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+      )
     })
+
     return (
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
@@ -67,9 +65,7 @@ class ParkCard extends Component {
       </h2>
       <hr className="divider"/>
       <Row>
-        <Col lg="4" md="6" sm="12">
-          {test}
-        </Col>
+        {test}
       </Row>
     </Container>
     );

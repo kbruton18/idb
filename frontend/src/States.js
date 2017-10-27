@@ -49,7 +49,7 @@ class StateCard extends Component {
             <b>Nickname(s): </b>{d.nicknames}<br />
             <b>Timezone: </b>{d.timeZone}<br />
             <b>Capital: </b>{d.capital}<br />
-            <b>National Park(s):</b> <Link to='/parks/${props.nationalParks}'>{d.nationalParks}</Link>
+            <b>National Park(s):</b> <Link to={`/parks/${d.nationalParks}`}> {d.nationalParks}</Link>
             </CardText>
           </CardBody>
         </Card>

@@ -87,7 +87,7 @@ def get_campgrounds_dict():
         campground_dict["regulationsUrl"] = campground.regulationsUrl
         campground_dict["totalSites"] = campground.totalSites
         campground_dict["directionsInfo"] = campground.directionsInfo
-	campground_dict["directionsUrl"] = campground.directionsUrl
+        campground_dict["directionsUrl"] = campground.directionsUrl
         campground_dict["imageUrl"] = campground.imageUrl
         campgrounds[campground.name] = campground_dict
     return campgrounds

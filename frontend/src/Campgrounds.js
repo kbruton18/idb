@@ -11,62 +11,72 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
-  CardSubtitle
+  CardTitle
 } from 'reactstrap';
-import CustomCard from './CustomCard.js';
+import CampgroundDetail from './CampgroundDetail.js';
 
-const ca = require('./img/states/california.jpg');
+class CampgroundCard extends Component {
 
-function CampgroundCard(props) {
-  return (
-    <Card className="text-center">
-      <CardImg top width="100%" src={props.img} alt={props.alt} />
-      <CardBody>
-        <CardTitle>{props.title}</CardTitle>
-        <CardSubtitle>{props.park}</CardSubtitle>
-        <CardText>
-          <b>States: </b><Link to={props.stateUrl}>{props.stateName}</Link><br />
-          <b>Number of Sites: </b>{props.numSites}<br />
-          <b>Directions: </b><Link to={props.directionsUrl}>Directions</Link>
-        </CardText>
-      </CardBody>
-    </Card>
-  );
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    }
+  }
 
-function CampgroundLanding(props) {
-  return (
-    <div>
+  componentDidMount() {
+    fetch('http://sweet-travels.appspot.com/api/campgrounds')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          data: responseJson
+        })
+      })
+  }
+
+  render() {
+    const test = this.state.data.map((d) => {
+      return (
+        <Col lg="4" md="6" sm="12">
+          <Card className ="text-center">
+            <Link to={`/campgrounds/${d.name}`}>
+              <CardImg top width="100%" src={d.imageUrl} alt="campground image" />
+            </Link>
+            <CardBody>
+              <CardTitle className="text-center">{d.name}</CardTitle>
+              <CardText>
+              <b>Total Sites</b>: {d.totalSites} <br/>
+              <b>Associated Park</b>: {d.parkCode} <br/>
+              <b>Description</b>: {d.description} <br/>
+              <b>Regulations</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a> <br/>
+              <b>Directions</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+      )
+    })
+
+    return (
       <Container className="bg-faded p-4 my-4">
-        <hr className="divider"/>
-        <h2 className="text-center text-lg text-uppercase my-0">Campgrounds</h2>
-        <hr className="divider"/>
-        <Row>
-          <Col lg="4" md="6" sm="12">
-            <CampgroundCard img={ca} alt="Picture of Campground" title="Mammoth Campground"
-              park="Yellowstone National Park" stateUrl="http://www.swetravels.me/states/wyoming.html"
-            stateName="Wyoming" numSites="85" directionsUrl="https://www.nps.gov/yell/planyourvisit/directions.htm"/>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
+      <hr className="divider"/>
+      <h2 className="text-center text-lg text-uppercase my-0">
+        Campgrounds
+      </h2>
+      <hr className="divider"/>
+      <Row>
+        {test}
+      </Row>
+    </Container>
+    );
+  }
 }
 
-function CampgroundDetail({match}) {
-  return (
+const Campgrounds = (props) => (
     <div>
-      <CustomCard title="Campground" strongTitle={match.params.id}/>
-    </div>
-  )
-}
-
-export default function Campgrounds(props) {
-  return (
-    <div>
-      <Route exact path="/campgrounds" component={CampgroundLanding}/>
+      <Route exact path="/campgrounds" component={CampgroundCard}/>
       <Route path="/campgrounds/:id" component={CampgroundDetail}/>
     </div>
   )
-}
+
+export default Campgrounds

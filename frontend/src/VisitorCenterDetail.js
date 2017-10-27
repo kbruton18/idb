@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {
+  Link,
+  Route
+} from 'react-router-dom';
+import {
   Container,
   Row,
   Col,
@@ -13,10 +17,10 @@ import CustomCard from './CustomCard.js';
 
 class VisitorCenterDetail extends Component {
 
-  constructor({match}) {
-    super(match);
+  constructor(props) {
+    super(props);
     this.state = {
-      id: match.params.id, 
+      id: props.match.params.id,
       data: []
     }
   }
@@ -41,8 +45,8 @@ class VisitorCenterDetail extends Component {
         </h2>
         <hr className="divider"/>
         <center><img width="50%" src={this.state.data.imageUrl} alt="visitor center image" /></center>
-        <p><b>Park Code:</b> {this.state.data.parkCode}</p>
-        <p><b>State(s):</b> {this.state.data.states}</p>
+        <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}> {this.state.data.parkCode}</Link></p>
+        <p><b>State(s):</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states}</Link></p>
         <p><b>Description:</b> {this.state.data.description}</p>
         <p><b>Lat/Long:</b> {this.state.data.latLong}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>

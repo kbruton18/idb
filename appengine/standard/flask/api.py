@@ -17,6 +17,7 @@ def get_parks_dict():
         park_dict["latLong"] = park.latLong
         park_dict["url"] = park.url
         park_dict["weatherInfo"] = park.weatherInfo
+        park_dict["campgrounds"] = park.campgrounds
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
         parks[park.parkCode] = park_dict
@@ -86,7 +87,7 @@ def get_campgrounds_dict():
         campground_dict["regulationsUrl"] = campground.regulationsUrl
         campground_dict["totalSites"] = campground.totalSites
         campground_dict["directionsInfo"] = campground.directionsInfo
-	campground_dict["directionsUrl"] = campground.directionsUrl
+        campground_dict["directionsUrl"] = campground.directionsUrl
         campground_dict["imageUrl"] = campground.imageUrl
         campgrounds[campground.name] = campground_dict
     return campgrounds

@@ -31,7 +31,7 @@ export default class NavBar extends React.Component {
                 <NavLink className="nav-link text-uppercase text-expanded" href="/about">About</NavLink>
               </NavItem>
               <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" className="nav-link text-uppercase text-expanded" href="/parks">Parks</NavLink>
+                <NavLink className="nav-link text-uppercase text-expanded" href="/parks">Parks</NavLink>
               </NavItem>
               <NavItem className="nav-item px-lg-4">
                 <NavLink className="nav-link text-uppercase text-expanded" href="/campgrounds">Campgrounds</NavLink>

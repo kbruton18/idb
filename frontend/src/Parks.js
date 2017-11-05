@@ -72,11 +72,11 @@ class ParkCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
               <CardText>
-              <b>State(s)</b>: {stateLinks}<br/>
               <b>Park Code</b>: {d.parkCode}<br/>
               <b>Designation</b>: {d.designation}<br/>
+              <b>State(s)</b>: {stateLinks}<br/>
               <b>Campgrounds(s)</b>: {campgroundLinks}<br/>
-              <b>url</b>: <a href={d.url}>{d.url}</a>
+              <b>Website</b>: <a href={d.url}>{d.url}</a>
               </CardText>
             </CardBody>
           </Card>

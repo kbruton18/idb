@@ -62,12 +62,12 @@ class CampgroundDetail extends Component {
         <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}> {this.state.data.parkCode} </Link></p>
         <p><b>State(s):</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states}</Link></p>
         <p><b>Description:</b> {this.state.data.description}</p>
+        <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
+        <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
         <p><b>Regulations Overview:</b> {this.state.data.regulations}</p>
         <p><b>Regulations URL:</b> <a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a></p>
         <p><b>Wheelchair Access:</b> {this.state.data.wheelchairAccess}</p>
         <p><b>Internet Info:</b> {this.state.data.internetInfo}</p>
-        <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
-        <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
       </Container>
       </div>
     );

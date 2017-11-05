@@ -60,10 +60,10 @@ class StateCard extends Component {
           <CardBody>
             <CardTitle className="text-center">{d.name}</CardTitle>
             <CardText>
-            <b>Abbreviations: </b>{d.abbreviations}<br />
-            <b>Nickname(s): </b>{d.nicknames}<br />
-            <b>Timezone: </b>{d.timeZone}<br />
-            <b>Capital: </b>{d.capital}<br />
+            <b>Abbreviations: </b>{d.abbreviations}<br/>
+            <b>Nickname(s): </b>{d.nicknames}<br/>
+            <b>Capital: </b>{d.capital}<br/>
+            <b>Timezone: </b>{d.timeZone}<br/>
             <b>National Park(s):</b> {parkLinks}
             </CardText>
           </CardBody>

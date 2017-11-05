@@ -19,8 +19,8 @@
 }
 
 .App-imageCrop {
-    height: calc(width * 0.5);
-    overflow: hidden;
+  height: calc(width * 0.5);
+  overflow: hidden;
 }
 
 @keyframes App-logo-spin {

@@ -44,6 +44,7 @@ class StateDetail extends Component {
         <NotFound/>
       )
     }
+
     return (
       <div>
         <Container className="bg-faded p-4 my-4">
@@ -63,7 +64,7 @@ class StateDetail extends Component {
         <p><b>Total Area:</b> {this.state.data.totalArea}</p>
         <p><b>Median Income:</b> {this.state.data.medianIncome}</p>
         <p><b>National Park:</b> {this.state.data.nationalParks}</p>
-        <p><b>Campground:</b> {this.state.data.campgrounds}</p>
+        <p><b>Campground:</b> {this.state.data.campgrounds} </p>
         <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
         <p><b>Website:</b> <a href={this.state.data.url}>{this.state.data.url}</a></p>
       </Container>

@@ -21,22 +21,22 @@ const rachelImg = require('./img/about/rachel.jpg');
 const ryanImg = require('./img/about/ryan.jpeg');
 
 export default class AboutStats extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			stats: []
-		}
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+    stats: []
+    }
+  }
 
-	componentDidMount() {
-		fetch('https://api.github.com/repos/kbruton18/idb/stats/contributors')
-			.then((response) => response.json())
-			.then((responseJson) => {
-				this.setState({stats: responseJson});
-			});
-	}
+  componentDidMount() {
+    fetch('https://api.github.com/repos/kbruton18/idb/stats/contributors')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({stats: responseJson});
+      });
+  }
 
-	render() {
+  render() {
     var derekc = 0
     var linhc = 0
     var katherinec = 0
@@ -90,8 +90,7 @@ export default class AboutStats extends Component {
         </Row>
       </Container>
     );
-	}
-
+  }
 }
 
 function AboutTeamMember(props) {

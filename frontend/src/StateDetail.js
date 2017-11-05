@@ -45,6 +45,36 @@ class StateDetail extends Component {
       )
     }
 
+    const parkList = String(this.state.data.nationalParks).split(",");
+    const parkLinks = parkList.map((p) => {
+      if (this.state.data.nationalParks!="No national park in this state.") {
+        if (parkList[parkList.length-1] === p) {
+          return (
+            <a><Link to={`/parks/${p}`}>{p}</Link></a>
+          )
+        }
+        return (
+        <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+        )
+      }
+      return <a>{this.state.data.nationalParks}</a>
+    })
+
+    const campgroundList = String(this.state.data.campgrounds).split(",");
+    const campgroundLinks = campgroundList.map((c) => {
+      if (this.state.data.campgrounds!="N/A") {
+        if (campgroundList[campgroundList.length-1] === c) {
+          return (
+            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+          )
+        }
+        return (
+        <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+        )
+      }
+      return <a>{this.state.data.campgrounds}</a>
+    })
+
     return (
       <div>
         <Container className="bg-faded p-4 my-4">
@@ -63,8 +93,8 @@ class StateDetail extends Component {
         <p><b>Total Population:</b> {this.state.data.totalPopulation}</p>
         <p><b>Total Area:</b> {this.state.data.totalArea}</p>
         <p><b>Median Income:</b> {this.state.data.medianIncome}</p>
-        <p><b>National Park:</b> {this.state.data.nationalParks}</p>
-        <p><b>Campground:</b> {this.state.data.campgrounds} </p>
+        <p><b>National Park(s):</b> {parkLinks}</p>
+        <p><b>Campground(s):</b> {campgroundLinks}</p>
         <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
         <p><b>Website:</b> <a href={this.state.data.url}>{this.state.data.url}</a></p>
       </Container>

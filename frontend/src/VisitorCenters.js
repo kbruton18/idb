@@ -35,7 +35,7 @@ class VisitorCenterCard extends Component {
   }
 
   render() {
-    const test = this.state.data.map((d) => {
+    const center = this.state.data.map((d) => {
       if (d.website.length !== 0) {
         return (
           <Col lg="4" md="6" sm="12">
@@ -67,7 +67,7 @@ class VisitorCenterCard extends Component {
       </h2>
       <hr className="divider"/>
       <Row>
-        {test}
+        {center}
       </Row>
     </Container>
     );

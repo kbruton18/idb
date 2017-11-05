@@ -43,7 +43,34 @@ class ParkDetail extends Component {
         <NotFound/>
       )
     }
-    var states = this.state.data.states
+
+    const stateList = String(this.state.data.states).split(",");
+    const stateLinks = stateList.map((s) => {
+      if (stateList[stateList.length-1] === s) {
+        return (
+          <a><Link to={`/states/${s}`}>{s}</Link></a>
+        )
+      }
+      return (
+      <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+      )
+    })
+
+    const campgroundList = String(this.state.data.campgrounds).split(", ");
+    const campgroundLinks = campgroundList.map((c) => {
+      if (this.state.data.campgrounds!="N/A") {
+        if (campgroundList[campgroundList.length-1] === c) {
+          return (
+            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+          )
+        }
+        return (
+        <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+        )
+      }
+      return <a>{this.state.data.campgrounds}</a>
+    })
+
     return (
       <div>
         <Container className="bg-faded p-4 my-4">
@@ -54,10 +81,10 @@ class ParkDetail extends Component {
           <hr className="divider"/>
           <center><img width="50%" src={this.state.data.imageUrl} alt="parks image" /></center>
           <p><b>Park Code:</b> {this.state.data.parkCode}</p>
-          <p><b>State(s):</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states} </Link></p>
+          <p><b>State(s):</b> {stateLinks}</p>
           <p><b>Description:</b> {this.state.data.description}</p>
           <p><b>Designation:</b> {this.state.data.designation}</p>
-          <p><b>Campgrounds:</b> {this.state.data.campgrounds}</p>
+          <p><b>Campgrounds:</b> {campgroundLinks}</p>
           <p><b>Lat Long:</b> {this.state.data.latLong}</p>
           <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
           <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>

@@ -35,7 +35,7 @@ class CampgroundCard extends Component {
   }
 
   render() {
-    const test = this.state.data.map((d) => {
+    const campground = this.state.data.map((d) => {
       return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
@@ -65,7 +65,7 @@ class CampgroundCard extends Component {
       </h2>
       <hr className="divider"/>
       <Row>
-        {test}
+        {campground}
       </Row>
     </Container>
     );

@@ -35,11 +35,35 @@ class ParkCard extends Component {
   }
 
   render() {
-    const test = this.state.data.map((d) => {
-      var x = d.campgrounds
-      var listCampgrounds = x.split(',')
+    const park = this.state.data.map((d) => {
+      const stateList = String(d.states).split(",");
+      const stateLinks = stateList.map((s) => {
+        if (stateList[stateList.length-1] === s) {
+          return (
+            <a><Link to={`/states/${s}`}>{s}</Link></a>
+          )
+        }
+        return (
+        <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+        )
+      })
 
-      return listCampgrounds[0] != "N/A" ? (
+      const campgroundList = String(d.campgrounds).split(", ");
+      const campgroundLinks = campgroundList.map((c) => {
+        if (d.campgrounds!="N/A") {
+          if (campgroundList[campgroundList.length-1] === c) {
+            return (
+              <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            )
+          }
+          return (
+          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          )
+        }
+        return <a>{d.campgrounds}</a>
+      })
+
+      return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/parks/${d.parkCode}`}>
@@ -48,31 +72,11 @@ class ParkCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
               <CardText>
-              <b>State(s)</b>: <Link to={`/states/${d.states}`}> {d.states} </Link><br/>
-              <b>Park Code</b>: {d.parkCode} <br/>
-              <b>Designation</b>: {d.designation} <br/>
-              <b>Campgrounds(s)</b>: <Link to={`/campgrounds/${listCampgrounds[0]}`}>{listCampgrounds[0]}</Link> <br/>
-              <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
-              </CardText>
-            </CardBody>
-          </Card>
-        </Col>
-      )
-      :
-      (
-        <Col lg="4" md="6" sm="12">
-          <Card className ="text-center">
-            <Link to={`/parks/${d.parkCode}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="parks image" />
-            </Link>
-            <CardBody>
-              <CardTitle className="text-center">{d.fullName}</CardTitle>
-              <CardText>
-              <b>State(s)</b>: <Link to={`/states/${d.states}`}> {d.states} </Link> <br/>
-              <b>Park Code</b>: {d.parkCode} <br/>
-              <b>Designation</b>: {d.designation} <br/>
-              <b>Campgrounds(s)</b>: {d.campgrounds} <br/>
-              <b>url</b>: <a href={d.url}>{d.url}</a> <br/>
+              <b>State(s)</b>: {stateLinks}<br/>
+              <b>Park Code</b>: {d.parkCode}<br/>
+              <b>Designation</b>: {d.designation}<br/>
+              <b>Campgrounds(s)</b>: {campgroundLinks}<br/>
+              <b>url</b>: <a href={d.url}>{d.url}</a>
               </CardText>
             </CardBody>
           </Card>
@@ -88,7 +92,7 @@ class ParkCard extends Component {
       </h2>
       <hr className="divider"/>
       <Row>
-        {test}
+        {park}
       </Row>
     </Container>
     );

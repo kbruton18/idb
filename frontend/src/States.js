@@ -35,11 +35,23 @@ class StateCard extends Component {
   }
 
   render() {
+    const state = this.state.data.map((d) => {
+      const parkList = String(d.nationalParks).split(",");
+      const parkLinks = parkList.map((p) => {
+        if (d.nationalParks!="No national park in this state.") {
+          if (parkList[parkList.length-1] === p) {
+            return (
+              <a><Link to={`/parks/${p}`}>{p}</Link></a>
+            )
+          }
+          return (
+          <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+          )
+        }
+        return <a>{d.nationalParks}</a>
+      })
 
-    const states = this.state.data.map((d) => {
-      var x = d.nationalParks
-      var y = x.split(',')
-      return d.nationalParks!="No national park in this state." ? (
+      return (
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
           <Link to={`/states/${d.abbreviations}`}>
@@ -52,33 +64,14 @@ class StateCard extends Component {
             <b>Nickname(s): </b>{d.nicknames}<br />
             <b>Timezone: </b>{d.timeZone}<br />
             <b>Capital: </b>{d.capital}<br />
-            <b>National Park(s):</b> <Link to={`/parks/${y[0]}`}> {y[0]}</Link>
+            <b>National Park(s):</b> {parkLinks}
             </CardText>
           </CardBody>
         </Card>
         </Col>
-        )
-        :
-        (
-        <Col lg="4" md="6" sm="12">
-        <Card className ="text-center">
-          <Link to={`/states/${d.abbreviations}`}>
-            <CardImg top width="100%" src={d.imageUrl} alt="ok" />
-          </Link>
-          <CardBody>
-            <CardTitle className="text-center">{d.name}</CardTitle>
-            <CardText>
-            <b>Abbreviations: </b>{d.abbreviations}<br />
-            <b>Nickname(s): </b>{d.nicknames}<br />
-            <b>Timezone: </b>{d.timeZone}<br />
-            <b>Capital: </b>{d.capital}<br />
-            <b>National Park(s):</b> {d.nationalParks}
-            </CardText>
-          </CardBody>
-        </Card>
-        </Col>
-        )
+      )
     })
+
     return (
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
@@ -87,7 +80,7 @@ class StateCard extends Component {
       </h2>
       <hr className="divider"/>
       <Row>
-          {states}
+          {state}
       </Row>
     </Container>
     );

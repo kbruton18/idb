@@ -85,7 +85,7 @@ class ParkDetail extends Component {
           <p><b>State(s):</b> {stateLinks}</p>
           <p><b>Lat Long:</b> {this.state.data.latLong}</p>
           <p><b>Description:</b> {this.state.data.description}</p>
-          <p><b>Campgrounds:</b> {campgroundLinks}</p>
+          <p><b>Campground(s):</b> {campgroundLinks}</p>
           <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
           <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
           <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>

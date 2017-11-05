@@ -47,7 +47,7 @@ class VisitorCenterCard extends Component {
                 <CardTitle className="text-center">{d.name}</CardTitle>
                 <CardText>
                 <b>Park</b>: <Link to={`/parks/${d.parkCode}`}> {d.parkCode} </Link> <br/>
-                <b>State(s)</b>: <Link to={`/states/${d.states}`}> {d.states}</Link> <br/>
+                <b>State</b>: <Link to={`/states/${d.states}`}> {d.states}</Link> <br/>
                 <b>Lat/Long</b>: {d.latLong} <br/>
                 <b>Directions</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a><br/>
                 <b>Website</b>: <a href={d.website}>{d.website}</a>

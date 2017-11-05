@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {
   Link,
   Route
 } from 'react-router-dom';
 import {
+  Pagination,
   Container,
   Row,
   Col,

@@ -75,7 +75,12 @@ class StateDetail extends Component {
       return <a>{this.state.data.campgrounds}</a>
     })
 
-    const updatedWebsite = "http://www." + this.state.data.url;
+    var updatedWebsiteLink = () => {
+      if (String(this.state.data.url).indexOf("http://") > -1) {
+        return this.state.data.url;
+      }
+      return ("http://" + this.state.data.url);
+    }
 
     return (
       <div>
@@ -98,7 +103,7 @@ class StateDetail extends Component {
         <p><b>National Park(s):</b> {parkLinks}</p>
         <p><b>Campground(s):</b> {campgroundLinks}</p>
         <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
-        <p><b>Website:</b> <a href={updatedWebsite}>{updatedWebsite}</a></p>
+        <p><b>Website:</b> <a href={updatedWebsiteLink()}>{updatedWebsiteLink()}</a></p>
       </Container>
       </div>
     );

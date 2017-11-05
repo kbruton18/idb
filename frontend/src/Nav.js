@@ -22,25 +22,25 @@ export default class NavBar extends React.Component {
           <div class="container">
           <a className="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Menu</a>
           <NavbarToggler onClick={this.toggle}/>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="navbar-nav mx-auto" navbar>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/">Home</NavLink>
+          <Collapse isOpen={this.state.isOpen} navbar> 
+            <Nav className="mx-auto" style={{"text-align":"right"}} navbar>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/">Home</NavLink>
               </NavItem>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/about">About</NavLink>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/about">About</NavLink>
               </NavItem>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/parks">Parks</NavLink>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/parks">Parks</NavLink>
               </NavItem>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/campgrounds">Campgrounds</NavLink>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/campgrounds">Campgrounds</NavLink>
               </NavItem>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/visitorcenters">Visitor Centers</NavLink>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/visitorcenters">Visitor Centers</NavLink>
               </NavItem>
-              <NavItem className="nav-item px-lg-4">
-                <NavLink className="nav-link text-uppercase text-expanded" href="/states">States</NavLink>
+              <NavItem className="px-lg-4">
+                <NavLink className="text-uppercase text-expanded" href="/states">States</NavLink>
               </NavItem>
             </Nav>
           </Collapse>

@@ -58,7 +58,7 @@ class CampgroundDetail extends Component {
            <strong> {this.state.data.name}</strong>
         </h2>
         <hr className="divider"/>
-        <center><img width="50%" src={this.state.data.imageUrl} alt="campgrounds image" /></center>
+        <center><img width="50%" src={this.state.data.imageUrl} alt="campground image" /></center>
         <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}> {this.state.data.parkCode} </Link></p>
         <p><b>State(s):</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states}</Link></p>
         <p><b>Description:</b> {this.state.data.description}</p>

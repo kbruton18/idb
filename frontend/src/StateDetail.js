@@ -87,10 +87,10 @@ class StateDetail extends Component {
         <Container className="bg-faded p-4 my-4">
         <hr className="divider"/>
         <h2 className="text-center text-lg text-uppercase my-0">
-           <strong> {this.state.data.name}</strong>
+           <strong>{this.state.data.name}</strong>
         </h2>
         <hr className="divider"/>
-        <center><img width="50%" src={this.state.data.imageUrl} alt="parks image" /></center>
+        <center><img width="50%" src={this.state.data.imageUrl} alt="Photo of state flag"/></center>
         <p><b>Abbreviations:</b> {this.state.data.abbreviations}</p>
         <p><b>Nicknames:</b> {this.state.data.nicknames}</p>
         <p><b>Time Zone:</b> {this.state.data.timeZone}</p>

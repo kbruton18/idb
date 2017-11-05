@@ -75,6 +75,8 @@ class StateDetail extends Component {
       return <a>{this.state.data.campgrounds}</a>
     })
 
+    const updatedWebsite = "http://www." + this.state.data.url;
+
     return (
       <div>
         <Container className="bg-faded p-4 my-4">
@@ -96,7 +98,7 @@ class StateDetail extends Component {
         <p><b>National Park(s):</b> {parkLinks}</p>
         <p><b>Campground(s):</b> {campgroundLinks}</p>
         <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
-        <p><b>Website:</b> <a href={this.state.data.url}>{this.state.data.url}</a></p>
+        <p><b>Website:</b> <a href={updatedWebsite}>{updatedWebsite}</a></p>
       </Container>
       </div>
     );

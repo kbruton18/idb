@@ -41,8 +41,8 @@ function AboutProcess(props) {
         The issue tracker for this site: <a href="https://trello.com/b/zej73RSH/idb-phase-1">Trello</a><br />
         The API for this site: <a href="http://docs.kbruton18.apiary.io">Apiary</a><br />
         The technical report for phase 1 of the project: <a href="https://utexas.box.com/s/fwed2ij9san9fpwtrjrubv31k47jxznrt5ml5n8n6geae">Report</a><br/>
-        The technical report for phase 2 of the project: <a href="https://utexas.box.com/s/fwed2ij9san9fpwtrjrubv31k47jxznr">Report</a>
-        UML; <a href="https://utexas.box.com/s/m0ansejc67roe1x1hhngse049x2rddei">UML</a>
+        The technical report for phase 2 of the project: <a href="https://utexas.box.com/s/fwed2ij9san9fpwtrjrubv31k47jxznr">Report</a><br/>
+        UML: <a href="https://utexas.box.com/s/m0ansejc67roe1x1hhngse049x2rddei">UML</a>
       </p>
     </Container>
   );

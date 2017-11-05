@@ -45,10 +45,10 @@ class CampgroundCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.name}</CardTitle>
               <CardText>
-              <b>Total Sites</b>: {d.totalSites} <br/>
-              <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}> {d.parkCode} </Link> <br/>
-              <b>Description</b>: {d.description} <br/>
-              <b>Regulations URL</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a> <br/>
+              <b>Total Sites</b>: {d.totalSites}<br/>
+              <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
+              <b>Description</b>: {d.description}<br/>
+              <b>Regulations URL</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a><br/>
               <b>Directions URL</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a>
               </CardText>
             </CardBody>

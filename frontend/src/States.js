@@ -57,7 +57,7 @@ class StateCard extends Component {
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
           <Link to={`/states/${d.abbreviations}`}>
-            <CardImg top width="100%" src={d.imageUrl} alt="Photo of state flag" />
+            <CardImg top width="100%" src={d.imageUrl} alt="Photo of state flag"/>
           </Link>
           <CardBody>
             <CardTitle className="text-center">{d.name}</CardTitle>

@@ -67,7 +67,7 @@ class ParkCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/parks/${d.parkCode}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="Image of park" />
+              <CardImg top width="100%" src={d.imageUrl} alt="Image of park"/>
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>

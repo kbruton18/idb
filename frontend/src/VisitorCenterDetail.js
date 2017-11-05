@@ -53,9 +53,9 @@ class VisitorCenterDetail extends Component {
            <strong> {this.state.data.name}</strong>
         </h2>
         <hr className="divider"/>
-        <center><img width="50%" src={this.state.data.imageUrl} alt="visitor center image" /></center>
-        <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}> {this.state.data.parkCode}</Link></p>
-        <p><b>State:</b> <Link to={`/states/${this.state.data.states}`}> {this.state.data.states}</Link></p>
+        <center><img width="50%" src={this.state.data.imageUrl} alt="visitor center image"/></center>
+        <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}>{this.state.data.parkCode}</Link></p>
+        <p><b>State:</b> <Link to={`/states/${this.state.data.states}`}>{this.state.data.states}</Link></p>
         <p><b>Description:</b> {this.state.data.description}</p>
         <p><b>Lat/Long:</b> {this.state.data.latLong}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>

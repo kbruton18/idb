@@ -41,14 +41,14 @@ class VisitorCenterCard extends Component {
           <Col lg="4" md="6" sm="12">
             <Card className ="text-center">
               <Link to={`/visitorcenters/${d.name}`}>
-                <CardImg top width="100%" src={d.imageUrl} alt="visitor center image" />
+                <CardImg top width="100%" src={d.imageUrl} alt="visitor center image"/>
               </Link>
               <CardBody>
                 <CardTitle className="text-center">{d.name}</CardTitle>
                 <CardText>
-                <b>Park</b>: <Link to={`/parks/${d.parkCode}`}> {d.parkCode} </Link> <br/>
-                <b>State</b>: <Link to={`/states/${d.states}`}> {d.states}</Link> <br/>
-                <b>Lat/Long</b>: {d.latLong} <br/>
+                <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
+                <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
+                <b>Lat/Long</b>: {d.latLong}<br/>
                 <b>Directions</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a><br/>
                 <b>Website</b>: <a href={d.website}>{d.website}</a>
                 </CardText>

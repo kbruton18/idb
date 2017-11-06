@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import {
-  Pagination,
+  Button,
   Container,
   Row,
   Col,
@@ -13,7 +13,11 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle
+  CardTitle,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import StateDetail from './StateDetail.js';
 
@@ -21,9 +25,44 @@ class StateCard extends Component {
 
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
+    this.reset = this.reset.bind(this);
+    this.sortByName = this.sortByName.bind(this);
+    this.sortByZone = this.sortByZone.bind(this);
     this.state = {
-      data: []
-    }
+      data: [],
+      isSort: false,
+      sortName: false,
+      sortZone: false,
+    };
+  }
+
+  toggle() {
+    this.setState({
+      isSort: !this.state.isSort
+    });
+  }
+
+  reset() {
+    this.setState({
+      isSort: false,
+      sortName: false,
+      sortZone: false,
+    });
+  }
+
+  sortByName() {
+    this.setState({
+      sortName: true,
+      sortZone: false
+    });
+  }
+
+  sortByZone() {
+    this.setState({
+      sortZone: true,
+      sortName: false
+    });
   }
 
   componentDidMount() {
@@ -37,7 +76,25 @@ class StateCard extends Component {
   }
 
   render() {
-    const state = this.state.data.map((d) => {
+    var version = [];
+    Object.assign(version, this.state.data);
+    if (this.state.sortName) {
+      version.sort(function(first, second) {
+        if(first.name < second.name) return -1;
+        if(first.name > second.name) return 1;
+        return 0;
+      });
+    } else if(this.state.sortZone) {
+      version.sort(function(first, second) {
+        if(first.timeZone < second.timeZone) return -1;
+        if(first.timeZone > second.timeZone) return 1;
+        return 0;
+      });
+    } else {
+      version = this.state.data;
+    }
+
+    const state = version.map((d) => {
       const parkList = String(d.nationalParks).split(",");
       const parkLinks = parkList.map((p) => {
         if (d.nationalParks!="No national park in this state.") {
@@ -81,6 +138,16 @@ class StateCard extends Component {
         states
       </h2>
       <hr className="divider"/>
+      <Button onClick={this.reset}>Reset</Button>
+      <Dropdown isOpen={this.state.isSort} toggle={this.toggle}>
+        <DropdownToggle caret>
+          Sort By
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+          <DropdownItem onClick={this.sortByZone}>Timezone</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
       <Row>
           {state}
       </Row>

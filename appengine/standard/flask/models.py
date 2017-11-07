@@ -38,6 +38,7 @@ class Park(database.Model):
 		return '<Park %s: ParkCode=%s>' % self.fullName, self.parkCode
 		
 	def search(self, term):
+	    self.searchString = ''
 	    if self.fullName.find(term) != -1:
 	        self.searchString = 'Name: %s' % self.fullName
 	    elif self.states.find(term) != -1:
@@ -50,10 +51,11 @@ class Park(database.Model):
 	        self.searchString = 'Weather Info: %s' % self.weatherInfo
 	    elif self.directionsInfo.find(term) != -1:
 	        self.searchString = 'Directions: %s' % self.directionsInfo
+	    
+	    if self.searchString == '':
+	        return False
 	    else:
-	       self.searchString = ''
-	       return False
-        return True
+	        return True
 
 
 class State(database.Model):

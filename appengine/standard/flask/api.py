@@ -37,10 +37,10 @@ def get_parks_dict():
 # Helper to make parks lists out of parks dicts
 def create_parks_list(parks_dict):
     park_codes = parks_dict.keys()
-	data = []
-	for code in park_codes:
-		data.append(parks_dict[code])
-	return data
+    data = []
+    for code in park_codes:
+        data.append(parks_dict[code])
+    return data
 
 # Return all info about all national parks, in list format
 def get_parks_list():

@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import {
   Button,
+  ButtonGroup,
   Container,
   Row,
   Col,
@@ -34,7 +35,8 @@ class CampgroundCard extends Component {
       sortDropdown: false,
       sortName: false,
       sortState: false,
-      sortPark: false
+      sortPark: false,
+      page: 1
     }
   }
 
@@ -77,6 +79,12 @@ class CampgroundCard extends Component {
     });
   }
 
+  setPage(page) {
+    this.setState({
+      page: page
+    });
+  }
+
   componentDidMount() {
     fetch('http://sweet-travels.appspot.com/api/campgrounds')
       .then((response) => response.json())
@@ -112,7 +120,9 @@ class CampgroundCard extends Component {
       version = this.state.data;
     }
 
-    const campground = version.map((d) => {
+    const pageOfCampgrounds = version.slice((this.state.page - 1) * 12, this.state.page * 12);
+
+    const campground = pageOfCampgrounds.map((d) => {
       return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
@@ -122,11 +132,11 @@ class CampgroundCard extends Component {
             <CardBody>
               <CardTitle className="text-center">{d.name}</CardTitle>
               <CardText>
-              <b>Total Sites</b>: {d.totalSites}<br/>
-              <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
-              <b>Description</b>: {d.description}<br/>
-              <b>Regulations URL</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a><br/>
-              <b>Directions URL</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a>
+                <b>Total Sites</b>: {d.totalSites}<br/>
+                <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
+                <b>Description</b>: {d.description}<br/>
+                <b>Regulations URL</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a><br/>
+                <b>Directions URL</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a>
               </CardText>
             </CardBody>
           </Card>
@@ -134,30 +144,45 @@ class CampgroundCard extends Component {
       )
     })
 
+    const pages = Math.ceil(version.length / 12);
+
+    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
+
+    const pageButtons = pageArray.map((d) => {
+      return (
+        <Button onClick={() => this.setPage(d)}>{d}</Button>
+      )
+    });
+
     return (
       <Container className="bg-faded p-4 my-4">
-      <hr className="divider"/>
-      <h2 className="text-center text-lg text-uppercase my-0">
-        Campgrounds
-      </h2>
-      <hr className="divider"/>
-      <form role="form" class="form-inline">
-        <Button onClick={this.reset}>Reset</Button>
-        <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-          <DropdownToggle caret>
-            Sort By
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-            <DropdownItem onClick={this.sortByState}>State</DropdownItem>
-            <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </form>
-      <Row>
-        {campground}
-      </Row>
-    </Container>
+        <hr className="divider"/>
+        <h2 className="text-center text-lg text-uppercase my-0">
+          Campgrounds
+        </h2>
+        <hr className="divider"/>
+        <form role="form" class="form-inline">
+          <Button onClick={this.reset}>Reset</Button>
+          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
+            <DropdownToggle caret>
+              Sort By
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+              <DropdownItem onClick={this.sortByState}>State</DropdownItem>
+              <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </form>
+        <Row>
+          {campground}
+        </Row>
+        <Row>
+          <ButtonGroup>
+            {pageButtons}
+          </ButtonGroup>
+        </Row>
+        </Container>
     );
   }
 }

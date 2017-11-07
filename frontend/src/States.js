@@ -24,29 +24,29 @@ class StateCard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
     this.sortByName = this.sortByName.bind(this);
     this.sortByZone = this.sortByZone.bind(this);
     this.state = {
       data: [],
-      isSort: false,
+      sortDropdown: false,
       sortName: false,
-      sortZone: false,
+      sortZone: false
     };
   }
 
-  toggle() {
+  toggleSort() {
     this.setState({
-      isSort: !this.state.isSort
+      sortDropdown: !this.state.sortDropdown
     });
   }
 
   reset() {
     this.setState({
-      isSort: false,
+      sortDropdown: false,
       sortName: false,
-      sortZone: false,
+      sortZone: false
     });
   }
 
@@ -138,7 +138,7 @@ class StateCard extends Component {
       </h2>
       <hr className="divider"/>
       <Button onClick={this.reset}>Reset</Button>
-      <Dropdown isOpen={this.state.isSort} toggle={this.toggle}>
+      <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
         <DropdownToggle caret>
           Sort By
         </DropdownToggle>

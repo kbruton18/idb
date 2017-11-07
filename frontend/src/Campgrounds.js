@@ -4,6 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 import {
+  Button,
   Container,
   Row,
   Col,
@@ -11,7 +12,11 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle
+  CardTitle,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 
@@ -19,9 +24,57 @@ class CampgroundCard extends Component {
 
   constructor(props) {
     super(props);
+    this.toggleSort = this.toggleSort.bind(this);
+    this.reset = this.reset.bind(this);
+    this.sortByName = this.sortByName.bind(this);
+    this.sortByState = this.sortByState.bind(this);
+    this.sortByPark = this.sortByPark.bind(this);
     this.state = {
-      data: []
+      data: [],
+      sortDropdown: false,
+      sortName: false,
+      sortState: false,
+      sortPark: false
     }
+  }
+
+  toggleSort() {
+    this.setState({
+      sortDropdown: !this.state.sortDropdown
+    });
+  }
+
+  reset() {
+    this.setState({
+      sortDropdown: false,
+      sortName: false,
+      sortState: false,
+      sortPark: false
+    });
+  }
+
+  sortByName() {
+    this.setState({
+      sortName: true,
+      sortState: false,
+      sortPark: false
+    });
+  }
+
+  sortByState() {
+    this.setState({
+      sortState: true,
+      sortName: false,
+      sortPark: false
+    });
+  }
+
+  sortByPark() {
+    this.setState({
+      sortPark: true,
+      sortName: false,
+      sortState: false
+    });
   }
 
   componentDidMount() {
@@ -35,7 +88,31 @@ class CampgroundCard extends Component {
   }
 
   render() {
-    const campground = this.state.data.map((d) => {
+    var version = [];
+    Object.assign(version, this.state.data);
+    if (this.state.sortName) {
+      version.sort(function(first, second) {
+        if(first.name < second.name) return -1;
+        if(first.name > second.name) return 1;
+        return 0;
+      });
+    } else if(this.state.sortState) {
+      version.sort(function(first, second) {
+        if(first.states < second.states) return -1;
+        if(first.states > second.states) return 1;
+        return 0;
+      });
+    } else if(this.state.sortPark) {
+      version.sort(function(first, second) {
+        if(first.parkCode < second.parkCode) return -1;
+        if(first.parkCode > second.parkCode) return 1;
+        return 0;
+      });
+    } else {
+      version = this.state.data;
+    }
+
+    const campground = version.map((d) => {
       return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
@@ -64,6 +141,17 @@ class CampgroundCard extends Component {
         Campgrounds
       </h2>
       <hr className="divider"/>
+      <Button onClick={this.reset}>Reset</Button>
+      <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
+        <DropdownToggle caret>
+          Sort By
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+          <DropdownItem onClick={this.sortByState}>State</DropdownItem>
+          <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
       <Row>
         {campground}
       </Row>

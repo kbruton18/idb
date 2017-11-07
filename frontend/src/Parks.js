@@ -30,7 +30,8 @@ class ParkCard extends Component {
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false
+      sortName: false,
+      page: 0
     }
   }
 
@@ -51,6 +52,28 @@ class ParkCard extends Component {
     this.setState({
       sortName: true
     });
+  }
+
+  next() {
+    if (this.state.page < (this.state.data.length / 6 - 1)) {
+      this.setState({
+        page: this.state.page + 1
+      });
+    }
+  }
+
+  previous() {
+    if (this.state.page > 0) {
+      this.setState({
+        page: this.state.page - 1
+      });
+    }
+  }
+
+  setPage(page) {
+      this.setState({
+        page: page
+      });
   }
 
   componentDidMount() {
@@ -76,7 +99,14 @@ class ParkCard extends Component {
       version = this.state.data;
     }
 
-    const park = version.map((d) => {
+    let n = this.state.page * 6
+    let currView = version.slice(n, n + 6);
+    const pageNumbers = [];
+    for (let i = 0; i < Math.ceil(this.state.data.length / 6); i++) {
+      pageNumbers.push(i);
+    }
+
+    const park = currView.map((d) => {
       const stateList = String(d.states).split(",");
       const stateLinks = stateList.map((s) => {
         if (stateList[stateList.length-1] === s) {
@@ -146,6 +176,19 @@ class ParkCard extends Component {
       <Row>
         {park}
       </Row>
+      <ul className="pagination">
+        <li>
+          <Button onClick={() => this.previous()}>Previous</Button>
+        </li>
+        {pageNumbers.map((page)=>
+          <li>
+            <Button onClick={() => this.setPage(page)}>{page}</Button>
+          </li>
+        )}
+        <li>
+          <Button onClick={() => this.next()}>Next</Button>
+        </li>
+      </ul>
     </Container>
     );
   }

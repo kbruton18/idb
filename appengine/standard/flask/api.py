@@ -2,10 +2,14 @@ from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
 def search_parks(term):
-    parks_list = Park.query.filter(Park.search(term)).all()
+    all_parks = Park.query.all()
     # states_list = State.query.filter(State.search(term) != null).all()
+    parks_list = []
+    for park in all_parks:
+        if park.search(term):
+            parks_list.append(park)
     parks_dict = create_parks_dict(parks_list)
-    return create_parks_list(parks_dict)
+    return parks_dict
 
 # Helper function to create park dicts
 def create_parks_dict(parks_list):

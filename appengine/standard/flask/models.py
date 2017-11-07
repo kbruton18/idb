@@ -16,6 +16,7 @@ class Park(database.Model):
 	campgrounds = database.Column(database.Text)
 	states = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
+	searchString = ''
 
 	def __init__(self, parkCode, fullName, description, designation,
 		directionsInfo, directionsUrl, latLong, url, weatherInfo,
@@ -35,6 +36,24 @@ class Park(database.Model):
 
 	def __repr__(self):
 		return '<Park %s: ParkCode=%s>' % self.fullName, self.parkCode
+		
+	def search(self, term):
+	    if self.fullName.find(term) != -1:
+	        self.searchString = 'Name: %s' % self.fullName
+	    elif self.states.find(term) != -1:
+	        self.searchString = 'State(s): %s' % self.states
+	    elif self.campgrounds.find(term) != -1:
+	        self.searchString = 'Campground(s): %s' % self.campgrounds
+	    elif self.description.find(term) != -1:
+	        self.searchString = 'Description: %s' % self.description
+	    elif self.weatherInfo.find(term) != -1:
+	        self.searchString = 'Weather Info: %s' % self.weatherInfo
+	    elif self.directionsInfo.find(term) != -1:
+	        self.searchString = 'Directions: %s' % self.directionsInfo
+	    else:
+	       self.searchString = ''
+	       return False
+        return True
 
 
 class State(database.Model):

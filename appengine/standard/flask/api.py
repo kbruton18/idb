@@ -1,10 +1,14 @@
 from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
-# Returns a dictionary of park codes mapped to dictionaries.
-# Each park's dictionary maps attribute park IDs to the park's attribute values
-def get_parks_dict():
-    parks_list = Park.query.all()
+def search_parks(term):
+    parks_list = Park.query.filter(Park.search(term)).all()
+    # states_list = State.query.filter(State.search(term) != null).all()
+    parks_dict = create_parks_dict(parks_list)
+    return create_parks_list(parks_dict)
+
+# Helper function to create park dicts
+def create_parks_dict(parks_list):
     parks = {}
     for park in parks_list:
         park_dict = {}
@@ -20,17 +24,27 @@ def get_parks_dict():
         park_dict["campgrounds"] = park.campgrounds
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
+        park_dict["searchString"] = park.searchString
         parks[park.parkCode] = park_dict
     return parks
 
-# Return all info about all national parks, in list format
-def get_parks_list():
-	parks_dict = get_parks_dict()
-	park_codes = parks_dict.keys()
+# Returns a dictionary of park codes mapped to dictionaries.
+# Each park's dictionary maps attribute park IDs to the park's attribute values
+def get_parks_dict():
+    parks_list = Park.query.all()
+    return create_parks_dict(parks_list)
+
+# Helper to make parks lists out of parks dicts
+def create_parks_list(parks_dict):
+    park_codes = parks_dict.keys()
 	data = []
 	for code in park_codes:
 		data.append(parks_dict[code])
 	return data
+
+# Return all info about all national parks, in list format
+def get_parks_list():
+	return create_parks_list(get_parks_dict())
 
 # Returns a park's dictionary, given the park code as a string (e.g. "dena")
 def get_park_info(park_code):

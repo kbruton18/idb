@@ -141,17 +141,19 @@ class CampgroundCard extends Component {
         Campgrounds
       </h2>
       <hr className="divider"/>
-      <Button onClick={this.reset}>Reset</Button>
-      <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-        <DropdownToggle caret>
-          Sort By
-        </DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-          <DropdownItem onClick={this.sortByState}>State</DropdownItem>
-          <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+      <form role="form" class="form-inline">
+        <Button onClick={this.reset}>Reset</Button>
+        <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
+          <DropdownToggle caret>
+            Sort By
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+            <DropdownItem onClick={this.sortByState}>State</DropdownItem>
+            <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </form>
       <Row>
         {campground}
       </Row>

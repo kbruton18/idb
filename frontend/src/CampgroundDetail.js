@@ -61,7 +61,9 @@ class CampgroundDetail extends Component {
         <center><img width="50%" src={this.state.data.imageUrl} alt="campground image"/></center>
         <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}>{this.state.data.parkCode}</Link></p>
         <p><b>State(s):</b> {stateLinks}</p>
+        <p><b>Total Sites:</b> {this.state.data.totalSites}</p>
         <p><b>Description:</b> {this.state.data.description}</p>
+        <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
         <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
         <p><b>Regulations Overview:</b> {this.state.data.regulations}</p>

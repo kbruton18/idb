@@ -1,19 +1,6 @@
 import React, {Component} from 'react';
-import {
-  Link,
-  Route
-} from 'react-router-dom';
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle
-} from 'reactstrap';
-import CustomCard from './CustomCard.js';
+import { Link } from 'react-router-dom';
+import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class VisitorCenterDetail extends Component {

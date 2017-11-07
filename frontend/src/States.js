@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import {
   Link,
   Route
@@ -97,7 +96,7 @@ class StateCard extends Component {
     const state = version.map((d) => {
       const parkList = String(d.nationalParks).split(",");
       const parkLinks = parkList.map((p) => {
-        if (d.nationalParks!="No national park in this state.") {
+        if (d.nationalParks!=="No national park in this state.") {
           if (parkList[parkList.length-1] === p) {
             return (
               <a><Link to={`/parks/${p}`}>{p}</Link></a>

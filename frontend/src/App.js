@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect,
+  Switch
 } from 'react-router-dom';
 import './App.css';
 import NavBar from './Nav.js';
@@ -15,8 +17,8 @@ import VisitorCenters from './VisitorCenters.js';
 import States from './States.js';
 import ParkDetail from './ParkDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
-import StateDetail from './StateDetail.js';
 import NotFound from './NotFound.js';
+import StateDetail from './StateDetail.js';
 
 class App extends Component {
   render() {
@@ -26,15 +28,18 @@ class App extends Component {
           <Title/>
           <NavBar/>
           <div>
-            <Route exact path="/" component={Home}/>
-            <Route path="/about" component={About}/>
-            <Route path="/parks" component={Parks}/>
-            <Route path="/campgrounds" component={Campgrounds}/>
-            <Route path="/visitorcenters" component={VisitorCenters}/>
-            <Route path="/states" component={States}/>
-            <Route path="parks/:id" component={ParkDetail}/>
-            <Route path="visitorcenters/:id" component={VisitorCenterDetail}/>
-            <Route path="states/:id" component={StateDetail}/>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/about" component={About}/>
+              <Route path="/parks" component={Parks}/>
+              <Route path="/campgrounds" component={Campgrounds}/>
+              <Route path="/visitorcenters" component={VisitorCenters}/>
+              <Route path="/states" component={States}/>
+              <Route path="parks/:id" component={ParkDetail}/>
+              <Route path="visitorcenters/:id" component={VisitorCenterDetail}/>
+              <Route path="states/:id" component={StateDetail}/>
+              <Route component={NotFound} />
+            </Switch>
           </div>
           <Footer/>
         </div>

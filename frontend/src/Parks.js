@@ -50,7 +50,7 @@ class ParkCard extends Component {
 
       const campgroundList = String(d.campgrounds).split(", ");
       const campgroundLinks = campgroundList.map((c) => {
-        if (d.campgrounds!="N/A") {
+        if (d.campgrounds!=="N/A") {
           if (campgroundList[campgroundList.length-1] === c) {
             return (
               <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>

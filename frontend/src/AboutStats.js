@@ -46,15 +46,15 @@ export default class AboutStats extends Component {
       if (this.state.stats[i]) {
         var curr = this.state.stats[i]["author"]["login"]
         var total = this.state.stats[i]["total"]
-        if (curr == "dchang95") {
+        if (curr === "dchang95") {
           derekc = total
-        } else if (curr == "kbruton18") {
+        } else if (curr === "kbruton18") {
           katherinec = total
-        } else if (curr == "linh-nguyen") {
+        } else if (curr === "linh-nguyen") {
           linhc = total
-        } else if (curr == "ryanhle") {
+        } else if (curr === "ryanhle") {
           ryanc = total
-        } else if (curr = "racheloei") {
+        } else if (curr === "racheloei") {
           rachelc = total
         }
       }

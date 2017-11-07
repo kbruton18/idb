@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
 import CustomCard from './CustomCard.js';
 import AboutStats from './AboutStats.js';

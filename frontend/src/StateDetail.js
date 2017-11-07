@@ -90,7 +90,6 @@ class StateDetail extends Component {
         <p><b>Median Income:</b> {this.state.data.medianIncome}</p>
         <p><b>National Park(s):</b> {parkLinks}</p>
         <p><b>Campground(s):</b> {campgroundLinks}</p>
-        <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
         <p><b>Website:</b> <a href={updatedWebsiteLink()}>{updatedWebsiteLink()}</a></p>
       </Container>
       </div>

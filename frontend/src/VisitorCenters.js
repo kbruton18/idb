@@ -114,6 +114,10 @@ class VisitorCenterCard extends Component {
 
     const center = version.map((d) => {
       if (d.website.length !== 0) {
+        const latLong = String(d.latLong).split(", lng:");
+        const lat = String(latLong[0]).replace("{lat:", "");
+        const long = String(latLong[1]).replace("}", "");
+
         return (
           <Col lg="4" md="6" sm="12">
             <Card className ="text-center">
@@ -125,7 +129,8 @@ class VisitorCenterCard extends Component {
                 <CardText>
                 <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
                 <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
-                <b>Lat/Long</b>: {d.latLong}<br/>
+                <b>Latitude</b>: {lat}<br/>
+                <b>Longitude</b>: {long}<br/>
                 <b>Directions</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a><br/>
                 <b>Website</b>: <a href={d.website}>{d.website}</a>
                 </CardText>

@@ -6,9 +6,8 @@ from flask import Flask
 class APITestMethods(unittest.TestCase):
   def testParksSearch(self):
     parks = api.search_parks("Yosemite")
-    print(parks)
     self.assertTrue("yose" in parks.keys())
-    self.assertEquals(1, len(parks.keys()))
+    self.assertEquals(2, len(parks.keys()))
  
   def testGetParksDict(self):
     parks = api.get_parks_dict()   

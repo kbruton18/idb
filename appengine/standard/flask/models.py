@@ -41,17 +41,25 @@ class Park(database.Model):
 	    self.searchString = ''
 	    if self.fullName.find(term) != -1:
 	        self.searchString = 'Name: %s' % self.fullName
+            elif self.parkCode.find(term) != -1:
+                self.searchString = 'Park Code: %s' % self.parkCode
 	    elif self.states.find(term) != -1:
 	        self.searchString = 'State(s): %s' % self.states
+            elif self.designation.find(term) != -1:
+                self.searchString = 'Designation: %s' % self.designation
 	    elif self.campgrounds.find(term) != -1:
-	        self.searchString = 'Campground(s): %s' % self.campgrounds
+	        self.searchString = 'Campgrounds: %s' % self.campgrounds
 	    elif self.description.find(term) != -1:
 	        self.searchString = 'Description: %s' % self.description
 	    elif self.weatherInfo.find(term) != -1:
 	        self.searchString = 'Weather Info: %s' % self.weatherInfo
 	    elif self.directionsInfo.find(term) != -1:
-	        self.searchString = 'Directions: %s' % self.directionsInfo
-	    
+	        self.searchString = 'Directions Info: %s' % self.directionsInfo
+	    elif self.directionsUrl.find(term) != -1:
+                self.searchString = 'Directions URL: %s' % self.directionsUrl
+            elif self.url.find(term) != -1:
+                self.searchString = 'Website: %s' % self.url
+
 	    if self.searchString == '':
 	        return False
 	    else:

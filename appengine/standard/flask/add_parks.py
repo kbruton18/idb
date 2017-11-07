@@ -15,7 +15,6 @@ the_page = response.read()
 # response.read() returns bytes, which we need to decode into a string
 the_page = the_page.decode("utf-8") 
 data = json.loads(the_page)
-count = 0
 for x in data["data"]:
     photo_endpoint = ""
 
@@ -56,7 +55,7 @@ for x in data["data"]:
         else: 
             photo_endpoint = "https://maps.googleapis.com/maps/api/place/photo?photoreference=" + photo_reference + "&maxheight=300&key=AIzaSyCH_1xeQ0qsxuwRjngc5-lX7Ve9D6oIHc4"
 
-    if "National Park" not in x["fullName"]:
+    if "Park" not in x["designation"]:
         continue
 
     campgrounds = ""
@@ -67,12 +66,17 @@ for x in data["data"]:
         campgrounds = campgrounds.rstrip(", ")
 
     if campgrounds == "": 
-        campgrounds = "N/A"
+        campgrounds = "None"
     park = Park(x["parkCode"], x["fullName"], x["description"],
         x["designation"], x["directionsInfo"], x["directionsUrl"],
         x["latLong"], x["url"], x["weatherInfo"], campgrounds, x["states"], 
         photo_endpoint)
+ 
+    if database.session.query(Park.parkCode).filter(Park.parkCode==x["parkCode"]).count() > 0:
+        continue
     database.session.add(park)
+    print("adding " + x["parkCode"] + " " + x["fullName"])
+
 database.session.commit()
 
 print('Finished executing')

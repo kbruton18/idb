@@ -32,6 +32,11 @@ class VisitorCenterDetail extends Component {
         <NotFound/>
       )
     }
+
+    const latLong = String(this.state.data.latLong).split(", lng:");
+    const lat = String(latLong[0]).replace("{lat:", "");
+    const long = String(latLong[1]).replace("}", "");
+
     return (
       <div>
       <Container className="bg-faded p-4 my-4">
@@ -44,7 +49,8 @@ class VisitorCenterDetail extends Component {
         <p><b>Park Code:</b> <Link to={`/parks/${this.state.data.parkCode}`}>{this.state.data.parkCode}</Link></p>
         <p><b>State:</b> <Link to={`/states/${this.state.data.states}`}>{this.state.data.states}</Link></p>
         <p><b>Description:</b> {this.state.data.description}</p>
-        <p><b>Lat/Long:</b> {this.state.data.latLong}</p>
+        <p><b>Latitude:</b> {lat}</p>
+        <p><b>Longitude:</b> {long}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
         <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
         <p><b>Website:</b> <a href={this.state.data.website}>{this.state.data.website}</a></p>

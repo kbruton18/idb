@@ -59,6 +59,9 @@ class ParkDetail extends Component {
       return <a>{this.state.data.campgrounds}</a>
     })
 
+    const latLong = String(this.state.data.latLong).split(", long:");
+    const lat = latLong[0].replace("lat:", "");
+
     return (
       <div>
         <Container className="bg-faded p-4 my-4">
@@ -71,7 +74,8 @@ class ParkDetail extends Component {
           <p><b>Park Code:</b> {this.state.data.parkCode}</p>
           <p><b>Designation:</b> {this.state.data.designation}</p>
           <p><b>State(s):</b> {stateLinks}</p>
-          <p><b>Lat Long:</b> {this.state.data.latLong}</p>
+          <p><b>Latitude:</b> {lat}</p>
+          <p><b>Longitude:</b> {latLong[1]}</p>
           <p><b>Description:</b> {this.state.data.description}</p>
           <p><b>Campground(s):</b> {campgroundLinks}</p>
           <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>

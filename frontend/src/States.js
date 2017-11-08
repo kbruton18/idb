@@ -108,7 +108,7 @@ class StateCard extends Component {
       version = this.state.data;
     }
 
-    const pageOfStates = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+    const pageOfStates = version.slice((this.state.page - 1) * 12, this.state.page * 12);
 
     const state = pageOfStates.map((d) => {
       const parkList = String(d.nationalParks).split(",");
@@ -147,7 +147,7 @@ class StateCard extends Component {
       )
     })
 
-    const pages = Math.ceil(version.length / 9);
+    const pages = Math.ceil(version.length / 12);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
     const pageButtons = pageArray.map((d) => {
       return (

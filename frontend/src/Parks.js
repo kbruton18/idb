@@ -28,7 +28,7 @@ class ParkCard extends Component {
     this.toggleSort = this.toggleSort.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
-    this.filterByState = this.filterByState.bind(this);
+    this.filterBy = this.filterBy.bind(this);
     this.sortByAscending = this.sortByAscending.bind(this);
     this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
@@ -37,6 +37,7 @@ class ParkCard extends Component {
       filterDropdown: false,
       sortAscending: false,
       sortDescending: false,
+      filterBy: false,
       page: 0,
       filter: ''
     }
@@ -75,9 +76,10 @@ class ParkCard extends Component {
     });
   }
 
-  filterByState() {
+  filterBy(event) {
     this.setState({
-      filter: ""
+      filter: event.currentTarget.textContent,
+      filterBy: true
     });
   }
 
@@ -117,10 +119,12 @@ class ParkCard extends Component {
 
     var version = [];
     Object.assign(version, this.state.data);
-    version.filter((state) => {
-      return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
-    });
-    if (this.state.sortAscending) {
+    if (this.state.filterBy) {
+      version = version.filter((state) => {
+        return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
+      });
+    }
+    else if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return -1;
         if(first.fullName > second.fullName) return 1;
@@ -135,6 +139,7 @@ class ParkCard extends Component {
     } else {
       version = this.state.data;
     }
+    console.log(version);
 
     let n = this.state.page * 6
     let currView = version.slice(n, n + 6);
@@ -215,7 +220,7 @@ class ParkCard extends Component {
               Filter By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.soryByName}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.filterBy}>Ascending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </form>

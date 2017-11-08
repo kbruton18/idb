@@ -20,38 +20,23 @@ import {
   DropdownItem
 } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
+import SortDropdown from './SortDropdown.js';
 
 class ParkCard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleSort = this.toggleSort.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
-      sortDropdown: false,
-      filterDropdown: false,
       sortType: "",
+      filterDropdown: false,
       filterBy: false,
-      page: 1,
-      filter: ""
+      filter: "",
+      page: 1
     }
-  }
-
-// Action for when a user wants to filter
-  toggleFilter() {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
-  }
-
-// Action for when a user wants to sort
-  toggleSort() {
-    this.setState({
-      sortDropdown: !this.state.sortDropdown
-    });
   }
 
 // resets everything to its original state.
@@ -66,6 +51,13 @@ class ParkCard extends Component {
   sort(type) {
     this.setState({
       sortType: type,
+    });
+  }
+
+// Action for when a user wants to filter
+  toggleFilter() {
+    this.setState({
+      filterDropdown: !this.state.filterDropdown
     });
   }
 
@@ -192,15 +184,7 @@ class ParkCard extends Component {
         <hr className="divider"/>
         <form class="form-inline">
           <Button onClick={this.reset}>Reset</Button>
-          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-            <DropdownToggle caret>
-              Sort By
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <SortDropdown sortFunction={this.sort.bind(this)}/>
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
             <DropdownToggle caret>
               Filter By

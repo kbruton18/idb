@@ -13,46 +13,21 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  CardTitle
 } from 'reactstrap';
 import StateDetail from './StateDetail.js';
+import SortDropdown from './SortDropdown.js';
 
 class StateCard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleSort = this.toggleSort.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.state = {
       data: [],
-      sortDropdown: false,
-      filterDropdown: false,
       sortType: "",
       page: 1
     };
-  }
-
-  setPage(page) {
-    this.setState({
-      page: page
-    });
-  }
-
-  toggleSort() {
-    this.setState({
-      sortDropdown: !this.state.sortDropdown
-    });
-  }
-
-  toggleFilter() {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
   }
 
   reset() {
@@ -64,6 +39,12 @@ class StateCard extends Component {
   sort(type) {
     this.setState({
       sortType: type
+    });
+  }
+
+  setPage(page) {
+    this.setState({
+      page: page
     });
   }
 
@@ -152,24 +133,7 @@ class StateCard extends Component {
       <hr className="divider"/>
       <form class="form-inline">
         <Button onClick={this.reset}>Reset</Button>
-        <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-          <DropdownToggle caret>
-            Sort By
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
-            <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-        <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
-          <DropdownToggle caret>
-            Filter By
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
-            <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <SortDropdown sortFunction={this.sort.bind(this)}/>
       </form>
       <Row>
           {state}

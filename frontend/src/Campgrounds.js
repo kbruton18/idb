@@ -13,33 +13,21 @@ import {
   CardImg,
   CardText,
   CardBody,
-  CardTitle,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  CardTitle
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
+import SortDropdown from './SortDropdown.js';
 
 class CampgroundCard extends Component {
 
   constructor(props) {
     super(props);
-    this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sort = this.sort.bind(this);
     this.state = {
       data: [],
-      sortDropdown: false,
       sortType: "",
       page: 1
     }
-  }
-
-  toggleSort() {
-    this.setState({
-      sortDropdown: !this.state.sortDropdown
-    });
   }
 
   reset() {
@@ -146,15 +134,7 @@ class CampgroundCard extends Component {
         <hr className="divider"/>
         <form class="form-inline">
           <Button onClick={this.reset}>Reset</Button>
-          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-            <DropdownToggle caret>
-              Sort By
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <SortDropdown sortFunction={this.sort.bind(this)}/>
         </form>
         <Row>
           {campground}

@@ -26,14 +26,24 @@ class ParkCard extends Component {
   constructor(props) {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.sortByName = this.sortByName.bind(this);
+    this.filterByState = this.filterByState.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
+      filterDropdown: false,
       sortName: false,
-      page: 0
+      page: 0,
+      filter: ''
     }
+  }
+
+  toggleFilter() {
+    this.setState({
+      filterDropdown: !this.state.filterDropdown
+    });
   }
 
   toggleSort() {
@@ -52,6 +62,12 @@ class ParkCard extends Component {
   sortByName() {
     this.setState({
       sortName: true
+    });
+  }
+
+  filterByState() {
+    this.setState({
+      filter: ""
     });
   }
 
@@ -88,8 +104,12 @@ class ParkCard extends Component {
   }
 
   render() {
+
     var version = [];
     Object.assign(version, this.state.data);
+    version.filter((state) => {
+      return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
+    });
     if (this.state.sortName) {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return -1;
@@ -171,6 +191,14 @@ class ParkCard extends Component {
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
+            <DropdownToggle caret>
+              Filter By
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={this.soryByName}>Ascending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </form>

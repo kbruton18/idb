@@ -140,7 +140,12 @@ def get_visitor_centers_dict():
     return visitor_centers
 
 def get_visitor_centers_with_filter(filterString): 
-    return filterString
+    filter_values = filterString.split(",")
+    visitor_centers_list = {}
+    for string in filter_values:
+        visitor_centers_list = VisitorCenter.query.filter(VisitorCenter.states.like(string + "%")).all()
+        return visitor_centers_list
+
 
 def get_visitor_centers_list():
         vc_dict = get_visitor_centers_dict()

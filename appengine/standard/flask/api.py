@@ -59,7 +59,7 @@ def get_parks_list(args):
 
 # Returns a park's dictionary, given the park code as a string (e.g. "dena")
 def get_park_info(park_code):
-    park_dict = get_parks_dict()
+    park_dict = get_parks_dict(None)
     return park_dict[park_code]
 
 def get_states_dict():

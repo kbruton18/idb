@@ -141,7 +141,7 @@ class CampgroundCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/campgrounds/${d.name}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="campground image" />
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="campground image" />
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.name}</CardTitle>

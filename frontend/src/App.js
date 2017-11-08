@@ -20,27 +20,27 @@ import NotFound from './NotFound.js';
 import StateDetail from './StateDetail.js';
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <Router>
-        <div className="App">
-          <Title/>
-          <NavBar/>
+        <div className='App'>
+          <Title />
+          <NavBar />
           <div>
             <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route exact path="/about" component={About}/>
-              <Route path="/parks" component={Parks}/>
-              <Route path="/campgrounds" component={Campgrounds}/>
-              <Route path="/visitorcenters" component={VisitorCenters}/>
-              <Route path="/states" component={States}/>
-              <Route path="parks/:id" component={ParkDetail}/>
-              <Route path="visitorcenters/:id" component={VisitorCenterDetail}/>
-              <Route path="states/:id" component={StateDetail}/>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/about' component={About} />
+              <Route path='/parks' component={Parks} />
+              <Route path='/campgrounds' component={Campgrounds} />
+              <Route path='/visitorcenters' component={VisitorCenters} />
+              <Route path='/states' component={States} />
+              <Route path='parks/:id' component={ParkDetail} />
+              <Route path='visitorcenters/:id' component={VisitorCenterDetail} />
+              <Route path='states/:id' component={StateDetail} />
               <Route component={NotFound} />
             </Switch>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </Router>
     );

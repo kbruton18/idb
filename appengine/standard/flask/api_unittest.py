@@ -25,17 +25,23 @@ class APITestMethods(unittest.TestCase):
         self.assertEquals(3, len(parks.keys()))
 
     def testStatesSearch(self):
-        states = api.search_states("Rick Scott")
+        states = api.search_states("Sunshine")
         self.assertTrue("FL" in states.keys())
         self.assertEquals(1, len(states.keys()))
+    
+    def testStatesSearchMultipleTerms(self):
+        states = api.search_states("Sunshine California")
+        self.assertTrue("FL" in states.keys())
+        self.assertTrue("CA" in states.keys())
+        self.assertEquals(2, len(states.keys()))
 
     def testCampgroundsSearch(self):
-        campgrounds = api.search_campgrounds("Sunrise or Summerland")
+        campgrounds = api.search_campgrounds("Summerland")
         self.assertTrue("White River" in campgrounds.keys())
         self.assertEquals(1, len(campgrounds.keys()))
 
     def testVisitorCentersSearch(self):
-        vcs = api.search_visitor_centers("Ashford on State Route 706")
+        vcs = api.search_visitor_centers("Ashford")
         self.assertTrue("Longmire Museum")
         self.assertEquals(1, len(vcs.keys()))
 

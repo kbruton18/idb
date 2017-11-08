@@ -9,6 +9,7 @@
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
+    "react-select": "^1.0.0-rc.10",
     "reactstrap": "^5.0.0-alpha.3",
     "whatwg-fetch": "^2.0.3"
   },
@@ -19,5 +20,8 @@
     "eject": "react-scripts eject",
     "test-deploy": "npm run build && gsutil cp -r build/* gs://test.swetravels.me",
     "deploy": "npm run build && gsutil cp -r build/* gs://www.swetravels.me && gsutil cp -r build/* gs://swetravels.me"
+  },
+  "devDependencies": {
+    "semistandard": "^11.0.0"
   }
 }

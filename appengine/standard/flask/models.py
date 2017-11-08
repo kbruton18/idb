@@ -45,18 +45,20 @@ class Park(database.Model):
             self.searchString = 'Park Code: %s' % self.parkCode
         elif self.states.find(term) != -1:
             self.searchString = 'State(s): %s' % self.states
+        elif self.description.find(term) != -1:
+            self.searchString = 'Description: %s' % self.description
         elif self.designation.find(term) != -1:
             self.searchString = 'Designation: %s' % self.designation
         elif self.campgrounds.find(term) != -1:
             self.searchString = 'Campgrounds: %s' % self.campgrounds
-        elif self.description.find(term) != -1:
-            self.searchString = 'Description: %s' % self.description
-        elif self.weatherInfo.find(term) != -1:
-            self.searchString = 'Weather Info: %s' % self.weatherInfo
+        elif self.latLong.find(term) != -1:
+            self.searchString = 'Lat Long: %s' % self.latLong
         elif self.directionsInfo.find(term) != -1:
             self.searchString = 'Directions Info: %s' % self.directionsInfo
         elif self.directionsUrl.find(term) != -1:
             self.searchString = 'Directions URL: %s' % self.directionsUrl
+        elif self.weatherInfo.find(term) != -1:
+            self.searchString = 'Weather Info: %s' % self.weatherInfo
         elif self.url.find(term) != -1:
             self.searchString = 'Website: %s' % self.url
 
@@ -110,11 +112,11 @@ class State(database.Model):
         if self.name.find(term) != -1:
             self.searchString = 'Name: %s' % self.name
         elif self.abbreviations.find(term) != -1:
-            elf.searchString = 'Abbreviation: %s' % self.abbreviations
+            elf.searchString = 'Abbreviations: %s' % self.abbreviations
         elif self.nicknames.find(term) != -1:
-            self.searchString = 'Nickname(s): %s' % self.nicknames
+            self.searchString = 'Nicknames: %s' % self.nicknames
         elif self.timeZone.find(term) != -1:
-            self.searchString = 'Timezone: %s' % self.timeZone
+            self.searchString = 'Time Zone: %s' % self.timeZone
         elif self.governor.find(term) != -1:
             self.searchString = 'Governor: %s' % self.governor
         elif self.capital.find(term) != -1:
@@ -177,6 +179,33 @@ class Campground(database.Model):
     def __repr__(self):
         return '<Campground %s: parkCode=%s>' % self.name, self.parkCode
 
+    def search(self, term):
+        self.searchString = ''
+        if self.name.find(term) != -1:
+            self.searchString = 'Name: %s' % self.name
+        elif self.parkCode.find(term) != -1:
+            self.searchString = 'Park Code: %s' % self.parkCode
+        elif self.states.find(term) != -1:
+            self.searchString = 'State(s): %s' % self.states
+        elif self.description.find(term) != -1:
+            self.searchString = 'Description: %s' % self.description
+        elif self.regulationsOverview.find(term) != -1:
+            self.searchString = 'Regulations: %s' % self.regulationsOverview
+        elif self.regulationsUrl.find(term) != -1:
+            self.searchString = 'Regulations URL: %s' % self.regulationsUrl
+        elif self.wheelchairAccess.find(term) != -1:
+            self.searchString = 'Wheelchair Access: %s' % self.wheelchairAccess
+        elif self.internetInfo.find(term) != -1:
+            self.searchString = 'Internet Info: %s' % self.internetInfo
+        elif self.directionsInfo.find(term) != -1:
+            self.searchString = 'Directions Info: %s' % self.directionsInfo
+        elif self.directionsUrl.find(term) != -1:
+            self.searchString = 'Directions URL: %s' % self.directionsUrl
+
+        if self.searchString == '':
+            return False
+        else:
+            return True
 
 class VisitorCenter(database.Model):
     __tablename__ = 'visitor_centers'

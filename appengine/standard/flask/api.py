@@ -109,9 +109,18 @@ def get_states_list():
 def get_state_info(abbreviation):
     state_dict = get_states_dict()
     return state_dict[abbreviation]
+    
+def search_campgrounds(term):
+    all_campgrounds = Campground.query.all()
+    campgrounds_list = []
+    for campground in all_campgrounds:
+        if campground.search(term):
+            campgrounds_list.append(campground)
+    campgrounds_dict = create_campgrounds_dict(campgrounds_list)
+    return campgrounds_dict
 
-def get_campgrounds_dict():
-    campgrounds_list = Campground.query.all()
+# Helper method to create campground dictionaries
+def create_campgrounds_dict(campgrounds_list):
     campgrounds = {}
     for campground in campgrounds_list:
         campground_dict = {}
@@ -131,12 +140,16 @@ def get_campgrounds_dict():
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
+def get_campgrounds_dict():
+    campgrounds_list = Campground.query.all()
+    return create_campgrounds_dict(campgrounds_list)
+
 def get_campgrounds_list():
     campgrounds_dict = get_campgrounds_dict()
     campgrounds_codes = campgrounds_dict.keys()
     data = []
     for code in campgrounds_codes:
-            data.append(campgrounds_dict[code])
+        data.append(campgrounds_dict[code])
     return data
 
 def get_campground_info(name):

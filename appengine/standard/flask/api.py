@@ -11,9 +11,12 @@ def search_instances(term):
 def search_parks(term):
     all_parks = Park.query.all()
     parks_list = []
+    terms = term.split()
     for park in all_parks:
-        if park.search(term):
-            parks_list.append(park)
+        for search_term in terms:
+            if park.search(search_term):
+                parks_list.append(park)
+                break
     parks_dict = create_parks_dict(parks_list)
     return parks_dict
 

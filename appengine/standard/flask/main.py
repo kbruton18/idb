@@ -43,7 +43,7 @@ def get_campground(name):
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():
   if 'filter' in request.args:
-    return "hello world"
+    return request.args['filter']
   else: 
     return jsonify(get_visitor_centers_list())
 

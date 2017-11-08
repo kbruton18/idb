@@ -74,9 +74,12 @@ def get_park_info(park_code, args):
 def search_states(term):
     all_states = State.query.all()
     states_list = []
+    terms = term.split()
     for state in all_states:
-        if state.search(term):
-            states_list.append(state)
+        for search_term in terms:
+            if state.search(search_term):
+                states_list.append(state)
+                break
     states_dict = create_states_dict(states_list)
     return states_dict
     
@@ -137,9 +140,12 @@ def get_state_info(abbreviation, args):
 def search_campgrounds(term):
     all_campgrounds = Campground.query.all()
     campgrounds_list = []
+    terms = term.split()
     for campground in all_campgrounds:
-        if campground.search(term):
-            campgrounds_list.append(campground)
+        for search_term in terms:
+            if campground.search(search_term):
+                campgrounds_list.append(campground)
+                break
     campgrounds_dict = create_campgrounds_dict(campgrounds_list)
     return campgrounds_dict
     
@@ -196,9 +202,12 @@ def get_campground_info(name, args):
 def search_visitor_centers(term):
     all_visitor_centers = VisitorCenter.query.all()
     visitor_centers_list = []
+    terms = term.split()
     for visitor_center in all_visitor_centers:
-        if visitor_center.search(term):
-            visitor_centers_list.append(visitor_center)
+        for search_term in terms:
+            if visitor_center.search(search_term):
+                visitor_centers_list.append(visitor_center)
+                break
     visitor_centers_dict = create_visitor_centers_dict(visitor_centers_list)
     return visitor_centers_dict
     

@@ -100,45 +100,43 @@ class VisitorCenterCard extends Component {
       version = this.state.data;
     }
 
-    const pageOfVisitorCenters = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+    const pageOfVisitorCenters = version.slice((this.state.page - 1) * 12, this.state.page * 12);
 
     const center = pageOfVisitorCenters.map((d) => {
-      if (d.website.length !== 0) {
-        const latLong = String(d.latLong).split(", lng:");
-        const lat = String(latLong[0]).replace("{lat:", "");
-        const long = String(latLong[1]).replace("}", "");
+      const latLong = String(d.latLong).split(", lng:");
+      const lat = String(latLong[0]).replace("{lat:", "");
+      const long = String(latLong[1]).replace("}", "");
 
-        const directionUrlLink = () => {
-          if (d.directionsUrl!=="None") {
-            return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
-          }
-          return <a>{d.directionsUrl}</a>
-        };
+      const directionUrlLink = () => {
+        if (d.directionsUrl!=="None") {
+          return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
+        }
+        return <a>{d.directionsUrl}</a>
+      };
 
-        return (
-          <Col lg="4" md="6" sm="12">
-            <Card className ="text-center">
-              <Link to={`/visitorcenters/${d.name}`}>
-                <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="visitor center image"/>
-              </Link>
-              <CardBody>
-                <CardTitle className="text-center">{d.name}</CardTitle>
-                <CardText>
-                <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
-                <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
-                <b>Latitude</b>: {lat}<br/>
-                <b>Longitude</b>: {long}<br/>
-                <b>Directions</b>: {directionUrlLink()}<br/>
-                <b>Website</b>: <a href={d.website}>{d.website}</a>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-        )
-      }
+      return (
+        <Col lg="4" md="6" sm="12">
+          <Card className ="text-center">
+            <Link to={`/visitorcenters/${d.name}`}>
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="visitor center image"/>
+            </Link>
+            <CardBody>
+              <CardTitle className="text-center">{d.name}</CardTitle>
+              <CardText>
+              <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
+              <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
+              <b>Latitude</b>: {lat}<br/>
+              <b>Longitude</b>: {long}<br/>
+              <b>Directions</b>: {directionUrlLink()}<br/>
+              <b>Website</b>: <a href={d.website}>{d.website}</a>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+      )
     })
 
-    const pages = Math.ceil(version.length / 9);
+    const pages = Math.ceil(version.length / 12);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
     const pageButtons = pageArray.map((d) => {
       return (

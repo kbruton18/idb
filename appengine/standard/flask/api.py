@@ -99,6 +99,7 @@ def get_states_dict(args):
         states[state.abbreviations] = state_dict
     return states
 
+# get list of all states
 def get_states_list(args):
     states_dict = get_states_dict(args)
     states_codes = states_dict.keys()
@@ -107,6 +108,8 @@ def get_states_list(args):
             data.append(states_dict[code])
     return data
 
+# get info for a specific state given the state abbreviation, used when a user
+# hits endpoint for a state detail page
 def get_state_info(abbreviation, args):
     state_dict = get_states_dict(args)
     return state_dict[abbreviation]
@@ -131,6 +134,7 @@ def get_campgrounds_dict(campgrounds_list):
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
+# get list of all campgrounds
 def get_campgrounds_list(args):
     campgrounds_list = []
     if 'states' in args: 
@@ -155,6 +159,8 @@ def get_campgrounds_list(args):
             data.append(campgrounds_dict[code])
     return data
 
+# get info for a specific campground given name of the campground, used when
+# a user hits endpoint for a campground detail page
 def get_campground_info(name):
     campgrounds_list = Campground.query.filter(Campground.name.like(name + "%")).all()
     campground_dict = get_campgrounds_dict(campgrounds_list)
@@ -194,6 +200,7 @@ def get_visitor_centers_dict(args):
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
+# get list of all visitor centers
 def get_visitor_centers_list(args):
     vc_dict = get_visitor_centers_dict(args)
     vc_codes = vc_dict.keys()
@@ -202,6 +209,8 @@ def get_visitor_centers_list(args):
             data.append(vc_dict[code])
     return data      
 
+# get info for a specific visitor center given a visitor center name, used 
+# when a user hits endpoint for a visitor center detail page
 def get_visitor_center_info(name, args):
     vc_dict = get_visitor_centers_dict(args)
     return vc_dict[name]

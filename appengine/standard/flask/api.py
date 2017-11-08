@@ -91,6 +91,7 @@ def create_states_dict(states_list):
         state_dict["campgrounds"] = state.campgrounds
         state_dict["url"] = state.url
         state_dict["imageUrl"] = state.imageUrl
+        state_dict["searchString"] = state.searchString
         states[state.abbreviations] = state_dict
     return states
 
@@ -137,6 +138,7 @@ def create_campgrounds_dict(campgrounds_list):
         campground_dict["directionsInfo"] = campground.directionsInfo
         campground_dict["directionsUrl"] = campground.directionsUrl
         campground_dict["imageUrl"] = campground.imageUrl
+        campground_dict["searchString"] = campground.searchString
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
@@ -156,8 +158,17 @@ def get_campground_info(name):
     campground_dict = get_campgrounds_dict()
     return campground_dict[name]
 
-def get_visitor_centers_dict():
-    visitor_centers_list = VisitorCenter.query.all()
+def search_visitor_centers(term):
+    all_visitor_centers = VisitorCenter.query.all()
+    visitor_centers_list = []
+    for visitor_center in all_visitor_centers:
+        if visitor_center.search(term):
+            visitor_centers_list.append(visitor_center)
+    visitor_centers_dict = create_visitor_centers_dict(visitor_centers_list)
+    return visitor_centers_dict
+
+# Helper method to make visitor center dictionaries
+def create_visitor_centers_dict(visitor_centers_list):
     visitor_centers = {}
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
@@ -170,8 +181,13 @@ def get_visitor_centers_dict():
         visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
         visitor_center_dict["website"] = visitor_center.website
         visitor_center_dict["imageUrl"] = visitor_center.imageUrl
+        visitor_center_dict["searchString"] = visitor_center.searchString
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
+
+def get_visitor_centers_dict():
+    visitor_centers_list = VisitorCenter.query.all()
+    return create_visitor_centers_dict(visitor_centers_list)
 
 def get_visitor_centers_list():
     vc_dict = get_visitor_centers_dict()

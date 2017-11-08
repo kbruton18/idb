@@ -16,7 +16,7 @@ class Park(database.Model):
     campgrounds = database.Column(database.Text)
     states = database.Column(database.Text)
     imageUrl = database.Column(database.Text)
-    searchString = ''
+    searchString = ""
 
     def __init__(self, parkCode, fullName, description, designation,
         directionsInfo, directionsUrl, latLong, url, weatherInfo,
@@ -157,6 +157,7 @@ class Campground(database.Model):
     directionsInfo = database.Column(database.Text)
     directionsUrl = database.Column(database.Text)
     imageUrl = database.Column(database.Text)
+    searchString = ""
 
     def __init__(self, name, parkCode, states, description,
         regulationsOverview, wheelchairAccess, internetInfo,
@@ -218,6 +219,7 @@ class VisitorCenter(database.Model):
     directionsInfo = database.Column(database.Text)
     website = database.Column(database.Text)
     imageUrl = database.Column(database.Text)
+    searchString = ""
 
     def __init__(self, name, parkCode, states, description, latLong,
         directionsUrl, directionsInfo, website, imageUrl):
@@ -233,3 +235,27 @@ class VisitorCenter(database.Model):
 
     def __repr__(self):
         return '<Visitor Center %s: parkCode =%s>' % self.fullName, self.parkCode
+
+    def search(self, term):
+        self.searchString = ''
+        if self.name.find(term) != -1:
+            self.searchString = 'Name: %s' % self.name
+        elif self.parkCode.find(term) != -1:
+            self.searchString = 'Park Code: %s' % self.parkCode
+        elif self.states.find(term) != -1:
+            self.searchString = 'State(s): %s' % self.states
+        elif self.description.find(term) != -1:
+            self.searchString = 'Description: %s' % self.description
+        elif self.latLong.find(term) != -1:
+            self.searchString = 'Lat/Long: %s' % self.latLong
+        elif self.directionsInfo.find(term) != -1:
+            self.searchString = 'Directions Info: %s' % self.directionsInfo
+        elif self.directionsUrl.find(term) != -1:
+            self.searchString = 'Directions URL: %s' % self.directionsUrl
+        elif self.website.find(term) != -1:
+            self.searchString = 'Website: %s' % self.website
+
+        if self.searchString == '':
+            return False
+        else:
+            return True

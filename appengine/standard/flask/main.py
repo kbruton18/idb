@@ -30,7 +30,7 @@ def get_states():
 
 @app.route('/api/states/<string:abbreviation>', methods=['GET'])
 def get_state(abbreviation):
-  return jsonify(get_state_info(abbreviation))
+  return jsonify(get_state_info(abbreviation, request.args))
 
 @app.route('/api/campgrounds', methods=['GET'])
 def get_campgrounds():

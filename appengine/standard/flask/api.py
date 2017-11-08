@@ -107,8 +107,8 @@ def get_states_list(args):
             data.append(states_dict[code])
     return data
 
-def get_state_info(abbreviation):
-    state_dict = get_states_dict()
+def get_state_info(abbreviation, args):
+    state_dict = get_states_dict(args)
     return state_dict[abbreviation]
 
 def get_campgrounds_dict(campgrounds_list):

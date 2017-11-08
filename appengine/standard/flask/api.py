@@ -125,6 +125,7 @@ def get_campground_info(name):
 def get_visitor_centers_dict(args):
     visitor_centers_list = []
     if 'states' in args:
+        filterString = args['states']
         filter_values = filterString.split(",")
         for string in filter_values:
             visitor_centers_list += VisitorCenter.query.filter(VisitorCenter.states.like(string + "%")).all()

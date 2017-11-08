@@ -29,15 +29,11 @@ class CampgroundCard extends Component {
     this.reset = this.reset.bind(this);
     this.sortByAscending = this.sortByAscending.bind(this);
     this.sortByDescending = this.sortByDescending.bind(this);
-    this.sortByState = this.sortByState.bind(this);
-    this.sortByPark = this.sortByPark.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
       sortAscending: false,
       sortDescending: false,
-      sortState: false,
-      sortPark: false,
       page: 1
     }
   }
@@ -51,45 +47,21 @@ class CampgroundCard extends Component {
   reset() {
     this.setState({
       sortAscending: false,
-      sortDescending: false,
-      sortState: false,
-      sortPark: false
+      sortDescending: false
     });
   }
 
   sortByAscending() {
     this.setState({
       sortAscending: true,
-      sortDescending: false,
-      sortState: false,
-      sortPark: false
+      sortDescending: false
     });
   }
 
   sortByDescending() {
     this.setState({
       sortAscending: false,
-      sortDescending: true,
-      sortState: false,
-      sortPark: false
-    });
-  }
-
-  sortByState() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: false,
-      sortState: true,
-      sortPark: false
-    });
-  }
-
-  sortByPark() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: false,
-      sortState: false,
-      sortPark: true
+      sortDescending: true
     });
   }
 
@@ -124,23 +96,11 @@ class CampgroundCard extends Component {
         if(first.name > second.name) return -1;
         return 0;
       });
-    } else if(this.state.sortState) {
-      version.sort(function(first, second) {
-        if(first.states < second.states) return -1;
-        if(first.states > second.states) return 1;
-        return 0;
-      });
-    } else if(this.state.sortPark) {
-      version.sort(function(first, second) {
-        if(first.parkCode < second.parkCode) return -1;
-        if(first.parkCode > second.parkCode) return 1;
-        return 0;
-      });
     } else {
       version = this.state.data;
     }
 
-    const pageOfCampgrounds = version.slice((this.state.page - 1) * 12, this.state.page * 12);
+    const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const campground = pageOfCampgrounds.map((d) => {
       const directionUrlLink = () => {
@@ -178,7 +138,7 @@ class CampgroundCard extends Component {
       )
     })
 
-    const pages = Math.ceil(version.length / 12);
+    const pages = Math.ceil(version.length / 9);
 
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
 
@@ -202,10 +162,8 @@ class CampgroundCard extends Component {
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByAscending}>Name Ascending</DropdownItem>
-              <DropdownItem onClick={this.sortByDescending}>Name Descending</DropdownItem>
-              <DropdownItem onClick={this.sortByState}>State</DropdownItem>
-              <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+              <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </form>

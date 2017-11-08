@@ -16,11 +16,11 @@ const propTypes = {
   activeIndex: PropTypes.number,
   next: PropTypes.func,
   previous: PropTypes.func,
-  goToIndex: PropTypes.func,
+  goToIndex: PropTypes.func
 };
 
 class CustomUncontrolledCarousel extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.animating = false;
     this.state = { activeIndex: 0 };
@@ -31,32 +31,32 @@ class CustomUncontrolledCarousel extends Component {
     this.onExited = this.onExited.bind(this);
   }
 
-  onExiting() {
+  onExiting () {
     this.animating = true;
   }
 
-  onExited() {
+  onExited () {
     this.animating = false;
   }
 
-  next() {
+  next () {
     if (this.animating) return;
     const nextIndex = this.state.activeIndex === this.props.items.length - 1 ? 0 : this.state.activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
-  previous() {
+  previous () {
     if (this.animating) return;
     const nextIndex = this.state.activeIndex === 0 ? this.props.items.length - 1 : this.state.activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
-  goToIndex(newIndex) {
+  goToIndex (newIndex) {
     if (this.animating) return;
     this.setState({ activeIndex: newIndex });
   }
 
-  render() {
+  render () {
     const { autoPlay, indicators, controls, items, goToIndex, ...props } = this.props;
     const { activeIndex } = this.state;
 
@@ -89,13 +89,13 @@ class CustomUncontrolledCarousel extends Component {
         />}
         {slides}
         {controls && <CarouselControl
-          direction="prev"
-          directionText="Previous"
+          direction='prev'
+          directionText='Previous'
           onClickHandler={props.previous || this.previous}
         />}
         {controls && <CarouselControl
-          direction="next"
-          directionText="Next"
+          direction='next'
+          directionText='Next'
           onClickHandler={props.next || this.next}
         />}
       </Carousel>
@@ -107,7 +107,7 @@ CustomUncontrolledCarousel.propTypes = propTypes;
 CustomUncontrolledCarousel.defaultProps = {
   controls: true,
   indicators: true,
-  autoPlay: true,
+  autoPlay: true
 };
 
 export default CustomUncontrolledCarousel;

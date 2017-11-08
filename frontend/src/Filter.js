@@ -5,31 +5,32 @@ import React from 'react';
 import 'react-select/dist/react-select.css';
 
 export default class Filter extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
       name: props.name,
       options: []
-    }
+    };
 
     this.processData(props.data, props.term);
   }
 
-  processData(data, term) {
+  processData (data, term) {
     this.setState({
       options: data.map((elem) => {
-      return {
-        value: elem[term],
-        label: elem[term]
-      };}
+        return {
+          value: elem[term],
+          label: elem[term]
+        };
+      }
     )
     });
   }
 
-  render() {
+  render () {
     return (
-      <Select name={this.state.name} options={this.state.options}/>
+      <Select name={this.state.name} options={this.state.options} />
     );
   }
 }

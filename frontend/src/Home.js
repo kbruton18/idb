@@ -30,22 +30,22 @@ const items = [
     caption: 'Hike the Appalachian Trail and visit old settlements at Cades Cove',
     altText: 'Great Smoky Mountains'
   }
-]
+];
 
-function Message(props) {
+function Message (props) {
   return (
-    <div class="text-center mt-4">
-      <div class="text-heading text-muted text-lg">Welcome To</div>
-      <h1 class="my-2">SWEet Travels</h1>
-      <div class="text-heading text-muted text-lg">By Group 16
+    <div class='text-center mt-4'>
+      <div class='text-heading text-muted text-lg'>Welcome To</div>
+      <h1 class='my-2'>SWEet Travels</h1>
+      <div class='text-heading text-muted text-lg'>By Group 16
       </div>
     </div>
   );
 }
 
-function Head(props) {
+function Head (props) {
   return (
-    <Container className="bg-faded p-4 my-4">
+    <Container className='bg-faded p-4 my-4'>
       <Row>
         <Col>
           <CustomUncontrolledCarousel items={items} />
@@ -56,30 +56,30 @@ function Head(props) {
   );
 }
 
-function Intro(props) {
+function Intro (props) {
   return (
-    <Container className="bg-faded p-4 my-4">
+    <Container className='bg-faded p-4 my-4'>
       <Row>
         <Col>
-          <hr class="divider" />
-          <h2 class="text-center text-lg text-uppercase my-0">Travel through
+          <hr class='divider' />
+          <h2 class='text-center text-lg text-uppercase my-0'>Travel through
             <strong> nature</strong>
           </h2>
-          <hr class="divider" />
-          <img class="img-fluid float-left mr-4 d-none d-lg-block" src={camping} alt="Tent under stars" />
+          <hr class='divider' />
+          <img class='img-fluid float-left mr-4 d-none d-lg-block' src={camping} alt='Tent under stars' />
           <p>Always wanted to visit the great outdoors? Taking a road trip across America? Looking for a camping or hiking trip? SWEet Travels is for you!</p>
           <p>SWEet Travels has a database of national parks, campgrounds, visitor centers, and states. It's easy to find your next adventure.</p>
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
 
-export default function Home(props) {
+export default function Home (props) {
   return (
     <div>
       <Head />
       <Intro />
     </div>
-  )
+  );
 }

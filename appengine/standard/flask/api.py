@@ -1,6 +1,13 @@
 from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
+def search_instances(term):
+    instances_dict = search_parks(term)
+    instances_dict.update(search_states(term))
+    instances_dict.update(search_campgrounds(term))
+    instances_dict.update(search_visitor_centers(term))
+    return instances_dict
+
 def search_parks(term):
     all_parks = Park.query.all()
     parks_list = []

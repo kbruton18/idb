@@ -35,8 +35,11 @@ def create_parks_dict(parks_list):
 # Returns a dictionary of park codes mapped to dictionaries.
 # Each park's dictionary maps attribute park IDs to the park's attribute values
 def get_parks_dict():
-    filter_values = request.headers['filter']
     parks_list = {}
+    print(request.headers)
+    print(request.headers['filter'])
+    filter_values = request.headers['filter']
+
     if not filter_values: 
         parks_list = Park.query.all()
     else: 

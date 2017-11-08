@@ -53,7 +53,7 @@ class ParkCard extends Component {
     });
   }
 
-// resets everything to its original state.
+// resets everything to its original state
   reset () {
     this.setState({
       sortType: '',

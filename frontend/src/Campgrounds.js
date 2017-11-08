@@ -36,18 +36,21 @@ class CampgroundCard extends Component {
     };
   }
 
+// Action for when a user wants to sort
   toggleSort () {
     this.setState({
       sortDropdown: !this.state.sortDropdown
     });
   }
 
+// resets everything to its original state
   reset () {
     this.setState({
       sortType: ''
     });
   }
 
+// setting sort type for park
   sort (type) {
     this.setState({
       sortType: type
@@ -74,12 +77,14 @@ class CampgroundCard extends Component {
     var version = [];
     Object.assign(version, this.state.data);
     if (this.state.sortType === 'Ascending') {
+      // if we are sorting by ascending order
       version.sort(function (first, second) {
         if (first.name < second.name) return -1;
         if (first.name > second.name) return 1;
         return 0;
       });
     } else if (this.state.sortType === 'Descending') {
+      // if we are sorting by descending order
       version.sort(function (first, second) {
         if (first.name < second.name) return 1;
         if (first.name > second.name) return -1;
@@ -89,6 +94,7 @@ class CampgroundCard extends Component {
       version = this.state.data;
     }
 
+    // for pagination, we display 9 pages at a time.
     const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const campground = pageOfCampgrounds.map((d) => {
@@ -106,6 +112,7 @@ class CampgroundCard extends Component {
         return <a>{d.regulationsUrl}</a>;
       };
 
+      // returns all the information to campgrounds that we plan to render
       return (
         <Col lg='4' md='6' sm='12'>
           <Card className='text-center'>

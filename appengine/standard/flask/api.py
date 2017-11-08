@@ -122,8 +122,14 @@ def get_campground_info(name):
     campground_dict = get_campgrounds_dict()
     return campground_dict[name]
 
-def get_visitor_centers_dict():
-    visitor_centers_list = VisitorCenter.query.all()
+def get_visitor_centers_dict(filterString):
+    visitor_centers_list = []
+    if filterString is None:
+        visitor_centers_list = VisitorCenter.query.all()
+    else: 
+        filter_values = filterString.split(",")
+        for string in filter_values:
+            visitor_centers_list += VisitorCenter.query.filter(VisitorCenter.states.like(string + "%")).all()
     visitor_centers = {}
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
@@ -159,20 +165,26 @@ def get_visitor_centers_with_filter(filterString):
     return visitor_centers
 
 def get_visitor_centers_list(filterString):
-    if filterString is None: 
-        vc_dict = get_visitor_centers_dict()
-        vc_codes = vc_dict.keys()
-        data = []
-        for code in vc_codes:
-                data.append(vc_dict[code])
-        return data
-    else: 
-        vc_dict = get_visitor_centers_with_filter(filterString)
-        vc_codes = vc_dict.keys()
-        data = []
-        for code in vc_codes:
-                data.append(vc_dict[code])
-        return data        
+    vc_dict = get_visitor_centers_dict(filterString)
+    vc_codes = vc_dict.keys()
+    data = []
+    for code in vc_codes:
+            data.append(vc_dict[code])
+    return data
+    # if filterString is None: 
+    #     vc_dict = get_visitor_centers_dict()
+    #     vc_codes = vc_dict.keys()
+    #     data = []
+    #     for code in vc_codes:
+    #             data.append(vc_dict[code])
+    #     return data
+    # else: 
+    #     vc_dict = get_visitor_centers_with_filter(filterString)
+    #     vc_codes = vc_dict.keys()
+    #     data = []
+    #     for code in vc_codes:
+    #             data.append(vc_dict[code])
+    #     return data        
 
 def get_visitor_center_info(name):
     vc_dict = get_visitor_centers_dict()

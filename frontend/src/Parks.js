@@ -29,14 +29,11 @@ class ParkCard extends Component {
     this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.filterBy = this.filterBy.bind(this);
-    this.sortByAscending = this.sortByAscending.bind(this);
-    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
       filterDropdown: false,
-      sortAscending: false,
-      sortDescending: false,
+      sortType: "",
       filterBy: false,
       page: 1,
       filter: ''
@@ -57,22 +54,13 @@ class ParkCard extends Component {
 
   reset() {
     this.setState({
-      sortAscending: false,
-      sortDescending: false
+      sortType: ""
     });
   }
 
-  sortByAscending() {
+  sort(type) {
     this.setState({
-      sortAscending: true,
-      sortDescending: false
-    });
-  }
-
-  sortByDescending() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: true
+      sortType: type
     });
   }
 
@@ -107,13 +95,13 @@ class ParkCard extends Component {
         return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
       });
     }
-    else if (this.state.sortAscending) {
+    else if (this.state.sortType === "Ascending") {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return -1;
         if(first.fullName > second.fullName) return 1;
         return 0;
       });
-    } else if (this.state.sortDescending) {
+    } else if (this.state.sortType === "Descending") {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return 1;
         if(first.fullName > second.fullName) return -1;
@@ -157,7 +145,7 @@ class ParkCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/parks/${d.parkCode}`}>
-              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="Image of park"/>
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="park"/>
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.fullName}</CardTitle>
@@ -189,15 +177,15 @@ class ParkCard extends Component {
           parks
         </h2>
         <hr className="divider"/>
-        <form role="form" class="form-inline">
+        <form class="form-inline">
           <Button onClick={this.reset}>Reset</Button>
           <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
             <DropdownToggle caret>
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
@@ -205,7 +193,7 @@ class ParkCard extends Component {
               Filter By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.filterBy}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.filterBy}>TX</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </form>

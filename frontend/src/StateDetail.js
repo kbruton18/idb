@@ -12,6 +12,7 @@ class StateDetail extends Component {
     };
   }
 
+  // fetches json data from endpoint states/ID and saves it to data state array
   componentDidMount () {
     fetch('http://api.sweet-travels.appspot.com/api/states/' + this.state.id)
       .then((response) => response.json())
@@ -32,6 +33,7 @@ class StateDetail extends Component {
       );
     }
 
+    // if there are multiple parks in the state, we split it so we can link each instance
     const parkList = String(this.state.data.nationalParks).split(',');
     const parkLinks = parkList.map((p) => {
       if (this.state.data.nationalParks !== 'None') {
@@ -47,6 +49,7 @@ class StateDetail extends Component {
       return <a>{this.state.data.nationalParks}</a>;
     });
 
+    // if there are multiple campgrounds in the state, we split it so we can link each instance
     const campgroundList = String(this.state.data.campgrounds).split(',');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
@@ -69,6 +72,7 @@ class StateDetail extends Component {
       return ('http://' + this.state.data.url);
     };
 
+    // state information to be rendered
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

@@ -28,6 +28,7 @@ export default class AboutStats extends Component {
     };
   }
 
+  // fetching github commits for each user
   componentDidMount () {
     fetch('https://api.github.com/repos/kbruton18/idb/stats/contributors')
       .then((response) => response.json())
@@ -37,6 +38,7 @@ export default class AboutStats extends Component {
   }
 
   render () {
+    // tracking the commits for each group member
     var derekc = 0;
     var linhc = 0;
     var katherinec = 0;
@@ -59,6 +61,7 @@ export default class AboutStats extends Component {
         }
       }
     }
+    // info for each specific person in the group
     const derek = {'name': 'Derek Chang', 'title': 'Front-End Engineer', 'text': 'Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on making sure that our data for our models was displayed properly.', 'commits': derekc, 'issues': 14, 'tests': 0, imageSrc: derekImg, imageCaption: 'Derek'};
     const katherine = {'name': 'Katherine Bruton', 'title': 'Back-End Engineer', 'text': "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", 'commits': katherinec, 'issues': 16, 'tests': 0, imageSrc: katherineImg, imageCaption: 'Katherine'};
     const linh = {'name': 'Linh Nguyen', 'title': 'Front-End Engineer', 'text': "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I added React to our project so we could have dynamic webpages.", 'commits': linhc, 'issues': 17, 'tests': 0, 'imageSrc': linhImg, imageCaption: 'Linh'};
@@ -93,6 +96,7 @@ export default class AboutStats extends Component {
   }
 }
 
+// Component that contains information for each user
 function AboutTeamMember (props) {
   return (
     <Card>

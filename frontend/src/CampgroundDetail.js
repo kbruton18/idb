@@ -12,6 +12,7 @@ class CampgroundDetail extends Component {
     };
   }
 
+  // fetches json data from campgrounds/ID endpoint and saves it to the data state array
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/campgrounds/' + this.state.id)
       .then((response) => response.json())
@@ -37,6 +38,7 @@ class CampgroundDetail extends Component {
       );
     }
 
+    // if there are multiple states that encompass a campground, we split it to we can link each instance
     const stateList = String(this.state.data.states).split(',');
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
@@ -49,6 +51,7 @@ class CampgroundDetail extends Component {
       );
     });
 
+    // checks to see if there is a directions url, if so, link it
     const directionUrlLink = () => {
       if (this.state.data.directionsUrl !== 'None') {
         return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>);
@@ -56,6 +59,7 @@ class CampgroundDetail extends Component {
       return <a>{this.state.data.directionsUrl}</a>;
     };
 
+    // checks to see if there is a regulation url, if so, link it
     const regulationUrlLink = () => {
       if (this.state.data.regulationsUrl !== 'None') {
         return (<a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a>);
@@ -63,6 +67,7 @@ class CampgroundDetail extends Component {
       return <a>{this.state.data.regulationsUrl}</a>;
     };
 
+    // information to be rendered for campgrounds
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

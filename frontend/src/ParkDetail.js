@@ -12,6 +12,7 @@ class ParkDetail extends Component {
     };
   }
 
+  // fetches json data from parks/ID endpoint and saves it to data state array, also provides error checking for bad endpoints
   componentDidMount () {
     fetch('http://api.sweet-travels.appspot.com/api/parks/' + this.state.id)
       .then((response) => response.json())
@@ -32,6 +33,7 @@ class ParkDetail extends Component {
       );
     }
 
+    // for multiple states in the park, we split in order to link each state to its own instance
     const stateList = String(this.state.data.states).split(',');
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
@@ -44,6 +46,7 @@ class ParkDetail extends Component {
       );
     });
 
+    // for multiple campgrounds in the park, we split in order to link each campground to its own instance
     const campgroundList = String(this.state.data.campgrounds).split(', ');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
@@ -62,6 +65,7 @@ class ParkDetail extends Component {
     const latLong = String(this.state.data.latLong).split(', long:');
     const lat = latLong[0].replace('lat:', '');
 
+    // park detail information to be returned
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

@@ -12,6 +12,7 @@ class VisitorCenterDetail extends Component {
     };
   }
 
+  // fetch json data from visitorcenters/ID and saves it do data state array
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/visitorcenters/' + this.state.id)
       .then((response) => response.json())
@@ -32,10 +33,12 @@ class VisitorCenterDetail extends Component {
       );
     }
 
+    // formats lat/long
     const latLong = String(this.state.data.latLong).split(', lng:');
     const lat = String(latLong[0]).replace('{lat:', '');
     const long = String(latLong[1]).replace('}', '');
 
+    // checks to see if there is a url to link
     const directionUrlLink = () => {
       if (this.state.data.directionsUrl !== 'None') {
         return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>);
@@ -43,6 +46,7 @@ class VisitorCenterDetail extends Component {
       return <a>{this.state.data.directionsUrl}</a>;
     };
 
+    // visitor center data to be rendered
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

@@ -42,7 +42,7 @@ def get_parks_dict(args):
         filterString = args['states']
         filter_values = filterString.split(",")
         for string in filter_values:
-            parks_list += Park.query.filter(Park.states.like(string + "%")).all()
+            parks_list += Park.query.filter(Park.states.contains(string)).all()
     return create_parks_dict(parks_list)
 
 # Helper to make parks lists out of parks dicts

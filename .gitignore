@@ -5,3 +5,5 @@ appengine/standard/flask/.DS_Store
 appengine/standard/flask/templates/.DS_Store
 */lib/
 *.pyc
+*.pyo
+*.tmp*

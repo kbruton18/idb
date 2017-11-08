@@ -119,6 +119,7 @@ def get_states_dict(args):
         states_list = State.query.all()
     return create_states_dict(states_list)
 
+# get list of all states
 def get_states_list(args):
     states_dict = get_states_dict(args)
     states_codes = states_dict.keys()
@@ -127,6 +128,8 @@ def get_states_list(args):
         data.append(states_dict[code])
     return data
 
+# get info for a specific state given the state abbreviation, used when a user
+# hits endpoint for a state detail page
 def get_state_info(abbreviation, args):
     state_dict = get_states_dict(args)
     return state_dict[abbreviation]
@@ -235,6 +238,7 @@ def get_visitor_centers_dict(args):
         visitor_centers_list = VisitorCenter.query.all()
     return create_visitor_centers_dict(visitor_centers_list)
 
+# get list of all visitor centers
 def get_visitor_centers_list(args):
     vc_dict = get_visitor_centers_dict(args)
     vc_codes = vc_dict.keys()
@@ -243,6 +247,8 @@ def get_visitor_centers_list(args):
             data.append(vc_dict[code])
     return data      
 
+# get info for a specific visitor center given a visitor center name, used 
+# when a user hits endpoint for a visitor center detail page
 def get_visitor_center_info(name, args):
     vc_dict = get_visitor_centers_dict(args)
     return vc_dict[name]

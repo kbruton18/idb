@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 database = SQLAlchemy()
 
+# Model for Park
 class Park(database.Model):
     __tablename__ = 'parks'
     parkCode = database.Column(database.String(50), primary_key = True)
@@ -67,7 +68,7 @@ class Park(database.Model):
         else:
             return True
 
-
+# Model for State
 class State(database.Model):
     __tablename__ = 'states'
     name = database.Column(database.String(200))
@@ -141,7 +142,7 @@ class State(database.Model):
         else:
             return True
 
-
+# Model for Campground
 class Campground(database.Model):
     __tablename__ = 'campgrounds'
     name = database.Column(database.String(200), primary_key = True)
@@ -208,6 +209,7 @@ class Campground(database.Model):
         else:
             return True
 
+# Model for Visitor Center
 class VisitorCenter(database.Model):
     __tablename__ = 'visitor_centers'
     name = database.Column(database.String(200), primary_key = True)

@@ -178,11 +178,13 @@ class CampgroundCard extends Component {
           {campground}
         </Row>
         <Row>
-          <ButtonGroup>
+          <ButtonGroup className="center">
+            <Button onClick={() => {this.setState({page: Math.max(this.state.page - 1, 1)})}}>Previous</Button>
             {pageButtons}
+            <Button onClick={() => {this.setState({page: Math.min(this.state.page + 1, pages)})}}>Next</Button>
           </ButtonGroup>
         </Row>
-        </Container>
+      </Container>
     );
   }
 }

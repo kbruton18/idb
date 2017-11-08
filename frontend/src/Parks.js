@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import {
   Button,
+  ButtonGroup,
   Container,
   Row,
   Col,
@@ -157,39 +158,35 @@ class ParkCard extends Component {
 
     return (
       <Container className="bg-faded p-4 my-4">
-      <hr className="divider"/>
-      <h2 className="text-center text-lg text-uppercase my-0">
-        parks
-      </h2>
-      <hr className="divider"/>
-      <form role="form" class="form-inline">
-        <Button onClick={this.reset}>Reset</Button>
-        <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-          <DropdownToggle caret>
-            Sort By
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </form>
-      <Row>
-        {park}
-      </Row>
-      <ul className="pagination">
-        <li>
-          <Button onClick={() => this.previous()}>Previous</Button>
-        </li>
-        {pageNumbers.map((page)=>
-          <li>
-            <Button onClick={() => this.setPage(page)}>{page}</Button>
-          </li>
-        )}
-        <li>
-          <Button onClick={() => this.next()}>Next</Button>
-        </li>
-      </ul>
-    </Container>
+        <hr className="divider"/>
+        <h2 className="text-center text-lg text-uppercase my-0">
+          parks
+        </h2>
+        <hr className="divider"/>
+        <form role="form" class="form-inline">
+          <Button onClick={this.reset}>Reset</Button>
+          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
+            <DropdownToggle caret>
+              Sort By
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </form>
+        <Row>
+          {park}
+        </Row>
+        <Row>
+          <ButtonGroup className="center">
+            <Button onClick={() => this.previous()}>Previous</Button>
+            {pageNumbers.map((page)=>
+              <Button onClick={() => this.setPage(page)}>{page}</Button>
+            )}
+            <Button onClick={() => this.next()}>Next</Button>
+          </ButtonGroup>
+        </Row>
+      </Container>
     );
   }
 }

@@ -26,14 +26,16 @@ class StateCard extends Component {
   constructor(props) {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByName = this.sortByName.bind(this);
-    this.sortByZone = this.sortByZone.bind(this);
+    this.sortByAscending = this.sortByAscending.bind(this);
+    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false,
-      sortZone: false,
+      filterDropdown: false,
+      sortAscending: false,
+      sortDescending: false,
       page: 1
     };
   }
@@ -50,25 +52,30 @@ class StateCard extends Component {
     });
   }
 
+  toggleFilter() {
+    this.setState({
+      filterDropdown: !this.state.filterDropdown
+    });
+  }
+
   reset() {
     this.setState({
-      sortDropdown: false,
-      sortName: false,
-      sortZone: false
+      sortAscending: false,
+      sortDescending: false
     });
   }
 
-  sortByName() {
+  sortByAscending() {
     this.setState({
-      sortName: true,
-      sortZone: false
+      sortAscending: true,
+      sortDescending: false
     });
   }
 
-  sortByZone() {
+  sortByDescending() {
     this.setState({
-      sortZone: true,
-      sortName: false
+      sortAscending: false,
+      sortDescending: true
     });
   }
 
@@ -85,16 +92,16 @@ class StateCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortName) {
+    if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
         return 0;
       });
-    } else if(this.state.sortZone) {
+    } else if (this.state.sortDescending) {
       version.sort(function(first, second) {
-        if(first.timeZone < second.timeZone) return -1;
-        if(first.timeZone > second.timeZone) return 1;
+        if(first.name < second.name) return 1;
+        if(first.name > second.name) return -1;
         return 0;
       });
     } else {
@@ -123,7 +130,7 @@ class StateCard extends Component {
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
           <Link to={`/states/${d.abbreviations}`}>
-            <CardImg top width="100%" src={d.imageUrl} alt="Photo of state flag"/>
+            <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="Photo of state flag"/>
           </Link>
           <CardBody>
             <CardTitle className="text-center">{d.name}</CardTitle>
@@ -162,8 +169,17 @@ class StateCard extends Component {
             Sort By
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-            <DropdownItem onClick={this.sortByZone}>Timezone</DropdownItem>
+            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
+          <DropdownToggle caret>
+            Filter By
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </form>

@@ -6,7 +6,7 @@ import urllib2, json
 create_app().app_context().push()
 
 
-endpoint = "http://sweet-travels.appspot.com/api/parks"
+endpoint = "http://sweet-travels.appspot.com/api/visitorcenters?filter=tx"
 req = urllib2.Request(endpoint,headers={})
 
 

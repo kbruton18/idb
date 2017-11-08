@@ -27,15 +27,13 @@ class VisitorCenterCard extends Component {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByName = this.sortByName.bind(this);
-    this.sortByState = this.sortByState.bind(this);
-    this.sortByPark = this.sortByPark.bind(this);
+    this.sortByAscending = this.sortByAscending.bind(this);
+    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false,
-      sortState: false,
-      sortPark: false,
+      sortAscending: false,
+      sortDescending: false,
       page: 1
     }
   }
@@ -54,34 +52,22 @@ class VisitorCenterCard extends Component {
 
   reset() {
     this.setState({
-      sortDropdown: false,
-      sortName: false,
-      sortState: false,
-      sortPark: false
+      sortAscending: false,
+      sortDescending: false
     });
   }
 
-  sortByName() {
+  sortByAscending() {
     this.setState({
-      sortName: true,
-      sortState: false,
-      sortPark: false
+      sortAscending: true,
+      sortDescending: false
     });
   }
 
-  sortByState() {
+  sortByDescending() {
     this.setState({
-      sortState: true,
-      sortName: false,
-      sortPark: false
-    });
-  }
-
-  sortByPark() {
-    this.setState({
-      sortPark: true,
-      sortName: false,
-      sortState: false
+      sortAscending: false,
+      sortDescending: true
     });
   }
 
@@ -98,22 +84,16 @@ class VisitorCenterCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortName) {
+    if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
         return 0;
       });
-    } else if(this.state.sortState) {
+    } else if (this.state.sortDescending) {
       version.sort(function(first, second) {
-        if(first.states < second.states) return -1;
-        if(first.states > second.states) return 1;
-        return 0;
-      });
-    } else if(this.state.sortPark) {
-      version.sort(function(first, second) {
-        if(first.parkCode < second.parkCode) return -1;
-        if(first.parkCode > second.parkCode) return 1;
+        if(first.name < second.name) return 1;
+        if(first.name > second.name) return -1;
         return 0;
       });
     } else {
@@ -123,39 +103,37 @@ class VisitorCenterCard extends Component {
     const pageOfVisitorCenters = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const center = pageOfVisitorCenters.map((d) => {
-      if (d.website.length !== 0) {
-        const latLong = String(d.latLong).split(", lng:");
-        const lat = String(latLong[0]).replace("{lat:", "");
-        const long = String(latLong[1]).replace("}", "");
+      const latLong = String(d.latLong).split(", lng:");
+      const lat = String(latLong[0]).replace("{lat:", "");
+      const long = String(latLong[1]).replace("}", "");
 
-        const directionUrlLink = () => {
-          if (d.directionsUrl!=="None") {
-            return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
-          }
-          return <a>{d.directionsUrl}</a>
-        };
+      const directionUrlLink = () => {
+        if (d.directionsUrl!=="None") {
+          return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
+        }
+        return <a>{d.directionsUrl}</a>
+      };
 
-        return (
-          <Col lg="4" md="6" sm="12">
-            <Card className ="text-center">
-              <Link to={`/visitorcenters/${d.name}`}>
-                <CardImg top width="100%" src={d.imageUrl} alt="visitor center image"/>
-              </Link>
-              <CardBody>
-                <CardTitle className="text-center">{d.name}</CardTitle>
-                <CardText>
-                <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
-                <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
-                <b>Latitude</b>: {lat}<br/>
-                <b>Longitude</b>: {long}<br/>
-                <b>Directions</b>: {directionUrlLink()}<br/>
-                <b>Website</b>: <a href={d.website}>{d.website}</a>
-                </CardText>
-              </CardBody>
-            </Card>
-          </Col>
-        )
-      }
+      return (
+        <Col lg="4" md="6" sm="12">
+          <Card className ="text-center">
+            <Link to={`/visitorcenters/${d.name}`}>
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="visitor center image"/>
+            </Link>
+            <CardBody>
+              <CardTitle className="text-center">{d.name}</CardTitle>
+              <CardText>
+              <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
+              <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
+              <b>Latitude</b>: {lat}<br/>
+              <b>Longitude</b>: {long}<br/>
+              <b>Directions</b>: {directionUrlLink()}<br/>
+              <b>Website</b>: <a href={d.website}>{d.website}</a>
+              </CardText>
+            </CardBody>
+          </Card>
+        </Col>
+      )
     })
 
     const pages = Math.ceil(version.length / 9);
@@ -180,9 +158,8 @@ class VisitorCenterCard extends Component {
             Sort By
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-            <DropdownItem onClick={this.sortByState}>State</DropdownItem>
-            <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </form>

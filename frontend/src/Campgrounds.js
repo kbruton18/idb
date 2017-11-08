@@ -27,15 +27,13 @@ class CampgroundCard extends Component {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByName = this.sortByName.bind(this);
-    this.sortByState = this.sortByState.bind(this);
-    this.sortByPark = this.sortByPark.bind(this);
+    this.sortByAscending = this.sortByAscending.bind(this);
+    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false,
-      sortState: false,
-      sortPark: false,
+      sortAscending: false,
+      sortDescending: false,
       page: 1
     }
   }
@@ -48,34 +46,22 @@ class CampgroundCard extends Component {
 
   reset() {
     this.setState({
-      sortDropdown: false,
-      sortName: false,
-      sortState: false,
-      sortPark: false
+      sortAscending: false,
+      sortDescending: false
     });
   }
 
-  sortByName() {
+  sortByAscending() {
     this.setState({
-      sortName: true,
-      sortState: false,
-      sortPark: false
+      sortAscending: true,
+      sortDescending: false
     });
   }
 
-  sortByState() {
+  sortByDescending() {
     this.setState({
-      sortState: true,
-      sortName: false,
-      sortPark: false
-    });
-  }
-
-  sortByPark() {
-    this.setState({
-      sortPark: true,
-      sortName: false,
-      sortState: false
+      sortAscending: false,
+      sortDescending: true
     });
   }
 
@@ -98,29 +84,23 @@ class CampgroundCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortName) {
+    if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
         return 0;
       });
-    } else if(this.state.sortState) {
+    } else if (this.state.sortDescending) {
       version.sort(function(first, second) {
-        if(first.states < second.states) return -1;
-        if(first.states > second.states) return 1;
-        return 0;
-      });
-    } else if(this.state.sortPark) {
-      version.sort(function(first, second) {
-        if(first.parkCode < second.parkCode) return -1;
-        if(first.parkCode > second.parkCode) return 1;
+        if(first.name < second.name) return 1;
+        if(first.name > second.name) return -1;
         return 0;
       });
     } else {
       version = this.state.data;
     }
 
-    const pageOfCampgrounds = version.slice((this.state.page - 1) * 12, this.state.page * 12);
+    const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const campground = pageOfCampgrounds.map((d) => {
       const directionUrlLink = () => {
@@ -141,7 +121,7 @@ class CampgroundCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/campgrounds/${d.name}`}>
-              <CardImg top width="100%" src={d.imageUrl} alt="campground image" />
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="campground image" />
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.name}</CardTitle>
@@ -158,7 +138,7 @@ class CampgroundCard extends Component {
       )
     })
 
-    const pages = Math.ceil(version.length / 12);
+    const pages = Math.ceil(version.length / 9);
 
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
 
@@ -182,9 +162,8 @@ class CampgroundCard extends Component {
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-              <DropdownItem onClick={this.sortByState}>State</DropdownItem>
-              <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
+              <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </form>

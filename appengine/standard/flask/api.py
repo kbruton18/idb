@@ -140,8 +140,8 @@ def get_campgrounds_list(args):
             data.append(campgrounds_dict[code])
     return data
 
-def get_campground_info(name):
-    campground_dict = get_campgrounds_dict()
+def get_campground_info(name, args):
+    campground_dict = get_campgrounds_dict(args)
     return campground_dict[name]
 
 def get_visitor_centers_dict(args):
@@ -186,7 +186,7 @@ def get_visitor_centers_list(args):
             data.append(vc_dict[code])
     return data      
 
-def get_visitor_center_info(name):
-    vc_dict = get_visitor_centers_dict()
+def get_visitor_center_info(name, args):
+    vc_dict = get_visitor_centers_dict(args)
     return vc_dict[name]
 

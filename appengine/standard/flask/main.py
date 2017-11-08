@@ -18,10 +18,7 @@ CORS(app)
 
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
-  if 'filter' in request.args:
-    return "hello world"
-  else: 
-    return jsonify(get_parks_list())
+  return jsonify(get_parks_list())
 
 @app.route('/api/parks/<string:park_code>', methods=['GET'])
 def get_park(park_code):
@@ -29,7 +26,7 @@ def get_park(park_code):
 
 @app.route('/api/states', methods=['GET'])
 def get_states():
-  return jsonify(get_states_list())
+    return jsonify(get_states_list())
 
 @app.route('/api/states/<string:abbreviation>', methods=['GET'])
 def get_state(abbreviation):
@@ -45,7 +42,10 @@ def get_campground(name):
 
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():
-  return jsonify(get_visitor_centers_list())
+  if 'filter' in request.args:
+    return "hello world"
+  else: 
+    return jsonify(get_visitor_centers_list())
 
 @app.route('/api/visitorcenters/<string:name>', methods=['GET'])
 def get_visitor_center(name):

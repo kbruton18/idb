@@ -96,8 +96,7 @@ def get_state_info(abbreviation):
     state_dict = get_states_dict()
     return state_dict[abbreviation]
 
-def get_campgrounds_dict():
-    campgrounds_list = Campground.query.all()
+def get_campgrounds_dict(campgrounds_list):
     campgrounds = {}
     for campground in campgrounds_list:
         campground_dict = {}
@@ -117,13 +116,29 @@ def get_campgrounds_dict():
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
-def get_campgrounds_list():
-        campgrounds_dict = get_campgrounds_dict()
-        campgrounds_codes = campgrounds_dict.keys()
-        data = []
-        for code in campgrounds_codes:
-                data.append(campgrounds_dict[code])
-        return data
+def get_campgrounds_list(args):
+    campgrounds_list = []
+    if 'states' in args: 
+        filterString = args['states']
+        filter_values = filterString.split(",")
+        for string in filter_values:
+            campgrounds_list += Campground.query.filter(Campground.states.like(string + "%")).all()
+
+    if 'parks' in args: 
+        filterString = args['parks']
+        filter_values = filterString.split(",")
+        for string in filter_values:
+            campgrounds_list += Campground.query.filter(Campground.parkCode.like(string + "%")).all()
+
+    if 'states' not in args and 'parks' not in args:
+        campgrounds_list = Campground.query.all()
+
+    campgrounds_dict = get_campgrounds_dict(campgrounds_list)
+    campgrounds_codes = campgrounds_dict.keys()
+    data = []
+    for code in campgrounds_codes:
+            data.append(campgrounds_dict[code])
+    return data
 
 def get_campground_info(name):
     campground_dict = get_campgrounds_dict()

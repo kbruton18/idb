@@ -4,6 +4,14 @@ import api
 from flask import Flask
 
 class APITestMethods(unittest.TestCase):
+    def testGlobalSearch(self):
+        instances = api.search_instances("wica")
+        self.assertTrue("wica" in instances.keys())
+        self.assertTrue("Elk Mountain Campground" in instances.keys())
+        self.assertTrue("Wind Cave Visitor Center" in instances.keys())
+        self.assertTrue("SD" in instances.keys())
+        self.assertEquals(4, len(instances.keys()))
+
     def testParksSearch(self):
         parks = api.search_parks("Yosemite")
         self.assertTrue("yose" in parks.keys())

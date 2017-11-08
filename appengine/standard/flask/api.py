@@ -1,5 +1,5 @@
 from models import Park, State, Campground, VisitorCenter
-from flask import Flask
+from flask import Flask, request
 
 def search_parks(term):
     all_parks = Park.query.all()
@@ -35,7 +35,14 @@ def create_parks_dict(parks_list):
 # Returns a dictionary of park codes mapped to dictionaries.
 # Each park's dictionary maps attribute park IDs to the park's attribute values
 def get_parks_dict():
-    parks_list = Park.query.all()
+    filter_values = request.headers['filter']
+    parks_list = {}
+    if not filter_values: 
+        parks_list = Park.query.all()
+    else: 
+        states = filter_values.split(",")
+        for x in states: 
+            parks_list += Park.query.filter(Park.states.contains(x))
     return create_parks_dict(parks_list)
 
 # Helper to make parks lists out of parks dicts

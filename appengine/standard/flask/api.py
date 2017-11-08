@@ -8,10 +8,8 @@ def search_instances(term):
     instances_dict.update(search_visitor_centers(term))
     return instances_dict
 
-
 def search_parks(term):
     all_parks = Park.query.all()
-    # states_list = State.query.filter(State.search(term) != null).all()
     parks_list = []
     terms = term.split()
     for park in all_parks:
@@ -72,24 +70,17 @@ def get_parks_list(args):
 def get_park_info(park_code, args):
     park_dict = get_parks_dict(args)
     return park_dict[park_code]
-
-def get_states_dict(args):
+    
+def search_states(term):
+    all_states = State.query.all()
     states_list = []
-    # if the user wants a specific timezone, parse the arguments and find states for each
-    if 'timezone' in args:
-        filterString = args['timezone']
-        filter_values = filterString.split(",")
-        for string in filter_values: 
-            states_list += State.query.filter(State.timeZone.contains(string)).all()
-    # if the user wants states with national parks, return all with national parks
-    if 'nationalParks' in args and args['nationalParks'] == "True": 
-        states_list += State.query.filter(State.nationalParks != "None").all()
-    if 'nationalParks' in args and args['nationalParks'] == "False": 
-        states_list += State.query.filter(State.nationalParks == "None").all()
-    # if no filters are specified, return all states
-    if 'timezone' not in args and 'nationalParks' not in args: 
-        states_list = State.query.all()
-
+    for state in all_states:
+        if state.search(term):
+            states_list.append(state)
+    states_dict = create_states_dict(states_list)
+    return states_dict
+    
+def create_states_dict(states_list):
     states = {}
     for state in states_list:
         state_dict = {}
@@ -110,19 +101,46 @@ def get_states_dict(args):
         states[state.abbreviations] = state_dict
     return states
 
+def get_states_dict(args):
+    states_list = []
+    # if the user wants a specific timezone, parse the arguments and find states for each
+    if 'timezone' in args:
+        filterString = args['timezone']
+        filter_values = filterString.split(",")
+        for string in filter_values: 
+            states_list += State.query.filter(State.timeZone.contains(string)).all()
+    # if the user wants states with national parks, return all with national parks
+    if 'nationalParks' in args and args['nationalParks'] == "True": 
+        states_list += State.query.filter(State.nationalParks != "None").all()
+    if 'nationalParks' in args and args['nationalParks'] == "False": 
+        states_list += State.query.filter(State.nationalParks == "None").all()
+    # if no filters are specified, return all states
+    if 'timezone' not in args and 'nationalParks' not in args: 
+        states_list = State.query.all()
+    return create_states_dict(states_list)
+
 def get_states_list(args):
     states_dict = get_states_dict(args)
     states_codes = states_dict.keys()
     data = []
     for code in states_codes:
-            data.append(states_dict[code])
+        data.append(states_dict[code])
     return data
 
 def get_state_info(abbreviation, args):
     state_dict = get_states_dict(args)
     return state_dict[abbreviation]
-
-def get_campgrounds_dict(campgrounds_list):
+    
+def search_campgrounds(term):
+    all_campgrounds = Campground.query.all()
+    campgrounds_list = []
+    for campground in all_campgrounds:
+        if campground.search(term):
+            campgrounds_list.append(campground)
+    campgrounds_dict = create_campgrounds_dict(campgrounds_list)
+    return campgrounds_dict
+    
+def create_campgrounds_dict(campgrounds_list):
     campgrounds = {}
     for campground in campgrounds_list:
         campground_dict = {}
@@ -142,7 +160,7 @@ def get_campgrounds_dict(campgrounds_list):
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
-def get_campgrounds_list(args):
+def get_campgrounds_dict(args):
     campgrounds_list = []
     if 'states' in args: 
         filterString = args['states']
@@ -158,18 +176,44 @@ def get_campgrounds_list(args):
 
     if 'states' not in args and 'parkCode' not in args:
         campgrounds_list = Campground.query.all()
-
-    campgrounds_dict = get_campgrounds_dict(campgrounds_list)
+    return create_campgrounds_dict(campgrounds_list)
+    
+def get_campgrounds_list(args):
+    campgrounds_dict = get_campgrounds_dict(args)
     campgrounds_codes = campgrounds_dict.keys()
     data = []
     for code in campgrounds_codes:
-            data.append(campgrounds_dict[code])
+        data.append(campgrounds_dict[code])
     return data
 
-def get_campground_info(name):
-    campgrounds_list = Campground.query.filter(Campground.name.like(name + "%")).all()
-    campground_dict = get_campgrounds_dict(campgrounds_list)
+def get_campground_info(name, args):
+    campground_dict = get_campgrounds_dict(args)
     return campground_dict[name]
+    
+def search_visitor_centers(term):
+    all_visitor_centers = VisitorCenter.query.all()
+    visitor_centers_list = []
+    for visitor_center in all_visitor_centers:
+        if visitor_center.search(term):
+            visitor_centers_list.append(visitor_center)
+    visitor_centers_dict = create_visitor_centers_dict(visitor_centers_list)
+    return visitor_centers_dict
+    
+def create_visitor_centers_dict(visitor_centers_list):
+    visitor_centers = {}
+    for visitor_center in visitor_centers_list:
+        visitor_center_dict = {}
+        visitor_center_dict["name"] = visitor_center.name
+        visitor_center_dict["parkCode"] = visitor_center.parkCode
+        visitor_center_dict["states"] = visitor_center.states
+        visitor_center_dict["description"] = visitor_center.description
+        visitor_center_dict["latLong"] = visitor_center.latLong
+        visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
+        visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
+        visitor_center_dict["website"] = visitor_center.website
+        visitor_center_dict["imageUrl"] = visitor_center.imageUrl
+        visitor_centers[visitor_center.name] = visitor_center_dict
+    return visitor_centers
 
 def get_visitor_centers_dict(args):
     visitor_centers_list = []
@@ -189,21 +233,7 @@ def get_visitor_centers_dict(args):
     # if no filter, return all visitor centers
     if not 'parks' in args and not 'states' in args: 
         visitor_centers_list = VisitorCenter.query.all()
-
-    visitor_centers = {}
-    for visitor_center in visitor_centers_list:
-        visitor_center_dict = {}
-        visitor_center_dict["name"] = visitor_center.name
-        visitor_center_dict["parkCode"] = visitor_center.parkCode
-        visitor_center_dict["states"] = visitor_center.states
-        visitor_center_dict["description"] = visitor_center.description
-        visitor_center_dict["latLong"] = visitor_center.latLong
-        visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
-        visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
-        visitor_center_dict["website"] = visitor_center.website
-        visitor_center_dict["imageUrl"] = visitor_center.imageUrl
-        visitor_centers[visitor_center.name] = visitor_center_dict
-    return visitor_centers
+    return create_visitor_centers_dict(visitor_centers_list)
 
 def get_visitor_centers_list(args):
     vc_dict = get_visitor_centers_dict(args)

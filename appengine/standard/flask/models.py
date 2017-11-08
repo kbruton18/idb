@@ -41,12 +41,12 @@ class Park(database.Model):
 	    self.searchString = ''
 	    if self.fullName.find(term) != -1:
 	        self.searchString = 'Name: %s' % self.fullName
-            elif self.parkCode.find(term) != -1:
-                self.searchString = 'Park Code: %s' % self.parkCode
+        elif self.parkCode.find(term) != -1:
+            self.searchString = 'Park Code: %s' % self.parkCode
 	    elif self.states.find(term) != -1:
 	        self.searchString = 'State(s): %s' % self.states
-            elif self.designation.find(term) != -1:
-                self.searchString = 'Designation: %s' % self.designation
+        elif self.designation.find(term) != -1:
+            self.searchString = 'Designation: %s' % self.designation
 	    elif self.campgrounds.find(term) != -1:
 	        self.searchString = 'Campgrounds: %s' % self.campgrounds
 	    elif self.description.find(term) != -1:
@@ -56,9 +56,9 @@ class Park(database.Model):
 	    elif self.directionsInfo.find(term) != -1:
 	        self.searchString = 'Directions Info: %s' % self.directionsInfo
 	    elif self.directionsUrl.find(term) != -1:
-                self.searchString = 'Directions URL: %s' % self.directionsUrl
-            elif self.url.find(term) != -1:
-                self.searchString = 'Website: %s' % self.url
+            self.searchString = 'Directions URL: %s' % self.directionsUrl
+        elif self.url.find(term) != -1:
+            self.searchString = 'Website: %s' % self.url
 
 	    if self.searchString == '':
 	        return False
@@ -82,6 +82,7 @@ class State(database.Model):
 	campgrounds = database.Column(database.Text)
 	url = database.Column(database.Text)
 	imageUrl = database.Column(database.Text)
+	searchString = ""
 
 	def __init__(self, name, abbreviations, nicknames, timeZone, governor,
 		capital, largestCity, totalPopulation, totalArea, medianIncome,
@@ -103,6 +104,40 @@ class State(database.Model):
 
 	def __repr__(self):
 		return '<State %s>' % self.name
+		
+	def search(self, term):
+	    self.searchString = ''
+	    if self.name.find(term) != -1:
+	        self.searchString = 'Name: %s' % self.name
+        elif self.abbreviations.find(term) != -1:
+            elf.searchString = 'Abbreviation: %s' % self.abbreviations
+	    elif self.nicknames.find(term) != -1:
+	        self.searchString = 'Nickname(s): %s' % self.nicknames
+        elif self.timeZone.find(term) != -1:
+            self.searchString = 'Timezone: %s' % self.timeZone
+	    elif self.governor.find(term) != -1:
+	        self.searchString = 'Governor: %s' % self.governor
+	    elif self.capital.find(term) != -1:
+	        self.searchString = 'Capital: %s' % self.capital
+	    elif self.largestCity.find(term) != -1:
+	        self.searchString = 'Largest City: %s' % self.largestCity
+	    elif self.totalPopulation.find(term) != -1:
+            self.searchString = 'Total Population: %s' % self.totalPopulation
+        elif self.totalArea.find(term) != -1:
+            self.searchString = 'Total Area: %s' % self.totalArea
+        elif self.medianIncome.find(term) != -1:
+            self.searchString = 'Median Income: %s' % self.medianIncome
+        elif self.nationalParks.find(term) != -1:
+            self.searchString = 'National Parks: %s' % self.nationalParks
+	    elif self.campgrounds.find(term) != -1:
+	        self.searchString = 'Campgrounds: %s' % self.campgrounds
+        elif self.url.find(term) != -1:
+            self.searchString = 'Website: %s' % self.url
+
+	    if self.searchString == '':
+	        return False
+	    else:
+	        return True
 
 
 class Campground(database.Model):

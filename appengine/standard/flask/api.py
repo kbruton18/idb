@@ -3,13 +3,21 @@ from flask import Flask
 
 def search_parks(term):
     all_parks = Park.query.all()
-    # states_list = State.query.filter(State.search(term) != null).all()
     parks_list = []
     for park in all_parks:
         if park.search(term):
             parks_list.append(park)
     parks_dict = create_parks_dict(parks_list)
     return parks_dict
+
+def search_states(term):
+    all_states = State.query.all()
+    states_list = []
+    for state in all_states:
+        if state.search(term):
+            states_list.append(state)
+    states_dict = create_states_dict(states_list)
+    return states_dict
 
 # Helper function to create park dicts
 def create_parks_dict(parks_list):
@@ -36,7 +44,6 @@ def create_parks_dict(parks_list):
 # Each park's dictionary maps attribute park IDs to the park's attribute values
 def get_parks_dict(filter_values):
     parks_list = {}
-
     if not filter_values: 
         parks_list = Park.query.all()
     else: 
@@ -62,8 +69,8 @@ def get_park_info(park_code):
     park_dict = get_parks_dict()
     return park_dict[park_code]
 
-def get_states_dict():
-    states_list = State.query.all()
+# Helper method to make states dictionary
+def create_states_dict(states_list):
     states = {}
     for state in states_list:
         state_dict = {}
@@ -84,13 +91,17 @@ def get_states_dict():
         states[state.abbreviations] = state_dict
     return states
 
+def get_states_dict():
+    states_list = State.query.all()
+    return create_states_dict(states_list)
+
 def get_states_list():
-        states_dict = get_states_dict()
-        states_codes = states_dict.keys()
-        data = []
-        for code in states_codes:
-                data.append(states_dict[code])
-        return data
+    states_dict = get_states_dict()
+    states_codes = states_dict.keys()
+    data = []
+    for code in states_codes:
+        data.append(states_dict[code])
+    return data
 
 def get_state_info(abbreviation):
     state_dict = get_states_dict()
@@ -118,12 +129,12 @@ def get_campgrounds_dict():
     return campgrounds
 
 def get_campgrounds_list():
-        campgrounds_dict = get_campgrounds_dict()
-        campgrounds_codes = campgrounds_dict.keys()
-        data = []
-        for code in campgrounds_codes:
-                data.append(campgrounds_dict[code])
-        return data
+    campgrounds_dict = get_campgrounds_dict()
+    campgrounds_codes = campgrounds_dict.keys()
+    data = []
+    for code in campgrounds_codes:
+            data.append(campgrounds_dict[code])
+    return data
 
 def get_campground_info(name):
     campground_dict = get_campgrounds_dict()
@@ -147,12 +158,12 @@ def get_visitor_centers_dict():
     return visitor_centers
 
 def get_visitor_centers_list():
-        vc_dict = get_visitor_centers_dict()
-        vc_codes = vc_dict.keys()
-        data = []
-        for code in vc_codes:
-                data.append(vc_dict[code])
-        return data
+    vc_dict = get_visitor_centers_dict()
+    vc_codes = vc_dict.keys()
+    data = []
+    for code in vc_codes:
+            data.append(vc_dict[code])
+    return data
 
 def get_visitor_center_info(name):
     vc_dict = get_visitor_centers_dict()

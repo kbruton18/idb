@@ -1,5 +1,4 @@
 import urllib2, json
-import requests
 
 def returnCommits(): 
 	endpoint = "https://api.github.com/repos/kbruton18/idb/stats/contributors"

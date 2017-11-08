@@ -35,7 +35,7 @@ class StateDetail extends Component {
 
     const parkList = String(this.state.data.nationalParks).split(",");
     const parkLinks = parkList.map((p) => {
-      if (this.state.data.nationalParks!=="No national park in this state.") {
+      if (this.state.data.nationalParks!=="None") {
         if (parkList[parkList.length-1] === p) {
           return (
             <a><Link to={`/parks/${p}`}>{p}</Link></a>
@@ -50,7 +50,7 @@ class StateDetail extends Component {
 
     const campgroundList = String(this.state.data.campgrounds).split(",");
     const campgroundLinks = campgroundList.map((c) => {
-      if (this.state.data.campgrounds!=="N/A") {
+      if (this.state.data.campgrounds!=="None") {
         if (campgroundList[campgroundList.length-1] === c) {
           return (
             <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>

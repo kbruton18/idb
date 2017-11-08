@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import {
   Button,
+  ButtonGroup,
   Container,
   Row,
   Col,
@@ -32,8 +33,15 @@ class StateCard extends Component {
       data: [],
       sortDropdown: false,
       sortName: false,
-      sortZone: false
+      sortZone: false,
+      page: 1
     };
+  }
+
+  setPage(page) {
+    this.setState({
+      page: page
+    });
   }
 
   toggleSort() {
@@ -93,10 +101,12 @@ class StateCard extends Component {
       version = this.state.data;
     }
 
-    const state = version.map((d) => {
+    const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+
+    const state = pageOfCampgrounds.map((d) => {
       const parkList = String(d.nationalParks).split(",");
       const parkLinks = parkList.map((p) => {
-        if (d.nationalParks!=="No national park in this state.") {
+        if (d.nationalParks!=="None") {
           if (parkList[parkList.length-1] === p) {
             return (
               <a><Link to={`/parks/${p}`}>{p}</Link></a>
@@ -130,6 +140,14 @@ class StateCard extends Component {
       )
     })
 
+    const pages = Math.ceil(version.length / 9);
+    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
+    const pageButtons = pageArray.map((d) => {
+      return (
+        <Button onClick={() => this.setPage(d)}>{d}</Button>
+      )
+    });
+
     return (
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
@@ -151,6 +169,15 @@ class StateCard extends Component {
       </form>
       <Row>
           {state}
+      </Row>
+      <Row>
+        <ButtonGroup >
+          <Button onClick={() => this.setPage(1)}>{"<<"}</Button>
+          <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page-1))}>{"<"}</Button>
+          {pageButtons}
+          <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page+1))}>{">"}</Button>
+          <Button onClick={() => this.setPage(pageButtons.length)}>{">>"}</Button>
+        </ButtonGroup>
       </Row>
     </Container>
     );

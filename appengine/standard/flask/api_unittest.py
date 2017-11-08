@@ -8,6 +8,11 @@ class APITestMethods(unittest.TestCase):
     parks = api.search_parks("Yosemite")
     self.assertTrue("yose" in parks.keys())
     self.assertEquals(2, len(parks.keys()))
+
+  def testStatesSearch(self):
+    states = api.search_states("Rick Scott")
+    self.assertTrue("FL" in states.keys())
+    self.assertEquals(1, len(states.keys()))
  
   def testGetParksDict(self):
     parks = api.get_parks_dict()   

@@ -20,6 +20,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
+import Filter from './Filter.js';
 
 class CampgroundCard extends Component {
 
@@ -166,6 +167,7 @@ class CampgroundCard extends Component {
               <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
+          <Filter name="Campground Filter" data={this.state.data} term="name"/>
         </form>
         <Row>
           {campground}

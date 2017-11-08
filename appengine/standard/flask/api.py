@@ -62,8 +62,23 @@ def get_park_info(park_code, args):
     park_dict = get_parks_dict(args)
     return park_dict[park_code]
 
-def get_states_dict():
-    states_list = State.query.all()
+def get_states_dict(args):
+    states_list = []
+    # if the user wants a specific timezone, parse the arguments and find states for each
+    if 'timezone' in args:
+        filterString = args['timezone']
+        filter_values = filterString.split(",")
+        for string in filter_values: 
+            states_list += State.query.filter(State.timeZone.contains(string)).all()
+    # if the user wants states with national parks, return all with national parks
+    if 'nationalParks' in args and args['nationalParks'] == True: 
+        states_list += State.query.filter(State.nationalParks != "None").all()
+    if 'nationalParks' in args and args['nationalParks'] == False: 
+        states_list += State.query.filter(State.nationalParks == "None").all()
+    # if no filters are specified, return all states
+    if 'timezone' not in args and 'nationalParks' not in args: 
+        states_list = State.query.all()
+
     states = {}
     for state in states_list:
         state_dict = {}
@@ -84,13 +99,13 @@ def get_states_dict():
         states[state.abbreviations] = state_dict
     return states
 
-def get_states_list():
-        states_dict = get_states_dict()
-        states_codes = states_dict.keys()
-        data = []
-        for code in states_codes:
-                data.append(states_dict[code])
-        return data
+def get_states_list(args):
+    states_dict = get_states_dict(args)
+    states_codes = states_dict.keys()
+    data = []
+    for code in states_codes:
+            data.append(states_dict[code])
+    return data
 
 def get_state_info(abbreviation):
     state_dict = get_states_dict()

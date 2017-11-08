@@ -26,7 +26,7 @@ def get_park(park_code):
 
 @app.route('/api/states', methods=['GET'])
 def get_states():
-    return jsonify(get_states_list())
+    return jsonify(get_states_list(request.args))
 
 @app.route('/api/states/<string:abbreviation>', methods=['GET'])
 def get_state(abbreviation):

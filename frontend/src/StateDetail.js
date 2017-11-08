@@ -78,7 +78,7 @@ class StateDetail extends Component {
            <strong>{this.state.data.name}</strong>
         </h2>
         <hr className="divider"/>
-        <center><img width="50%" src={this.state.data.imageUrl} alt="Photo of state flag"/></center>
+        <center><img width="50%" src={this.state.data.imageUrl} alt="State flag"/></center>
         <p><b>Abbreviations:</b> {this.state.data.abbreviations}</p>
         <p><b>Nicknames:</b> {this.state.data.nicknames}</p>
         <p><b>Time Zone:</b> {this.state.data.timeZone}</p>

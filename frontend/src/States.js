@@ -28,14 +28,11 @@ class StateCard extends Component {
     this.toggleSort = this.toggleSort.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByAscending = this.sortByAscending.bind(this);
-    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
       filterDropdown: false,
-      sortAscending: false,
-      sortDescending: false,
+      sortType: "",
       page: 1
     };
   }
@@ -60,22 +57,13 @@ class StateCard extends Component {
 
   reset() {
     this.setState({
-      sortAscending: false,
-      sortDescending: false
+      sortType: ""
     });
   }
 
-  sortByAscending() {
+  sort(type) {
     this.setState({
-      sortAscending: true,
-      sortDescending: false
-    });
-  }
-
-  sortByDescending() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: true
+      sortType: type
     });
   }
 
@@ -92,13 +80,13 @@ class StateCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortAscending) {
+    if (this.state.sortType === "Ascending") {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
         return 0;
       });
-    } else if (this.state.sortDescending) {
+    } else if (this.state.sortType === "Descending") {
       version.sort(function(first, second) {
         if(first.name < second.name) return 1;
         if(first.name > second.name) return -1;
@@ -130,7 +118,7 @@ class StateCard extends Component {
         <Col lg="4" md="6" sm="12">
         <Card className ="text-center">
           <Link to={`/states/${d.abbreviations}`}>
-            <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="Photo of state flag"/>
+            <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="State flag"/>
           </Link>
           <CardBody>
             <CardTitle className="text-center">{d.name}</CardTitle>
@@ -162,15 +150,15 @@ class StateCard extends Component {
         states
       </h2>
       <hr className="divider"/>
-      <form role="form" class="form-inline">
+      <form class="form-inline">
         <Button onClick={this.reset}>Reset</Button>
         <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
           <DropdownToggle caret>
             Sort By
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
-            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+            <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
           </DropdownMenu>
         </Dropdown>
         <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
@@ -178,8 +166,8 @@ class StateCard extends Component {
             Filter By
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
-            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+            <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </form>

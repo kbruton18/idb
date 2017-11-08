@@ -70,7 +70,7 @@ class ParkDetail extends Component {
             <strong> {this.state.data.fullName}</strong>
           </h2>
           <hr className="divider"/>
-          <center><img width="50%" src={this.state.data.imageUrl} alt="Image of park"/></center>
+          <center><img width="50%" src={this.state.data.imageUrl} alt="park"/></center>
           <p><b>Park Code:</b> {this.state.data.parkCode}</p>
           <p><b>Designation:</b> {this.state.data.designation}</p>
           <p><b>State(s):</b> {stateLinks}</p>

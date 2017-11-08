@@ -28,13 +28,11 @@ class CampgroundCard extends Component {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByAscending = this.sortByAscending.bind(this);
-    this.sortByDescending = this.sortByDescending.bind(this);
+    this.sort = this.sort.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortAscending: false,
-      sortDescending: false,
+      sortType: "",
       page: 1
     }
   }
@@ -47,22 +45,13 @@ class CampgroundCard extends Component {
 
   reset() {
     this.setState({
-      sortAscending: false,
-      sortDescending: false
+      sortType: ""
     });
   }
 
-  sortByAscending() {
+  sort(type) {
     this.setState({
-      sortAscending: true,
-      sortDescending: false
-    });
-  }
-
-  sortByDescending() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: true
+      sortType: type
     });
   }
 
@@ -85,13 +74,13 @@ class CampgroundCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortAscending) {
+    if (this.state.sortType === "Ascending") {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
         return 0;
       });
-    } else if (this.state.sortDescending) {
+    } else if (this.state.sortType === "Descending") {
       version.sort(function(first, second) {
         if(first.name < second.name) return 1;
         if(first.name > second.name) return -1;
@@ -122,7 +111,7 @@ class CampgroundCard extends Component {
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
             <Link to={`/campgrounds/${d.name}`}>
-              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="campground image" />
+              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="campground" />
             </Link>
             <CardBody>
               <CardTitle className="text-center">{d.name}</CardTitle>
@@ -156,15 +145,15 @@ class CampgroundCard extends Component {
           Campgrounds
         </h2>
         <hr className="divider"/>
-        <form role="form" class="form-inline">
+        <form class="form-inline">
           <Button onClick={this.reset}>Reset</Button>
           <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
             <DropdownToggle caret>
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, "Ascending")}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, "Descending")}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <Filter name="Campground Filter" data={this.state.data} term="name"/>

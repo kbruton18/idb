@@ -71,9 +71,9 @@ def get_states_dict(args):
         for string in filter_values: 
             states_list += State.query.filter(State.timeZone.contains(string)).all()
     # if the user wants states with national parks, return all with national parks
-    if 'nationalParks' in args and args['nationalParks'] == True: 
+    if 'nationalParks' in args and args['nationalParks'] == "True": 
         states_list += State.query.filter(State.nationalParks != "None").all()
-    if 'nationalParks' in args and args['nationalParks'] == False: 
+    if 'nationalParks' in args and args['nationalParks'] == "False": 
         states_list += State.query.filter(State.nationalParks == "None").all()
     # if no filters are specified, return all states
     if 'timezone' not in args and 'nationalParks' not in args: 

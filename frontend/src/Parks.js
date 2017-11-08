@@ -20,6 +20,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
+import './pic.css'
 
 class ParkCard extends Component {
 

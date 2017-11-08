@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Container, Input, Form } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Container, Input, Form, FormGroup, Button } from 'reactstrap';
 
 class Search extends React.Component {
   constructor(props) {
@@ -28,7 +28,10 @@ class Search extends React.Component {
 
     return (
       <Form>
-        <Input name="query"/>
+        <FormGroup>
+          <Input name="query"/>
+          <Button>Submit</Button>
+        </FormGroup>
       </Form>
     );
   }

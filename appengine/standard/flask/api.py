@@ -145,46 +145,13 @@ def get_visitor_centers_dict(filterString):
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
-def get_visitor_centers_with_filter(filterString): 
-    filter_values = filterString.split(",")
-    visitor_centers = {}
-    for string in filter_values:
-        visitor_centers_list = VisitorCenter.query.filter(VisitorCenter.states.like(string + "%")).all()
-        for visitor_center in visitor_centers_list:
-            visitor_center_dict = {}
-            visitor_center_dict["name"] = visitor_center.name
-            visitor_center_dict["parkCode"] = visitor_center.parkCode
-            visitor_center_dict["states"] = visitor_center.states
-            visitor_center_dict["description"] = visitor_center.description
-            visitor_center_dict["latLong"] = visitor_center.latLong
-            visitor_center_dict["directionsUrl"] = visitor_center.directionsUrl
-            visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
-            visitor_center_dict["website"] = visitor_center.website
-            visitor_center_dict["imageUrl"] = visitor_center.imageUrl
-            visitor_centers[visitor_center.name] = visitor_center_dict
-    return visitor_centers
-
 def get_visitor_centers_list(filterString):
     vc_dict = get_visitor_centers_dict(filterString)
     vc_codes = vc_dict.keys()
     data = []
     for code in vc_codes:
             data.append(vc_dict[code])
-    return data
-    # if filterString is None: 
-    #     vc_dict = get_visitor_centers_dict()
-    #     vc_codes = vc_dict.keys()
-    #     data = []
-    #     for code in vc_codes:
-    #             data.append(vc_dict[code])
-    #     return data
-    # else: 
-    #     vc_dict = get_visitor_centers_with_filter(filterString)
-    #     vc_codes = vc_dict.keys()
-    #     data = []
-    #     for code in vc_codes:
-    #             data.append(vc_dict[code])
-    #     return data        
+    return data      
 
 def get_visitor_center_info(name):
     vc_dict = get_visitor_centers_dict()

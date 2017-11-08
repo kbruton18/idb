@@ -20,161 +20,158 @@ import {
   DropdownItem
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
+import Filter from './Filter.js';
 
 class CampgroundCard extends Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByAscending = this.sortByAscending.bind(this);
-    this.sortByDescending = this.sortByDescending.bind(this);
+    this.sort = this.sort.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortAscending: false,
-      sortDescending: false,
+      sortType: '',
       page: 1
-    }
+    };
   }
 
-  toggleSort() {
+// Action for when a user wants to sort
+  toggleSort () {
     this.setState({
       sortDropdown: !this.state.sortDropdown
     });
   }
 
-  reset() {
+// resets everything to its original state
+  reset () {
     this.setState({
-      sortAscending: false,
-      sortDescending: false
+      sortType: ''
     });
   }
 
-  sortByAscending() {
+// setting sort type for park
+  sort (type) {
     this.setState({
-      sortAscending: true,
-      sortDescending: false
+      sortType: type
     });
   }
 
-  sortByDescending() {
-    this.setState({
-      sortAscending: false,
-      sortDescending: true
-    });
-  }
-
-  setPage(page) {
+  setPage (page) {
     this.setState({
       page: page
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/campgrounds')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           data: responseJson
-        })
-      })
+        });
+      });
   }
 
-  render() {
+  render () {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortAscending) {
-      version.sort(function(first, second) {
-        if(first.name < second.name) return -1;
-        if(first.name > second.name) return 1;
+    if (this.state.sortType === 'Ascending') {
+      // if we are sorting by ascending order
+      version.sort(function (first, second) {
+        if (first.name < second.name) return -1;
+        if (first.name > second.name) return 1;
         return 0;
       });
-    } else if (this.state.sortDescending) {
-      version.sort(function(first, second) {
-        if(first.name < second.name) return 1;
-        if(first.name > second.name) return -1;
+    } else if (this.state.sortType === 'Descending') {
+      // if we are sorting by descending order
+      version.sort(function (first, second) {
+        if (first.name < second.name) return 1;
+        if (first.name > second.name) return -1;
         return 0;
       });
     } else {
       version = this.state.data;
     }
 
+    // for pagination, we display 9 pages at a time.
     const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const campground = pageOfCampgrounds.map((d) => {
       const directionUrlLink = () => {
-        if (d.directionsUrl!=="None") {
-          return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
+        if (d.directionsUrl !== 'None') {
+          return (<a href={d.directionsUrl}>{d.directionsUrl}</a>);
         }
-        return <a>{d.directionsUrl}</a>
+        return <a>{d.directionsUrl}</a>;
       };
 
       const regulationUrlLink = () => {
-        if (d.regulationsUrl!=="None") {
-          return (<a href={d.regulationsUrl}>{d.regulationsUrl}</a>)
+        if (d.regulationsUrl !== 'None') {
+          return (<a href={d.regulationsUrl}>{d.regulationsUrl}</a>);
         }
-        return <a>{d.regulationsUrl}</a>
+        return <a>{d.regulationsUrl}</a>;
       };
 
+      // returns all the information to campgrounds that we plan to render
       return (
-        <Col lg="4" md="6" sm="12">
-          <Card className ="text-center">
+        <Col lg='4' md='6' sm='12'>
+          <Card className='text-center'>
             <Link to={`/campgrounds/${d.name}`}>
-              <CardImg top width="100%" height = "250px" src={d.imageUrl} alt="campground image" />
+              <CardImg top width='100%' height='250px' src={d.imageUrl} alt='campground' />
             </Link>
             <CardBody>
-              <CardTitle className="text-center">{d.name}</CardTitle>
+              <CardTitle className='text-center'>{d.name}</CardTitle>
               <CardText>
-                <b>Total Sites</b>: {d.totalSites}<br/>
-                <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
-                <b>Description</b>: {d.description}<br/>
-                <b>Regulations URL</b>: {regulationUrlLink()}<br/>
+                <b>Total Sites</b>: {d.totalSites}<br />
+                <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br />
+                <b>Description</b>: {d.description}<br />
+                <b>Regulations URL</b>: {regulationUrlLink()}<br />
                 <b>Directions URL</b>: {directionUrlLink()}
               </CardText>
             </CardBody>
           </Card>
         </Col>
-      )
-    })
+      );
+    });
 
     const pages = Math.ceil(version.length / 9);
 
-    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
+    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
 
     const pageButtons = pageArray.map((d) => {
       return (
         <Button onClick={() => this.setPage(d)}>{d}</Button>
-      )
+      );
     });
 
     return (
-      <Container className="bg-faded p-4 my-4">
-        <hr className="divider"/>
-        <h2 className="text-center text-lg text-uppercase my-0">
+      <Container className='bg-faded p-4 my-4'>
+        <hr className='divider' />
+        <h2 className='text-center text-lg text-uppercase my-0'>
           Campgrounds
         </h2>
-        <hr className="divider"/>
-        <form role="form" class="form-inline">
+        <hr className='divider' />
+        <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
             <DropdownToggle caret>
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, 'Ascending')}>Ascending</DropdownItem>
+              <DropdownItem onClick={this.sort.bind(this, 'Descending')}>Descending</DropdownItem>
             </DropdownMenu>
           </Dropdown>
+          <Filter name='Campground Filter' data={this.state.data} term='name' />
         </form>
         <Row>
           {campground}
         </Row>
         <Row>
-          <ButtonGroup className="center">
-            <Button onClick={() => {this.setState({page: Math.max(this.state.page - 1, 1)})}}>Previous</Button>
+          <ButtonGroup className='center'>
+            <Button onClick={() => { this.setState({page: Math.max(this.state.page - 1, 1)}); }}>Previous</Button>
             {pageButtons}
-            <Button onClick={() => {this.setState({page: Math.min(this.state.page + 1, pages)})}}>Next</Button>
+            <Button onClick={() => { this.setState({page: Math.min(this.state.page + 1, pages)}); }}>Next</Button>
           </ButtonGroup>
         </Row>
       </Container>
@@ -183,10 +180,10 @@ class CampgroundCard extends Component {
 }
 
 const Campgrounds = (props) => (
-    <div>
-      <Route exact path="/campgrounds" component={CampgroundCard}/>
-      <Route path="/campgrounds/:id" component={CampgroundDetail}/>
-    </div>
-  )
+  <div>
+    <Route exact path='/campgrounds' component={CampgroundCard} />
+    <Route path='/campgrounds/:id' component={CampgroundDetail} />
+  </div>
+  );
 
-export default Campgrounds
+export default Campgrounds;

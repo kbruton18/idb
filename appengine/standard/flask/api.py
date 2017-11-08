@@ -124,13 +124,13 @@ def get_campgrounds_list(args):
         for string in filter_values:
             campgrounds_list += Campground.query.filter(Campground.states.like(string + "%")).all()
 
-    if 'parks' in args: 
-        filterString = args['parks']
+    if 'parkCode' in args: 
+        filterString = args['parkCode']
         filter_values = filterString.split(",")
         for string in filter_values:
             campgrounds_list += Campground.query.filter(Campground.parkCode.like(string + "%")).all()
 
-    if 'states' not in args and 'parks' not in args:
+    if 'states' not in args and 'parkCode' not in args:
         campgrounds_list = Campground.query.all()
 
     campgrounds_dict = get_campgrounds_dict(campgrounds_list)

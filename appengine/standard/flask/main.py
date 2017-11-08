@@ -18,7 +18,7 @@ CORS(app)
 
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
-  return jsonify(get_parks_list())
+  return jsonify(get_parks_list(request.args))
 
 @app.route('/api/parks/<string:park_code>', methods=['GET'])
 def get_park(park_code):

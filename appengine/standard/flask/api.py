@@ -34,8 +34,15 @@ def create_parks_dict(parks_list):
 
 # Returns a dictionary of park codes mapped to dictionaries.
 # Each park's dictionary maps attribute park IDs to the park's attribute values
-def get_parks_dict():
-    parks_list = Park.query.all()
+def get_parks_dict(args):
+    parks_list = []
+    if 'states' not in args: 
+        parks_list = Park.query.all()
+    else: 
+        filterString = args['states']
+        filter_values = filterString.split(",")
+        for string in filter_values:
+            parks_list += Park.query.filter(Park.states.like(string + "%")).all()
     return create_parks_dict(parks_list)
 
 # Helper to make parks lists out of parks dicts
@@ -47,8 +54,8 @@ def create_parks_list(parks_dict):
     return data
 
 # Return all info about all national parks, in list format
-def get_parks_list():
-	return create_parks_list(get_parks_dict())
+def get_parks_list(args):
+	return create_parks_list(get_parks_dict(args))
 
 # Returns a park's dictionary, given the park code as a string (e.g. "dena")
 def get_park_info(park_code):

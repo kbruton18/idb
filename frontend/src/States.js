@@ -52,7 +52,6 @@ class StateCard extends Component {
 
   reset() {
     this.setState({
-      sortDropdown: false,
       sortAscending: false,
       sortDescending: false
     });
@@ -60,7 +59,6 @@ class StateCard extends Component {
 
   sortByAscending() {
     this.setState({
-      sortDropdown: false,
       sortAscending: true,
       sortDescending: false
     });
@@ -68,7 +66,6 @@ class StateCard extends Component {
 
   sortByDescending() {
     this.setState({
-      sortDropdown: false,
       sortAscending: false,
       sortDescending: true
     });

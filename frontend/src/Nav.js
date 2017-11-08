@@ -17,17 +17,16 @@ class Search extends React.Component {
   }
 
   render () {
-    var contents;
     if (!this.state.isOpen) {
       return (
         <Container onClick={this.toggle}>
-        🔍 Search
+        <span role="img" aria-label="magnifier">🔍 Search</span>
       </Container>
       );
     }
 
     return (
-      <Form>
+      <Form >
         <FormGroup>
           <Input name='query' />
           <Button>Submit</Button>

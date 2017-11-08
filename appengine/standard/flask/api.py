@@ -65,7 +65,7 @@ def create_parks_list(parks_dict):
 
 # Return all info about all national parks, in list format
 def get_parks_list():
-	return create_parks_list(get_parks_dict())
+    return create_parks_list(get_parks_dict())
 
 # Returns a park's dictionary, given the park code as a string (e.g. "dena")
 def get_park_info(park_code):
@@ -200,4 +200,3 @@ def get_visitor_centers_list():
 def get_visitor_center_info(name):
     vc_dict = get_visitor_centers_dict()
     return vc_dict[name]
-

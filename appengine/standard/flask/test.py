@@ -7,7 +7,7 @@ create_app().app_context().push()
 
 
 endpoint = "http://sweet-travels.appspot.com/api/parks"
-req = urllib2.Request(endpoint,headers={'filter': "tx"})
+req = urllib2.Request(endpoint,headers={})
 
 
 response = urllib2.urlopen(req)

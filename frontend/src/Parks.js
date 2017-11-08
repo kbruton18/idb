@@ -43,25 +43,30 @@ class ParkCard extends Component {
     }
   }
 
+// Action for when a user wants to filter
   toggleFilter() {
     this.setState({
       filterDropdown: !this.state.filterDropdown
     });
   }
 
+// Action for when a user wants to sort
   toggleSort() {
     this.setState({
       sortDropdown: !this.state.sortDropdown
     });
   }
 
+// resets everything to its original state.
   reset() {
     this.setState({
       sortAscending: false,
-      sortDescending: false
+      sortDescending: false,
+      filterBy: false
     });
   }
 
+// sort park name by ascending order
   sortByAscending() {
     this.setState({
       sortAscending: true,
@@ -69,6 +74,7 @@ class ParkCard extends Component {
     });
   }
 
+// sort park name by descending order
   sortByDescending() {
     this.setState({
       sortAscending: false,
@@ -76,6 +82,7 @@ class ParkCard extends Component {
     });
   }
 
+// action for filtering, saves what is pressed
   filterBy(event) {
     this.setState({
       filter: event.currentTarget.textContent,
@@ -83,6 +90,7 @@ class ParkCard extends Component {
     });
   }
 
+// sets current page to what is pressed
   setPage(page) {
     this.setState({
       page: page
@@ -102,17 +110,20 @@ class ParkCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
+    // if we are filtering
     if (this.state.filterBy) {
       version = version.filter((state) => {
         return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
       });
     }
+    // if we are sorting by ascending order
     else if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return -1;
         if(first.fullName > second.fullName) return 1;
         return 0;
       });
+      // if we are sorting by descending order
     } else if (this.state.sortDescending) {
       version.sort(function(first, second) {
         if(first.fullName < second.fullName) return 1;
@@ -123,8 +134,10 @@ class ParkCard extends Component {
       version = this.state.data;
     }
 
+    // for pagination, we display 9 pages at a time.
     const pageOfParks = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
+    // for parks with multiple states, we need to split up the list so that we can link each state
     const park = pageOfParks.map((d) => {
       const stateList = String(d.states).split(",");
       const stateLinks = stateList.map((s) => {
@@ -138,6 +151,7 @@ class ParkCard extends Component {
         )
       })
 
+      // for parks with multiple campgrounds, we need to split up the list so that we can link each campground
       const campgroundList = String(d.campgrounds).split(", ");
       const campgroundLinks = campgroundList.map((c) => {
         if (d.campgrounds!=="None") {
@@ -153,6 +167,7 @@ class ParkCard extends Component {
         return <a>{d.campgrounds}</a>
       })
 
+      // returns all the information to park that we plan to render
       return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">

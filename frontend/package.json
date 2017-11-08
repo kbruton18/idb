@@ -19,5 +19,8 @@
     "eject": "react-scripts eject",
     "test-deploy": "npm run build && gsutil cp -r build/* gs://test.swetravels.me",
     "deploy": "npm run build && gsutil cp -r build/* gs://www.swetravels.me && gsutil cp -r build/* gs://swetravels.me"
+  },
+  "devDependencies": {
+    "semistandard": "^11.0.0"
   }
 }

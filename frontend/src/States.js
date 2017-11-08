@@ -28,12 +28,10 @@ class StateCard extends Component {
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
     this.sortByName = this.sortByName.bind(this);
-    this.sortByZone = this.sortByZone.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
       sortName: false,
-      sortZone: false,
       page: 1
     };
   }
@@ -53,22 +51,13 @@ class StateCard extends Component {
   reset() {
     this.setState({
       sortDropdown: false,
-      sortName: false,
-      sortZone: false
+      sortName: false
     });
   }
 
   sortByName() {
     this.setState({
-      sortName: true,
-      sortZone: false
-    });
-  }
-
-  sortByZone() {
-    this.setState({
-      sortZone: true,
-      sortName: false
+      sortName: true
     });
   }
 
@@ -89,12 +78,6 @@ class StateCard extends Component {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
-        return 0;
-      });
-    } else if(this.state.sortZone) {
-      version.sort(function(first, second) {
-        if(first.timeZone < second.timeZone) return -1;
-        if(first.timeZone > second.timeZone) return 1;
         return 0;
       });
     } else {
@@ -163,7 +146,6 @@ class StateCard extends Component {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
-            <DropdownItem onClick={this.sortByZone}>Timezone</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </form>

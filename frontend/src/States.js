@@ -27,11 +27,13 @@ class StateCard extends Component {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByName = this.sortByName.bind(this);
+    this.sortByAscending = this.sortByAscending.bind(this);
+    this.sortByDescending = this.sortByDescending.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false,
+      sortAscending: false,
+      sortDescending: false,
       page: 1
     };
   }
@@ -51,13 +53,24 @@ class StateCard extends Component {
   reset() {
     this.setState({
       sortDropdown: false,
-      sortName: false
+      sortAscending: false,
+      sortDescending: false
     });
   }
 
-  sortByName() {
+  sortByAscending() {
     this.setState({
-      sortName: true
+      sortDropdown: false,
+      sortAscending: true,
+      sortDescending: false
+    });
+  }
+
+  sortByDescending() {
+    this.setState({
+      sortDropdown: false,
+      sortAscending: false,
+      sortDescending: true
     });
   }
 
@@ -74,10 +87,16 @@ class StateCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortName) {
+    if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
+        return 0;
+      });
+    } else if (this.state.sortDescending) {
+      version.sort(function(first, second) {
+        if(first.name < second.name) return 1;
+        if(first.name > second.name) return -1;
         return 0;
       });
     } else {
@@ -145,7 +164,8 @@ class StateCard extends Component {
             Sort By
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+            <DropdownItem onClick={this.sortByAscending}>Ascending</DropdownItem>
+            <DropdownItem onClick={this.sortByDescending}>Descending</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </form>

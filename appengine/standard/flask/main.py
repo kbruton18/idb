@@ -38,7 +38,7 @@ def get_campgrounds():
 
 @app.route('/api/campgrounds/<string:name>', methods=['GET'])
 def get_campground(name):
-  return jsonify(get_campground_info(name, request.args))
+  return jsonify(get_campground_info(name))
 
 @app.route('/api/visitorcenters', methods=['GET'])
 def get_visitor_centers():

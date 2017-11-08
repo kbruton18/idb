@@ -140,8 +140,9 @@ def get_campgrounds_list(args):
             data.append(campgrounds_dict[code])
     return data
 
-def get_campground_info(name, args):
-    campground_dict = get_campgrounds_dict(args)
+def get_campground_info(name):
+    campgrounds_list = Campground.query.filter(Campground.name.like(name + "%")).all()
+    campground_dict = get_campgrounds_dict(campgrounds_list)
     return campground_dict[name]
 
 def get_visitor_centers_dict(args):

@@ -16,7 +16,7 @@ class APITestMethods(unittest.TestCase):
     
   def testGetParksList(self):
     parks = api.get_parks_list()
-    self.assertEquals(len(parks), 45)
+    self.assertEquals(len(parks), 100)
 
   def testParksStates(self):
     parks = api.get_parks_dict()
@@ -43,7 +43,7 @@ class APITestMethods(unittest.TestCase):
 
   def testStatesLength(self):
     states = api.get_states_dict()
-    self.assertEquals(44, len(states.keys()))
+    self.assertEquals(50, len(states.keys()))
 
   def testStatesNames(self):
     states = api.get_states_dict()
@@ -52,7 +52,7 @@ class APITestMethods(unittest.TestCase):
 
   def testStatesList(self):
     states = api.get_states_list()
-    self.assertEquals(len(states), 44)
+    self.assertEquals(len(states), 50)
 
   def testCampgroundsDict(self):
     campgrounds = api.get_campgrounds_dict()

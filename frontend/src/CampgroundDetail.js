@@ -50,6 +50,20 @@ class CampgroundDetail extends Component {
       )
     })
 
+    const directionUrlLink = () => {
+      if (this.state.data.directionsUrl!=="None") {
+        return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>)
+      }
+      return <a>{this.state.data.directionsUrl}</a>
+    };
+
+    const regulationUrlLink = () => {
+      if (this.state.data.regulationsUrl!=="None") {
+        return (<a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a>)
+      }
+      return <a>{this.state.data.regulationsUrl}</a>
+    };
+
     return (
       <div>
       <Container className="bg-faded p-4 my-4">
@@ -65,9 +79,9 @@ class CampgroundDetail extends Component {
         <p><b>Description:</b> {this.state.data.description}</p>
         <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
-        <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
+        <p><b>Directions URL:</b> {directionUrlLink()}</p>
         <p><b>Regulations Overview:</b> {this.state.data.regulations}</p>
-        <p><b>Regulations URL:</b> <a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a></p>
+        <p><b>Regulations URL:</b> {regulationUrlLink()}</p>
         <p><b>Wheelchair Access:</b> {this.state.data.wheelchairAccess}</p>
         <p><b>Internet Info:</b> {this.state.data.internetInfo}</p>
       </Container>

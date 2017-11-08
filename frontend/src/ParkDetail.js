@@ -46,7 +46,7 @@ class ParkDetail extends Component {
 
     const campgroundList = String(this.state.data.campgrounds).split(", ");
     const campgroundLinks = campgroundList.map((c) => {
-      if (this.state.data.campgrounds!=="N/A") {
+      if (this.state.data.campgrounds!=="None") {
         if (campgroundList[campgroundList.length-1] === c) {
           return (
             <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>

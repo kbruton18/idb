@@ -118,6 +118,13 @@ class VisitorCenterCard extends Component {
         const lat = String(latLong[0]).replace("{lat:", "");
         const long = String(latLong[1]).replace("}", "");
 
+        const directionUrlLink = () => {
+          if (d.directionsUrl!=="None") {
+            return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
+          }
+          return <a>{d.directionsUrl}</a>
+        };
+
         return (
           <Col lg="4" md="6" sm="12">
             <Card className ="text-center">
@@ -131,7 +138,7 @@ class VisitorCenterCard extends Component {
                 <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br/>
                 <b>Latitude</b>: {lat}<br/>
                 <b>Longitude</b>: {long}<br/>
-                <b>Directions</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a><br/>
+                <b>Directions</b>: {directionUrlLink()}<br/>
                 <b>Website</b>: <a href={d.website}>{d.website}</a>
                 </CardText>
               </CardBody>

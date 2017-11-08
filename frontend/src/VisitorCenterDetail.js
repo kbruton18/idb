@@ -37,6 +37,13 @@ class VisitorCenterDetail extends Component {
     const lat = String(latLong[0]).replace("{lat:", "");
     const long = String(latLong[1]).replace("}", "");
 
+    const directionUrlLink = () => {
+      if (this.state.data.directionsUrl!=="None") {
+        return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>)
+      }
+      return <a>{this.state.data.directionsUrl}</a>
+    };
+
     return (
       <div>
       <Container className="bg-faded p-4 my-4">
@@ -52,7 +59,7 @@ class VisitorCenterDetail extends Component {
         <p><b>Latitude:</b> {lat}</p>
         <p><b>Longitude:</b> {long}</p>
         <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
-        <p><b>Directions URL:</b> <a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a></p>
+        <p><b>Directions URL:</b> {directionUrlLink()}</p>
         <p><b>Website:</b> <a href={this.state.data.website}>{this.state.data.website}</a></p>
       </Container>
       </div>

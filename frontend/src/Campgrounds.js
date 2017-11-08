@@ -123,6 +123,20 @@ class CampgroundCard extends Component {
     const pageOfCampgrounds = version.slice((this.state.page - 1) * 12, this.state.page * 12);
 
     const campground = pageOfCampgrounds.map((d) => {
+      const directionUrlLink = () => {
+        if (d.directionsUrl!=="None") {
+          return (<a href={d.directionsUrl}>{d.directionsUrl}</a>)
+        }
+        return <a>{d.directionsUrl}</a>
+      };
+
+      const regulationUrlLink = () => {
+        if (d.regulationsUrl!=="None") {
+          return (<a href={d.regulationsUrl}>{d.regulationsUrl}</a>)
+        }
+        return <a>{d.regulationsUrl}</a>
+      };
+
       return (
         <Col lg="4" md="6" sm="12">
           <Card className ="text-center">
@@ -135,8 +149,8 @@ class CampgroundCard extends Component {
                 <b>Total Sites</b>: {d.totalSites}<br/>
                 <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br/>
                 <b>Description</b>: {d.description}<br/>
-                <b>Regulations URL</b>: <a href={d.regulationsUrl}>{d.regulationsUrl}</a><br/>
-                <b>Directions URL</b>: <a href={d.directionsUrl}>{d.directionsUrl}</a>
+                <b>Regulations URL</b>: {regulationUrlLink()}<br/>
+                <b>Directions URL</b>: {directionUrlLink()}
               </CardText>
             </CardBody>
           </Card>

@@ -122,14 +122,8 @@ def get_campground_info(name):
     campground_dict = get_campgrounds_dict()
     return campground_dict[name]
 
-def get_visitor_centers_dict(filter):
-    visitor_center_list = {}
-    if filter == None:
-        visitor_centers_list = VisitorCenter.query.all()
-    else:
-        filter_values = filter.split(",")
-        for x in filter_values: 
-            visitor_centers_list.append(VisitorCenter.query.filter(VisitorCenter.states.like(x+"%")))
+def get_visitor_centers_dict():
+    visitor_centers_list = VisitorCenter.query.all()
     visitor_centers = {}
     for visitor_center in visitor_centers_list:
         visitor_center_dict = {}
@@ -145,13 +139,16 @@ def get_visitor_centers_dict(filter):
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
-def get_visitor_centers_list(filter=None):
-    vc_dict = get_visitor_centers_dict()
-    vc_codes = vc_dict.keys()
-    data = []
-    for code in vc_codes:
-            data.append(vc_dict[code])
-    return data
+def get_visitor_centers_with_filter(filterString): 
+    return filterString
+
+def get_visitor_centers_list():
+        vc_dict = get_visitor_centers_dict()
+        vc_codes = vc_dict.keys()
+        data = []
+        for code in vc_codes:
+                data.append(vc_dict[code])
+        return data
 
 def get_visitor_center_info(name):
     vc_dict = get_visitor_centers_dict()

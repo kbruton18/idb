@@ -100,7 +100,7 @@ class CampgroundCard extends Component {
       version = this.state.data;
     }
 
-    const pageOfCampgrounds = version.slice((this.state.page - 1) * 12, this.state.page * 12);
+    const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     const campground = pageOfCampgrounds.map((d) => {
       const directionUrlLink = () => {
@@ -138,7 +138,7 @@ class CampgroundCard extends Component {
       )
     })
 
-    const pages = Math.ceil(version.length / 12);
+    const pages = Math.ceil(version.length / 9);
 
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
 

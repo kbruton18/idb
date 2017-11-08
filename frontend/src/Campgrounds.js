@@ -27,13 +27,15 @@ class CampgroundCard extends Component {
     super(props);
     this.toggleSort = this.toggleSort.bind(this);
     this.reset = this.reset.bind(this);
-    this.sortByName = this.sortByName.bind(this);
+    this.sortByAscending = this.sortByAscending.bind(this);
+    this.sortByDescending = this.sortByDescending.bind(this);
     this.sortByState = this.sortByState.bind(this);
     this.sortByPark = this.sortByPark.bind(this);
     this.state = {
       data: [],
       sortDropdown: false,
-      sortName: false,
+      sortAscending: false,
+      sortDescending: false,
       sortState: false,
       sortPark: false,
       page: 1
@@ -48,16 +50,26 @@ class CampgroundCard extends Component {
 
   reset() {
     this.setState({
-      sortDropdown: false,
-      sortName: false,
+      sortAscending: false,
+      sortDescending: false,
       sortState: false,
       sortPark: false
     });
   }
 
-  sortByName() {
+  sortByAscending() {
     this.setState({
-      sortName: true,
+      sortAscending: true,
+      sortDescending: false,
+      sortState: false,
+      sortPark: false
+    });
+  }
+
+  sortByDescending() {
+    this.setState({
+      sortAscending: false,
+      sortDescending: true,
       sortState: false,
       sortPark: false
     });
@@ -65,17 +77,19 @@ class CampgroundCard extends Component {
 
   sortByState() {
     this.setState({
+      sortAscending: false,
+      sortDescending: false,
       sortState: true,
-      sortName: false,
       sortPark: false
     });
   }
 
   sortByPark() {
     this.setState({
-      sortPark: true,
-      sortName: false,
-      sortState: false
+      sortAscending: false,
+      sortDescending: false,
+      sortState: false,
+      sortPark: true
     });
   }
 
@@ -98,10 +112,16 @@ class CampgroundCard extends Component {
   render() {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.sortName) {
+    if (this.state.sortAscending) {
       version.sort(function(first, second) {
         if(first.name < second.name) return -1;
         if(first.name > second.name) return 1;
+        return 0;
+      });
+    } else if (this.state.sortDescending) {
+      version.sort(function(first, second) {
+        if(first.name < second.name) return 1;
+        if(first.name > second.name) return -1;
         return 0;
       });
     } else if(this.state.sortState) {
@@ -182,7 +202,8 @@ class CampgroundCard extends Component {
               Sort By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.sortByName}>Name</DropdownItem>
+              <DropdownItem onClick={this.sortByAscending}>Name Ascending</DropdownItem>
+              <DropdownItem onClick={this.sortByDescending}>Name Descending</DropdownItem>
               <DropdownItem onClick={this.sortByState}>State</DropdownItem>
               <DropdownItem onClick={this.sortByPark}>Park</DropdownItem>
             </DropdownMenu>

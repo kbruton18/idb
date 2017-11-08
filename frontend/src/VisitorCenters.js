@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import {
   Button,
+  ButtonGroup,
   Container,
   Row,
   Col,
@@ -34,8 +35,15 @@ class VisitorCenterCard extends Component {
       sortDropdown: false,
       sortName: false,
       sortState: false,
-      sortPark: false
+      sortPark: false,
+      page: 1
     }
+  }
+
+  setPage(page) {
+    this.setState({
+      page: page
+    });
   }
 
   toggleSort() {
@@ -112,7 +120,9 @@ class VisitorCenterCard extends Component {
       version = this.state.data;
     }
 
-    const center = version.map((d) => {
+    const pageOfVisitorCenters = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+
+    const center = pageOfVisitorCenters.map((d) => {
       if (d.website.length !== 0) {
         const latLong = String(d.latLong).split(", lng:");
         const lat = String(latLong[0]).replace("{lat:", "");
@@ -148,6 +158,14 @@ class VisitorCenterCard extends Component {
       }
     })
 
+    const pages = Math.ceil(version.length / 9);
+    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) {return i + 1;});
+    const pageButtons = pageArray.map((d) => {
+      return (
+        <Button onClick={() => this.setPage(d)}>{d}</Button>
+      )
+    });
+
     return (
       <Container className="bg-faded p-4 my-4">
       <hr className="divider"/>
@@ -170,6 +188,13 @@ class VisitorCenterCard extends Component {
       </form>
       <Row>
         {center}
+      </Row>
+      <Row>
+        <ButtonGroup className="center">
+          <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page-1))}>Previous</Button>
+          {pageButtons}
+          <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page+1))}>Next</Button>
+        </ButtonGroup>
       </Row>
     </Container>
     );

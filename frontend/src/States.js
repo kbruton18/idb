@@ -101,9 +101,9 @@ class StateCard extends Component {
       version = this.state.data;
     }
 
-    const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+    const pageOfStates = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
-    const state = pageOfCampgrounds.map((d) => {
+    const state = pageOfStates.map((d) => {
       const parkList = String(d.nationalParks).split(",");
       const parkLinks = parkList.map((p) => {
         if (d.nationalParks!=="None") {
@@ -171,12 +171,10 @@ class StateCard extends Component {
           {state}
       </Row>
       <Row>
-        <ButtonGroup >
-          <Button onClick={() => this.setPage(1)}>{"<<"}</Button>
-          <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page-1))}>{"<"}</Button>
+        <ButtonGroup className="center">
+          <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page-1))}>Previous</Button>
           {pageButtons}
-          <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page+1))}>{">"}</Button>
-          <Button onClick={() => this.setPage(pageButtons.length)}>{">>"}</Button>
+          <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page+1))}>Next</Button>
         </ButtonGroup>
       </Row>
     </Container>

@@ -21,6 +21,7 @@ import {
 } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
 
 class ParkCard extends Component {
   constructor (props) {
@@ -30,12 +31,13 @@ class ParkCard extends Component {
     this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
+      states: [],
       sortType: '',
       filterDropdown: false,
       filterBy: false,
       filter: '',
       page: 1
-    }
+    };
   }
 
 // resets everything to its original state
@@ -63,6 +65,7 @@ class ParkCard extends Component {
 
 // action for filtering, saves what is pressed
   filterBy (event) {
+    console.log(event.currentTarget.textContent);
     this.setState({
       filter: event.currentTarget.textContent,
       filterBy: true
@@ -84,17 +87,22 @@ class ParkCard extends Component {
           data: responseJson
         });
       });
+
+    fetch('https://sweet-travels.appspot.com/api/states')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          states: createFilterTerms(responseJson, 'abbreviations').sort()
+        });
+      });
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
     // if we are filtering
-    if (this.state.filterBy) {
-      version = version.filter((state) => {
-        return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
-      });
-    }
+    version = filterElemsByTerms(version, 'states', this.state.filter);
+
     if (this.state.sortType === 'Ascending') {
       // if we are sorting by ascending order
       version.sort(function (first, second) {
@@ -109,8 +117,6 @@ class ParkCard extends Component {
         if (first.fullName > second.fullName) return -1;
         return 0;
       });
-    } else {
-      version = this.state.data;
     }
 
     // for pagination, we display 9 pages at a time.
@@ -185,13 +191,14 @@ class ParkCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <SortDropdown sortFunction={this.sort.bind(this)}/>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
             <DropdownToggle caret>
               Filter By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.filterBy}>TX</DropdownItem>
+              {/* <DropdownItem onClick={this.filterBy}>TX</DropdownItem> */}
+              {this.state.states.map(createFilterElem.bind(this, this.filterBy))}
             </DropdownMenu>
           </Dropdown>
         </form>

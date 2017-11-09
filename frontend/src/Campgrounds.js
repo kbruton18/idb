@@ -17,7 +17,6 @@ import {
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 import SortDropdown from './SortDropdown.js';
-import Filter from './Filter.js';
 
 class CampgroundCard extends Component {
   constructor (props) {
@@ -30,7 +29,7 @@ class CampgroundCard extends Component {
     };
   }
 
-  reset() {
+  reset () {
     this.setState({
       sortType: ''
     });
@@ -139,8 +138,7 @@ class CampgroundCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <SortDropdown sortFunction={this.sort.bind(this)}/>
-          <Filter name='Campground Filter' data={this.state.data} term='name' />
+          <SortDropdown sortFunction={this.sort.bind(this)} />
         </form>
         <Row>
           {campground}

@@ -29,7 +29,7 @@ class StateCard extends Component {
     };
   }
 
-  reset() {
+  reset () {
     this.setState({
       sortType: ''
     });
@@ -42,13 +42,13 @@ class StateCard extends Component {
     });
   }
 
-  setPage(page) {
+  setPage (page) {
     this.setState({
       page: page
     });
   }
 
-  componentDidMount() {
+  componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/states')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -135,21 +135,21 @@ class StateCard extends Component {
         <h2 className='text-center text-lg text-uppercase my-0'>
         states
       </h2>
-      <hr className="divider"/>
-      <form class="form-inline">
-        <Button onClick={this.reset}>Reset</Button>
-        <SortDropdown sortFunction={this.sort.bind(this)}/>
-      </form>
-      <Row>
-        {state}
-      </Row>
-      <Row>
-        <ButtonGroup className='center'>
-          <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page - 1))}>Previous</Button>
-          {pageButtons}
-          <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page + 1))}>Next</Button>
-        </ButtonGroup>
-      </Row>
+        <hr className='divider' />
+        <form class='form-inline'>
+          <Button onClick={this.reset}>Reset</Button>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
+        </form>
+        <Row>
+          {state}
+        </Row>
+        <Row>
+          <ButtonGroup className='center'>
+            <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page - 1))}>Previous</Button>
+            {pageButtons}
+            <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page + 1))}>Next</Button>
+          </ButtonGroup>
+        </Row>
       </Container>
     );
   }

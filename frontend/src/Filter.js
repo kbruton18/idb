@@ -1,36 +1,21 @@
-import Select from 'react-select';
 import React from 'react';
+import { DropdownItem } from 'reactstrap';
 
-// Be sure to include styles at some point, probably during your bootstrapping
-import 'react-select/dist/react-select.css';
-
-export default class Filter extends React.Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      name: props.name,
-      options: []
-    };
-
-    this.processData(props.data, props.term);
-  }
-
-  processData (data, term) {
-    this.setState({
-      options: data.map((elem) => {
-        return {
-          value: elem[term],
-          label: elem[term]
-        };
-      }
-    )
-    });
-  }
-
-  render () {
-    return (
-      <Select name={this.state.name} options={this.state.options} />
-    );
-  }
+function createFilterTerms (data, term) {
+  return data.map((elem) => elem[term]);
 }
+
+function filterElemsByTerms (data, field, term) {
+  if (term.length === 0) {
+    return data;
+  }
+  return data.filter((elem) => elem[field].toLowerCase().includes(term.toLowerCase()));
+}
+
+function createFilterElem (fun, term) {
+  return (
+    <DropdownItem onClick={fun.bind(this)}>{term}</DropdownItem>
+  );
+}
+
+export {createFilterTerms, filterElemsByTerms, createFilterElem};

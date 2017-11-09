@@ -5,6 +5,12 @@ import api
 from flask import Flask
 
 class APITestMethods(unittest.TestCase):
+    def testSearchTermParser(self):
+        term = 'yes  yes "hello and" yes  "hello a"'
+        expected_list = ['yes', 'yes', 'hello and', 'yes', 'hello a']
+        actual_list = api.get_search_terms(term)
+        self.assertEquals(expected_list, actual_list)
+
     def testGlobalSearch(self):
         instances = api.search_instances("wica")
         self.assertTrue("wica" in instances.keys())
@@ -34,6 +40,11 @@ class APITestMethods(unittest.TestCase):
         self.assertTrue("FL" in states.keys())
         self.assertTrue("CA" in states.keys())
         self.assertEquals(2, len(states.keys()))
+        
+    def testStatesMultiWordSearch(self):
+        states = api.search_states('"New Mexico"')
+        self.assertTrue("NM" in states.keys())
+        self.assertEquals(1, len(states.keys()))
 
     def testCampgroundsSearch(self):
         campgrounds = api.search_campgrounds("Summerland")

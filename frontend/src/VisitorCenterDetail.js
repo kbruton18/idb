@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class VisitorCenterDetail extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -12,7 +13,8 @@ class VisitorCenterDetail extends Component {
     };
   }
 
-  // fetch json data from visitorcenters/ID and saves it do data state array
+  // Fetch json data from .../visitorcenters/ID
+  // Catch if there is no response, this means bad URL
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/visitorcenters/' + this.state.id)
       .then((response) => response.json())
@@ -27,18 +29,25 @@ class VisitorCenterDetail extends Component {
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
     if (this.state.nothingFound) {
       return (
         <NotFound />
       );
     }
 
-    // formats lat/long
+    // In the database latLong looks like: {lat:######, lng:######}
+    // Breaking it apart to enhance display. If the database does
+    // not contain it display "N/A" for both.
     const latLong = String(this.state.data.latLong).split(', lng:');
-    const lat = String(latLong[0]).replace('{lat:', '');
-    const long = String(latLong[1]).replace('}', '');
+    var lat = String(latLong[0]).replace('{lat:', '');
+    var long = String(latLong[1]).replace('}', '');
+    if (lat.length === 0) {
+      lat = "N/A";
+      long = "N/A";
+    }
 
-    // checks to see if there is a url to link
+    // Checks to see if there is a url to link
     const directionUrlLink = () => {
       if (this.state.data.directionsUrl !== 'None') {
         return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>);
@@ -46,7 +55,7 @@ class VisitorCenterDetail extends Component {
       return <a>{this.state.data.directionsUrl}</a>;
     };
 
-    // visitor center data to be rendered
+    // Returns the visitor center detail to be rendered.
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

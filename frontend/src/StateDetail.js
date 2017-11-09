@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class StateDetail extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -12,7 +13,8 @@ class StateDetail extends Component {
     };
   }
 
-  // fetches json data from endpoint states/ID and saves it to data state array
+  // Fetch json data from .../states/ID
+  // Catch if there is no response, this means bad URL
   componentDidMount () {
     fetch('http://api.sweet-travels.appspot.com/api/states/' + this.state.id)
       .then((response) => response.json())
@@ -27,44 +29,49 @@ class StateDetail extends Component {
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
     if (this.state.nothingFound) {
       return (
         <NotFound />
       );
     }
 
-    // if there are multiple parks in the state, we split it so we can link each instance
+    // There can be multiple parks per state or none. In the database this is a comma
+    // separated string so we need to split it up so we can link each individually.
     const parkList = String(this.state.data.nationalParks).split(',');
     const parkLinks = parkList.map((p) => {
       if (this.state.data.nationalParks !== 'None') {
         if (parkList[parkList.length - 1] === p) {
           return (
-            <a><Link to={`/parks/${p}`}>{p}</Link></a>
+            <span><Link to={`/parks/${p}`}>{p}</Link></span>
           );
         }
         return (
-          <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+          <span><Link to={`/parks/${p}`}>{p}</Link>, </span>
         );
       }
-      return <a>{this.state.data.nationalParks}</a>;
+      return <span>{this.state.data.nationalParks}</span>;
     });
 
-    // if there are multiple campgrounds in the state, we split it so we can link each instance
+    // There can be multiple campgrounds per state or none. In the database this is a 
+    // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(',');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
         if (campgroundList[campgroundList.length - 1] === c) {
           return (
-            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            <span><Link to={`/campgrounds/${c}`}>{c}</Link></span>
           );
         }
         return (
-          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          <span><Link to={`/campgrounds/${c}`}>{c}</Link>, </span>
         );
       }
-      return <a>{this.state.data.campgrounds}</a>;
+      return <span>{this.state.data.campgrounds}</span>;
     });
 
+    // Website links must have "http://" at the beginning in order to link
+    // correctly. Adding it in for websites that do not have it and appends it.
     var updatedWebsiteLink = () => {
       if (String(this.state.data.url).indexOf('http://') > -1) {
         return this.state.data.url;
@@ -72,7 +79,7 @@ class StateDetail extends Component {
       return ('http://' + this.state.data.url);
     };
 
-    // state information to be rendered
+    // Returns the state detail to be rendered.
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

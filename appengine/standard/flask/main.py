@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 from api import *
-from github_commits import returnCommits
 from models import database
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -15,6 +14,10 @@ def create_app():
 
 app = create_app()
 CORS(app)
+
+@app.route('/api/search/<string:term>', methods=['GET'])
+def search_site(term):
+    return jsonify(search_instances(term))
 
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
@@ -47,10 +50,6 @@ def get_visitor_centers():
 @app.route('/api/visitorcenters/<string:name>', methods=['GET'])
 def get_visitor_center(name):
   return jsonify(get_visitor_center_info(name, request.args))
-
-@app.route('/commits', methods=['GET'])
-def get_commits(name):
-  return jsonify(returnCommits())
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

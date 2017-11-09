@@ -1,5 +1,6 @@
 import React from 'react';
 
+// The footer for all pages within our website.
 export default function Footer (props) {
   return (
     <footer className='bg-faded text-center py-5'>

@@ -184,6 +184,10 @@ def search_campgrounds(term):
     campgrounds_dict = create_campgrounds_dict(campgrounds_list)
     return campgrounds_dict
 
+def get_park_name(park_code):
+    park = Park.query.filter(Park.parkCode == park_code).first()
+    return park.fullName
+
 # helper method to create campgrounds dictionaries
 def create_campgrounds_dict(campgrounds_list):
     campgrounds = {}
@@ -191,8 +195,7 @@ def create_campgrounds_dict(campgrounds_list):
         campground_dict = {}
         campground_dict["name"] = campground.name
         campground_dict["parkCode"] = campground.parkCode
-        campground_dict["parkName"] = "test"
-        # campground_dict["parkName"] = get_park_info(campground.parkCode, "")["fullName"]
+        campground_dict["parkName"] = get_park_name(campground.parkCode)
         campground_dict["states"] = campground.states
         campground_dict["description"] = campground.description
         campground_dict["regulations"] = campground.regulationsOverview

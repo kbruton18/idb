@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Container, Col, CardBody, CardTitle, CardText, Card, CardImg } from 'reactstrap';
+import { Button, ButtonGroup, Row, Container, Col, CardBody, CardTitle, CardText, Card, CardImg } from 'reactstrap';
 
 class Search extends Component {
   constructor (props) {
     super(props);
     this.state = {
       query: decodeURI(this.props.location.search.slice(3)).replace('+', ' '),
-      data: []
+      data: [],
+      page: 1
     };
+  }
+
+  setPage (page) {
+    this.setState({
+      page: page
+    });
   }
 
   // Fetch json data from .../parks/ID
@@ -21,35 +28,21 @@ class Search extends Component {
           data: responseJson
         });
       })
-      .then((responseJson) => {
-        if (Object.keys(responseJson).length === 0 
-          && responseJson.constructor === Object) {
-          this.setState({
-            nothingFound: true
-          });
-        }
-      })
       .catch(() => {
         this.setState({nothingFound: true});
       });
   }
 
   render () {
-    // If bad URL error was found, return NotFound page
-    if (this.state.nothingFound) {
+    const searchResults = Object.values(this.state.data).slice((this.state.page - 1) * 9, this.state.page * 9);
+    const version = searchResults.map((data) => <SearchCard data={data} />)
+    const pages = Math.ceil(Object.values(this.state.data).length / 9);
+    const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
+    const pageButtons = pageArray.map((d) => {
       return (
-        <div>
-          <Container className='bg-faded p-4 my-4'>
-            <hr className='divider' />
-            <h2 className='text-center text-lg text-uppercase my-0'>
-              <strong>Searched for: {this.state.query}</strong>
-            </h2>
-            <hr className='divider' />
-              <p align="center">No matches for search term.</p>
-          </Container>
-        </div>
+        <Button onClick={() => this.setPage(d)}>{d}</Button>
       );
-    }
+    });
 
     return (
       <div>
@@ -60,7 +53,14 @@ class Search extends Component {
           </h2>
           <hr className='divider' />
           <Row>
-            {Object.values(this.state.data).map((data) => <SearchCard data={data} />)}
+            {version}
+          </Row>
+          <Row>
+            <ButtonGroup className='center'>
+              <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page - 1))}>Previous</Button>
+              {pageButtons}
+              <Button onClick={() => this.setPage(this.state.page === pageButtons.length ? pageButtons.length : (this.state.page + 1))}>Next</Button>
+            </ButtonGroup>
           </Row>
         </Container>
       </div>

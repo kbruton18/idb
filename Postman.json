@@ -79,7 +79,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"// Campgrounds Test 1",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"tests[\"Response time is less than 1s\"] = responseTime < 1000;",
 							"",
 							"// Campgrounds test 2",
 							"var jsonData = JSON.parse(responseBody);",
@@ -136,7 +136,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"// visitor centers test 1",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"tests[\"Response time is less than 500ms\"] = responseTime < 500;",
 							"",
 							"// visitor centers test 2",
 							"var jsonData = JSON.parse(responseBody);",
@@ -188,7 +188,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"// States test 1",
-							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"tests[\"Response time is less than 500ms\"] = responseTime < 500;",
 							"",
 							"// States test 2",
 							"var jsonData = JSON.parse(responseBody);",

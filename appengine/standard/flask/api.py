@@ -192,7 +192,7 @@ def create_campgrounds_dict(campgrounds_list):
         campground_dict["name"] = campground.name
         campground_dict["parkCode"] = campground.parkCode
         campground_dict["parkName"] = "test"
-        campground_dict["parkName"] = get_park_info(campground.parkCode, "")["fullName"]
+        # campground_dict["parkName"] = get_park_info(campground.parkCode, "")["fullName"]
         campground_dict["states"] = campground.states
         campground_dict["description"] = campground.description
         campground_dict["regulations"] = campground.regulationsOverview

@@ -16,6 +16,10 @@ def create_app():
 app = create_app()
 CORS(app)
 
+@app.route('/api/search/<string:term>', methods=['GET'])
+def search_site(term):
+    return jsonify(search_instances(term))
+
 @app.route('/api/parks', methods=['GET'])
 def get_parks():
   return jsonify(get_parks_list(request.args))

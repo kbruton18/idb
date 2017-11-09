@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Container, Row, Col, Card,
          CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import StateDetail from './StateDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class StateCard extends Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class StateCard extends Component {
     this.state = {
       data: [],
       sortType: '',
-      page: 1
+      page: 1,
+      filter: null
     };
   }
 
@@ -21,6 +23,7 @@ class StateCard extends Component {
     this.setState({
       sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
   // Sets the sort type.
@@ -46,11 +49,20 @@ class StateCard extends Component {
           data: responseJson
         });
       });
+    let filterPromises = [];
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/states', 'timeZone'));
+
+    processPromises.call(this, filterPromises);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
+
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
+
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
       version.sort(function (first, second) {
@@ -65,9 +77,6 @@ class StateCard extends Component {
         if (first.name > second.name) return -1;
         return 0;
       });
-    } else {
-      // Otherwise keep the original order
-      version = this.state.data;
     }
 
     // For pagination, we display 9 card instances at a time.
@@ -123,6 +132,11 @@ class StateCard extends Component {
       );
     });
 
+    let filterButtons;
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     // Returns the entire states page.
     return (
       <Container className='bg-faded p-4 my-4'>
@@ -134,6 +148,7 @@ class StateCard extends Component {
         <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
+          {filterButtons}
         </form>
         <Row>
           {state}

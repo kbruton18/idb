@@ -97,7 +97,13 @@ class Filter {
   }
 
   createFilterElemForTerm (term) {
-    var filterKey = (term === 'abbreviations') ? "State" : "Name";
+    var filterKey = "Matching Parks";
+    if (term === "abbreviations") {
+      filterKey = "State";
+    } else if (term === "timeZone") {
+      filterKey = "Timezone";
+    }
+
     return (
       <UncontrolledDropdown>
         <DropdownToggle caret>

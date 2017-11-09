@@ -97,12 +97,19 @@ class Filter {
   }
 
   createFilterElemForTerm (term) {
+    var filterKey = "Matching Parks";
+    if (term === "abbreviations") {
+      filterKey = "State";
+    } else if (term === "timeZone") {
+      filterKey = "Timezone";
+    }
+
     return (
       <UncontrolledDropdown>
         <DropdownToggle caret>
-          Filter by
+          Filter by {filterKey}
         </DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu className="overflow-scrolling">
           {this.filterTerms[term].map(this.createFilterElemForFilter.bind(this, term))}
         </DropdownMenu>
       </UncontrolledDropdown>

@@ -7,7 +7,7 @@ class Search extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      query: this.props.location.search.slice(3),
+      query: decodeURI(this.props.location.search.slice(3)).replace('+', ' '),
       data: []
     };
   }

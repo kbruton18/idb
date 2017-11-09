@@ -131,7 +131,7 @@ class CampgroundCard extends Component {
           Campgrounds
         </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
         </form>

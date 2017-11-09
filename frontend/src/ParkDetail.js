@@ -42,11 +42,11 @@ class ParkDetail extends Component {
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link></a>
+          <span><Link to={`/states/${s}`}>{s}</Link></span>
         );
       }
       return (
-        <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+        <span><Link to={`/states/${s}`}>{s}</Link>, </span>
       );
     });
 
@@ -57,11 +57,11 @@ class ParkDetail extends Component {
       if (this.state.data.campgrounds !== 'None') {
         if (campgroundList[campgroundList.length - 1] === c) {
           return (
-            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            <span><Link to={`/campgrounds/${c}`}>{c}</Link></span>
           );
         }
         return (
-          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          <span><Link to={`/campgrounds/${c}`}>{c}</Link>, </span>
         );
       }
       return <a>{this.state.data.campgrounds}</a>;

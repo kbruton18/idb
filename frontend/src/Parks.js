@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, ButtonGroup, Container, Row, Col, Card,
          CardImg, CardText, CardBody, CardTitle,
-         Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+         Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
 import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
@@ -116,11 +116,11 @@ class ParkCard extends Component {
       const stateLinks = stateList.map((s) => {
         if (stateList[stateList.length - 1] === s) {
           return (
-            <a><Link to={`/states/${s}`}>{s}</Link></a>
+            <span><Link to={`/states/${s}`}>{s}</Link></span>
           );
         }
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+          <span><Link to={`/states/${s}`}>{s}</Link>, </span>
         );
       });
 
@@ -180,7 +180,7 @@ class ParkCard extends Component {
           parks
         </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>

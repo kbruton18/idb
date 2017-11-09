@@ -67,11 +67,11 @@ export default class NavBar extends React.Component {
     return (
       <div>
         <Navbar className='navbar navbar-expand-lg navbar-light bg-faded py-lg-4'>
-          <div class='container'>
+          <div className='container'>
             <a className='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'>Menu</a>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className='mx-auto' style={{'text-align': 'right'}} navbar>
+              <Nav className='mx-auto' style={{'textAlign': 'right'}} navbar>
                 <NavItem className='px-lg-2'>
                   <NavLink className='text-uppercase text-expanded' href='/'>Home</NavLink>
                 </NavItem>

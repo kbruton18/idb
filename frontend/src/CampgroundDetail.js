@@ -47,11 +47,11 @@ class CampgroundDetail extends Component {
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link></a>
+          <span><Link to={`/states/${s}`}>{s}</Link></span>
         );
       }
       return (
-        <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+        <span><Link to={`/states/${s}`}>{s}</Link>, </span>
       );
     });
 

@@ -43,14 +43,14 @@ class StateDetail extends Component {
       if (this.state.data.nationalParks !== 'None') {
         if (parkList[parkList.length - 1] === p) {
           return (
-            <a><Link to={`/parks/${p}`}>{p}</Link></a>
+            <span><Link to={`/parks/${p}`}>{p}</Link></span>
           );
         }
         return (
-          <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+          <span><Link to={`/parks/${p}`}>{p}</Link>, </span>
         );
       }
-      return <a>{this.state.data.nationalParks}</a>;
+      return <span>{this.state.data.nationalParks}</span>;
     });
 
     // There can be multiple campgrounds per state or none. In the database this is a 
@@ -60,14 +60,14 @@ class StateDetail extends Component {
       if (this.state.data.campgrounds !== 'None') {
         if (campgroundList[campgroundList.length - 1] === c) {
           return (
-            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            <span><Link to={`/campgrounds/${c}`}>{c}</Link></span>
           );
         }
         return (
-          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          <span><Link to={`/campgrounds/${c}`}>{c}</Link>, </span>
         );
       }
-      return <a>{this.state.data.campgrounds}</a>;
+      return <span>{this.state.data.campgrounds}</span>;
     });
 
     // Website links must have "http://" at the beginning in order to link

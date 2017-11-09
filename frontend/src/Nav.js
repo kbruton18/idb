@@ -20,8 +20,8 @@ class Search extends React.Component {
     if (!this.state.isOpen) {
       return (
         <Container onClick={this.toggle}>
-        <span role="img" aria-label="magnifier">🔍 Search</span>
-      </Container>
+          <span role='img' aria-label='magnifier'>🔍 Search</span>
+        </Container>
       );
     }
 

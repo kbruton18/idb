@@ -21,21 +21,16 @@ import {
 } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
-import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class ParkCard extends Component {
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
-    this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
-      states: [],
       sortType: '',
-      filterDropdown: false,
-      filterBy: false,
-      filter: '',
+      filter: null,
       page: 1
     };
   }
@@ -43,10 +38,9 @@ class ParkCard extends Component {
 // resets everything to its original state
   reset () {
     this.setState({
-      sortType: '',
-      filterBy: false,
-      filter: ''
+      sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
 // setting sort type for park
@@ -56,21 +50,14 @@ class ParkCard extends Component {
     });
   }
 
-// Action for when a user wants to filter
-  toggleFilter () {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
-  }
-
 // action for filtering, saves what is pressed
-  filterBy (event) {
-    console.log(event.currentTarget.textContent);
-    this.setState({
-      filter: event.currentTarget.textContent,
-      filterBy: true
-    });
-  }
+  // filterBy (event) {
+  //   console.log(event.currentTarget.textContent);
+  //   this.setState({
+  //     filter: event.currentTarget.textContent,
+  //     filterBy: true
+  //   });
+  // }
 
 // sets current page to what is pressed
   setPage (page) {
@@ -88,20 +75,18 @@ class ParkCard extends Component {
         });
       });
 
-    fetch('https://sweet-travels.appspot.com/api/states')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          states: createFilterTerms(responseJson, 'abbreviations').sort()
-        });
-      });
+    let p = processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations');
+
+    processPromises.call(this, [p]);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
     // if we are filtering
-    version = filterElemsByTerms(version, 'states', this.state.filter);
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
 
     if (this.state.sortType === 'Ascending') {
       // if we are sorting by ascending order
@@ -182,6 +167,12 @@ class ParkCard extends Component {
       );
     });
 
+    let filterButtons;
+
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -192,15 +183,7 @@ class ParkCard extends Component {
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
-          <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
-            <DropdownToggle caret>
-              Filter By
-            </DropdownToggle>
-            <DropdownMenu>
-              {/* <DropdownItem onClick={this.filterBy}>TX</DropdownItem> */}
-              {this.state.states.map(createFilterElem.bind(this, this.filterBy))}
-            </DropdownMenu>
-          </Dropdown>
+          {filterButtons}
         </form>
         <Row>
           {park}

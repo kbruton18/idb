@@ -17,6 +17,7 @@ import {
 } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class CampgroundCard extends Component {
   constructor (props) {
@@ -33,6 +34,7 @@ class CampgroundCard extends Component {
     this.setState({
       sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
 // setting sort type for park
@@ -56,11 +58,21 @@ class CampgroundCard extends Component {
           data: responseJson
         });
       });
+    let filterPromises = [];
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations'));
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/parks', 'fullName'));
+
+    processPromises.call(this, filterPromises);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
+
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
+
     if (this.state.sortType === 'Ascending') {
       // if we are sorting by ascending order
       version.sort(function (first, second) {
@@ -75,8 +87,6 @@ class CampgroundCard extends Component {
         if (first.name > second.name) return -1;
         return 0;
       });
-    } else {
-      version = this.state.data;
     }
 
     // for pagination, we display 9 pages at a time.
@@ -129,6 +139,12 @@ class CampgroundCard extends Component {
       );
     });
 
+    let filterButtons;
+
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -139,6 +155,7 @@ class CampgroundCard extends Component {
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
+          {filterButtons}
         </form>
         <Row>
           {campground}

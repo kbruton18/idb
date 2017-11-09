@@ -6,7 +6,6 @@ import VisitorCenterDetail from './VisitorCenterDetail.js';
 import SortDropdown from './SortDropdown.js';
 
 class VisitorCenterCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -83,8 +82,8 @@ class VisitorCenterCard extends Component {
       var lat = String(latLong[0]).replace('{lat:', '');
       var long = String(latLong[1]).replace('}', '');
       if (lat.length === 0) {
-        lat = "N/A";
-        long = "N/A";
+        lat = 'N/A';
+        long = 'N/A';
       }
 
       // Checks to see if there is a url to link
@@ -135,7 +134,7 @@ class VisitorCenterCard extends Component {
         Visitor Centers
       </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
         </form>
@@ -162,4 +161,3 @@ export default function VisitorCenters (props) {
     </div>
   );
 }
-

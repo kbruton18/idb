@@ -17,7 +17,6 @@ const propTypes = {
 };
 
 class CustomUncontrolledCarousel extends Component {
-
   constructor (props) {
     super(props);
     this.animating = false;

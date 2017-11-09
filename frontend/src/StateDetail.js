@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class StateDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -43,31 +42,31 @@ class StateDetail extends Component {
       if (this.state.data.nationalParks !== 'None') {
         if (parkList[parkList.length - 1] === p) {
           return (
-            <a><Link to={`/parks/${p}`}>{p}</Link></a>
+            <span><Link to={`/parks/${p}`}>{p}</Link></span>
           );
         }
         return (
-          <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+          <span><Link to={`/parks/${p}`}>{p}</Link>, </span>
         );
       }
-      return <a>{this.state.data.nationalParks}</a>;
+      return <span>{this.state.data.nationalParks}</span>;
     });
 
-    // There can be multiple campgrounds per state or none. In the database this is a 
+    // There can be multiple campgrounds per state or none. In the database this is a
     // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(',');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
         if (campgroundList[campgroundList.length - 1] === c) {
           return (
-            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            <span><Link to={`/campgrounds/${c}`}>{c}</Link></span>
           );
         }
         return (
-          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          <span><Link to={`/campgrounds/${c}`}>{c}</Link>, </span>
         );
       }
-      return <a>{this.state.data.campgrounds}</a>;
+      return <span>{this.state.data.campgrounds}</span>;
     });
 
     // Website links must have "http://" at the beginning in order to link

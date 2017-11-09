@@ -1,0 +1,260 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SWE Travels",
+		"_postman_id": "9614d0f7-a8cd-9435-a951-4764cd42f737",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Parks Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Parks Test 1",
+							"tests[\"Body matches string\"] = responseBody.has(\"data\");",
+							"",
+							"// Parks Test 2",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Check that first parks json has correct description\"] = jsonData[0].description === \"Did you know that Petrified Forest is more spectacular than ever? While the park has all the wonders known for a century, there are many new adventures and discoveries to share. There are backcountry hikes into areas never open before such as Red Basin and little known areas like the Martha's Butte. There are new exhibits that bring the stories to life. Come rediscover Petrified Forest!\";",
+							"",
+							"// Parks Test 3",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"",
+							"// Parks Test 4",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Testing parks designation data\"] = jsonData[0].designation === \"National Park\";",
+							"",
+							"// Parks Test 5",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Testing parks directions info data\"] = jsonData[0].directionsInfo === \"Petrified Forest stretches north and south between I-40 and Highway 180. Westbound I-40 travelers should take Exit 311, drive the 28 miles through the park and connect with Hwy 180 at the south end. Travel 19 miles on Hwy 180 North to return to Interstate 40 via Holbrook. Eastbound I-40 travelers should take Exit 285 into Holbrook then travel 19 miles on Hwy 180 South to the park's south entrance. Drive the 28 miles north through the park to return to I-40.\";",
+							"",
+							"// Parks Test 6",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Parks directions info 2\"] = jsonData[1].directionsInfo === \"Kalaupapa is an extremely isolated place, surrounded on three sides by ocean and two-thousand foot cliffs on the fourth. Consequently, there is no road access into the peninsula. Kalaupapa cannot be reached by automobile. To get to the park, visitors must travel by air, mule, or on foot. See the park's Direction and Transportation webpage for additional information.\";",
+							"",
+							"// Parks test 7",
+							"var schema = {",
+							"\"properties\": {",
+							"                \"campgrounds\": { \"type\": \"string\" },",
+							"                \"description\": { \"type\": \"string\" },",
+							"                \"designation\": { \"type\": \"string\" },",
+							"                \"directionsInfo\": { \"type\": \"string\" },",
+							"                \"directionsUrl\": { \"type\": \"string\" },",
+							"                \"fullName\": { \"type\": \"string\" },",
+							"                \"imageUrl\": { \"type\": \"string\" },",
+							"                \"latLong\": { \"type\": \"string\" },",
+							"                \"parkCode\": { \"type\": \"string\" },",
+							"                \"searchString\": { \"type\": \"string\" },",
+							"                \"states\": { \"type\": \"string\" },",
+							"                \"url\": { \"type\": \"string\" },",
+							"                \"weatherInfo\": { \"type\": \"string\" }",
+							"            }",
+							"};",
+							"var jsonData = JSON.parse(responseBody);",
+							"var data1 = jsonData[0];",
+							"",
+							"tests[\"Valid Data Scheme\"] = tv4.validate(data1, schema);",
+							"console.log(\"Validation failed: \", tv4.error);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://sweet-travels.appspot.com/api/parks",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Parks request"
+			},
+			"response": []
+		},
+		{
+			"name": "Campgrounds Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Campgrounds Test 1",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"",
+							"// Campgrounds test 2",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"// Campgrounds test 3",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Testing campgrounds data\"] = jsonData[0].description === \"This 61-site campground is open all year with sites available on a first-come, first-served basis. Two sites are handicap-accessible. Flush toilets and drinking water are available late spring through early fall. Fees are half-price when water is not available. Ranger programs are offered nightly in the amphitheater during the summer. Two group campsites are reservable. Contact the park at 605.745.4600 for more information.\";",
+							"",
+							"// Campgrounds test 4",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Your test name\"] = jsonData[1].name === \"Duck Harbor Campground\";",
+							"",
+							"",
+							"// Campgrounds test 5",
+							"var schema = {",
+							"\"properties\": {",
+							"                \"description\": { \"type\": \"string\" },",
+							"                \"directionsInfo\": { \"type\": \"string\" },",
+							"                \"directionsUrl\": { \"type\": \"string\" },",
+							"                \"imageUrl\": { \"type\": \"string\" },",
+							"                \"internetInfo\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"parkCode\": { \"type\": \"string\" },",
+							"                \"regulations\": { \"type\": \"string\" },",
+							"                \"regulationsUrl\": { \"type\": \"string\" },",
+							"                \"searchString\": { \"type\": \"string\" },",
+							"                \"states\": { \"type\": \"string\" },",
+							"                \"totalSites\": { \"type\": \"integer\" },",
+							"                \"weatherInfo\": { \"type\": \"string\" },",
+							"                \"wheelchairAccess\": { \"type\": \"string\" }",
+							"            }",
+							"};",
+							"var jsonData = JSON.parse(responseBody);",
+							"var data1 = jsonData[0];",
+							"",
+							"tests[\"Valid Data Scheme\"] = tv4.validate(data1, schema);",
+							"console.log(\"Validation failed: \", tv4.error);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://sweet-travels.appspot.com/api/campgrounds",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Visitor Centers Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// visitor centers test 1",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"",
+							"// visitor centers test 2",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"// visitor centers test 3",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Visitor Centers data test 1\"] = jsonData[0].name === \"Hulls Cove Visitor Center\";",
+							"",
+							"// visitor centers test 4",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Visitor Centers data test 2\"] = jsonData[1].name === \"Ohanapecosh Visitor Center\";",
+							"",
+							"// visitor centers test 5",
+							"var schema = {",
+							"\"properties\": {",
+							"                \"description\": { \"type\": \"string\" },",
+							"                \"directionsInfo\": { \"type\": \"string\" },",
+							"                \"directionsUrl\": { \"type\": \"string\" },",
+							"                \"imageUrl\": { \"type\": \"string\" },",
+							"                \"latLong\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"parkCode\": { \"type\": \"string\" },",
+							"                \"searchString\": { \"type\": \"string\" },",
+							"                \"states\": { \"type\": \"string\" },",
+							"                \"website\": { \"type\": \"string\" }",
+							"            }",
+							"};",
+							"var jsonData = JSON.parse(responseBody);",
+							"var data1 = jsonData[0];",
+							"",
+							"tests[\"Valid Data Scheme\"] = tv4.validate(data1, schema);",
+							"console.log(\"Validation failed: \", tv4.error);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://sweet-travels.appspot.com/api/visitorcenters",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "States Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// States test 1",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 500;",
+							"",
+							"// States test 2",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"// States test 3",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"States data test 1\"] = jsonData[0].abbreviations === \"WA\";",
+							"",
+							"// States test 4",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"States data test 2\"] = jsonData[0].largestCity === \"Seattle\";",
+							"",
+							"// States test 5",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"States data test 3\"] = jsonData[1].abbreviations === \"DE\";",
+							"",
+							"// States test 6",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"States data test 4\"] = jsonData[1].governor === \"John C. Carney Jr.\";",
+							"",
+							"// States test 7",
+							"var schema = {",
+							"\"properties\": {",
+							"                \"abbreviations\": { \"type\": \"string\" },",
+							"                \"campgrounds\": { \"type\": \"string\" },",
+							"                \"capital\": { \"type\": \"string\" },",
+							"                \"governor\": { \"type\": \"string\" },",
+							"                \"imageUrl\": { \"type\": \"string\" },",
+							"                \"largestCity\": { \"type\": \"string\" },",
+							"                \"medianIncome\": { \"type\": \"string\" },",
+							"                \"name\": { \"type\": \"string\" },",
+							"                \"nationalParks\": { \"type\": \"string\" },",
+							"                \"nicknames\": { \"type\": \"string\" },",
+							"                \"searchString\": { \"type\": \"string\" },",
+							"                \"timeZone\": { \"type\": \"string\" },",
+							"                \"totalArea\": { \"type\": \"string\" },",
+							"                \"totalPopulation\": { \"type\": \"string\" },",
+							"                \"url\": { \"type\": \"string\" }",
+							"            }",
+							"};",
+							"var jsonData = JSON.parse(responseBody);",
+							"var data1 = jsonData[0];",
+							"",
+							"tests[\"Valid Data Scheme\"] = tv4.validate(data1, schema);",
+							"console.log(\"Validation failed: \", tv4.error);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://sweet-travels.appspot.com/api/states",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

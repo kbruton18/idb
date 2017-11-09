@@ -33,10 +33,10 @@ const items = [
 // The welcome message display on our splash page.
 function Message (props) {
   return (
-    <div class='text-center mt-4'>
-      <div class='text-heading text-muted text-lg'>Welcome To</div>
-      <h1 class='my-2'>SWEet Travels</h1>
-      <div class='text-heading text-muted text-lg'>By Group 16
+    <div className='text-center mt-4'>
+      <div className='text-heading text-muted text-lg'>Welcome To</div>
+      <h1 className='my-2'>SWEet Travels</h1>
+      <div className='text-heading text-muted text-lg'>By Group 16
       </div>
     </div>
   );
@@ -62,12 +62,12 @@ function Intro (props) {
     <Container className='bg-faded p-4 my-4'>
       <Row>
         <Col>
-          <hr class='divider' />
-          <h2 class='text-center text-lg text-uppercase my-0'>Travel through
+          <hr className='divider' />
+          <h2 className='text-center text-lg text-uppercase my-0'>Travel through
             <strong> nature</strong>
           </h2>
-          <hr class='divider' />
-          <img class='img-fluid float-left mr-4 d-none d-lg-block' src={camping} alt='Tent under stars' />
+          <hr className='divider' />
+          <img className='img-fluid float-left mr-4 d-none d-lg-block' src={camping} alt='Tent under stars' />
           <p>Always wanted to visit the great outdoors? Taking a road trip across America? Looking for a camping or hiking trip? SWEet Travels is for you!</p>
           <p>SWEet Travels has a database of national parks, campgrounds, visitor centers, and states. It's easy to find your next adventure.</p>
         </Col>

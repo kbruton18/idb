@@ -6,7 +6,6 @@ import StateDetail from './StateDetail.js';
 import SortDropdown from './SortDropdown.js';
 
 class StateCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -83,14 +82,14 @@ class StateCard extends Component {
         if (d.nationalParks !== 'None') {
           if (parkList[parkList.length - 1] === p) {
             return (
-              <a><Link to={`/parks/${p}`}>{p}</Link></a>
+              <span><Link to={`/parks/${p}`}>{p}</Link></span>
             );
           }
           return (
-            <a><Link to={`/parks/${p}`}>{p}</Link>, </a>
+            <span><Link to={`/parks/${p}`}>{p}</Link>, </span>
           );
         }
-        return <a>{d.nationalParks}</a>;
+        return <span>{d.nationalParks}</span>;
       });
 
       // Returns information for each card that we plan to render.
@@ -132,7 +131,7 @@ class StateCard extends Component {
         states
       </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
         </form>

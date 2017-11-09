@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, ButtonGroup, Container, Row, Col, Card,
-         CardImg, CardText, CardBody, CardTitle,
-         Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
-import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class ParkCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
-    this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
-      states: [],
       sortType: '',
-      filterDropdown: false,
-      filterBy: false,
-      filter: '',
+      filter: null,
       page: 1
     };
   }
@@ -28,32 +21,15 @@ class ParkCard extends Component {
   // Resets all the sorting to go back to the original ordering.
   reset () {
     this.setState({
-      sortType: '',
-      filterBy: false,
-      filter: ''
+      sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
   // Sets the sort type.
   sort (type) {
     this.setState({
       sortType: type
-    });
-  }
-
-  // Toggle for when a user wants to filter
-  toggleFilter () {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
-  }
-
-  // Action for filtering, saves what is pressed
-  filterBy (event) {
-    console.log(event.currentTarget.textContent);
-    this.setState({
-      filter: event.currentTarget.textContent,
-      filterBy: true
     });
   }
 
@@ -74,20 +50,18 @@ class ParkCard extends Component {
         });
       });
 
-    fetch('https://sweet-travels.appspot.com/api/states')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          states: createFilterTerms(responseJson, 'abbreviations').sort()
-        });
-      });
+    let p = processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations');
+
+    processPromises.call(this, [p]);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
-    // Filter if there is a filter term.
-    version = filterElemsByTerms(version, 'states', this.state.filter);
+    // if we are filtering
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
 
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
@@ -116,15 +90,15 @@ class ParkCard extends Component {
       const stateLinks = stateList.map((s) => {
         if (stateList[stateList.length - 1] === s) {
           return (
-            <a><Link to={`/states/${s}`}>{s}</Link></a>
+            <span><Link to={`/states/${s}`}>{s}</Link></span>
           );
         }
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+          <span><Link to={`/states/${s}`}>{s}</Link>, </span>
         );
       });
 
-      // There can be multiple campgrounds per park or none. In the database this is a 
+      // There can be multiple campgrounds per park or none. In the database this is a
       // comma separated string so we need to split it up so we can link each individually.
       const campgroundList = String(d.campgrounds).split(', ');
       const campgroundLinks = campgroundList.map((c) => {
@@ -172,7 +146,12 @@ class ParkCard extends Component {
       );
     });
 
-    // Returns the entire parks page.
+    let filterButtons;
+
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -180,18 +159,10 @@ class ParkCard extends Component {
           parks
         </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
-          <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
-            <DropdownToggle caret>
-              Filter By
-            </DropdownToggle>
-            <DropdownMenu>
-              {/* <DropdownItem onClick={this.filterBy}>TX</DropdownItem> */}
-              {this.state.states.map(createFilterElem.bind(this, this.filterBy))}
-            </DropdownMenu>
-          </Dropdown>
+          {filterButtons}
         </form>
         <Row>
           {park}

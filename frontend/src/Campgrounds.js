@@ -4,16 +4,17 @@ import { Button, ButtonGroup, Container, Row, Col, Card,
          CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class CampgroundCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
     this.state = {
       data: [],
       sortType: '',
-      page: 1
+      page: 1,
+      filter: null
     };
   }
 
@@ -22,6 +23,7 @@ class CampgroundCard extends Component {
     this.setState({
       sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
   // Sets the sort type.
@@ -47,11 +49,21 @@ class CampgroundCard extends Component {
           data: responseJson
         });
       });
+    let filterPromises = [];
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations'));
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/parks', 'fullName'));
+
+    processPromises.call(this, filterPromises);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
+
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
+
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
       version.sort(function (first, second) {
@@ -66,9 +78,6 @@ class CampgroundCard extends Component {
         if (first.name > second.name) return -1;
         return 0;
       });
-    } else {
-      // Otherwise keep the original order
-      version = this.state.data;
     }
 
     // For pagination, we display 9 card instances at a time.
@@ -123,7 +132,12 @@ class CampgroundCard extends Component {
       );
     });
 
-    // Returns the entire campgrounds page.
+    let filterButtons;
+
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -131,9 +145,10 @@ class CampgroundCard extends Component {
           Campgrounds
         </h2>
         <hr className='divider' />
-        <form class='form-inline'>
+        <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
+          {filterButtons}
         </form>
         <Row>
           {campground}

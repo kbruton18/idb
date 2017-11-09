@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class CampgroundDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -47,11 +46,11 @@ class CampgroundDetail extends Component {
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link></a>
+          <span><Link to={`/states/${s}`}>{s}</Link></span>
         );
       }
       return (
-        <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+        <span><Link to={`/states/${s}`}>{s}</Link>, </span>
       );
     });
 

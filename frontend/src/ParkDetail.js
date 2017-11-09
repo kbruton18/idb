@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class ParkDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -42,26 +41,26 @@ class ParkDetail extends Component {
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
         return (
-          <a><Link to={`/states/${s}`}>{s}</Link></a>
+          <span><Link to={`/states/${s}`}>{s}</Link></span>
         );
       }
       return (
-        <a><Link to={`/states/${s}`}>{s}</Link>, </a>
+        <span><Link to={`/states/${s}`}>{s}</Link>, </span>
       );
     });
 
-    // There can be multiple campgrounds per park or none. In the database this is a 
+    // There can be multiple campgrounds per park or none. In the database this is a
     // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(', ');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
         if (campgroundList[campgroundList.length - 1] === c) {
           return (
-            <a><Link to={`/campgrounds/${c}`}>{c}</Link></a>
+            <span><Link to={`/campgrounds/${c}`}>{c}</Link></span>
           );
         }
         return (
-          <a><Link to={`/campgrounds/${c}`}>{c}</Link>, </a>
+          <span><Link to={`/campgrounds/${c}`}>{c}</Link>, </span>
         );
       }
       return <a>{this.state.data.campgrounds}</a>;
@@ -74,8 +73,8 @@ class ParkDetail extends Component {
     var lat = latLong[0].replace('lat:', '');
     var long = latLong[1];
     if (lat.length === 0) {
-      lat = "N/A";
-      long = "N/A";
+      lat = 'N/A';
+      long = 'N/A';
     }
 
     // Returns the state detail to be rendered.

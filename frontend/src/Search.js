@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class Search extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -29,7 +28,6 @@ class Search extends Component {
   }
 
   render () {
-
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

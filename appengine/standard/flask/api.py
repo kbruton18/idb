@@ -2,6 +2,7 @@ from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
 def get_search_terms(term):
+    term = term.lower()
     terms = []
     i = 0
     while i < len(term):

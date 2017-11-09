@@ -40,27 +40,27 @@ class Park(database.Model):
         
     def search(self, term):
         self.searchString = ''
-        if self.fullName.find(term) != -1:
+        if self.fullName.lower().find(term) != -1:
             self.searchString = 'Name: %s' % self.fullName
-        elif self.parkCode.find(term) != -1:
+        elif self.parkCode.lower().find(term) != -1:
             self.searchString = 'Park Code: %s' % self.parkCode
-        elif self.states.find(term) != -1:
+        elif self.states.lower().find(term) != -1:
             self.searchString = 'State(s): %s' % self.states
-        elif self.description.find(term) != -1:
+        elif self.description.lower().find(term) != -1:
             self.searchString = 'Description: %s' % self.description
-        elif self.designation.find(term) != -1:
+        elif self.designation.lower().find(term) != -1:
             self.searchString = 'Designation: %s' % self.designation
-        elif self.campgrounds.find(term) != -1:
+        elif self.campgrounds.lower().find(term) != -1:
             self.searchString = 'Campgrounds: %s' % self.campgrounds
-        elif self.latLong.find(term) != -1:
+        elif self.latLong.lower().find(term) != -1:
             self.searchString = 'Lat Long: %s' % self.latLong
-        elif self.directionsInfo.find(term) != -1:
+        elif self.directionsInfo.lower().find(term) != -1:
             self.searchString = 'Directions Info: %s' % self.directionsInfo
-        elif self.directionsUrl.find(term) != -1:
+        elif self.directionsUrl.lower().find(term) != -1:
             self.searchString = 'Directions URL: %s' % self.directionsUrl
-        elif self.weatherInfo.find(term) != -1:
+        elif self.weatherInfo.lower().find(term) != -1:
             self.searchString = 'Weather Info: %s' % self.weatherInfo
-        elif self.url.find(term) != -1:
+        elif self.url.lower().find(term) != -1:
             self.searchString = 'Website: %s' % self.url
 
         if self.searchString == '':
@@ -110,31 +110,31 @@ class State(database.Model):
         
     def search(self, term):
         self.searchString = ''
-        if self.name.find(term) != -1:
+        if self.name.lower().find(term) != -1:
             self.searchString = 'Name: %s' % self.name
-        elif self.abbreviations.find(term) != -1:
+        elif self.abbreviations.lower().find(term) != -1:
             elf.searchString = 'Abbreviations: %s' % self.abbreviations
-        elif self.nicknames.find(term) != -1:
+        elif self.nicknames.lower().find(term) != -1:
             self.searchString = 'Nicknames: %s' % self.nicknames
-        elif self.timeZone.find(term) != -1:
+        elif self.timeZone.lower().find(term) != -1:
             self.searchString = 'Time Zone: %s' % self.timeZone
-        elif self.governor.find(term) != -1:
+        elif self.governor.lower().find(term) != -1:
             self.searchString = 'Governor: %s' % self.governor
-        elif self.capital.find(term) != -1:
+        elif self.capital.lower().find(term) != -1:
             self.searchString = 'Capital: %s' % self.capital
-        elif self.largestCity.find(term) != -1:
+        elif self.largestCity.lower().find(term) != -1:
             self.searchString = 'Largest City: %s' % self.largestCity
-        elif self.totalPopulation.find(term) != -1:
+        elif self.totalPopulation.lower().find(term) != -1:
             self.searchString = 'Total Population: %s' % self.totalPopulation
-        elif self.totalArea.find(term) != -1:
+        elif self.totalArea.lower().find(term) != -1:
             self.searchString = 'Total Area: %s' % self.totalArea
-        elif self.medianIncome.find(term) != -1:
+        elif self.medianIncome.lower().find(term) != -1:
             self.searchString = 'Median Income: %s' % self.medianIncome
-        elif self.nationalParks != None and self.nationalParks.find(term) != -1:
+        elif self.nationalParks != None and self.nationalParks.lower().find(term) != -1:
             self.searchString = 'National Parks: %s' % self.nationalParks
-        elif self.campgrounds != None and self.campgrounds.find(term) != -1:
+        elif self.campgrounds != None and self.campgrounds.lower().find(term) != -1:
             self.searchString = 'Campgrounds: %s' % self.campgrounds
-        elif self.url.find(term) != -1:
+        elif self.url.lower().find(term) != -1:
             self.searchString = 'Website: %s' % self.url
 
         if self.searchString == '':
@@ -183,25 +183,25 @@ class Campground(database.Model):
 
     def search(self, term):
         self.searchString = ''
-        if self.name.find(term) != -1:
+        if self.name.lower().find(term) != -1:
             self.searchString = 'Name: %s' % self.name
-        elif self.parkCode.find(term) != -1:
+        elif self.parkCode.lower().find(term) != -1:
             self.searchString = 'Park Code: %s' % self.parkCode
-        elif self.states.find(term) != -1:
+        elif self.states.lower().find(term) != -1:
             self.searchString = 'State(s): %s' % self.states
-        elif self.description.find(term) != -1:
+        elif self.description.lower().find(term) != -1:
             self.searchString = 'Description: %s' % self.description
-        elif self.regulationsOverview.find(term) != -1:
+        elif self.regulationsOverview.lower().find(term) != -1:
             self.searchString = 'Regulations: %s' % self.regulationsOverview
-        elif self.regulationsUrl.find(term) != -1:
+        elif self.regulationsUrl.lower().find(term) != -1:
             self.searchString = 'Regulations URL: %s' % self.regulationsUrl
-        elif self.wheelchairAccess.find(term) != -1:
+        elif self.wheelchairAccess.lower().find(term) != -1:
             self.searchString = 'Wheelchair Access: %s' % self.wheelchairAccess
-        elif self.internetInfo.find(term) != -1:
+        elif self.internetInfo.lower().find(term) != -1:
             self.searchString = 'Internet Info: %s' % self.internetInfo
-        elif self.directionsInfo.find(term) != -1:
+        elif self.directionsInfo.lower().find(term) != -1:
             self.searchString = 'Directions Info: %s' % self.directionsInfo
-        elif self.directionsUrl.find(term) != -1:
+        elif self.directionsUrl.lower().find(term) != -1:
             self.searchString = 'Directions URL: %s' % self.directionsUrl
 
         if self.searchString == '':
@@ -240,21 +240,21 @@ class VisitorCenter(database.Model):
 
     def search(self, term):
         self.searchString = ''
-        if self.name.find(term) != -1:
+        if self.name.lower().find(term) != -1:
             self.searchString = 'Name: %s' % self.name
-        elif self.parkCode.find(term) != -1:
+        elif self.parkCode.lower().find(term) != -1:
             self.searchString = 'Park Code: %s' % self.parkCode
-        elif self.states.find(term) != -1:
+        elif self.states.lower().find(term) != -1:
             self.searchString = 'State(s): %s' % self.states
-        elif self.description.find(term) != -1:
+        elif self.description.lower().find(term) != -1:
             self.searchString = 'Description: %s' % self.description
-        elif self.latLong.find(term) != -1:
+        elif self.latLong.lower().find(term) != -1:
             self.searchString = 'Lat/Long: %s' % self.latLong
-        elif self.directionsInfo.find(term) != -1:
+        elif self.directionsInfo.lower().find(term) != -1:
             self.searchString = 'Directions Info: %s' % self.directionsInfo
-        elif self.directionsUrl.find(term) != -1:
+        elif self.directionsUrl.lower().find(term) != -1:
             self.searchString = 'Directions URL: %s' % self.directionsUrl
-        elif self.website.find(term) != -1:
+        elif self.website.lower().find(term) != -1:
             self.searchString = 'Website: %s' % self.website
 
         if self.searchString == '':

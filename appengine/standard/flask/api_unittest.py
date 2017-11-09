@@ -24,6 +24,11 @@ class APITestMethods(unittest.TestCase):
         self.assertTrue("yose" in parks.keys())
         self.assertEquals(2, len(parks.keys()))
         
+    def testCaseInsensitiveSearch(self):
+        parks = api.search_parks("YoSEMIte")
+        self.assertTrue("yose" in parks.keys())
+        self.assertEquals(2, len(parks.keys()))
+        
     def testParksSearchMultipleTerms(self):
         parks = api.search_parks("Yosemite Denali")
         self.assertTrue("yose" in parks.keys())

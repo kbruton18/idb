@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Container, Row, Col, Card,
          CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {processFetch, processPromises} from './Filter.js';
 
 class VisitorCenterCard extends Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class VisitorCenterCard extends Component {
     this.state = {
       data: [],
       sortType: '',
-      page: 1
+      page: 1,
+      filter: null
     };
   }
 
@@ -21,6 +23,7 @@ class VisitorCenterCard extends Component {
     this.setState({
       sortType: ''
     });
+    this.state.filter.resetFilter();
   }
 
   // Sets the sort type.
@@ -46,11 +49,19 @@ class VisitorCenterCard extends Component {
           data: responseJson
         });
       });
+
+    let p = processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations');
+
+    processPromises.call(this, [p]);
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
+    if (this.state.filter) {
+      version = this.state.filter.filterDataArr(version);
+    }
+
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
       version.sort(function (first, second) {
@@ -65,11 +76,7 @@ class VisitorCenterCard extends Component {
         if (first.name > second.name) return -1;
         return 0;
       });
-    } else {
-      // Otherwise keep the original order
-      version = this.state.data;
     }
-
     // For pagination, we display 9 card instances at a time.
     const pageOfVisitorCenters = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
@@ -126,17 +133,24 @@ class VisitorCenterCard extends Component {
       );
     });
 
+    let filterButtons;
+
+    if (this.state.filter) {
+      filterButtons = this.state.filter.createFilterElem();
+    }
+
     // Returns the entire visitor centers page.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
         <h2 className='text-center text-lg text-uppercase my-0'>
-        Visitor Centers
-      </h2>
+          Visitor Centers
+        </h2>
         <hr className='divider' />
         <form className='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
+          {filterButtons}
         </form>
         <Row>
           {center}

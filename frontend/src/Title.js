@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Renders the title of the website.
 export default function Title (props) {
   return (
     <div>

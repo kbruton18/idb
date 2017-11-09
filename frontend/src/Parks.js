@@ -1,88 +1,70 @@
 import React, { Component } from 'react';
-import {
-  Link,
-  Route
-} from 'react-router-dom';
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Link, Route } from 'react-router-dom';
+import { Button, ButtonGroup, Container, Row, Col, Card,
+         CardImg, CardText, CardBody, CardTitle,
+         Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
+import SortDropdown from './SortDropdown.js';
+import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
 
 class ParkCard extends Component {
+
   constructor (props) {
     super(props);
-    this.toggleSort = this.toggleSort.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
     this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
-      sortDropdown: false,
-      filterDropdown: false,
+      states: [],
       sortType: '',
+      filterDropdown: false,
       filterBy: false,
-      page: 1,
-      filter: ''
+      filter: '',
+      page: 1
     };
   }
 
-// Action for when a user wants to filter
-  toggleFilter () {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
-  }
-
-// Action for when a user wants to sort
-  toggleSort () {
-    this.setState({
-      sortDropdown: !this.state.sortDropdown
-    });
-  }
-
-// resets everything to its original state
+  // Resets all the sorting to go back to the original ordering.
   reset () {
     this.setState({
       sortType: '',
+      filterBy: false,
       filter: ''
     });
   }
 
-// setting sort type for park
+  // Sets the sort type.
   sort (type) {
     this.setState({
       sortType: type
     });
   }
 
-// action for filtering, saves what is pressed
+  // Toggle for when a user wants to filter
+  toggleFilter () {
+    this.setState({
+      filterDropdown: !this.state.filterDropdown
+    });
+  }
+
+  // Action for filtering, saves what is pressed
   filterBy (event) {
+    console.log(event.currentTarget.textContent);
     this.setState({
       filter: event.currentTarget.textContent,
       filterBy: true
     });
   }
 
-// sets current page to what is pressed
+  // Sets the page.
   setPage (page) {
     this.setState({
       page: page
     });
   }
 
+  // Fetch json data from .../parks
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/parks')
       .then((response) => response.json())
@@ -91,39 +73,45 @@ class ParkCard extends Component {
           data: responseJson
         });
       });
+
+    fetch('https://sweet-travels.appspot.com/api/states')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          states: createFilterTerms(responseJson, 'abbreviations').sort()
+        });
+      });
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
-    // if we are filtering
-    if (this.state.filterBy) {
-      version = version.filter((state) => {
-        return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
-      });
-    } else if (this.state.sortType === 'Ascending') {
-      // if we are sorting by ascending order
+    // Filter if there is a filter term.
+    version = filterElemsByTerms(version, 'states', this.state.filter);
+
+    if (this.state.sortType === 'Ascending') {
+      // If we are sorting by ascending name
       version.sort(function (first, second) {
         if (first.fullName < second.fullName) return -1;
         if (first.fullName > second.fullName) return 1;
         return 0;
       });
     } else if (this.state.sortType === 'Descending') {
-      // if we are sorting by descending order
+      // If we are sorting by descending name
       version.sort(function (first, second) {
         if (first.fullName < second.fullName) return 1;
         if (first.fullName > second.fullName) return -1;
         return 0;
       });
-    } else {
-      version = this.state.data;
     }
 
-    // for pagination, we display 9 pages at a time.
+    // For pagination, we display 9 card instances at a time.
     const pageOfParks = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
-    // for parks with multiple states, we need to split up the list so that we can link each state
+    // Creates all the cards for each park.
     const park = pageOfParks.map((d) => {
+      // There can be multiple states per park. In the database this is a comma
+      // separated string so we need to split it up so we can link each individually.
       const stateList = String(d.states).split(',');
       const stateLinks = stateList.map((s) => {
         if (stateList[stateList.length - 1] === s) {
@@ -136,7 +124,8 @@ class ParkCard extends Component {
         );
       });
 
-      // for parks with multiple campgrounds, we need to split up the list so that we can link each campground
+      // There can be multiple campgrounds per park or none. In the database this is a 
+      // comma separated string so we need to split it up so we can link each individually.
       const campgroundList = String(d.campgrounds).split(', ');
       const campgroundLinks = campgroundList.map((c) => {
         if (d.campgrounds !== 'None') {
@@ -152,7 +141,7 @@ class ParkCard extends Component {
         return <a>{d.campgrounds}</a>;
       });
 
-      // returns all the information to park that we plan to render
+      // Returns information for each card that we plan to render.
       return (
         <Col lg='4' md='6' sm='12'>
           <Card className='text-center'>
@@ -174,6 +163,7 @@ class ParkCard extends Component {
       );
     });
 
+    // Does calculations for how many pagination page buttons we need.
     const pages = Math.ceil(version.length / 9);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
@@ -182,6 +172,7 @@ class ParkCard extends Component {
       );
     });
 
+    // Returns the entire parks page.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -191,21 +182,14 @@ class ParkCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-            <DropdownToggle caret>
-              Sort By
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.sort.bind(this, 'Ascending')}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sort.bind(this, 'Descending')}>Descending</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
             <DropdownToggle caret>
               Filter By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.filterBy}>TX</DropdownItem>
+              {/* <DropdownItem onClick={this.filterBy}>TX</DropdownItem> */}
+              {this.state.states.map(createFilterElem.bind(this, this.filterBy))}
             </DropdownMenu>
           </Dropdown>
         </form>
@@ -224,11 +208,11 @@ class ParkCard extends Component {
   }
 }
 
-const Parks = (props) => (
-  <div>
-    <Route exact path='/parks' component={ParkCard} />
-    <Route path='/parks/:id' component={ParkDetail} />
-  </div>
+export default function Parks (props) {
+  return (
+    <div>
+      <Route exact path='/parks' component={ParkCard} />
+      <Route path='/parks/:id' component={ParkDetail} />
+    </div>
   );
-
-export default Parks;
+}

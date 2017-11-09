@@ -1,75 +1,44 @@
 import React, { Component } from 'react';
-import {
-  Link,
-  Route
-} from 'react-router-dom';
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Link, Route } from 'react-router-dom';
+import { Button, ButtonGroup, Container, Row, Col, Card,
+         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import StateDetail from './StateDetail.js';
+import SortDropdown from './SortDropdown.js';
 
 class StateCard extends Component {
+
   constructor (props) {
     super(props);
-    this.toggleSort = this.toggleSort.bind(this);
-    this.toggleFilter = this.toggleFilter.bind(this);
     this.reset = this.reset.bind(this);
     this.state = {
       data: [],
-      sortDropdown: false,
-      filterDropdown: false,
       sortType: '',
       page: 1
     };
   }
 
-  setPage (page) {
-    this.setState({
-      page: page
-    });
-  }
-
-// Action for when a user wants to sort
-  toggleSort () {
-    this.setState({
-      sortDropdown: !this.state.sortDropdown
-    });
-  }
-
-// Action for when a user wants to filter
-  toggleFilter () {
-    this.setState({
-      filterDropdown: !this.state.filterDropdown
-    });
-  }
-
-// resets everything to its original state
+  // Resets all the sorting to go back to the original ordering.
   reset () {
     this.setState({
       sortType: ''
     });
   }
 
-// setting sort type for park
+  // Sets the sort type.
   sort (type) {
     this.setState({
       sortType: type
     });
   }
 
+  // Sets the page.
+  setPage (page) {
+    this.setState({
+      page: page
+    });
+  }
+
+  // Fetch json data from .../states
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/states')
       .then((response) => response.json())
@@ -84,28 +53,31 @@ class StateCard extends Component {
     var version = [];
     Object.assign(version, this.state.data);
     if (this.state.sortType === 'Ascending') {
-      // if we are sorting by ascending order
+      // If we are sorting by ascending name
       version.sort(function (first, second) {
         if (first.name < second.name) return -1;
         if (first.name > second.name) return 1;
         return 0;
       });
     } else if (this.state.sortType === 'Descending') {
-      // if we are sorting by descending order
+      // If we are sorting by descending name
       version.sort(function (first, second) {
         if (first.name < second.name) return 1;
         if (first.name > second.name) return -1;
         return 0;
       });
     } else {
+      // Otherwise keep the original order
       version = this.state.data;
     }
 
-    // for pagination, we display 9 pages at a time.
+    // For pagination, we display 9 card instances at a time.
     const pageOfStates = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
-    // for states with multiple parks, we need to split up the list so that we can link each park
+    // Creates all the cards for each state.
     const state = pageOfStates.map((d) => {
+      // There can be multiple parks per state or none. In the database this is a comma
+      // separated string so we need to split it up so we can link each individually.
       const parkList = String(d.nationalParks).split(',');
       const parkLinks = parkList.map((p) => {
         if (d.nationalParks !== 'None') {
@@ -121,6 +93,7 @@ class StateCard extends Component {
         return <a>{d.nationalParks}</a>;
       });
 
+      // Returns information for each card that we plan to render.
       return (
         <Col lg='4' md='6' sm='12'>
           <Card className='text-center'>
@@ -142,6 +115,7 @@ class StateCard extends Component {
       );
     });
 
+    // Does calculations for how many pagination page buttons we need.
     const pages = Math.ceil(version.length / 9);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
@@ -150,7 +124,7 @@ class StateCard extends Component {
       );
     });
 
-    // returns all the information to states that we plan to render
+    // Returns the entire states page.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -160,24 +134,7 @@ class StateCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <Dropdown isOpen={this.state.sortDropdown} toggle={this.toggleSort}>
-            <DropdownToggle caret>
-            Sort By
-          </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.sort.bind(this, 'Ascending')}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sort.bind(this, 'Descending')}>Descending</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
-            <DropdownToggle caret>
-            Filter By
-          </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={this.sort.bind(this, 'Ascending')}>Ascending</DropdownItem>
-              <DropdownItem onClick={this.sort.bind(this, 'Descending')}>Descending</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
         </form>
         <Row>
           {state}

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Carousel,
-  CarouselItem,
-  CarouselCaption,
-  CarouselControl,
-  CarouselIndicators
-} from 'reactstrap';
+import { Carousel, CarouselItem, CarouselCaption,
+         CarouselControl, CarouselIndicators} from 'reactstrap';
+
+// Custom Carousel definition.
 
 const propTypes = {
   items: PropTypes.array.isRequired,
@@ -20,6 +17,7 @@ const propTypes = {
 };
 
 class CustomUncontrolledCarousel extends Component {
+
   constructor (props) {
     super(props);
     this.animating = false;

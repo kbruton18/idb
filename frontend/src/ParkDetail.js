@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class ParkDetail extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -12,6 +13,8 @@ class ParkDetail extends Component {
     };
   }
 
+  // Fetch json data from .../parks/ID
+  // Catch if there is no response, this means bad URL
   componentDidMount () {
     fetch('http://api.sweet-travels.appspot.com/api/parks/' + this.state.id)
       .then((response) => response.json())
@@ -26,12 +29,15 @@ class ParkDetail extends Component {
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
     if (this.state.nothingFound) {
       return (
         <NotFound />
       );
     }
 
+    // There can be multiple states per park. In the database this is a comma
+    // separated string so we need to split it up so we can link each individually.
     const stateList = String(this.state.data.states).split(',');
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
@@ -44,6 +50,8 @@ class ParkDetail extends Component {
       );
     });
 
+    // There can be multiple campgrounds per park or none. In the database this is a 
+    // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(', ');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
@@ -59,9 +67,18 @@ class ParkDetail extends Component {
       return <a>{this.state.data.campgrounds}</a>;
     });
 
+    // In the database latLong looks like: lat:######, long:######
+    // Breaking it apart to enhance display. If the database does
+    // not contain it display "N/A" for both.
     const latLong = String(this.state.data.latLong).split(', long:');
-    const lat = latLong[0].replace('lat:', '');
+    var lat = latLong[0].replace('lat:', '');
+    var long = latLong[1];
+    if (lat.length === 0) {
+      lat = "N/A";
+      long = "N/A";
+    }
 
+    // Returns the state detail to be rendered.
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>
@@ -75,7 +92,7 @@ class ParkDetail extends Component {
           <p><b>Designation:</b> {this.state.data.designation}</p>
           <p><b>State(s):</b> {stateLinks}</p>
           <p><b>Latitude:</b> {lat}</p>
-          <p><b>Longitude:</b> {latLong[1]}</p>
+          <p><b>Longitude:</b> {long}</p>
           <p><b>Description:</b> {this.state.data.description}</p>
           <p><b>Campground(s):</b> {campgroundLinks}</p>
           <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>

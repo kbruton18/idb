@@ -113,7 +113,7 @@ class State(database.Model):
         if self.name.lower().find(term) != -1:
             self.searchString = 'Name: %s' % self.name
         elif self.abbreviations.lower().find(term) != -1:
-            elf.searchString = 'Abbreviations: %s' % self.abbreviations
+            self.searchString = 'Abbreviations: %s' % self.abbreviations
         elif self.nicknames.lower().find(term) != -1:
             self.searchString = 'Nicknames: %s' % self.nicknames
         elif self.timeZone.lower().find(term) != -1:

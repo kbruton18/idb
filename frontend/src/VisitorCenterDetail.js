@@ -37,10 +37,15 @@ class VisitorCenterDetail extends Component {
     }
 
     // In the database latLong looks like: {lat:######, lng:######}
-    // Breaking it apart to enhance display.
+    // Breaking it apart to enhance display. If the database does
+    // not contain it display "N/A" for both.
     const latLong = String(this.state.data.latLong).split(', lng:');
-    const lat = String(latLong[0]).replace('{lat:', '');
-    const long = String(latLong[1]).replace('}', '');
+    var lat = String(latLong[0]).replace('{lat:', '');
+    var long = String(latLong[1]).replace('}', '');
+    if (lat.length === 0) {
+      lat = "N/A";
+      long = "N/A";
+    }
 
     // Checks to see if there is a url to link
     const directionUrlLink = () => {

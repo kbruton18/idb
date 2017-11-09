@@ -68,9 +68,15 @@ class ParkDetail extends Component {
     });
 
     // In the database latLong looks like: lat:######, long:######
-    // Breaking it apart to enhance display.
+    // Breaking it apart to enhance display. If the database does
+    // not contain it display "N/A" for both.
     const latLong = String(this.state.data.latLong).split(', long:');
-    const lat = latLong[0].replace('lat:', '');
+    var lat = latLong[0].replace('lat:', '');
+    var long = latLong[1];
+    if (lat.length === 0) {
+      lat = "N/A";
+      long = "N/A";
+    }
 
     // Returns the state detail to be rendered.
     return (
@@ -86,7 +92,7 @@ class ParkDetail extends Component {
           <p><b>Designation:</b> {this.state.data.designation}</p>
           <p><b>State(s):</b> {stateLinks}</p>
           <p><b>Latitude:</b> {lat}</p>
-          <p><b>Longitude:</b> {latLong[1]}</p>
+          <p><b>Longitude:</b> {long}</p>
           <p><b>Description:</b> {this.state.data.description}</p>
           <p><b>Campground(s):</b> {campgroundLinks}</p>
           <p><b>Weather Info:</b> {this.state.data.weatherInfo}</p>

@@ -7,7 +7,6 @@ import SortDropdown from './SortDropdown.js';
 import {processFetch, processPromises} from './Filter.js';
 
 class CampgroundCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);

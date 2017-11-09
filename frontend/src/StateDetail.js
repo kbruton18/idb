@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class StateDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -53,7 +52,7 @@ class StateDetail extends Component {
       return <span>{this.state.data.nationalParks}</span>;
     });
 
-    // There can be multiple campgrounds per state or none. In the database this is a 
+    // There can be multiple campgrounds per state or none. In the database this is a
     // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(',');
     const campgroundLinks = campgroundList.map((c) => {

@@ -6,7 +6,6 @@ import VisitorCenterDetail from './VisitorCenterDetail.js';
 import SortDropdown from './SortDropdown.js';
 
 class VisitorCenterCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -83,8 +82,8 @@ class VisitorCenterCard extends Component {
       var lat = String(latLong[0]).replace('{lat:', '');
       var long = String(latLong[1]).replace('}', '');
       if (lat.length === 0) {
-        lat = "N/A";
-        long = "N/A";
+        lat = 'N/A';
+        long = 'N/A';
       }
 
       // Checks to see if there is a url to link
@@ -162,4 +161,3 @@ export default function VisitorCenters (props) {
     </div>
   );
 }
-

@@ -11,7 +11,6 @@ const rachelImg = require('./img/about/rachel.jpg');
 const ryanImg = require('./img/about/ryan.jpeg');
 
 export default class AboutStats extends Component {
-
   constructor (props) {
     super(props);
     this.state = {

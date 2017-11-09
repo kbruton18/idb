@@ -6,7 +6,6 @@ import StateDetail from './StateDetail.js';
 import SortDropdown from './SortDropdown.js';
 
 class StateCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);

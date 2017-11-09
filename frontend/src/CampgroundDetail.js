@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class CampgroundDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {

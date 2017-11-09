@@ -7,7 +7,6 @@ import SortDropdown from './SortDropdown.js';
 import {processFetch, processPromises} from './Filter.js';
 
 class ParkCard extends Component {
-
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -33,7 +32,6 @@ class ParkCard extends Component {
       sortType: type
     });
   }
-
 
   // Sets the page.
   setPage (page) {

@@ -4,7 +4,6 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Container,
 
 // Class for the search bar that is located within the Navigation Bar.
 class Search extends React.Component {
-
   constructor (props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -45,7 +44,6 @@ class Search extends React.Component {
 
 // The Navigation Bar
 export default class NavBar extends React.Component {
-
   constructor (props) {
     super(props);
     this.toggle = this.toggle.bind(this);

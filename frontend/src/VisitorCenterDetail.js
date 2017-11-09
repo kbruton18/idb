@@ -4,7 +4,6 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class VisitorCenterDetail extends Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -43,8 +42,8 @@ class VisitorCenterDetail extends Component {
     var lat = String(latLong[0]).replace('{lat:', '');
     var long = String(latLong[1]).replace('}', '');
     if (lat.length === 0) {
-      lat = "N/A";
-      long = "N/A";
+      lat = 'N/A';
+      long = 'N/A';
     }
 
     // Checks to see if there is a url to link

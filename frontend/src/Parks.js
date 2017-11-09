@@ -5,6 +5,7 @@ import { Button, ButtonGroup, Container, Row, Col, Card,
          Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
+import {createFilterTerms, filterElemsByTerms, createFilterElem} from './Filter.js';
 
 class ParkCard extends Component {
 
@@ -15,6 +16,7 @@ class ParkCard extends Component {
     this.filterBy = this.filterBy.bind(this);
     this.state = {
       data: [],
+      states: [],
       sortType: '',
       filterDropdown: false,
       filterBy: false,
@@ -48,6 +50,7 @@ class ParkCard extends Component {
 
   // Action for filtering, saves what is pressed
   filterBy (event) {
+    console.log(event.currentTarget.textContent);
     this.setState({
       filter: event.currentTarget.textContent,
       filterBy: true
@@ -70,17 +73,22 @@ class ParkCard extends Component {
           data: responseJson
         });
       });
+
+    fetch('https://sweet-travels.appspot.com/api/states')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          states: createFilterTerms(responseJson, 'abbreviations').sort()
+        });
+      });
   }
 
   render () {
     var version = [];
     Object.assign(version, this.state.data);
-    if (this.state.filterBy) {
-      // If we are filtering
-      version = version.filter((state) => {
-        return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
-      });
-    }
+    // Filter if there is a filter term.
+    version = filterElemsByTerms(version, 'states', this.state.filter);
+
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
       version.sort(function (first, second) {
@@ -95,9 +103,6 @@ class ParkCard extends Component {
         if (first.fullName > second.fullName) return -1;
         return 0;
       });
-    } else {
-      // Otherwise keep the original order
-      version = this.state.data;
     }
 
     // For pagination, we display 9 card instances at a time.
@@ -183,7 +188,8 @@ class ParkCard extends Component {
               Filter By
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem onClick={this.filterBy}>TX</DropdownItem>
+              {/* <DropdownItem onClick={this.filterBy}>TX</DropdownItem> */}
+              {this.state.states.map(createFilterElem.bind(this, this.filterBy))}
             </DropdownMenu>
           </Dropdown>
         </form>

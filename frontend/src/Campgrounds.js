@@ -4,7 +4,6 @@ import { Button, ButtonGroup, Container, Row, Col, Card,
          CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 import SortDropdown from './SortDropdown.js';
-import Filter from './Filter.js';
 
 class CampgroundCard extends Component {
 
@@ -135,7 +134,6 @@ class CampgroundCard extends Component {
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
           <SortDropdown sortFunction={this.sort.bind(this)} />
-          <Filter name='Campground Filter' data={this.state.data} term='name' />
         </form>
         <Row>
           {campground}

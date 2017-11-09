@@ -97,12 +97,13 @@ class Filter {
   }
 
   createFilterElemForTerm (term) {
+    var filterKey = (term === 'abbreviations') ? "State" : "Name";
     return (
       <UncontrolledDropdown>
         <DropdownToggle caret>
-          Filter by
+          Filter by {filterKey}
         </DropdownToggle>
-        <DropdownMenu>
+        <DropdownMenu className="overflow-scrolling">
           {this.filterTerms[term].map(this.createFilterElemForFilter.bind(this, term))}
         </DropdownMenu>
       </UncontrolledDropdown>

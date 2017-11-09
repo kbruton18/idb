@@ -1,16 +1,14 @@
 import React from 'react';
-import {
-  Container,
-  Row,
-  Col
-} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import CustomUncontrolledCarousel from './CustomUncontrolledCarousel.js';
 
+// Images for our splash and carousel.
 const yosemite = require('./img/yosemite.jpg');
 const grandcanyon = require('./img/grandcanyon.jpg');
 const smoky = require('./img/smoky.jpg');
 const camping = require('./img/camping.jpg');
 
+// Data for the items in our carousel.
 const items = [
   {
     src: yosemite,
@@ -32,6 +30,7 @@ const items = [
   }
 ];
 
+// The welcome message display on our splash page.
 function Message (props) {
   return (
     <div class='text-center mt-4'>
@@ -43,6 +42,7 @@ function Message (props) {
   );
 }
 
+// The carousel display for our splash page.
 function Head (props) {
   return (
     <Container className='bg-faded p-4 my-4'>
@@ -56,6 +56,7 @@ function Head (props) {
   );
 }
 
+// The intro for our splash page
 function Intro (props) {
   return (
     <Container className='bg-faded p-4 my-4'>

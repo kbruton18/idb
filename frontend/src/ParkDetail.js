@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class ParkDetail extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -12,7 +13,8 @@ class ParkDetail extends Component {
     };
   }
 
-  // fetches json data from parks/ID endpoint and saves it to data state array, also provides error checking for bad endpoints
+  // Fetch json data from .../parks/ID
+  // Catch if there is no response, this means bad URL
   componentDidMount () {
     fetch('http://api.sweet-travels.appspot.com/api/parks/' + this.state.id)
       .then((response) => response.json())
@@ -27,13 +29,15 @@ class ParkDetail extends Component {
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
     if (this.state.nothingFound) {
       return (
         <NotFound />
       );
     }
 
-    // for multiple states in the park, we split in order to link each state to its own instance
+    // There can be multiple states per park. In the database this is a comma
+    // separated string so we need to split it up so we can link each individually.
     const stateList = String(this.state.data.states).split(',');
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
@@ -46,7 +50,8 @@ class ParkDetail extends Component {
       );
     });
 
-    // for multiple campgrounds in the park, we split in order to link each campground to its own instance
+    // There can be multiple campgrounds per park or none. In the database this is a 
+    // comma separated string so we need to split it up so we can link each individually.
     const campgroundList = String(this.state.data.campgrounds).split(', ');
     const campgroundLinks = campgroundList.map((c) => {
       if (this.state.data.campgrounds !== 'None') {
@@ -62,10 +67,12 @@ class ParkDetail extends Component {
       return <a>{this.state.data.campgrounds}</a>;
     });
 
+    // In the database latLong looks like: lat:######, long:######
+    // Breaking it apart to enhance display.
     const latLong = String(this.state.data.latLong).split(', long:');
     const lat = latLong[0].replace('lat:', '');
 
-    // park detail information to be returned
+    // Returns the state detail to be rendered.
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

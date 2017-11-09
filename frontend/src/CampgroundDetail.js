@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import NotFound from './NotFound.js';
 
 class CampgroundDetail extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -12,7 +13,8 @@ class CampgroundDetail extends Component {
     };
   }
 
-  // fetches json data from campgrounds/ID endpoint and saves it to the data state array
+  // Fetch json data from .../campgrounds/ID
+  // Catch if there is no response, this means bad URL
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/campgrounds/' + this.state.id)
       .then((response) => response.json())
@@ -32,13 +34,15 @@ class CampgroundDetail extends Component {
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
     if (this.state.nothingFound) {
       return (
         <NotFound />
       );
     }
 
-    // if there are multiple states that encompass a campground, we split it to we can link each instance
+    // There can be multiple states per campground. In the database this is a comma
+    // separated string so we need to split it up so we can link each individually.
     const stateList = String(this.state.data.states).split(',');
     const stateLinks = stateList.map((s) => {
       if (stateList[stateList.length - 1] === s) {
@@ -51,7 +55,7 @@ class CampgroundDetail extends Component {
       );
     });
 
-    // checks to see if there is a directions url, if so, link it
+    // Checks to see if there is a directionsUrl url to link
     const directionUrlLink = () => {
       if (this.state.data.directionsUrl !== 'None') {
         return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>);
@@ -59,7 +63,7 @@ class CampgroundDetail extends Component {
       return <a>{this.state.data.directionsUrl}</a>;
     };
 
-    // checks to see if there is a regulation url, if so, link it
+    // Checks to see if there is a regulations url to link
     const regulationUrlLink = () => {
       if (this.state.data.regulationsUrl !== 'None') {
         return (<a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a>);
@@ -67,7 +71,7 @@ class CampgroundDetail extends Component {
       return <a>{this.state.data.regulationsUrl}</a>;
     };
 
-    // information to be rendered for campgrounds
+    // Returns the campground detail to be rendered.
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

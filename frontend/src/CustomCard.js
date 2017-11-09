@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 
+// Generic card.
 export default function CustomCard (props) {
   return (
     <Container className='bg-faded p-4 my-4'>

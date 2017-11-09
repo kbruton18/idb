@@ -1,28 +1,13 @@
 import React, { Component } from 'react';
-import {
-  Link,
-  Route
-} from 'react-router-dom';
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { Link, Route } from 'react-router-dom';
+import { Button, ButtonGroup, Container, Row, Col, Card,
+         CardImg, CardText, CardBody, CardTitle,
+         Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
 
 class ParkCard extends Component {
+
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -35,10 +20,10 @@ class ParkCard extends Component {
       filterBy: false,
       filter: '',
       page: 1
-    }
+    };
   }
 
-// resets everything to its original state
+  // Resets all the sorting to go back to the original ordering.
   reset () {
     this.setState({
       sortType: '',
@@ -47,21 +32,21 @@ class ParkCard extends Component {
     });
   }
 
-// setting sort type for park
+  // Sets the sort type.
   sort (type) {
     this.setState({
       sortType: type
     });
   }
 
-// Action for when a user wants to filter
+  // Toggle for when a user wants to filter
   toggleFilter () {
     this.setState({
       filterDropdown: !this.state.filterDropdown
     });
   }
 
-// action for filtering, saves what is pressed
+  // Action for filtering, saves what is pressed
   filterBy (event) {
     this.setState({
       filter: event.currentTarget.textContent,
@@ -69,13 +54,14 @@ class ParkCard extends Component {
     });
   }
 
-// sets current page to what is pressed
+  // Sets the page.
   setPage (page) {
     this.setState({
       page: page
     });
   }
 
+  // Fetch json data from .../parks
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/parks')
       .then((response) => response.json())
@@ -89,35 +75,38 @@ class ParkCard extends Component {
   render () {
     var version = [];
     Object.assign(version, this.state.data);
-    // if we are filtering
     if (this.state.filterBy) {
+      // If we are filtering
       version = version.filter((state) => {
         return state.states.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1;
       });
     }
     if (this.state.sortType === 'Ascending') {
-      // if we are sorting by ascending order
+      // If we are sorting by ascending name
       version.sort(function (first, second) {
         if (first.fullName < second.fullName) return -1;
         if (first.fullName > second.fullName) return 1;
         return 0;
       });
     } else if (this.state.sortType === 'Descending') {
-      // if we are sorting by descending order
+      // If we are sorting by descending name
       version.sort(function (first, second) {
         if (first.fullName < second.fullName) return 1;
         if (first.fullName > second.fullName) return -1;
         return 0;
       });
     } else {
+      // Otherwise keep the original order
       version = this.state.data;
     }
 
-    // for pagination, we display 9 pages at a time.
+    // For pagination, we display 9 card instances at a time.
     const pageOfParks = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
-    // for parks with multiple states, we need to split up the list so that we can link each state
+    // Creates all the cards for each park.
     const park = pageOfParks.map((d) => {
+      // There can be multiple states per park. In the database this is a comma
+      // separated string so we need to split it up so we can link each individually.
       const stateList = String(d.states).split(',');
       const stateLinks = stateList.map((s) => {
         if (stateList[stateList.length - 1] === s) {
@@ -130,7 +119,8 @@ class ParkCard extends Component {
         );
       });
 
-      // for parks with multiple campgrounds, we need to split up the list so that we can link each campground
+      // There can be multiple campgrounds per park or none. In the database this is a 
+      // comma separated string so we need to split it up so we can link each individually.
       const campgroundList = String(d.campgrounds).split(', ');
       const campgroundLinks = campgroundList.map((c) => {
         if (d.campgrounds !== 'None') {
@@ -146,7 +136,7 @@ class ParkCard extends Component {
         return <a>{d.campgrounds}</a>;
       });
 
-      // returns all the information to park that we plan to render
+      // Returns information for each card that we plan to render.
       return (
         <Col lg='4' md='6' sm='12'>
           <Card className='text-center'>
@@ -168,6 +158,7 @@ class ParkCard extends Component {
       );
     });
 
+    // Does calculations for how many pagination page buttons we need.
     const pages = Math.ceil(version.length / 9);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
@@ -176,6 +167,7 @@ class ParkCard extends Component {
       );
     });
 
+    // Returns the entire parks page.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -185,7 +177,7 @@ class ParkCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <SortDropdown sortFunction={this.sort.bind(this)}/>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
           <Dropdown isOpen={this.state.filterDropdown} toggle={this.toggleFilter}>
             <DropdownToggle caret>
               Filter By
@@ -210,11 +202,11 @@ class ParkCard extends Component {
   }
 }
 
-const Parks = (props) => (
-  <div>
-    <Route exact path='/parks' component={ParkCard} />
-    <Route path='/parks/:id' component={ParkDetail} />
-  </div>
+export default function Parks (props) {
+  return (
+    <div>
+      <Route exact path='/parks' component={ParkCard} />
+      <Route path='/parks/:id' component={ParkDetail} />
+    </div>
   );
-
-export default Parks;
+}

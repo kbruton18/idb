@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavBar from './Nav.js';
 import Title from './Title.js';
@@ -19,6 +15,7 @@ import VisitorCenterDetail from './VisitorCenterDetail.js';
 import NotFound from './NotFound.js';
 import StateDetail from './StateDetail.js';
 
+// Renders the entire app.
 class App extends Component {
   render () {
     return (

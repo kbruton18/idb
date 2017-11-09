@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Carousel,
-  CarouselItem,
-  CarouselCaption,
-  CarouselControl,
-  CarouselIndicators
-} from 'reactstrap';
+import { Carousel, CarouselItem, CarouselCaption,
+         CarouselControl, CarouselIndicators} from 'reactstrap';
 
 const propTypes = {
   items: PropTypes.array.isRequired,

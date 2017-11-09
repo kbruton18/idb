@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
+import { Container, Row, Col, Card, CardImg, CardText,
+         CardBody, CardTitle, CardSubtitle, CardFooter } from 'reactstrap';
 
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  CardFooter
-} from 'reactstrap';
-
+// Everyone's photo
 const derekImg = require('./img/about/derek.jpg');
 const katherineImg = require('./img/about/katherine.jpg');
 const linhImg = require('./img/about/linh.jpg');
@@ -21,6 +11,7 @@ const rachelImg = require('./img/about/rachel.jpg');
 const ryanImg = require('./img/about/ryan.jpeg');
 
 export default class AboutStats extends Component {
+
   constructor (props) {
     super(props);
     this.state = {
@@ -28,7 +19,7 @@ export default class AboutStats extends Component {
     };
   }
 
-  // fetching github commits for each user
+  // Fetches github commits for each person
   componentDidMount () {
     fetch('https://api.github.com/repos/kbruton18/idb/stats/contributors')
       .then((response) => response.json())
@@ -38,12 +29,13 @@ export default class AboutStats extends Component {
   }
 
   render () {
-    // tracking the commits for each group member
+    // Tracks the commits for each group member
     var derekc = 0;
     var linhc = 0;
     var katherinec = 0;
     var rachelc = 0;
     var ryanc = 0;
+
     for (var i = 0; i < this.state.stats.length; i++) {
       if (this.state.stats[i]) {
         var curr = this.state.stats[i]['author']['login'];
@@ -61,12 +53,15 @@ export default class AboutStats extends Component {
         }
       }
     }
-    // info for each specific person in the group
+
+    // Info about each specific person in the group
     const derek = {'name': 'Derek Chang', 'title': 'Front-End Engineer', 'text': 'Senior, Computer Science major from Austin, TX. I love traveling, learning, and interacting with interesting people on a daily basis. I worked on making sure that our data for our models was displayed properly.', 'commits': derekc, 'issues': 14, 'tests': 0, imageSrc: derekImg, imageCaption: 'Derek'};
     const katherine = {'name': 'Katherine Bruton', 'title': 'Back-End Engineer', 'text': "I'm a senior from San Antonio, TX. I love exploring cities, playing video games, and swing dancing! For this phase of the project, I worked on the Visitor Centers pages.", 'commits': katherinec, 'issues': 16, 'tests': 0, imageSrc: katherineImg, imageCaption: 'Katherine'};
     const linh = {'name': 'Linh Nguyen', 'title': 'Front-End Engineer', 'text': "I'm a senior from the DFW area. I like travelling, avacados, horror movies, and baking. For this iteration, I added React to our project so we could have dynamic webpages.", 'commits': linhc, 'issues': 17, 'tests': 0, 'imageSrc': linhImg, imageCaption: 'Linh'};
     const rachel = {'name': 'Rachel Oei', 'title': 'Back-End Engineer', 'text': 'I am a senior computer science major from Miami, Florida. I worked on the Home and About pages for this project and got to learn about Google Cloud Platform, Flask, and Bootstrap.', 'commits': rachelc, 'issues': 18, 'tests': 17, 'imageSrc': rachelImg, 'imageCaption': 'Rachel'};
     const ryan = {'name': 'Ryan Le', 'title': 'Front-End Engineer', 'text': "Hi! I'm a fourth year disaster human studying Computer Science at The University of Texas at Austin. So far, I've mostly worked on the Campgrounds page and had a lovely time learning about Google Cloud Platform and Flask.", 'commits': ryanc, 'issues': 14, 'tests': 0, 'imageSrc': ryanImg, 'imageCaption': 'Ryan'};
+
+    // Returns the about page data.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />

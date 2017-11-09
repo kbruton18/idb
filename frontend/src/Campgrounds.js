@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
-import {
-  Link,
-  Route
-} from 'react-router-dom';
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Row,
-  Col,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle
-} from 'reactstrap';
+import { Link, Route } from 'react-router-dom';
+import { Button, ButtonGroup, Container, Row, Col, Card,
+         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import CampgroundDetail from './CampgroundDetail.js';
 import SortDropdown from './SortDropdown.js';
 import Filter from './Filter.js';
 
 class CampgroundCard extends Component {
+
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
@@ -30,25 +18,28 @@ class CampgroundCard extends Component {
     };
   }
 
-  reset() {
+  // Resets all the sorting to go back to the original ordering.
+  reset () {
     this.setState({
       sortType: ''
     });
   }
 
-// setting sort type for park
+  // Sets the sort type.
   sort (type) {
     this.setState({
       sortType: type
     });
   }
 
+  // Sets the page.
   setPage (page) {
     this.setState({
       page: page
     });
   }
 
+  // Fetch json data from .../campgrounds
   componentDidMount () {
     fetch('http://sweet-travels.appspot.com/api/campgrounds')
       .then((response) => response.json())
@@ -63,27 +54,30 @@ class CampgroundCard extends Component {
     var version = [];
     Object.assign(version, this.state.data);
     if (this.state.sortType === 'Ascending') {
-      // if we are sorting by ascending order
+      // If we are sorting by ascending name
       version.sort(function (first, second) {
         if (first.name < second.name) return -1;
         if (first.name > second.name) return 1;
         return 0;
       });
     } else if (this.state.sortType === 'Descending') {
-      // if we are sorting by descending order
+      // If we are sorting by descending name
       version.sort(function (first, second) {
         if (first.name < second.name) return 1;
         if (first.name > second.name) return -1;
         return 0;
       });
     } else {
+      // Otherwise keep the original order
       version = this.state.data;
     }
 
-    // for pagination, we display 9 pages at a time.
+    // For pagination, we display 9 card instances at a time.
     const pageOfCampgrounds = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
+    // Creates all the cards for each campground.
     const campground = pageOfCampgrounds.map((d) => {
+      // Checks to see if there is a direction URL to link
       const directionUrlLink = () => {
         if (d.directionsUrl !== 'None') {
           return (<a href={d.directionsUrl}>{d.directionsUrl}</a>);
@@ -91,6 +85,7 @@ class CampgroundCard extends Component {
         return <a>{d.directionsUrl}</a>;
       };
 
+      // Checks to see if there is a regulation URL to link
       const regulationUrlLink = () => {
         if (d.regulationsUrl !== 'None') {
           return (<a href={d.regulationsUrl}>{d.regulationsUrl}</a>);
@@ -98,7 +93,7 @@ class CampgroundCard extends Component {
         return <a>{d.regulationsUrl}</a>;
       };
 
-      // returns all the information to campgrounds that we plan to render
+      // Returns information for each card that we plan to render.
       return (
         <Col lg='4' md='6' sm='12'>
           <Card className='text-center'>
@@ -120,16 +115,16 @@ class CampgroundCard extends Component {
       );
     });
 
+    // Does calculations for how many pagination page buttons we need.
     const pages = Math.ceil(version.length / 9);
-
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
-
     const pageButtons = pageArray.map((d) => {
       return (
         <Button onClick={() => this.setPage(d)}>{d}</Button>
       );
     });
 
+    // Returns the entire campgrounds page.
     return (
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
@@ -139,7 +134,7 @@ class CampgroundCard extends Component {
         <hr className='divider' />
         <form class='form-inline'>
           <Button onClick={this.reset}>Reset</Button>
-          <SortDropdown sortFunction={this.sort.bind(this)}/>
+          <SortDropdown sortFunction={this.sort.bind(this)} />
           <Filter name='Campground Filter' data={this.state.data} term='name' />
         </form>
         <Row>
@@ -157,11 +152,11 @@ class CampgroundCard extends Component {
   }
 }
 
-const Campgrounds = (props) => (
-  <div>
-    <Route exact path='/campgrounds' component={CampgroundCard} />
-    <Route path='/campgrounds/:id' component={CampgroundDetail} />
-  </div>
+export default function Campgrounds (props) {
+  return (
+    <div>
+      <Route exact path='/campgrounds' component={CampgroundCard} />
+      <Route path='/campgrounds/:id' component={CampgroundDetail} />
+    </div>
   );
-
-export default Campgrounds;
+}

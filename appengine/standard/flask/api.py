@@ -1,6 +1,7 @@
 from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
+# parser to parse search queries
 def get_search_terms(term):
     term = term.lower()
     terms = []
@@ -14,11 +15,9 @@ def get_search_terms(term):
                 i = lastIndex + 1
             else:
                 i += -1
-        
         elif term[i] == ' ':
             while term[i] == ' ' and i < len(term):
                 i += 1
-          
         else:
             lastIndex = term.find(' ', i)
             if lastIndex == -1:
@@ -28,6 +27,7 @@ def get_search_terms(term):
             i = lastIndex
     return terms
 
+# global search function that, given a query, searches all instances
 def search_instances(term):
     instances_dict = search_parks(term)
     instances_dict.update(search_states(term))
@@ -35,6 +35,7 @@ def search_instances(term):
     instances_dict.update(search_visitor_centers(term))
     return instances_dict
 
+# given a query, parses the query and searches all parks for a match
 def search_parks(term):
     all_parks = Park.query.all()
     parks_list = []
@@ -97,7 +98,8 @@ def get_parks_list(args):
 def get_park_info(park_code, args):
     park_dict = get_parks_dict(args)
     return park_dict[park_code]
-    
+
+# parses the given query and returns all state matches
 def search_states(term):
     all_states = State.query.all()
     states_list = []
@@ -109,7 +111,8 @@ def search_states(term):
                 break
     states_dict = create_states_dict(states_list)
     return states_dict
-    
+
+# helper method to create state dictionaries
 def create_states_dict(states_list):
     states = {}
     for state in states_list:
@@ -132,6 +135,7 @@ def create_states_dict(states_list):
         states[state.abbreviations] = state_dict
     return states
 
+# filters states by given criteria and returns a dicitionary of their data
 def get_states_dict(args):
     states_list = []
     # if the user wants a specific timezone, parse the arguments and find states for each
@@ -164,7 +168,8 @@ def get_states_list(args):
 def get_state_info(abbreviation, args):
     state_dict = get_states_dict(args)
     return state_dict[abbreviation]
-    
+
+# parses search query and returns dict of campgrounds that match
 def search_campgrounds(term):
     all_campgrounds = Campground.query.all()
     campgrounds_list = []
@@ -176,7 +181,8 @@ def search_campgrounds(term):
                 break
     campgrounds_dict = create_campgrounds_dict(campgrounds_list)
     return campgrounds_dict
-    
+
+# helper method to create campgrounds dictionaries
 def create_campgrounds_dict(campgrounds_list):
     campgrounds = {}
     for campground in campgrounds_list:
@@ -198,6 +204,7 @@ def create_campgrounds_dict(campgrounds_list):
         campgrounds[campground.name] = campground_dict
     return campgrounds
 
+# filter campgrounds by given criteria and return dictionary of data
 def get_campgrounds_dict(args):
     campgrounds_list = []
     if 'states' in args: 
@@ -215,7 +222,8 @@ def get_campgrounds_dict(args):
     if 'states' not in args and 'parkCode' not in args:
         campgrounds_list = Campground.query.all()
     return create_campgrounds_dict(campgrounds_list)
-    
+
+# get list of campground data that matches given argument
 def get_campgrounds_list(args):
     campgrounds_dict = get_campgrounds_dict(args)
     campgrounds_codes = campgrounds_dict.keys()
@@ -224,10 +232,12 @@ def get_campgrounds_list(args):
         data.append(campgrounds_dict[code])
     return data
 
+# get the information of a given campground
 def get_campground_info(name, args):
     campground_dict = get_campgrounds_dict(args)
     return campground_dict[name]
-    
+
+# parse search query and return visitor centers that match
 def search_visitor_centers(term):
     all_visitor_centers = VisitorCenter.query.all()
     visitor_centers_list = []
@@ -239,7 +249,8 @@ def search_visitor_centers(term):
                 break
     visitor_centers_dict = create_visitor_centers_dict(visitor_centers_list)
     return visitor_centers_dict
-    
+
+# helper method to make visitor centers dict
 def create_visitor_centers_dict(visitor_centers_list):
     visitor_centers = {}
     for visitor_center in visitor_centers_list:
@@ -257,6 +268,7 @@ def create_visitor_centers_dict(visitor_centers_list):
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers
 
+# filter visitor centers by given argument and return dictionary of their data
 def get_visitor_centers_dict(args):
     visitor_centers_list = []
     # look for matching states, if there is a state filter

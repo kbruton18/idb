@@ -1,7 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, Container,
          Input, Form, FormGroup, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
 // Class for the search bar that is located within the Navigation Bar.
 class Search extends React.Component {
   constructor (props) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Container, Col, CardBody, CardTitle, CardText, Card, CardImg } from 'reactstrap';
-import NotFound from './NotFound.js';
 
 class Search extends Component {
   constructor (props) {
@@ -22,12 +21,36 @@ class Search extends Component {
           data: responseJson
         });
       })
+      .then((responseJson) => {
+        if (Object.keys(responseJson).length === 0 
+          && responseJson.constructor === Object) {
+          this.setState({
+            nothingFound: true
+          });
+        }
+      })
       .catch(() => {
         this.setState({nothingFound: true});
       });
   }
 
   render () {
+    // If bad URL error was found, return NotFound page
+    if (this.state.nothingFound) {
+      return (
+        <div>
+          <Container className='bg-faded p-4 my-4'>
+            <hr className='divider' />
+            <h2 className='text-center text-lg text-uppercase my-0'>
+              <strong>Searched for: {this.state.query}</strong>
+            </h2>
+            <hr className='divider' />
+              <p align="center">No matches for search term.</p>
+          </Container>
+        </div>
+      );
+    }
+
     return (
       <div>
         <Container className='bg-faded p-4 my-4'>

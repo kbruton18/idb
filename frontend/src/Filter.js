@@ -105,7 +105,6 @@ class Filter {
   }
 
   createFilterElemForFilter (type, term) {
-    console.log(term);
     return (
       <DropdownItem onClick={this.setFilter.bind(this, type, [term])}>{term}</DropdownItem>
     );

@@ -66,6 +66,7 @@ def create_parks_dict(parks_list):
         park_dict["states"] = park.states
         park_dict["imageUrl"] = park.imageUrl
         park_dict["searchString"] = park.searchString
+        park_dict["model"] = "park"
         parks[park.parkCode] = park_dict
     return parks
 
@@ -131,6 +132,7 @@ def create_states_dict(states_list):
         state_dict["campgrounds"] = state.campgrounds
         state_dict["url"] = state.url
         state_dict["imageUrl"] = state.imageUrl
+        state_dict]"model"] = "state"
         state_dict["searchString"] = state.searchString
         states[state.abbreviations] = state_dict
     return states
@@ -200,6 +202,7 @@ def create_campgrounds_dict(campgrounds_list):
         campground_dict["directionsInfo"] = campground.directionsInfo
         campground_dict["directionsUrl"] = campground.directionsUrl
         campground_dict["imageUrl"] = campground.imageUrl
+        campground_dict["model"] = "campground"
         campground_dict["searchString"] = campground.searchString
         campgrounds[campground.name] = campground_dict
     return campgrounds
@@ -264,6 +267,7 @@ def create_visitor_centers_dict(visitor_centers_list):
         visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
         visitor_center_dict["website"] = visitor_center.website
         visitor_center_dict["imageUrl"] = visitor_center.imageUrl
+        visitor_center_dict["model"] = "visitor_center"
         visitor_center_dict["searchString"] = visitor_center.searchString
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers

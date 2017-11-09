@@ -59,6 +59,8 @@ class APITestMethods(unittest.TestCase):
         campgrounds = api.search_campgrounds("Summerland")
         self.assertTrue("White River" in campgrounds.keys())
         self.assertEquals(1, len(campgrounds.keys()))
+        campground = campgrounds["White River"]
+        self.assertEquals(campground["parkName"], "Mount Rainier National Park")
 
     def testVisitorCentersSearch(self):
         vcs = api.search_visitor_centers("Ashford")

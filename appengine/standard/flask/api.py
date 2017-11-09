@@ -132,7 +132,7 @@ def create_states_dict(states_list):
         state_dict["campgrounds"] = state.campgrounds
         state_dict["url"] = state.url
         state_dict["imageUrl"] = state.imageUrl
-        state_dict]"model"] = "state"
+        state_dict["model"] = "state"
         state_dict["searchString"] = state.searchString
         states[state.abbreviations] = state_dict
     return states
@@ -191,6 +191,7 @@ def create_campgrounds_dict(campgrounds_list):
         campground_dict = {}
         campground_dict["name"] = campground.name
         campground_dict["parkCode"] = campground.parkCode
+        campground_dict["parkName"] = get_park_info(campground.parkCode, "")["fullName"]
         campground_dict["states"] = campground.states
         campground_dict["description"] = campground.description
         campground_dict["regulations"] = campground.regulationsOverview

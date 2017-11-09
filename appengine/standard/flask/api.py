@@ -92,7 +92,7 @@ def create_parks_list(parks_dict):
 
 # Return all info about all national parks, in list format
 def get_parks_list(args):
-	return create_parks_list(get_parks_dict(args))
+    return create_parks_list(get_parks_dict(args))
 
 # Returns a park's dictionary, given the park code as a string (e.g. "dena")
 def get_park_info(park_code, args):

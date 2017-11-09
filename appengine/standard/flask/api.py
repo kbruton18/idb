@@ -268,7 +268,7 @@ def create_visitor_centers_dict(visitor_centers_list):
         visitor_center_dict["directionsInfo"] = visitor_center.directionsInfo
         visitor_center_dict["website"] = visitor_center.website
         visitor_center_dict["imageUrl"] = visitor_center.imageUrl
-        visitor_center_dict["model"] = "visitor_center"
+        visitor_center_dict["model"] = "visitorcenter"
         visitor_center_dict["searchString"] = visitor_center.searchString
         visitor_centers[visitor_center.name] = visitor_center_dict
     return visitor_centers

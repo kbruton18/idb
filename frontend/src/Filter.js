@@ -23,7 +23,12 @@ class Filter {
     this.appliedFilters = {};
 
     for (const key in this.filters) {
-      this.filterTerms[key] = createFilterTerms(this.filters[key], key).sort();
+      this.filterTerms[key] = createFilterTerms(this.filters[key], key).sort().reduce((acc, cur) => {
+        if (acc.length === 0 || acc[acc.length - 1] !== cur) {
+          acc.push(cur);
+        }
+        return acc;
+      }, []);
       this.appliedFilters[key] = [];
     }
 

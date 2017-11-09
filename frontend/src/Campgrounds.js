@@ -51,7 +51,7 @@ class CampgroundCard extends Component {
       });
     let filterPromises = [];
     filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/states', 'abbreviations'));
-    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/parks', 'fullName'));
+    filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/campgrounds', 'parkCode'));
 
     processPromises.call(this, filterPromises);
   }

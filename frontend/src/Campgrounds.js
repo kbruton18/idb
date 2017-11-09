@@ -14,7 +14,8 @@ class CampgroundCard extends Component {
     this.state = {
       data: [],
       sortType: '',
-      page: 1
+      page: 1,
+      filter: null
     };
   }
 

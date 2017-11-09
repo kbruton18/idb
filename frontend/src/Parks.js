@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, ButtonGroup, Container, Row, Col, Card,
-         CardImg, CardText, CardBody, CardTitle,
-         Dropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
+         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import ParkDetail from './ParkDetail.js';
 import SortDropdown from './SortDropdown.js';
 import {processFetch, processPromises} from './Filter.js';

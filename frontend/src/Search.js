@@ -7,7 +7,7 @@ class Search extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      id: props.match.params.id,
+      query: this.props.location.search.slice(3),
       data: []
     };
   }
@@ -15,7 +15,7 @@ class Search extends Component {
   // Fetch json data from .../parks/ID
   // Catch if there is no response, this means bad URL
   componentDidMount () {
-    fetch('http://api.sweet-travels.appspot.com/api/search/' + this.state.id)
+    fetch('http://api.sweet-travels.appspot.com/api/search/' + this.state.query)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -36,7 +36,7 @@ class Search extends Component {
             <strong> Name</strong>
           </h2>
           <hr className='divider' />
-          <p><b>Park Code:</b> Code</p>
+          <p><b>Search:</b> {this.state.query}</p>
         </Container>
       </div>
     );

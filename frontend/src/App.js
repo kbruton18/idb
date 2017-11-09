@@ -14,6 +14,7 @@ import ParkDetail from './ParkDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
 import NotFound from './NotFound.js';
 import StateDetail from './StateDetail.js';
+import Search from './Search.js';
 
 // Renders the entire app.
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
               <Route path='parks/:id' component={ParkDetail} />
               <Route path='visitorcenters/:id' component={VisitorCenterDetail} />
               <Route path='states/:id' component={StateDetail} />
+              <Route path='/search' component={Search} />
               <Route component={NotFound} />
             </Switch>
           </div>

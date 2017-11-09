@@ -1,6 +1,32 @@
 from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
+def get_search_terms(term):
+    terms = []
+    i = 0
+    while i < len(term):
+        if term[i] == '"':
+            lastIndex = term.find('"', i + 1)
+            if lastIndex != -1:
+                quotedterm = term[i+1:lastIndex]
+                terms.append(quotedterm)
+                i = lastIndex + 1
+            else:
+                i += -1
+        
+        elif term[i] == ' ':
+            while term[i] == ' ' and i < len(term):
+                i += 1
+          
+        else:
+            lastIndex = term.find(' ', i)
+            if lastIndex == -1:
+                lastIndex = len(term)
+            nextterm = term[i:lastIndex]
+            terms.append(nextterm)
+            i = lastIndex
+    return terms
+
 def search_instances(term):
     instances_dict = search_parks(term)
     instances_dict.update(search_states(term))
@@ -11,7 +37,7 @@ def search_instances(term):
 def search_parks(term):
     all_parks = Park.query.all()
     parks_list = []
-    terms = term.split()
+    terms = get_search_terms(term)
     for park in all_parks:
         for search_term in terms:
             if park.search(search_term):
@@ -74,7 +100,7 @@ def get_park_info(park_code, args):
 def search_states(term):
     all_states = State.query.all()
     states_list = []
-    terms = term.split()
+    terms = get_search_terms(term)
     for state in all_states:
         for search_term in terms:
             if state.search(search_term):
@@ -140,7 +166,7 @@ def get_state_info(abbreviation, args):
 def search_campgrounds(term):
     all_campgrounds = Campground.query.all()
     campgrounds_list = []
-    terms = term.split()
+    terms = get_search_terms(term)
     for campground in all_campgrounds:
         for search_term in terms:
             if campground.search(search_term):
@@ -202,7 +228,7 @@ def get_campground_info(name, args):
 def search_visitor_centers(term):
     all_visitor_centers = VisitorCenter.query.all()
     visitor_centers_list = []
-    terms = term.split()
+    terms = get_search_terms(term)
     for visitor_center in all_visitor_centers:
         for search_term in terms:
             if visitor_center.search(search_term):

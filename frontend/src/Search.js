@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Row, Container, Col, CardBody, CardTitle, CardText, Card, CardImg } from 'reactstrap';
 import NotFound from './NotFound.js';
+import TextHighlight from 'react-text-highlight';
 
 class Search extends Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class Search extends Component {
 
   render () {
     const searchResults = Object.values(this.state.data).slice((this.state.page - 1) * 9, this.state.page * 9);
-    const version = searchResults.map((data) => <SearchCard data={data} />)
+    const version = searchResults.map((data) => <SearchCard data={data} query={this.state.query} />)
     const pages = Math.ceil(Object.values(this.state.data).length / 9);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
@@ -73,24 +74,25 @@ function SearchCard (props) {
   const type = props.data.model;
   if (type === 'park') {
     return (
-      <ParkSearchCard data={props.data} />
+      <ParkSearchCard data={props.data} query={props.query} />
     );
   }
 
   if (type === 'state') {
     return (
-      <StateSearchCard data={props.data} />
+      <StateSearchCard data={props.data} query={props.query} />
     );
   }
 
   return (
-    <OtherSearchCard data={props.data} />
+    <OtherSearchCard data={props.data} query={props.query} />
   );
 }
 
 // visitorcenter campground url name
 
 function OtherSearchCard (props) {
+  const query = props.query;
   const image = props.data.imageUrl;
   const search = props.data.searchString;
   const name = props.data.name;
@@ -99,11 +101,12 @@ function OtherSearchCard (props) {
   console.log(search);
 
   return (
-    <SearchCardBase url={url} image={image} alt={type} title={name} search={search} />
+    <SearchCardBase url={url} image={image} alt={type} title={name} search={search} query={query} />
   );
 }
 
 function StateSearchCard (props) {
+  const query = props.query;
   const abbr = props.data.abbreviations;
   const image = props.data.imageUrl;
   const search = props.data.searchString;
@@ -111,11 +114,12 @@ function StateSearchCard (props) {
   const name = props.data.name;
 
   return (
-    <SearchCardBase url={url} image={image} alt='State' title={name} serach={search} />
+    <SearchCardBase url={url} image={image} alt='State' title={name} serach={search} query={query} />
   );
 }
 
 function ParkSearchCard (props) {
+  const query = props.query;
   const fullName = props.data.fullName;
   const image = props.data.imageUrl;
   const search = props.data.searchString;
@@ -123,11 +127,14 @@ function ParkSearchCard (props) {
   const url = '/parks/' + parkCode;
 
   return (
-    <SearchCardBase url={url} image={image} alt='Park' title={fullName} search={search} />
+    <SearchCardBase url={url} image={image} alt='Park' title={fullName} search={search} query={query} />
   );
 }
 
 function SearchCardBase (props) {
+  console.log(props.search)
+  var description = (props.search === undefined || props.search === null) ? "" : props.search;
+
   return (
     <Col lg='4' md='6' sm='12'>
       <Container>
@@ -138,7 +145,7 @@ function SearchCardBase (props) {
           <CardBody>
             <CardTitle className='text-center'>{props.title}</CardTitle>
             <CardText>
-              {props.search}
+              <TextHighlight highlight={props.query} text={description} />
             </CardText>
           </CardBody>
         </Card>

@@ -31,8 +31,6 @@ class Filter {
       }, []);
       this.appliedFilters[key] = [];
     }
-
-    console.log(this.filterTerms);
   }
 
   resetFilter () {

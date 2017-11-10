@@ -134,7 +134,6 @@ function SearchCardBase (props) {
   highlightWords.push(props.query.replace("+", " "));
   const description = (props.search === undefined || props.search === null) ? "" : props.search;
 
-  console.log(highlightWords);
   return (
     <Col lg='4' md='6' sm='12'>
       <Container>

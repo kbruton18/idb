@@ -19,7 +19,6 @@ class CampgroundDetail extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson) {
-          console.log(responseJson);
           this.setState({
             data: responseJson
           });

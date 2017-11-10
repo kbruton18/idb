@@ -130,10 +130,11 @@ function ParkSearchCard (props) {
 }
 
 function SearchCardBase (props) {
-  var highlightWords = String(props.query).split(" ");
-  highlightWords.push(props.query);
+  var highlightWords = String(props.query).replace("+", " ").split(" ");
+  highlightWords.push(props.query.replace("+", " "));
   const description = (props.search === undefined || props.search === null) ? "" : props.search;
 
+  console.log(highlightWords);
   return (
     <Col lg='4' md='6' sm='12'>
       <Container>

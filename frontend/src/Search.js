@@ -114,7 +114,7 @@ function StateSearchCard (props) {
   const name = props.data.name;
 
   return (
-    <SearchCardBase url={url} image={image} alt='State' title={name} serach={search} query={query} />
+    <SearchCardBase url={url} image={image} alt='State' title={name} search={search} query={query} />
   );
 }
 

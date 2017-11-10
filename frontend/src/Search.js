@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, ButtonGroup, Row, Container, Col, CardBody, CardTitle, CardText, Card, CardImg } from 'reactstrap';
-import NotFound from './NotFound.js';
-import TextHighlight from 'react-text-highlight';
+import Highlighter from 'react-highlight-words';
 
 class Search extends Component {
   constructor (props) {
@@ -131,7 +130,9 @@ function ParkSearchCard (props) {
 }
 
 function SearchCardBase (props) {
-  var description = (props.search === undefined || props.search === null) ? "" : props.search;
+  var highlightWords = String(props.query).split(" ");
+  highlightWords.push(props.query);
+  const description = (props.search === undefined || props.search === null) ? "" : props.search;
 
   return (
     <Col lg='4' md='6' sm='12'>
@@ -143,7 +144,7 @@ function SearchCardBase (props) {
           <CardBody>
             <CardTitle className='text-center'>{props.title}</CardTitle>
             <CardText>
-              <TextHighlight highlight={props.query} text={description} />
+              <Highlighter highlightClassName='Highlight' searchWords={highlightWords} textToHighlight={description} />
             </CardText>
           </CardBody>
         </Card>

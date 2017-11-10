@@ -98,7 +98,6 @@ function OtherSearchCard (props) {
   const name = props.data.name;
   const type = props.data.model;
   const url = '/' + type + 's/' + name;
-  console.log(search);
 
   return (
     <SearchCardBase url={url} image={image} alt={type} title={name} search={search} query={query} />
@@ -132,7 +131,6 @@ function ParkSearchCard (props) {
 }
 
 function SearchCardBase (props) {
-  console.log(props.search)
   var description = (props.search === undefined || props.search === null) ? "" : props.search;
 
   return (

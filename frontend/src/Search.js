@@ -36,7 +36,7 @@ class Search extends Component {
 
   render () {
     const searchResults = Object.values(this.state.data).slice((this.state.page - 1) * 9, this.state.page * 9);
-    const version = searchResults.map((data) => <SearchCard data={data} query={this.state.query} />)
+    const version = searchResults.map((data) => <SearchCard data={data} query={this.state.query} />);
     const pages = Math.ceil(Object.values(this.state.data).length / 9);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
@@ -130,9 +130,9 @@ function ParkSearchCard (props) {
 }
 
 function SearchCardBase (props) {
-  var highlightWords = String(props.query).replace("+", " ").split(" ");
-  highlightWords.push(props.query.replace("+", " "));
-  const description = (props.search === undefined || props.search === null) ? "" : props.search;
+  var highlightWords = String(props.query).replace('+', ' ').split(' ');
+  highlightWords.push(props.query.replace('+', ' '));
+  const description = (props.search === undefined || props.search === null) ? '' : props.search;
 
   return (
     <Col lg='4' md='6' sm='12'>

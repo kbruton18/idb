@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-import { Button, ButtonGroup, Container, Row, Col, Card,
-         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
-import StateDetail from './StateDetail.js';
+import { Button, ButtonGroup, Container, Row } from 'reactstrap';
 import SortDropdown from './SortDropdown.js';
-import {processFetch, processPromises} from './Filter.js';
+import {processPromises} from './Filter.js';
 
-class LandingCard extends Component {
+export default class GenericLanding extends Component {
   constructor (props) {
     super(props);
     this.reset = this.reset.bind(this);
+    this.dataUrl = props.dataUrl;
+    this.fetchPromises = props.fetchPromises;
+    this.ascendingSortFunction = props.ascendingSortFunction;
+    this.descendingSortFunction = props.descendingSortFunction;
+    this.cardFunction = props.cardFunction;
     this.state = {
+      title: props.title,
       data: [],
       sortType: '',
       page: 1,
@@ -43,20 +46,18 @@ class LandingCard extends Component {
   // Fetch json data from .../states
   componentDidMount () {
     // TODO Generically fetch and process data
-    // fetch('http://sweet-travels.appspot.com/api/states')
-    //   .then((response) => response.json())
-    //   .then((responseJson) => {
-    //     this.setState({
-    //       data: responseJson
-    //     });
-    //   });
+    fetch(this.dataUrl)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          data: responseJson
+        });
+      });
 
     // TODO Generically fetch and process filter data
+    // I want this to be an array of bound but not called processFetch's
 
-    // let filterPromises = [];
-    // filterPromises.push(processFetch('https://sweet-travels.appspot.com/api/states', 'timeZone'));
-
-    // processPromises.call(this, filterPromises);
+    processPromises.call(this, this.fetchPromises.map((f) => f()));
   }
 
   render () {
@@ -69,27 +70,19 @@ class LandingCard extends Component {
 
     // TODO Generically sort...
 
-    // if (this.state.sortType === 'Ascending') {
-    //   // If we are sorting by ascending name
-    //   version.sort(function (first, second) {
-    //     if (first.name < second.name) return -1;
-    //     if (first.name > second.name) return 1;
-    //     return 0;
-    //   });
-    // } else if (this.state.sortType === 'Descending') {
-    //   // If we are sorting by descending name
-    //   version.sort(function (first, second) {
-    //     if (first.name < second.name) return 1;
-    //     if (first.name > second.name) return -1;
-    //     return 0;
-    //   });
-    // }
+    if (this.state.sortType === 'Ascending') {
+      // If we are sorting by ascending name
+      version.sort(this.ascendingSortFunction);
+    } else if (this.state.sortType === 'Descending') {
+      // If we are sorting by descending name
+      version.sort(this.descendingSortFunction);
+    }
 
     // For pagination, we display 9 card instances at a time.
     const displayPage = version.slice((this.state.page - 1) * 9, this.state.page * 9);
 
     // TODO Creates all the cards, with some function
-    // const cards = displayPage.map(cardFunction);
+    const cards = displayPage.map(this.cardFunction);
 
     // TODO THIS IS GARBAGE
     // Does calculations for how many pagination page buttons we need.
@@ -111,7 +104,7 @@ class LandingCard extends Component {
       <Container className='bg-faded p-4 my-4'>
         <hr className='divider' />
         <h2 className='text-center text-lg text-uppercase my-0'>
-          states
+          {this.state.title}
         </h2>
         <hr className='divider' />
         <form className='form-inline'>
@@ -133,14 +126,4 @@ class LandingCard extends Component {
       </Container>
     );
   }
-}
-
-export default function GenericLanding (props) {
-  return (
-    <div>
-      {/* TODO CHANGE PATH */}
-      <Route exact path='/states' component={LandingCard} />
-      <Route path='/states/:id' component={StateDetail} />
-    </div>
-  );
 }

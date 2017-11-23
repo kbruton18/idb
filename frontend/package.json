@@ -27,5 +27,10 @@
   },
   "devDependencies": {
     "semistandard": "^11.0.0"
-  }
+  },
+  "semistandard": {
+      "globals": [
+        "fetch"
+      ]
+    }
 }

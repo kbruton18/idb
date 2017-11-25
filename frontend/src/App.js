@@ -10,7 +10,8 @@ import About from './About.js';
 import ParksLanding from './ParksLanding.js';
 import Campgrounds from './Campgrounds.js';
 import VisitorCenters from './VisitorCenters.js';
-import States from './States.js';
+// import States from './States.js';
+import StatesLanding from './StatesLanding.js';
 import ParkDetail from './ParkDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
 import NotFound from './NotFound.js';
@@ -32,7 +33,7 @@ class App extends Component {
               <Route path='/parks' component={ParksLanding} />
               <Route path='/campgrounds' component={Campgrounds} />
               <Route path='/visitorcenters' component={VisitorCenters} />
-              <Route path='/states' component={States} />
+              <Route path='/states' component={StatesLanding} />
               <Route path='parks/:id' component={ParkDetail} />
               <Route path='visitorcenters/:id' component={VisitorCenterDetail} />
               <Route path='states/:id' component={StateDetail} />

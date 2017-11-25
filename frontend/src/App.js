@@ -7,7 +7,7 @@ import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
 // import Parks from './Parks.js';
-import ParkLanding from './ParkLanding.js';
+import ParksLanding from './ParksLanding.js';
 import Campgrounds from './Campgrounds.js';
 import VisitorCenters from './VisitorCenters.js';
 import States from './States.js';
@@ -29,7 +29,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/about' component={About} />
-              <Route path='/parks' component={ParkLanding} />
+              <Route path='/parks' component={ParksLanding} />
               <Route path='/campgrounds' component={Campgrounds} />
               <Route path='/visitorcenters' component={VisitorCenters} />
               <Route path='/states' component={States} />

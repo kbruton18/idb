@@ -4,8 +4,15 @@ import unittest
 import api
 from flask import Flask
 
+# Unit tests for api.py, the API for the Sweet Travels web app.
 class APITestMethods(unittest.TestCase):
     def testSearchTermParser(self):
+        term = 'yes yes no'
+        expected_list = ["yes", "yes", "no"]
+        actual_list = api.get_search_terms(term)
+        self.assertEquals(expected_list, actual_list)
+
+    def testSearchTermParserWithQuotes(self):
         term = 'yes  yes "hello and" yes  "hello a"'
         expected_list = ['yes', 'yes', 'hello and', 'yes', 'hello a']
         actual_list = api.get_search_terms(term)

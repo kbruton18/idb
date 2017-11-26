@@ -37,3 +37,7 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
 }
+
+.Highlight {
+  background-color: #ffd54f;
+}

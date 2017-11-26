@@ -31,8 +31,6 @@ class Filter {
       }, []);
       this.appliedFilters[key] = [];
     }
-
-    console.log(this.filterTerms);
   }
 
   resetFilter () {
@@ -97,11 +95,11 @@ class Filter {
   }
 
   createFilterElemForTerm (term) {
-    var filterKey = "Matching Parks";
-    if (term === "abbreviations") {
-      filterKey = "State";
-    } else if (term === "timeZone") {
-      filterKey = "Timezone";
+    var filterKey = 'Matching Parks';
+    if (term === 'abbreviations') {
+      filterKey = 'State';
+    } else if (term === 'timeZone') {
+      filterKey = 'Timezone';
     }
 
     return (
@@ -109,7 +107,7 @@ class Filter {
         <DropdownToggle caret>
           Filter by {filterKey}
         </DropdownToggle>
-        <DropdownMenu className="overflow-scrolling">
+        <DropdownMenu className='overflow-scrolling'>
           {this.filterTerms[term].map(this.createFilterElemForFilter.bind(this, term))}
         </DropdownMenu>
       </UncontrolledDropdown>

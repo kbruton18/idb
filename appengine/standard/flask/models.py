@@ -37,7 +37,10 @@ class Park(database.Model):
 
     def __repr__(self):
         return '<Park %s: ParkCode=%s>' % self.fullName, self.parkCode
-        
+    
+    # Searches the model for the given term. Fills the searchString variable
+    # with the surrounding text of the first occurrence of the term. Returns
+    # a boolean indicating the presence of the term.
     def search(self, term):
         self.searchString = ''
         if self.fullName.lower().find(term) != -1:
@@ -107,7 +110,10 @@ class State(database.Model):
 
     def __repr__(self):
         return '<State %s>' % self.name
-        
+
+    # Searches the model for the given term. Fills the searchString variable
+    # with the surrounding text of the first occurrence of the term. Returns
+    # a boolean indicating the presence of the term.
     def search(self, term):
         self.searchString = ''
         if self.name.lower().find(term) != -1:
@@ -181,6 +187,9 @@ class Campground(database.Model):
     def __repr__(self):
         return '<Campground %s: parkCode=%s>' % self.name, self.parkCode
 
+    # Searches the model for the given term. Fills the searchString variable
+    # with the surrounding text of the first occurrence of the term. Returns
+    # a boolean indicating the presence of the term.
     def search(self, term):
         self.searchString = ''
         if self.name.lower().find(term) != -1:
@@ -238,6 +247,9 @@ class VisitorCenter(database.Model):
     def __repr__(self):
         return '<Visitor Center %s: parkCode =%s>' % self.fullName, self.parkCode
 
+    # Searches the model for the given term. Fills the searchString variable
+    # with the surrounding text of the first occurrence of the term. Returns
+    # a boolean indicating the presence of the term.
     def search(self, term):
         self.searchString = ''
         if self.name.lower().find(term) != -1:

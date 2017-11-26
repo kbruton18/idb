@@ -8,7 +8,7 @@ let all = []
 
 let sim = d3.forceSimulation()
     .force('link', d3.forceLink().id((d) => (d.name)))
-    .force('charge', d3.forceManyBody().strength(-5))
+    .force('charge', d3.forceManyBody().strength(-1))
     .force('center', d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
 
 let color = d3.scaleOrdinal(d3.schemeCategory10)
@@ -16,11 +16,11 @@ let color = d3.scaleOrdinal(d3.schemeCategory10)
 function main () {
   let cp = fetch('https://sweet-travels.appspot.com/api/proxy/carriers').then((r) => r.json()).then(processCarriers)
   let bp = fetch('https://sweet-travels.appspot.com/api/proxy/brands').then((r) => r.json()).then(processBrands)
-//  let mp = fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
+  let mp = fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
   let op = fetch('https://sweet-travels.appspot.com/api/proxy/os').then((r) => r.json()).then(processOs)
-//  let promises = [cp, bp, mp, op]
-  let promises = [cp, bp, op]
-  Promise.all(promises).then(printStuff).then(d3Stuff)
+  let promises = [cp, bp, mp, op]
+//  let promises = [cp, bp, op]
+  Promise.all(promises).then(printStuff).then(d3Stuff).catch(d3Stuff)
 }
 
 function d3Stuff () {
@@ -101,6 +101,7 @@ function processModels (data) {
     d['type'] = 3
     return d
   })
+  all = all.concat(models)
 }
 
 function processOs (data) {
@@ -109,6 +110,7 @@ function processOs (data) {
     d['type'] = 4
     return d
   })
+  all = all.concat(os)
 }
 
 main()

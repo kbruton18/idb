@@ -4,32 +4,43 @@ let carriers = []
 let brands = []
 let models = []
 let os = []
-let all = []
+let nodes = []
+let links = []
 
 let sim = d3.forceSimulation()
     .force('link', d3.forceLink().id((d) => (d.name)))
-    .force('charge', d3.forceManyBody().strength(-1))
+    .force('charge', d3.forceManyBody().strength(-500))
     .force('center', d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
+
+let svg
+let vis
 
 let color = d3.scaleOrdinal(d3.schemeCategory10)
 
 function main () {
   let cp = fetch('https://sweet-travels.appspot.com/api/proxy/carriers').then((r) => r.json()).then(processCarriers)
   let bp = fetch('https://sweet-travels.appspot.com/api/proxy/brands').then((r) => r.json()).then(processBrands)
-  let mp = fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
+//  let mp = fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
   let op = fetch('https://sweet-travels.appspot.com/api/proxy/os').then((r) => r.json()).then(processOs)
-  let promises = [cp, bp, mp, op]
-//  let promises = [cp, bp, op]
-  Promise.all(promises).then(printStuff).then(d3Stuff).catch(d3Stuff)
+//  let promises = [cp, bp, mp, op]
+  let promises = [cp, bp, op]
+  Promise.all(promises).then(d3Stuff)
 }
 
 function d3Stuff () {
-  let svg = d3.select('#d3').append('svg').attr('width', window.innerWidth).attr('height', window.innerHeight)
-  let node = svg.append('g').attr('class', 'nodes')
-  let link = svg.append('g').attr('class', 'links')
+  svg = d3.select('#d3').append('svg').attr('width', window.innerWidth).attr('height', window.innerHeight)
+      .call(zoom)
+  vis = svg.append('g')
+  let link = vis.append('g').attr('class', 'links')
+  let node = vis.append('g').attr('class', 'nodes')
+
+  link = link.selectAll('line')
+      .data(links)
+      .enter().append('line')
+        .attr('stroke-width', 1)
 
   node = node.selectAll('circle')
-      .data(all)
+      .data(nodes)
       .enter().append('circle')
         .attr('r', 10)
         .attr('fill', (d) => color(d['type']))
@@ -38,16 +49,34 @@ function d3Stuff () {
           .on('drag', dragged)
           .on('end', dragEnd))
 
-  sim.nodes(all).on('tick', tick)
+  sim.nodes(nodes).on('tick', tick)
+
+  sim.force('link').links(links)
+
   console.log(sim.nodes())
+  console.log(links)
   sim.alpha(1).restart()
 
   function tick () {
     node
         .attr('cx', (d) => d.x)
         .attr('cy', (d) => d.y)
+
+    link
+        .attr('x1', (d) => d.source.x)
+        .attr('x2', (d) => d.target.x)
+        .attr('y1', (d) => d.source.y)
+        .attr('y2', (d) => d.target.y)
   }
 }
+
+function zoomed () {
+  console.log(d3.event)
+  vis.attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ')scale(' + d3.event.transform.k + ')')
+}
+
+let zoom = d3.zoom()
+  .on('zoom', zoomed)
 
 function dragStart (d) {
   if (!d3.event.active) {
@@ -83,7 +112,14 @@ function processCarriers (data) {
     d['type'] = 1
     return d
   })
-  all = all.concat(carriers)
+
+  carriers.forEach(function (c) {
+    c['brands'].forEach(function (b) {
+      links.push({'source': c['name'], 'target': b})
+    })
+  })
+
+  nodes = nodes.concat(carriers)
 }
 
 function processBrands (data) {
@@ -92,7 +128,14 @@ function processBrands (data) {
     d['type'] = 2
     return d
   })
-  all = all.concat(brands)
+
+  brands.forEach(function (b) {
+    b['os'].forEach(function (o) {
+      links.push({'source': b['name'], 'target': o})
+    })
+  })
+
+  nodes = nodes.concat(brands)
 }
 
 function processModels (data) {
@@ -101,7 +144,7 @@ function processModels (data) {
     d['type'] = 3
     return d
   })
-  all = all.concat(models)
+  nodes = nodes.concat(models)
 }
 
 function processOs (data) {
@@ -110,7 +153,7 @@ function processOs (data) {
     d['type'] = 4
     return d
   })
-  all = all.concat(os)
+  nodes = nodes.concat(os)
 }
 
 main()

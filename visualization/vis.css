@@ -2,3 +2,8 @@ circle {
   stroke: #000;
   stroke-width: 2px;
 }
+
+line {
+  stroke: #000;
+  stroke-opacity: 0.5;
+}

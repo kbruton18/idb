@@ -14,6 +14,7 @@ import VisitorCenters from './VisitorCenters.js';
 // import States from './States.js';
 import StatesLanding from './StatesLanding.js';
 import ParkDetail from './ParkDetail.js';
+import CampgroundDetail from './CampgroundDetail.js';
 import VisitorCenterDetail from './VisitorCenterDetail.js';
 import NotFound from './NotFound.js';
 import StateDetail from './StateDetail.js';
@@ -31,13 +32,14 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/about' component={About} />
-              <Route path='/parks' component={ParksLanding} />
-              <Route path='/campgrounds' component={CampgroundsLanding} />
-              <Route path='/visitorcenters' component={VisitorCenters} />
-              <Route path='/states' component={StatesLanding} />
-              <Route path='parks/:id' component={ParkDetail} />
-              <Route path='visitorcenters/:id' component={VisitorCenterDetail} />
-              <Route path='states/:id' component={StateDetail} />
+              <Route exact path='/parks' component={ParksLanding} />
+              <Route exact path='/campgrounds' component={CampgroundsLanding} />
+              <Route exact path='/visitorcenters' component={VisitorCenters} />
+              <Route exact path='/states' component={StatesLanding} />
+              <Route path='/parks/:id' component={ParkDetail} />
+              <Route path='/campgrounds/:id' component={CampgroundDetail} />
+              <Route path='/visitorcenters/:id' component={VisitorCenterDetail} />
+              <Route path='/states/:id' component={StateDetail} />
               <Route path='/search' component={Search} />
               <Route component={NotFound} />
             </Switch>

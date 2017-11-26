@@ -18,12 +18,7 @@ let vis
 let color = d3.scaleOrdinal(d3.schemeCategory10)
 
 function main () {
-  let cp = fetch('https://sweet-travels.appspot.com/api/proxy/carriers').then((r) => r.json()).then(processCarriers)
-  let bp = fetch('https://sweet-travels.appspot.com/api/proxy/brands').then((r) => r.json()).then(processBrands)
-//  let mp = fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
-  let op = fetch('https://sweet-travels.appspot.com/api/proxy/os').then((r) => r.json()).then(processOs)
-//  let promises = [cp, bp, mp, op]
-  let promises = [cp, bp, op]
+  let promises = [fetchCarriers(), fetchBrands(), fetchModels(), fetchOs()]
   Promise.all(promises).then(d3Stuff)
 }
 
@@ -68,6 +63,35 @@ function d3Stuff () {
         .attr('y1', (d) => d.source.y)
         .attr('y2', (d) => d.target.y)
   }
+}
+
+function fetchCarriers () {
+  return fetch('https://sweet-travels.appspot.com/api/proxy/carriers').then((r) => r.json()).then(processCarriers)
+}
+
+function fetchBrands () {
+  return fetch('https://sweet-travels.appspot.com/api/proxy/brands').then((r) => r.json()).then(processBrands)
+}
+
+function fetchModels () {
+  function f () {
+    return fetch('https://sweet-travels.appspot.com/api/proxy/models').then((r) => r.json()).then(processModels)
+  }
+
+  function r (i) {
+    return f().catch(function (e) {
+      if (i < 20) {
+        return r(i + 1)
+      }
+      throw e
+    })
+  }
+
+  return r(0)
+}
+
+function fetchOs () {
+  return fetch('https://sweet-travels.appspot.com/api/proxy/os').then((r) => r.json()).then(processOs)
 }
 
 function zoomed () {
@@ -117,6 +141,9 @@ function processCarriers (data) {
     c['brands'].forEach(function (b) {
       links.push({'source': c['name'], 'target': b})
     })
+    c['models'].forEach(function (m) {
+      links.push({'source': c['name'], 'target': m})
+    })
   })
 
   nodes = nodes.concat(carriers)
@@ -132,6 +159,9 @@ function processBrands (data) {
   brands.forEach(function (b) {
     b['os'].forEach(function (o) {
       links.push({'source': b['name'], 'target': o})
+    })
+    b['phone_models'].forEach(function (m) {
+      links.push({'source': b['name'], 'target': m})
     })
   })
 
@@ -153,6 +183,13 @@ function processOs (data) {
     d['type'] = 4
     return d
   })
+
+  os.forEach(function (o) {
+    o['models'].forEach(function (m) {
+      links.push({'source': o['name'], 'target': m})
+    })
+  })
+
   nodes = nodes.concat(os)
 }
 

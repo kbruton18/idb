@@ -33,31 +33,19 @@ function printBadStuff (promises) {
 }
 
 function processCarriers (data) {
-  let processSingle = function (d) {
-    carriers[d['name']] = d
-  }
-  data.forEach(processSingle)
+  carriers = data
 }
 
 function processBrands (data) {
-  let processSingle = function (d) {
-    brands[d['name']] = d
-  }
-  data.forEach(processSingle)
+  brands = data
 }
 
 function processModels (data) {
-  let processSingle = function (d) {
-    models[d['name']] = d
-  }
-  data.forEach(processSingle)
+  models = data
 }
 
 function processOs (data) {
-  let processSingle = function (d) {
-    os[d['name']] = d
-  }
-  data.forEach(processSingle)
+  os = data
 }
 
 main()

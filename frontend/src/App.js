@@ -6,12 +6,9 @@ import Title from './Title.js';
 import Footer from './Footer.js';
 import Home from './Home.js';
 import About from './About.js';
-// import Parks from './Parks.js';
 import ParksLanding from './ParksLanding.js';
-// import Campgrounds from './Campgrounds.js';
 import CampgroundsLanding from './CampgroundsLanding.js';
-import VisitorCenters from './VisitorCenters.js';
-// import States from './States.js';
+import VisitorCentersLanding from './VisitorCentersLanding.js';
 import StatesLanding from './StatesLanding.js';
 import ParkDetail from './ParkDetail.js';
 import CampgroundDetail from './CampgroundDetail.js';
@@ -34,7 +31,7 @@ class App extends Component {
               <Route exact path='/about' component={About} />
               <Route exact path='/parks' component={ParksLanding} />
               <Route exact path='/campgrounds' component={CampgroundsLanding} />
-              <Route exact path='/visitorcenters' component={VisitorCenters} />
+              <Route exact path='/visitorcenters' component={VisitorCentersLanding} />
               <Route exact path='/states' component={StatesLanding} />
               <Route path='/parks/:id' component={ParkDetail} />
               <Route path='/campgrounds/:id' component={CampgroundDetail} />

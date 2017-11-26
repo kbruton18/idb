@@ -2,9 +2,11 @@ from models import Park, State, Campground, VisitorCenter
 from flask import Flask
 
 # Parser to parse search queries. The parser parses by spaces and
-# groups words in double quotes together. Malformed queries (with
-# odd numbers of double quotes) will not be parsed correctly and
-# will fail silently.
+# groups words in double quotes as one term. Space-separated terms
+# will be multiple terms. Malformed queries (with odd numbers of
+# double quotes) will not be parsed correctly and will fail silently.
+# Search results will contain at least one of the terms, in a
+# random order.
 def get_search_terms(term):
     term = term.lower()
     terms = []

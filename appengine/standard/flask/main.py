@@ -62,7 +62,7 @@ def get_proxy_info(name):
         else:
             return result.status_code
     except urlfetch.Error:
-        return "something went wrong"
+        return "something went wrong", 500
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

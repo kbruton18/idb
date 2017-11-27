@@ -2,8 +2,8 @@ import React from 'react';
 import GenericLanding from './GenericLanding.js';
 import { processFetch } from './Filter.js';
 import { Link } from 'react-router-dom';
-import { Col, Card,
-         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Container } from 'reactstrap';
+import DetailsCard from './DetailsCard.js';
 
 export default function ParkLanding (props) {
   const dUrl = 'https://sweet-travels.appspot.com/api/visitorcenters';
@@ -38,26 +38,20 @@ export default function ParkLanding (props) {
       return <a>{d.directionsUrl}</a>;
     };
 
+    let body = (
+      <Container>
+        <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br />
+        <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br />
+        <b>Latitude</b>: {lat}<br />
+        <b>Longitude</b>: {long}<br />
+        <b>Directions</b>: {directionUrlLink()}<br />
+        <b>Website</b>: <a href={d.website}>{d.website}</a>
+      </Container>
+    );
+
       // Returns information for each card that we plan to render.
     return (
-      <Col lg='4' md='6' sm='12'>
-        <Card className='text-center'>
-          <Link to={`/visitorcenters/${d.name}`}>
-            <CardImg top width='100%' height='250px' src={d.imageUrl} alt='visitor center' />
-          </Link>
-          <CardBody>
-            <CardTitle className='text-center'>{d.name}</CardTitle>
-            <CardText>
-              <b>Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br />
-              <b>State</b>: <Link to={`/states/${d.states}`}>{d.states}</Link><br />
-              <b>Latitude</b>: {lat}<br />
-              <b>Longitude</b>: {long}<br />
-              <b>Directions</b>: {directionUrlLink()}<br />
-              <b>Website</b>: <a href={d.website}>{d.website}</a>
-            </CardText>
-          </CardBody>
-        </Card>
-      </Col>
+      <DetailsCard linkUrl={`/visitorcenters/${d.name}`} imageUrl={d.imageUrl} name={d.name} body={body} />
     );
   };
 

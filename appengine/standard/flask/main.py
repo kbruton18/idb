@@ -4,6 +4,7 @@ from models import database
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from google.appengine.api import urlfetch
+from google.appengine.api import memcache
 
 def create_app():
     app = Flask(__name__)
@@ -54,15 +55,20 @@ def get_visitor_center(name):
 
 @app.route('/api/proxy/<string:name>')
 def get_proxy_info(name):
-    url = 'https://phonedb.info/' + name
-    try:
-        result = urlfetch.fetch(url)
-        if result.status_code == 200:
-            return result.content, 200
-        else:
-            return result.status_code
-    except urlfetch.Error:
-        return "something went wrong", 500
+    data = memcache.get(name)
+    if data is not None:
+        return data, 200
+    else:
+        url = 'https://phonedb.info/' + name
+        try:
+            result = urlfetch.fetch(url)
+            if result.status_code == 200:
+                memcache.add(name, result.content, 86400)
+                return result.content, 200
+            else:
+                return result.status_code
+        except urlfetch.Error:
+            return "something went wrong", 500
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

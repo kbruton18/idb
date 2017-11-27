@@ -14,48 +14,85 @@ let sim = d3.forceSimulation()
 
 let svg
 let vis
-
+let link
+let node
+let label
 let color = d3.scaleOrdinal(d3.schemeCategory10)
 
 function main () {
   let promises = [fetchCarriers(), fetchBrands(), fetchModels(), fetchOs()]
-  Promise.all(promises).then(d3Stuff)
+  Promise.all(promises).then(d3Stuff.bind(null, undefined, undefined))
 }
 
-function d3Stuff () {
+function setupD3 () {
   svg = d3.select('#d3').append('svg').attr('width', window.innerWidth).attr('height', window.innerHeight)
       .call(zoom)
   vis = svg.append('g')
-  let link = vis.append('g').attr('class', 'links')
-  let node = vis.append('g').attr('class', 'nodes')
+  link = vis.append('g').attr('class', 'links')
+  node = vis.append('g').attr('class', 'nodes')
+  label = vis.append('g').attr('class', 'labels')
+}
 
+function d3Stuff (usedNodes, usedLinks) {
+  if (usedNodes === undefined) {
+    console.log('defaulting')
+    usedNodes = nodes
+    usedLinks = links
+    setupD3()
+  }
+  let r = 10
+  console.log('setting links')
   link = link.selectAll('line')
-      .data(links)
-      .enter().append('line')
+      .data(usedLinks, (d) => d.id)
+  link.exit().remove()
+  link = link.enter().append('line')
         .attr('stroke-width', 1)
+        .merge(link)
 
+  console.log('links set')
+
+  console.log('setting nodes')
   node = node.selectAll('circle')
-      .data(nodes)
-      .enter().append('circle')
-        .attr('r', 10)
+      .data(usedNodes, (d) => d.name)
+  node.exit().remove()
+  node = node.enter().append('circle')
+        .attr('r', r)
         .attr('fill', (d) => color(d['type']))
         .call(d3.drag()
           .on('start', dragStart)
           .on('drag', dragged)
           .on('end', dragEnd))
+        .on('click', (d) => console.log(bfstree(d)))
+        .merge(node)
 
-  sim.nodes(nodes).on('tick', tick)
+  console.log('nodes set')
 
-  sim.force('link').links(links)
+  console.log('setting labels')
+  label = label.selectAll('text')
+        .data(usedNodes, (d) => d.name)
+  label.exit().remove()
+  label = label.enter().append('text')
+            .text((d) => d.name)
+          .merge(label)
+  console.log('nodes set')
 
-  console.log(sim.nodes())
-  console.log(links)
+  console.log('setting sim')
+  sim.nodes(usedNodes).on('tick', tick)
+
+  sim.force('link').links(usedLinks)
+
   sim.alpha(1).restart()
+  console.log('sim set')
+  console.log(sim.nodes())
 
   function tick () {
     node
         .attr('cx', (d) => d.x)
         .attr('cy', (d) => d.y)
+
+    label
+        .attr('x', (d) => d.x + r * 1.5)
+        .attr('y', (d) => d.y + r / 2)
 
     link
         .attr('x1', (d) => d.source.x)
@@ -95,7 +132,6 @@ function fetchOs () {
 }
 
 function zoomed () {
-  console.log(d3.event)
   vis.attr('transform', 'translate(' + d3.event.transform.x + ',' + d3.event.transform.y + ')scale(' + d3.event.transform.k + ')')
 }
 
@@ -139,10 +175,10 @@ function processCarriers (data) {
 
   carriers.forEach(function (c) {
     c['brands'].forEach(function (b) {
-      links.push({'source': c['name'], 'target': b})
+      links.push({'source': c['name'], 'target': b, 'id': c['name'] + '->' + b})
     })
     c['models'].forEach(function (m) {
-      links.push({'source': c['name'], 'target': m})
+      links.push({'source': c['name'], 'target': m, 'id': c['name'] + '->' + m})
     })
   })
 
@@ -158,10 +194,10 @@ function processBrands (data) {
 
   brands.forEach(function (b) {
     b['os'].forEach(function (o) {
-      links.push({'source': b['name'], 'target': o})
+      links.push({'source': b['name'], 'target': o, 'id': b['name'] + '->' + o})
     })
     b['phone_models'].forEach(function (m) {
-      links.push({'source': b['name'], 'target': m})
+      links.push({'source': b['name'], 'target': m, 'id': b['name'] + '->' + m})
     })
   })
 
@@ -186,11 +222,47 @@ function processOs (data) {
 
   os.forEach(function (o) {
     o['models'].forEach(function (m) {
-      links.push({'source': o['name'], 'target': m})
+      links.push({'source': o['name'], 'target': m, 'id': o['name'] + '->' + m})
     })
   })
 
   nodes = nodes.concat(os)
+}
+
+function bfstree (elem) {
+  let foundN = [elem]
+  let foundL = []
+
+  function isLinkNode (link, element) {
+    return isLinkSource(link, element) || isLinkTarget(link, element)
+  }
+
+  function isLinkSource (link, element) {
+    return link.source.name === element.name
+  }
+
+  function isLinkTarget (link, element) {
+    return link.target.name === element.name
+  }
+
+  for (let i = 0; i < 1; i++) {
+    let iterL = links.filter((link) => (!foundL.includes(link) && foundN.some(isLinkNode.bind(null, link))))
+    console.log(iterL.length)
+    foundL = foundL.concat(iterL)
+    iterL.forEach((link) => {
+      if (!foundN.some(isLinkSource.bind(null, link))) {
+        foundN.push(link.source)
+      }
+
+      if (!foundN.some(isLinkTarget.bind(null, link))) {
+        foundN.push(link.target)
+      }
+    })
+  }
+
+  d3Stuff(foundN, foundL)
+
+  return {'nodes': foundN, 'links': foundL}
 }
 
 main()

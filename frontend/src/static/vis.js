@@ -9,8 +9,9 @@ let links = []
 
 let sim = d3.forceSimulation()
     .force('link', d3.forceLink().id((d) => (d.name)))
-    .force('charge', d3.forceManyBody().strength(-500))
+    .force('charge', d3.forceManyBody().strength(-5000))
     .force('center', d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
+    .on('tick', tick)
 
 let svg
 let vis
@@ -18,6 +19,7 @@ let link
 let node
 let label
 let color = d3.scaleOrdinal(d3.schemeCategory10)
+let r = 10
 
 function main () {
   let promises = [fetchCarriers(), fetchBrands(), fetchModels(), fetchOs()]
@@ -28,9 +30,9 @@ function setupD3 () {
   svg = d3.select('#d3').append('svg').attr('width', window.innerWidth).attr('height', window.innerHeight)
       .call(zoom)
   vis = svg.append('g')
-  link = vis.append('g').attr('class', 'links')
-  node = vis.append('g').attr('class', 'nodes')
-  label = vis.append('g').attr('class', 'labels')
+  link = vis.append('g').attr('class', 'links').selectAll('line')
+  node = vis.append('g').attr('class', 'nodes').selectAll('circle')
+  label = vis.append('g').attr('class', 'labels').selectAll('text')
 }
 
 function d3Stuff (usedNodes, usedLinks) {
@@ -40,20 +42,26 @@ function d3Stuff (usedNodes, usedLinks) {
     usedLinks = links
     setupD3()
   }
-  let r = 10
+
+  link = link.data([])
+  link.exit().remove()
+
+  node = node.data([])
+  node.exit().remove()
+
+  label = label.data([])
+  label.exit().remove()
+
   console.log('setting links')
-  link = link.selectAll('line')
-      .data(usedLinks, (d) => d.id)
+  link = link.data(usedLinks, (d) => d.id)
   link.exit().remove()
   link = link.enter().append('line')
         .attr('stroke-width', 1)
-        .merge(link)
 
   console.log('links set')
 
   console.log('setting nodes')
-  node = node.selectAll('circle')
-      .data(usedNodes, (d) => d.name)
+  node = node.data(usedNodes, (d) => d.name)
   node.exit().remove()
   node = node.enter().append('circle')
         .attr('r', r)
@@ -63,43 +71,41 @@ function d3Stuff (usedNodes, usedLinks) {
           .on('drag', dragged)
           .on('end', dragEnd))
         .on('click', (d) => console.log(bfstree(d)))
-        .merge(node)
 
   console.log('nodes set')
 
   console.log('setting labels')
-  label = label.selectAll('text')
-        .data(usedNodes, (d) => d.name)
+  label = label.data(usedNodes, (d) => d.name)
   label.exit().remove()
   label = label.enter().append('text')
             .text((d) => d.name)
-          .merge(label)
   console.log('nodes set')
 
   console.log('setting sim')
-  sim.nodes(usedNodes).on('tick', tick)
+  sim.nodes(usedNodes)
 
   sim.force('link').links(usedLinks)
 
   sim.alpha(1).restart()
   console.log('sim set')
   console.log(sim.nodes())
+}
 
-  function tick () {
-    node
+function tick () {
+  console.log('tick')
+  node
         .attr('cx', (d) => d.x)
         .attr('cy', (d) => d.y)
 
-    label
+  label
         .attr('x', (d) => d.x + r * 1.5)
         .attr('y', (d) => d.y + r / 2)
 
-    link
+  link
         .attr('x1', (d) => d.source.x)
         .attr('x2', (d) => d.target.x)
         .attr('y1', (d) => d.source.y)
         .attr('y2', (d) => d.target.y)
-  }
 }
 
 function fetchCarriers () {
@@ -245,7 +251,7 @@ function bfstree (elem) {
     return link.target.name === element.name
   }
 
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 2; i++) {
     let iterL = links.filter((link) => (!foundL.includes(link) && foundN.some(isLinkNode.bind(null, link))))
     console.log(iterL.length)
     foundL = foundL.concat(iterL)

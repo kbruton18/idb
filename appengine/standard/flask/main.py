@@ -4,6 +4,7 @@ from models import database
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from google.appengine.api import urlfetch
+from google.appengine.api import memcache
 
 def create_app():
     app = Flask(__name__)

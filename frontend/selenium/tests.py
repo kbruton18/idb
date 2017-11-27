@@ -1,35 +1,56 @@
 #!/usr/bin/env python
 
+import unittest
+import re
+import time
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait  # available since 2.4.0
-# available since 2.26.0
 from selenium.webdriver.support import expected_conditions as EC
 
-# Create a new instance of the Firefox driver
-driver = webdriver.Firefox()
+class SweTests(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Firefox()
+        self.driver.get("http://www.swetravels.me")
 
-# go to the google home page
-driver.get("http://www.google.com")
+    def test_loads(self):
+        self.assertEqual("SWEtravels", self.driver.title)
 
-# the page is ajaxy so the title is originally this:
-print driver.title
+    def test_nav_home(self):
+        self.nav_test('Home')
 
-# find the element that's name attribute is q (the google search box)
-inputElement = driver.find_element_by_name("q")
+    def test_nav_about(self):
+        self.nav_test('About')
 
-# type in the search
-inputElement.send_keys("cheese!")
+    def test_nav_park(self):
+        self.nav_test('Parks')
+        self.content_test('Park Code')
 
-# submit the form (although google automatically searches now without submitting)
-inputElement.submit()
+    def test_nav_camp(self):
+        self.nav_test('Campgrounds')
+        self.content_test('Total Sites')
 
-try:
-    # we have to wait for the page to refresh, the last thing that seems to be updated is the title
-    WebDriverWait(driver, 10).until(EC.title_contains("cheese!"))
+    def test_nav_visi(self):
+        self.nav_test('Visitor Centers')
+        self.content_test('Directions')
 
-    # You should see "cheese! - Google Search"
-    print driver.title
+    def test_nav_stat(self):
+        self.nav_test('States')
+        self.content_test('Abbreviations')
 
-finally:
-    driver.quit()
+    def nav_test(self, text):
+        link = self.driver.find_element_by_link_text(text)
+        link.click()
+        self.assertEqual("SWEtravels", self.driver.title)
+
+    def content_test(self, exp):
+        src = self.driver.page_source
+        found = re.search(exp, src)
+        self.assertNotEqual(found, None)
+
+    def tearDown(self):
+        self.driver.close()
+
+if __name__ == "__main__":
+    unittest.main()
+

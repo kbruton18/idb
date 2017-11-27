@@ -19,7 +19,7 @@ let link
 let node
 let label
 let color = d3.scaleOrdinal(d3.schemeCategory10)
-let r = 10
+let r = 50
 
 function main () {
   let promises = [fetchCarriers(), fetchBrands(), fetchModels(), fetchOs()]
@@ -56,7 +56,7 @@ function d3Stuff (usedNodes, usedLinks) {
   link = link.data(usedLinks, (d) => d.id)
   link.exit().remove()
   link = link.enter().append('line')
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 3)
 
   console.log('links set')
 
@@ -98,8 +98,8 @@ function tick () {
         .attr('cy', (d) => d.y)
 
   label
-        .attr('x', (d) => d.x + r * 1.5)
-        .attr('y', (d) => d.y + r / 2)
+        .attr('x', (d) => d.x + r * 1.1)
+        .attr('y', (d) => d.y + r / 3)
 
   link
         .attr('x1', (d) => d.source.x)

@@ -2,8 +2,8 @@ import React from 'react';
 import GenericLanding from './GenericLanding.js';
 import { processFetch } from './Filter.js';
 import { Link } from 'react-router-dom';
-import { Col, Card,
-         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Container } from 'reactstrap';
+import DetailsCard from './DetailsCard.js';
 
 export default function ParkLanding (props) {
   const dUrl = 'https://sweet-travels.appspot.com/api/states';
@@ -36,25 +36,19 @@ export default function ParkLanding (props) {
       return <span>{d.nationalParks}</span>;
     });
 
+    let body = (
+      <Container>
+        <b>Abbreviations: </b>{d.abbreviations}<br />
+        <b>Nickname(s): </b>{d.nicknames}<br />
+        <b>Capital: </b>{d.capital}<br />
+        <b>Timezone: </b>{d.timeZone}<br />
+        <b>National Park(s):</b> {parkLinks}
+      </Container>
+    );
+
   // Returns information for each card that we plan to render.
     return (
-      <Col lg='4' md='6' sm='12'>
-        <Card className='text-center'>
-          <Link to={`/states/${d.abbreviations}`}>
-            <CardImg top width='100%' height='250px' src={d.imageUrl} alt='State flag' />
-          </Link>
-          <CardBody>
-            <CardTitle className='text-center'>{d.name}</CardTitle>
-            <CardText>
-              <b>Abbreviations: </b>{d.abbreviations}<br />
-              <b>Nickname(s): </b>{d.nicknames}<br />
-              <b>Capital: </b>{d.capital}<br />
-              <b>Timezone: </b>{d.timeZone}<br />
-              <b>National Park(s):</b> {parkLinks}
-            </CardText>
-          </CardBody>
-        </Card>
-      </Col>
+      <DetailsCard linkUrl={`/states/${d.abbreviations}`} imageUrl={d.imageUrl} name={d.name} body={body} />
     );
   };
 

@@ -55,14 +55,11 @@ def get_visitor_center(name):
 @app.route('/api/proxy/<string:name>')
 def get_proxy_info(name):
     url = 'https://phonedb.info/' + name
-    try:
-        result = urlfetch.fetch(url)
-        if result.status_code == 200:
-            return result.content, 200
-        else:
-            return result.status_code
-    except urlfetch.Error:
-        return "something went wrong", 500
+    result = urlfetch.fetch(url)
+    if result.status_code == 200:
+        return result.content, 200
+    else:
+        return result.status_code
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

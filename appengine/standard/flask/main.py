@@ -55,20 +55,12 @@ def get_visitor_center(name):
 
 @app.route('/api/proxy/<string:name>')
 def get_proxy_info(name):
-    data = memcache.get(name)
-    if data is not None:
-        return data, 200
+    url = 'https://phonedb.info/' + name
+    result = urlfetch.fetch(url)
+    if result.status_code == 200:
+        return result.content, 200
     else:
-        url = 'https://phonedb.info/' + name
-        try:
-            result = urlfetch.fetch(url)
-            if result.status_code == 200:
-                memcache.add(name, result.content, 86400)
-                return result.content, 200
-            else:
-                return result.status_code
-        except urlfetch.Error:
-            return "something went wrong", 500
+        return result.status_code
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

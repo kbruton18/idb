@@ -2,8 +2,8 @@ import React from 'react';
 import GenericLanding from './GenericLanding.js';
 import { processFetch } from './Filter.js';
 import { Link } from 'react-router-dom';
-import { Col, Card,
-         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Container } from 'reactstrap';
+import DetailsCard from './DetailsCard.js';
 
 export default function ParkLanding (props) {
   const dUrl = 'https://sweet-travels.appspot.com/api/parks';
@@ -49,25 +49,19 @@ export default function ParkLanding (props) {
       }
       return <a>{d.campgrounds}</a>;
     });
+
+    let body = (
+      <Container>
+        <b>Park Code</b>: {d.parkCode}<br />
+        <b>Designation</b>: {d.designation}<br />
+        <b>State(s)</b>: {stateLinks}<br />
+        <b>Campgrounds(s)</b>: {campgroundLinks}<br />
+        <b>Website</b>: <a href={d.url}>{d.url}</a>
+      </Container>
+    );
       // Returns information for each card that we plan to render.
     return (
-      <Col lg='4' md='6' sm='12'>
-        <Card className='text-center'>
-          <Link to={`/parks/${d.parkCode}`}>
-            <CardImg top width='100%' height='250px' src={d.imageUrl} alt='park' />
-          </Link>
-          <CardBody>
-            <CardTitle className='text-center'>{d.fullName}</CardTitle>
-            <CardText>
-              <b>Park Code</b>: {d.parkCode}<br />
-              <b>Designation</b>: {d.designation}<br />
-              <b>State(s)</b>: {stateLinks}<br />
-              <b>Campgrounds(s)</b>: {campgroundLinks}<br />
-              <b>Website</b>: <a href={d.url}>{d.url}</a>
-            </CardText>
-          </CardBody>
-        </Card>
-      </Col>
+      <DetailsCard linkUrl={`/parks/${d.parkCode}`} imageUrl={d.imageUrl} name={d.name} body={body} />
     );
   };
 

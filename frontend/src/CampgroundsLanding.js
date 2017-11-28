@@ -21,7 +21,7 @@ export default function ParkLanding (props) {
   const cf = function (d) {
       // Checks to see if there is a direction URL to link
     const directionUrlLink = () => {
-      if (d.directionsUrl !== 'None') {
+      if (d.directionsUrl !== 'Not available') {
         return (<a href={d.directionsUrl}>{d.directionsUrl}</a>);
       }
       return <a>{d.directionsUrl}</a>;
@@ -29,7 +29,7 @@ export default function ParkLanding (props) {
 
       // Checks to see if there is a regulation URL to link
     const regulationUrlLink = () => {
-      if (d.regulationsUrl !== 'None') {
+      if (d.regulationsUrl !== 'Not available') {
         return (<a href={d.regulationsUrl}>{d.regulationsUrl}</a>);
       }
       return <a>{d.regulationsUrl}</a>;

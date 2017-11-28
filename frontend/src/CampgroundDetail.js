@@ -55,7 +55,7 @@ class CampgroundDetail extends Component {
 
     // Checks to see if there is a directionsUrl url to link
     const directionUrlLink = () => {
-      if (this.state.data.directionsUrl !== 'None') {
+      if (this.state.data.directionsUrl !== 'Not available') {
         return (<a href={this.state.data.directionsUrl}>{this.state.data.directionsUrl}</a>);
       }
       return <a>{this.state.data.directionsUrl}</a>;
@@ -63,7 +63,7 @@ class CampgroundDetail extends Component {
 
     // Checks to see if there is a regulations url to link
     const regulationUrlLink = () => {
-      if (this.state.data.regulationsUrl !== 'None') {
+      if (this.state.data.regulationsUrl !== 'Not available') {
         return (<a href={this.state.data.regulationsUrl}>{this.state.data.regulationsUrl}</a>);
       }
       return <a>{this.state.data.regulationsUrl}</a>;

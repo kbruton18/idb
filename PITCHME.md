@@ -27,18 +27,37 @@ Katherine Bruton
 ![Katherine](frontend/src/img/about/katherine.jpg)
 
 ---
-Demo
+### Demo
+
 [SWEet Travels](http://swetravels.me)
 
 ---
-Self-Critique
+### Self-Critique
+
+- slow to load
+- lack of UI indication during filtering or sorting
+- filtering or sorting is not applied if user presses back button
+- no indication of page number in paginated pages
+- very few campground instances
+- sparse data; many occasions of "No Info Available"
 
 ---
-Group 19 Critique
+### PhoneDB Critique
+
+- loads quickly
+- thorough sorting system
+- limited data on instances
+- attributes not labeled on instance cards
+- name of long instances cut off
+- lack of carousel
+- search system seems to match letters
+- highlighted search context is sometimes missing
 
 ---
-Visualization
+### Visualization
+
 [PhoneDB Visualization](http://swetravels.me/vis.html)
+
 - Carriers: blue
 - Brands: orange
 - Phones: red

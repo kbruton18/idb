@@ -52,6 +52,6 @@ export default function ParkLanding (props) {
   };
 
   return (
-    <GenericLanding title={'states'} dataUrl={dUrl} fetchPromises={fPromises} ascendingSortFunction={asf} descendingSortFunction={dsf} cardFunction={cf} />
+    <GenericLanding title={'campgrounds'} dataUrl={dUrl} fetchPromises={fPromises} ascendingSortFunction={asf} descendingSortFunction={dsf} cardFunction={cf} />
   );
 }

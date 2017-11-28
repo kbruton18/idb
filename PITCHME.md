@@ -1,4 +1,4 @@
----?image=frontend/src/img/bg.jpg
+---?image=frontend/src/img/yosemite.jpg
 # SWEet Travels
 
 An application designed to promote travel.

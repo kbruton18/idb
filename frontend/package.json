@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build; cp ./src/static/* ./build/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "test-deploy": "npm run build && gsutil cp -r build/* gs://test.swetravels.me",

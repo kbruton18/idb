@@ -2,8 +2,8 @@ import React from 'react';
 import GenericLanding from './GenericLanding.js';
 import { processFetch } from './Filter.js';
 import { Link } from 'react-router-dom';
-import { Col, Card,
-         CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Container } from 'reactstrap';
+import DetailsCard from './DetailsCard.js';
 
 export default function ParkLanding (props) {
   const dUrl = 'https://sweet-travels.appspot.com/api/campgrounds';
@@ -35,29 +35,23 @@ export default function ParkLanding (props) {
       return <a>{d.regulationsUrl}</a>;
     };
 
+    let body = (
+      <Container>
+        <b>Total Sites</b>: {d.totalSites}<br />
+        <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br />
+        <b>Description</b>: {d.description}<br />
+        <b>Regulations URL</b>: {regulationUrlLink()}<br />
+        <b>Directions URL</b>: {directionUrlLink()}
+      </Container>
+    );
+
       // Returns information for each card that we plan to render.
     return (
-      <Col lg='4' md='6' sm='12'>
-        <Card className='text-center'>
-          <Link to={`/campgrounds/${d.name}`}>
-            <CardImg top width='100%' height='250px' src={d.imageUrl} alt='campground' />
-          </Link>
-          <CardBody>
-            <CardTitle className='text-center'>{d.name}</CardTitle>
-            <CardText>
-              <b>Total Sites</b>: {d.totalSites}<br />
-              <b>Associated Park</b>: <Link to={`/parks/${d.parkCode}`}>{d.parkCode}</Link><br />
-              <b>Description</b>: {d.description}<br />
-              <b>Regulations URL</b>: {regulationUrlLink()}<br />
-              <b>Directions URL</b>: {directionUrlLink()}
-            </CardText>
-          </CardBody>
-        </Card>
-      </Col>
+      <DetailsCard linkUrl={`/campgrounds/${d.name}`} imageUrl={d.imageUrl} name={d.name} body={body} />
     );
   };
 
   return (
-    <GenericLanding title={'states'} dataUrl={dUrl} fetchPromises={fPromises} ascendingSortFunction={asf} descendingSortFunction={dsf} cardFunction={cf} />
+    <GenericLanding title={'campgrounds'} dataUrl={dUrl} fetchPromises={fPromises} ascendingSortFunction={asf} descendingSortFunction={dsf} cardFunction={cf} />
   );
 }

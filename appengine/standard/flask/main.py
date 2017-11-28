@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from api import *
 from models import database
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from google.appengine.api import urlfetch
+from google.appengine.api import memcache
 
 def create_app():
     app = Flask(__name__)
@@ -53,16 +54,41 @@ def get_visitor_center(name):
   return jsonify(get_visitor_center_info(name, request.args))
 
 @app.route('/api/proxy/<string:name>')
-def get_proxy_info(name):
+def get_proxy_models(name):
+    data = memcache_get(name)
+    if data is not None:
+        resp = make_response(data)
+        resp.mimetype = 'application/json'
+        return resp
     url = 'https://phonedb.info/' + name
-    try:
-        result = urlfetch.fetch(url)
-        if result.status_code == 200:
-            return result.content, 200
-        else:
-            return result.status_code
-    except urlfetch.Error:
-        return "something went wrong", 500
+    result = urlfetch.fetch(url, deadline=600)
+    if result.status_code == 200:
+        memcache_store(result.content, name)
+        return result.content, 200
+    else:
+        return result.status_code
+
+
+def memcache_get(key):
+    data = ''
+    if memcache.get(key) != "good":
+        return None
+    for i in range(5):
+        cached = memcache.get(key + str(i))
+        data = data + cached
+    return data
+
+def memcache_store(data, key):
+    datalen = len(data)
+    step = datalen / 4
+    last = 0
+    index = 0
+    for i in range(step, datalen, step):
+        memcache.add(key + str(index), data[last:i], time=86400)
+        last = i
+        index = index + 1
+    memcache.add(key + str(index), data[last:], time=86400)
+    memcache.add(key, "good", time=86400)
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0")

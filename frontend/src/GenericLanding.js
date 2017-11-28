@@ -78,15 +78,15 @@ export default class GenericLanding extends Component {
       version.sort(this.descendingSortFunction);
     }
 
-    // For pagination, we display 9 card instances at a time.
-    const displayPage = version.slice((this.state.page - 1) * 9, this.state.page * 9);
+    // For pagination, we display 12 card instances at a time.
+    const displayPage = version.slice((this.state.page - 1) * 12, this.state.page * 12);
 
     // TODO Creates all the cards, with some function
     const cards = displayPage.map(this.cardFunction);
 
     // TODO THIS IS GARBAGE
     // Does calculations for how many pagination page buttons we need.
-    const pages = Math.ceil(version.length / 9);
+    const pages = Math.ceil(version.length / 12);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
     const pageButtons = pageArray.map((d) => {
       return (

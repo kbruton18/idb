@@ -34,7 +34,7 @@ function AboutSources (props) {
 function AboutProcess (props) {
   const content = (
     <Container>
-      <p>Our data came from the <a href='https://www.nps.gov/subjects/digital/nps-data-api.htm'>National Park Service API </a>and the <a href='https://developers.google.com/places/'>Google Places API</a>. For this part of the project, we looked up and entered text manually; we did not scrape any sources. </p>
+      <p>Our data came from the <a href='https://www.nps.gov/subjects/digital/nps-data-api.htm'>National Park Service API </a>and the <a href='https://developers.google.com/places/'>Google Places API</a>.</p>
       <p>We used a variety of tools for this website, including Google Cloud Platform for hosting, Namecheap for the domain name, Github as a code repository, Trello for issue tracking, Apiary for API design, Postman for REST calls, Plan-It-Poker for     user stories, Slack for communication, and Git for version control.</p>
       <p>
         The code repository for this site: <a href='https://github.com/kbruton18/idb'>Github</a><br />

@@ -3,7 +3,7 @@ from api import *
 from models import database
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from google.appengine.api import urlfetch
+from google.appengine.api import urlfetch
 from google.appengine.api import memcache
 
 def create_app():
@@ -53,20 +53,20 @@ def get_visitor_centers():
 def get_visitor_center(name):
   return jsonify(get_visitor_center_info(name, request.args))
 
-# @app.route('/api/proxy/<string:name>')
-# def get_proxy_models(name):
-#     data = memcache_get(name)
-#     if data is not None:
-#         resp = make_response(data)
-#         resp.mimetype = 'application/json'
-#         return resp
-#     url = 'https://phonedb.info/' + name
-#     result = urlfetch.fetch(url, deadline=600)
-#     if result.status_code == 200:
-#         memcache_store(result.content, name)
-#         return result.content, 200
-#     else:
-#         return result.status_code
+@app.route('/api/proxy/<string:name>')
+def get_proxy_models(name):
+    data = memcache_get(name)
+    if data is not None:
+        resp = make_response(data)
+        resp.mimetype = 'application/json'
+        return resp
+    url = 'https://phonedb.info/' + name
+    result = urlfetch.fetch(url, deadline=600)
+    if result.status_code == 200:
+        memcache_store(result.content, name)
+        return result.content, 200
+    else:
+        return result.status_code
 
 
 def memcache_get(key):

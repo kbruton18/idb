@@ -9,7 +9,7 @@ Story Title,Estimate,Vote Started,Voting Duration,Avg Voting Time,Fastest,Slowes
 "As a user, I should be able to see all the states when I click on States so that I can quickly see my available options when planning my trip",5,18/10/2017 02:38:32,0:00:08,0:00:04,Rachel,Ryan Le,3
 "As a user, I want to see pages of campgrounds rather than all of them on one page so that everything doesn't bog down trying to load at once",5,18/10/2017 02:38:21,0:00:08,0:00:06,Rachel,Ryan Le,2
 "As a user, I want to look at a specific visitor center and see relevant content, so that I can plan my visit.",2,18/10/2017 02:38:10,0:00:08,0:00:04,Rachel,Ryan Le,2
-"As a user, I want to be able to click on About so that I can learn more about the website, how it is used, and get background on the creators of the site.",Œ_,18/10/2017 02:37:53,0:00:14,0:00:06,Rachel,Ryan Le,1
+"As a user, I want to be able to click on About so that I can learn more about the website, how it is used, and get background on the creators of the site.",Î_,18/10/2017 02:37:53,0:00:14,0:00:06,Rachel,Ryan Le,1
 "As a user, I should be able to see multiple campgrounds when I click on Campgrounds so that I can quickly look through my options.",2,18/10/2017 02:37:34,0:00:17,0:00:10,Rachel,Ryan Le,2
 "As a user, I want to be able to click a visitor center and see a map of where that visitor center is located, so I can plan navigation.",5,18/10/2017 02:37:18,0:00:13,0:00:08,Rachel,Ryan Le,2
 "As a user, I want to click on Visitor Centers and see a list of park visitor centers so I can plan out my visit.",2,18/10/2017 02:37:04,0:00:12,0:00:05,Rachel,Ryan Le,2
@@ -17,7 +17,7 @@ Story Title,Estimate,Vote Started,Voting Duration,Avg Voting Time,Fastest,Slowes
 "As a user of the SWEtravels API, I want to query for campgrounds and get back results",5,18/10/2017 02:36:36,0:00:09,0:00:06,Rachel,Ryan Le,5
 "As a user, I want to be able to navigate to all the pages from the home page because I do not want to use a broken website.",20,18/10/2017 02:36:23,0:00:10,0:00:05,Rachel,Ryan Le,3
 "As a user, I want to be able to click on States so that I can view all the list of possible states with parks that I could visit.",2,18/10/2017 02:36:09,0:00:12,0:00:08,Rachel,Ryan Le,2
-"As a user, I should be able to see an image of the campground.",Œ_,18/10/2017 02:35:58,0:00:07,0:00:04,Rachel,Ryan Le,1
+"As a user, I should be able to see an image of the campground.",Î_,18/10/2017 02:35:58,0:00:07,0:00:04,Rachel,Ryan Le,1
 "As a user, I should be able to click on a specific campground to view more information on that campground",2,18/10/2017 02:35:46,0:00:09,0:00:05,Rachel,Ryan Le,1
 "As a user, I want to see a carousel on the homepage so I can navigate.",1,18/10/2017 02:35:33,0:00:08,0:00:05,Rachel,Ryan Le,2
 "As a user, I should be able to click on Campgrounds to view a list of campgrounds",2,18/10/2017 02:34:59,0:00:30,0:00:22,Rachel,Ryan Le,3
@@ -29,4 +29,14 @@ Story Title,Estimate,Vote Started,Voting Duration,Avg Voting Time,Fastest,Slowes
 "As a user, I should be able to search for a keyword and find all related entries to that keyword.",8,8/11/17 0:00,0:00:04,0:00:10,Katherine,Derek,8
 "As a user, I should be able to sort campgrounds by alphabetical order, so I can more easily find a specific campground.",1,8/11/17 0:00,0:00:03,0:00:05,Katherine,Ryan Le,4
 "As a user, I should be able to filter campgrounds by state, so that I can find out which campgrounds are located where.",3,8/11/17 0:00,0:00:04,0:00:04,Katherine,Derek,3
-,,,,,,,
+"As a user, I don't want to ever see a broken state or broken page of the website. If a page is broken, I want to see a 404 page.",å_,28/11/2017 03:33:43,0:00:10,0:00:09,Katherine,Derek,1
+"As a developer, I want to see more connected data between models.",8,28/11/2017 03:33:35,0:00:06,0:00:05,Linh,Ryan Le,6
+"As a user, I want to see which filter or sorting I am using on the page.",2,28/11/2017 03:33:27,0:00:06,0:00:05,Linh,Rachel,3
+"As a user, I want to see an indicator that shows what page I am on.",å_,28/11/2017 03:33:22,0:00:03,0:00:02,Ryan Le,Katherine,1
+"As a developer, I want to see a critique of the website so that I know how to improve my own.",3,28/11/2017 03:33:14,0:00:06,0:00:03,Linh,Katherine,1
+As a developer I would like to be able to access the APIs to use the data,3,28/11/2017 03:32:55,0:00:06,0:00:03,Rachel,Katherine,3
+"As a user, I want to see more refined data for visitor centers.",5,28/11/2017 03:33:02,0:00:10,0:00:01,Linh,Derek,6
+"As a user, I want to see more campgrounds in the data.",8,28/11/2017 03:32:46,0:00:08,0:00:02,Linh,Derek,6
+"As a developer, I want to see unit tests so that I can verify the API is working.",3,28/11/2017 03:32:40,0:00:02,0:00:02,Rachel,Derek,2
+"As a developer, I want to read the technical report describing unit testing with Selenium.",2,28/11/2017 03:32:35,0:00:04,0:00:03,Ryan Le,Linh,1
+"As a user, I want to see a visualization of PhoneDB's data.",5,28/11/2017 03:32:21,0:00:11,0:00:09,Ryan Le,Katherine,8

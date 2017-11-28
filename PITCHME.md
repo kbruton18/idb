@@ -1,3 +1,4 @@
+---?image=frontend/src/img/bg.jpg
 # SWEet Travels
 
 An application designed to promote travel.
@@ -34,9 +35,9 @@ Katherine Bruton
 ---
 ### Self-Critique
 
-- slow to load
+- slow to load in some cases, particularly images
 - lack of UI indication during filtering or sorting
-- filtering or sorting is not applied if user presses back button
+- filtering/sorting is not applied if user presses back button
 - no indication of page number in paginated pages
 - very few campground instances
 - sparse data; many occasions of "No Info Available"
@@ -44,7 +45,6 @@ Katherine Bruton
 ---
 ### PhoneDB Critique
 
-- loads quickly
 - thorough sorting system
 - limited data on instances
 - attributes not labeled on instance cards

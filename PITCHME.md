@@ -42,4 +42,3 @@ Visualization
 - Brands: 
 - Models: Red
 - OS: 
-

@@ -36,12 +36,9 @@ Self-Critique
 Group 19 Critique
 
 ---
-
-.red { color : red; }
-
 Visualization
 - [PhoneDB Visualization](http://test.swetravels.me/vis.html)
 - Carriers: blue
 - Brands: orange
-- @red[Phones]
+- Phones: red
 - OS: green

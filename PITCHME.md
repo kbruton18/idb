@@ -28,6 +28,7 @@ Katherine Bruton
 
 ---
 Demo
+[SWEet Travels](http://swetravels.me)
 
 ---
 Self-Critique
@@ -37,7 +38,7 @@ Group 19 Critique
 
 ---
 Visualization
-- [PhoneDB Visualization](http://test.swetravels.me/vis.html)
+[PhoneDB Visualization](http://swetravels.me/vis.html)
 - Carriers: blue
 - Brands: orange
 - Phones: red

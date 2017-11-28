@@ -61,7 +61,7 @@ export default function ParkLanding (props) {
     );
       // Returns information for each card that we plan to render.
     return (
-      <DetailsCard linkUrl={`/parks/${d.parkCode}`} imageUrl={d.imageUrl} name={d.name} body={body} />
+      <DetailsCard linkUrl={`/parks/${d.parkCode}`} imageUrl={d.imageUrl} name={d.fullName} body={body} />
     );
   };
 

@@ -26,20 +26,3 @@ Katherine Bruton
 
 ![Katherine](frontend/src/img/about/katherine.jpg)
 
----
-Demo
-
----
-Self-Critique
-
----
-Group 19 Critique
-
----
-Visualization
-- [PhoneDB Visualization](https://phonedb.info/)
-- Carriers
-- Brands
-- Models
-- OS
-

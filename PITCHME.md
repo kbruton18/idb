@@ -37,4 +37,9 @@ Group 19 Critique
 
 ---
 Visualization
+- [PhoneDB Visualization](https://phonedb.info/)
+- Carriers
+- Brands
+- Models
+- OS
 

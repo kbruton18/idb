@@ -6,7 +6,7 @@ function About (props) {
   const content = (
     <Container>
       <p>
-        This is our visualization of <a href='phonedb.info'>phonedb.info</a>. Red circles are models. Blue circles are carriers. Green circles are operating systems. Orange circles are brands. Lines represent the relationships between the different instances.
+        This is our visualization of <a href='https://phonedb.info'>phonedb.info</a>. Red circles are models. Blue circles are carriers. Green circles are operating systems. Orange circles are brands. Lines represent the relationships between the different instances.
       </p>
     </Container>
   );

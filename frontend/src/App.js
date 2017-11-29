@@ -16,6 +16,7 @@ import VisitorCenterDetail from './VisitorCenterDetail.js';
 import NotFound from './NotFound.js';
 import StateDetail from './StateDetail.js';
 import Search from './Search.js';
+import Vis from './Vis.js';
 
 // Renders the entire app.
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
               <Route exact path='/campgrounds' component={CampgroundsLanding} />
               <Route exact path='/visitorcenters' component={VisitorCentersLanding} />
               <Route exact path='/states' component={StatesLanding} />
+              <Route exact path='/d3' component={Vis} />
               <Route path='/parks/:id' component={ParkDetail} />
               <Route path='/campgrounds/:id' component={CampgroundDetail} />
               <Route path='/visitorcenters/:id' component={VisitorCenterDetail} />

@@ -97,4 +97,4 @@ Katherine Bruton
 ---
 ### Visualization
 
-[PhoneDB Visualization](http://swetravels.me/vis.html)
+[PhoneDB Visualization](http://test.swetravels.me/d3)

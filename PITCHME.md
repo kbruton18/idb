@@ -43,13 +43,13 @@ Katherine Bruton
 
 +++
 #### What we can do better
-- slow to load in some cases, particularly images
-- commit numbers need a page to display
-- lack of UI indication during filtering or sorting
+- slow loading
+- refresh to display commits
+- no indicator for filtering or sorting
 - filtering/sorting is not applied if user presses back button
 - no indication of page number in paginated pages
-- very few campground instances
-- sparse data; many occasions of "No Info Available"
+- sparsely connected models 
+- sparse data for visitor centers and campgrounds
 
 +++
 #### What puzzles us
@@ -69,12 +69,12 @@ Katherine Bruton
 +++
 
 #### What they can do better
-- attributes not labeled on instance cards
-- name of long instances cut off
+- unlabelled attributes
+- long instance names cut off
 - lack of carousel
-- search system seems to match letters
-- highlighted search context is sometimes missing
-- API is difficult to use because of lack of CORS
+- search system matches letters
+- missing highlighted search context
+- API is difficult to use 
 
 +++
 #### What puzzled us

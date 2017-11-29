@@ -45,6 +45,7 @@ function AboutProcess (props) {
         The technical report for phase 3 of the project: <a href='https://utexas.box.com/s/cc0tvmqt9b402ef38j45vj67glnuobv6'>Report</a><br />
         The technical report for phase 4 of the project: <a href='https://racheloei.gitbooks.io/sweet-travels'>Report</a><br />
         UML for phase 4: <a href='https://utexas.box.com/s/bihmk95dnoe15050dnifg3ae5jj94skn'>UML</a><br />
+        Presentation: <a href='https://gitpitch.com/kbruton18/idb/master?grs=github&t=night'>Link</a><br />
       </p>
       <p>Visualization for Group 19: <a href='http://swetravels.me/vis.html'>Link</a></p>
     </Container>

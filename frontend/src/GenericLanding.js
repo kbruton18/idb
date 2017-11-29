@@ -45,7 +45,6 @@ export default class GenericLanding extends Component {
 
   // Fetch json data from .../states
   componentDidMount () {
-    // TODO Generically fetch and process data
     fetch(this.dataUrl)
       .then((response) => response.json())
       .then((responseJson) => {
@@ -53,10 +52,6 @@ export default class GenericLanding extends Component {
           data: responseJson
         });
       });
-
-    // TODO Generically fetch and process filter data
-    // I want this to be an array of bound but not called processFetch's
-
     processPromises.call(this, this.fetchPromises.map((f) => f()));
   }
 
@@ -67,9 +62,6 @@ export default class GenericLanding extends Component {
     if (this.state.filter) {
       version = this.state.filter.filterDataArr(version);
     }
-
-    // TODO Generically sort...
-
     if (this.state.sortType === 'Ascending') {
       // If we are sorting by ascending name
       version.sort(this.ascendingSortFunction);
@@ -80,11 +72,8 @@ export default class GenericLanding extends Component {
 
     // For pagination, we display 12 card instances at a time.
     const displayPage = version.slice((this.state.page - 1) * 12, this.state.page * 12);
-
-    // TODO Creates all the cards, with some function
     const cards = displayPage.map(this.cardFunction);
 
-    // TODO THIS IS GARBAGE
     // Does calculations for how many pagination page buttons we need.
     const pages = Math.ceil(version.length / 12);
     const pageArray = Array.apply(null, Array(pages)).map(function (_, i) { return i + 1; });
@@ -116,7 +105,6 @@ export default class GenericLanding extends Component {
           {cards}
         </Row>
         <Row>
-          {/* TODO ALSO GARBAGE */}
           <ButtonGroup className='center'>
             <Button onClick={() => this.setPage(this.state.page === 1 ? 1 : (this.state.page - 1))}>Previous</Button>
             {pageButtons}

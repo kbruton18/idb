@@ -37,6 +37,12 @@ export default function ParkLanding (props) {
       }
       return <a>{d.directionsUrl}</a>;
     };
+    const websiteUrlLink = () => {
+      if (d.website !== 'None') {
+        return (<a href={d.website}>{d.website}</a>);
+      }
+      return <a>{d.website}</a>;
+    };
 
     let body = (
       <Container>
@@ -45,7 +51,7 @@ export default function ParkLanding (props) {
         <b>Latitude</b>: {lat}<br />
         <b>Longitude</b>: {long}<br />
         <b>Directions</b>: {directionUrlLink()}<br />
-        <b>Website</b>: <a href={d.website}>{d.website}</a>
+        <b>Website</b>: {websiteUrlLink()}
       </Container>
     );
 

@@ -53,6 +53,12 @@ class VisitorCenterDetail extends Component {
       }
       return <a>{this.state.data.directionsUrl}</a>;
     };
+    const websiteUrlLink = () => {
+      if (this.state.data.website !== 'None') {
+        return (<a href={this.state.data.website}>{this.state.data.website}</a>);
+      }
+      return <a>{this.state.data.website}</a>;
+    };
 
     // Returns the visitor center detail to be rendered.
     return (
@@ -71,7 +77,7 @@ class VisitorCenterDetail extends Component {
           <p><b>Longitude:</b> {long}</p>
           <p><b>Directions Info:</b> {this.state.data.directionsInfo}</p>
           <p><b>Directions URL:</b> {directionUrlLink()}</p>
-          <p><b>Website:</b> <a href={this.state.data.website}>{this.state.data.website}</a></p>
+          <p><b>Website:</b> {websiteUrlLink()}</p>
         </Container>
       </div>
     );

@@ -37,9 +37,19 @@ Katherine Bruton
 
 +++
 #### What we did well
+- Attractive website
+- Codebase quality
+- Reliable API
+- Good team communication
 
 +++
 #### What we learned
+- Flask
+- React
+- D3
+- GCP
+- SQLAlchemy
+- etc.
 
 +++
 #### What we can do better
@@ -53,18 +63,21 @@ Katherine Bruton
 
 +++
 #### What puzzles us
+- Backend and frontend split
 
 ---
 ### PhoneDB Critique
 
 +++
 #### What they did well
-
 - thorough sorting system
 - many instances
 
 +++
 #### What we learned
+- good design
+- good transitions
+- loading icon
 
 +++
 
@@ -83,8 +96,3 @@ Katherine Bruton
 ### Visualization
 
 [PhoneDB Visualization](http://swetravels.me/vis.html)
-
-- Carriers: blue
-- Brands: orange
-- Phones: red
-- OS: green

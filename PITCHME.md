@@ -91,6 +91,8 @@ Katherine Bruton
 
 +++
 #### What puzzled us
+- difficult API
+- search system
 
 ---
 ### Visualization

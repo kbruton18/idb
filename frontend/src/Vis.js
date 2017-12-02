@@ -32,7 +32,7 @@ function Usage (props) {
 function Frame (props) {
   const content = (
     <Container>
-      <iframe src='http://swetravels.me/vis.html' scrolling='no' frameborder='0' style={{position: 'relative', height: '800px', width: '100%'}} />
+      <iframe src='http://test.swetravels.me/vis.html' scrolling='no' frameborder='0' style={{position: 'relative', height: '800px', width: '100%'}} />
     </Container>
   );
   return (

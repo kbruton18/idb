@@ -43,6 +43,7 @@ function d3Stuff (usedNodes, usedLinks) {
     setupD3()
   }
 
+  vis.attr('transform', 'translate(' + 0 + ',' + 0 + ')scale(' + 0.3 + ')')
   link = link.data([])
   link.exit().remove()
 
